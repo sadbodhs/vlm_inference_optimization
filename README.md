@@ -54,26 +54,33 @@ No FP8 on sm_86 — that arm is out of scope here rather than faked.
 
 ## Run it
 
-Nothing below needs a GPU. The dry run exercises every code path against a fixture.
+Everything runs in Docker — harness included. No host Python, no venv, no conda.
 
 ```bash
-pip install -r requirements.txt
-./scripts/smoke.sh
+docker build -f docker/harness.Dockerfile -t vlmbench-harness .
+./scripts/smoke.sh        # all four experiments against a mock server, no GPU
 ```
 
-Against a real server:
+Against a real server on the 3090:
 
 ```bash
-vllm serve Qwen/Qwen2.5-VL-7B-Instruct-AWQ --quantization awq_marlin \
-    --max-model-len 8192 --gpu-memory-utilization 0.90
-
-python3 experiments/e0_saturation.py --arm arms/B_vllm_awq.yaml
-python3 experiments/e1_roofline.py   --arm arms/B_vllm_awq.yaml
-python3 experiments/e2_ttft_vs_tokens.py --arm arms/B_vllm_awq.yaml
-python3 experiments/e3_token_budget.py --arm arms/B_vllm_awq.yaml \
+docker/run_vllm.sh start arms/B_vllm_awq.yaml       # first run downloads weights
+docker/run_harness.sh python3 experiments/e0_saturation.py     --arm arms/B_vllm_awq.yaml
+docker/run_harness.sh python3 experiments/e1_roofline.py       --arm arms/B_vllm_awq.yaml
+docker/run_harness.sh python3 experiments/e2_ttft_vs_tokens.py --arm arms/B_vllm_awq.yaml
+docker/run_harness.sh python3 experiments/e3_token_budget.py   --arm arms/B_vllm_awq.yaml \
     --manifest data/docvqa/manifest.jsonl --scorer anls
-python3 experiments/plot.py
+docker/run_harness.sh python3 experiments/plot.py
+docker/run_vllm.sh stop
 ```
+
+Server and harness sit on a shared `vlmbench` Docker network and address each other
+by container name, so the measurement code is byte-identical across arms (R1). The
+resolved image digest of both is written into every `meta.json`.
+
+The harness container is CPU-only and requests `--gpus all` for exactly one reason:
+the NVIDIA runtime injects `nvidia-smi`, without which every run silently records
+null clocks and the thermal check stops working.
 
 ## How the harness holds the bar
 

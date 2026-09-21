@@ -2,8 +2,8 @@
 id: Z_mock
 stack: mock
 model: mock-vlm-7b
-base_url: http://127.0.0.1:8077
-weight_bytes: 6.0e9
+base_url: http://vlm-mock:8077   # container name on the vlmbench network
+weight_bytes: 6.0e+9
 max_tokens: 64
 temperature: 0.0
 max_pixels: 1605632

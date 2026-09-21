@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import platform
 import subprocess
 import time
@@ -85,6 +86,8 @@ async def run_arm(
             return r
 
         t0 = time.perf_counter()
+        sampler = gpu.Sampler()
+        sampler.__enter__()
         if mode == "open":
             results = await loadgen.open_loop(len(work), rate_qps, send, seed=seed)
         elif mode == "closed":
@@ -92,7 +95,9 @@ async def run_arm(
         elif mode == "sequential":
             results = await loadgen.sequential(len(work), send)
         else:
+            sampler.__exit__()
             raise ValueError(f"unknown mode {mode!r}")
+        sampler.__exit__()
         wall = time.perf_counter() - t0
 
     gpu_after = gpu.probe()
@@ -137,9 +142,17 @@ async def run_arm(
         "load": {"mode": mode, "rate_qps": rate_qps, "concurrency": concurrency,
                   "repeats": repeats, "n_requests": len(work), "seed": seed},
         "host": {"platform": platform.platform(), "python": platform.python_version()},
+        # Container provenance. Every arm runs in Docker; these are injected by
+        # docker/run_harness.sh and docker/run_vllm.sh so a result is traceable to
+        # the exact images that produced it.
+        "images": {
+            "harness": os.environ.get("HARNESS_IMAGE"),
+            "server": os.environ.get("SERVER_IMAGE"),
+        },
         "gpu_before": gpu_before,
         "gpu_after": gpu_after,
-        "thermal": gpu.throttle_verdict(gpu_before, gpu_after),
+        # Sampled during the run, not inferred from before/after (see gpu.Sampler).
+        "thermal": sampler.summary(),
         # R4: the things this run does not entitle you to claim.
         "not_measured": unmeasured or [],
     }
@@ -148,6 +161,16 @@ async def run_arm(
 
     summary["run_id"] = run_id
     summary["out_dir"] = str(out_dir)
+
+    # A run in which nothing succeeded must not return quietly: the tables would
+    # render as empty columns and the sweep would continue producing files that
+    # look like results. Fail here, with the reason the requests actually gave.
+    if results and summary["n_ok"] == 0:
+        first = next((r.error for r in results if r.error), "unknown")
+        raise RuntimeError(
+            f"arm {arm.id!r}: all {len(results)} requests failed against "
+            f"{arm.base_url} -- first error: {first}"
+        )
     return summary
 
 

@@ -39,6 +39,22 @@ class Arm:
 
     raw: dict = field(default_factory=dict)
 
+    def __post_init__(self) -> None:
+        # PyYAML follows YAML 1.1, where `6.0e9` is a STRING -- an exponent needs a
+        # sign (`6.0e+9`) to parse as a float. ruamel follows YAML 1.2 and parses it
+        # as a number. Coerce here so an arm behaves identically whichever loader is
+        # present, rather than failing only inside the container.
+        for f in ("weight_bytes",):
+            v = getattr(self, f)
+            if isinstance(v, str):
+                setattr(self, f, float(v))
+        for f in ("max_pixels", "max_tokens"):
+            v = getattr(self, f)
+            if isinstance(v, str):
+                setattr(self, f, int(float(v)))
+        if isinstance(self.temperature, str):
+            self.temperature = float(self.temperature)
+
     @classmethod
     def load(cls, path: str | Path) -> "Arm":
         path = Path(path)

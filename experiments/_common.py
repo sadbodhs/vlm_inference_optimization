@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -17,7 +18,8 @@ def base_parser(desc: str) -> argparse.ArgumentParser:
     p.add_argument("--tag", default=None, help="label for this sweep")
     p.add_argument("--dry-run", action="store_true",
                    help="point at the mock server instead of the real stack")
-    p.add_argument("--mock-url", default="http://127.0.0.1:8077")
+    p.add_argument("--mock-url",
+                   default=os.environ.get("BENCH_MOCK_URL", "http://vlm-mock:8077"))
     return p
 
 

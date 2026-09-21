@@ -2,9 +2,9 @@
 id: C_sglang_awq
 stack: sglang
 model: Qwen/Qwen2.5-VL-7B-Instruct-AWQ
-base_url: http://127.0.0.1:30000
+base_url: http://vlm-server:30000   # container name on the vlmbench network
 quantization: awq_marlin
-weight_bytes: 6.0e9
+weight_bytes: 6.0e+9
 max_tokens: 128
 temperature: 0.0
 max_pixels: 1605632

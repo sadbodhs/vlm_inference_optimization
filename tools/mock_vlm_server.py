@@ -185,6 +185,9 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--port", type=int, default=8000)
+    ap.add_argument("--host", default="0.0.0.0",
+                    help="0.0.0.0 so sibling containers can reach it; "
+                         "binding loopback makes it invisible on a docker network")
     ap.add_argument("--itl-ms", type=float, default=CFG.itl_ms)
     ap.add_argument("--max-running", type=int, default=CFG.max_running)
     ap.add_argument("--prefill-ms-per-ktok", type=float, default=CFG.prefill_ms_per_ktok)
@@ -193,9 +196,9 @@ def main():
     CFG.itl_ms, CFG.max_running = a.itl_ms, a.max_running
     CFG.prefill_ms_per_ktok, CFG.max_pixels = a.prefill_ms_per_ktok, a.max_pixels
 
-    srv = ThreadingHTTPServer(("127.0.0.1", a.port), Handler)
+    srv = ThreadingHTTPServer((a.host, a.port), Handler)
     srv.daemon_threads = True
-    print(f"mock VLM on http://127.0.0.1:{a.port}  (batch={CFG.max_running}, itl={CFG.itl_ms}ms)",
+    print(f"mock VLM on http://{a.host}:{a.port}  (batch={CFG.max_running}, itl={CFG.itl_ms}ms)",
           flush=True)
     srv.serve_forever()
 
