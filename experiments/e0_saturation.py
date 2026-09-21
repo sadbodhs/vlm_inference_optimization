@@ -30,16 +30,26 @@ async def main() -> None:
     p.add_argument("--width", type=int, default=448)
     p.add_argument("--height", type=int, default=448)
     p.add_argument("--max-tokens", type=int, default=64)
+    # Synthetic squares understate capacity badly: a real page carries several
+    # times the vision tokens, and prefill is what saturates this server.
+    p.add_argument("--manifest", default=None,
+                   help="use real documents instead of synthetic images")
     args = p.parse_args()
 
-    from bench.data import synthetic
+    from bench.data import load_manifest, synthetic
     from bench.harness import run_arm
 
     arm = resolve_arm(args)
     arm.max_tokens = args.max_tokens
     tag = args.tag or f"e0-saturation-{arm.id}"
     rates = [float(x) for x in args.rates.split(",")]
-    samples = synthetic(min(args.n, 32), width=args.width, height=args.height)
+    if args.manifest:
+        samples = load_manifest(args.manifest, limit=min(args.n, 32))
+        workload = args.manifest
+    else:
+        samples = synthetic(min(args.n, 32), width=args.width, height=args.height)
+        workload = f"synthetic {args.width}x{args.height}"
+    print(f"workload: {workload}  ({len(samples)} distinct samples)")
 
     rows = []
     for rate in rates:
@@ -94,7 +104,8 @@ async def main() -> None:
 
     write_sweep(args.out, tag, rows,
                 {"experiment": "e0-saturation", "arm": arm.id, "rates": rates,
-                 "image": [args.width, args.height], "n_per_rate": args.n})
+                 "workload": workload, "image": [args.width, args.height],
+                 "n_per_rate": args.n})
 
 
 if __name__ == "__main__":

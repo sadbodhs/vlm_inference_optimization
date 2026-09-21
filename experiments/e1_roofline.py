@@ -24,6 +24,8 @@ async def main() -> None:
     p.add_argument("--n", type=int, default=12, help="requests (concurrency 1)")
     p.add_argument("--max-tokens", type=int, default=128)
     p.add_argument("--warmup", type=int, default=3)
+    p.add_argument("--repeats", type=int, default=1,
+                   help="independent runs; >1 gives a spread instead of a point")
     args = p.parse_args()
 
     from bench.data import synthetic
@@ -41,14 +43,24 @@ async def main() -> None:
         await run_arm(arm, samples[: args.warmup], mode="sequential",
                       results_root=args.out, run_id=f"{tag}-warmup")
 
-    s = await run_arm(
-        arm, samples, mode="sequential", results_root=args.out, run_id=tag,
-        unmeasured=["batched decode", "accuracy", "long-context decode"],
-    )
+    rates, ttfts = [], []
+    for rep in range(args.repeats):
+        s = await run_arm(
+            arm, samples, mode="sequential", results_root=args.out,
+            run_id=tag if args.repeats == 1 else f"{tag}-r{rep}",
+            unmeasured=["batched decode", "accuracy", "long-context decode"],
+            seed=rep,
+        )
+        if s["tpot_ms"]["p50"]:
+            rates.append(1000.0 / s["tpot_ms"]["p50"])
+        if s["ttft_ms"]["p50"]:
+            ttfts.append(s["ttft_ms"]["p50"])
 
-    measured = None
-    if s["tpot_ms"]["p50"]:
-        measured = 1000.0 / s["tpot_ms"]["p50"]
+    import statistics as st
+    measured = st.mean(rates) if rates else None
+    # A spread across independent runs is the only thing that says whether a
+    # difference between two arms is real. One run cannot.
+    spread = st.stdev(rates) if len(rates) > 1 else None
 
     roof = decode_roofline_tok_s(arm.roofline_bytes) if arm.roofline_bytes else None
     row = {
@@ -57,15 +69,23 @@ async def main() -> None:
         "decode_weight_GB": (arm.roofline_bytes / 1e9) if arm.roofline_bytes else None,
         "tpot_p50_ms": s["tpot_ms"]["p50"],
         "decode_tok_s": measured,
+        "decode_tok_s_sd": spread,
+        "decode_tok_s_runs": [round(r, 2) for r in rates],
+        "repeats": args.repeats,
         "roofline_tok_s": roof,
         "pct_of_roofline": (100.0 * measured / roof) if (roof and measured) else None,
-        "ttft_p50_ms": s["ttft_ms"]["p50"],
+        "ttft_p50_ms": (st.mean(ttfts) if ttfts else None),
+        "ttft_p50_ms_sd": (st.stdev(ttfts) if len(ttfts) > 1 else None),
     }
 
     print(f"\nE1 · single-stream decode vs roofline   (HBM {HBM_BW_GB_S:.0f} GB/s)")
     table([row], [("arm", "arm"), ("weight_GB", "weights GB"),
-                  ("decode_tok_s", "tok/s"), ("roofline_tok_s", "roofline"),
+                  ("decode_tok_s", "tok/s"), ("decode_tok_s_sd", "sd"),
+                  ("roofline_tok_s", "roofline"),
                   ("pct_of_roofline", "% of roof"), ("ttft_p50_ms", "TTFT p50")])
+    if spread is not None:
+        print(f"  {args.repeats} runs: {row['decode_tok_s_runs']}  "
+              f"sd={spread:.2f} tok/s ({100*spread/measured:.2f}% of mean)")
 
     if row["pct_of_roofline"] and row["pct_of_roofline"] > 100:
         print("\n  !! ABOVE ROOFLINE -- this is impossible on real hardware.")

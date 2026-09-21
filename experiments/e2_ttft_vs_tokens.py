@@ -32,6 +32,8 @@ async def main() -> None:
     p.add_argument("--n", type=int, default=8, help="requests per size")
     p.add_argument("--max-tokens", type=int, default=8,
                    help="kept tiny: E2 is about TTFT, not decode")
+    p.add_argument("--repeats", type=int, default=1,
+                   help="independent sweeps; >1 gives a spread per point")
     args = p.parse_args()
 
     from bench.data import synthetic, text_only
@@ -50,30 +52,54 @@ async def main() -> None:
     print(f"\ntext-only control: prompt_tokens={text_tokens}, "
           f"TTFT p50={ctrl['ttft_ms']['p50']:.1f} ms")
 
+    import statistics as st
+
+    per_size: dict[int, list[float]] = {e: [] for e in sizes}
+    tok_of: dict[int, float] = {}
+    p95_of: dict[int, float] = {}
+    for rep in range(args.repeats):
+        for edge in sizes:
+            s = await run_arm(
+                arm, synthetic(args.n, width=edge, height=edge), mode="sequential",
+                results_root=args.out,
+                run_id=f"{tag}-{edge}px" if args.repeats == 1 else f"{tag}-{edge}px-r{rep}",
+                unmeasured=["accuracy at this resolution", "batched TTFT"],
+                seed=rep,
+            )
+            per_size[edge].append(s["ttft_ms"]["p50"])
+            tok_of[edge] = s["prompt_tokens"]["mean"]
+            p95_of[edge] = s["ttft_ms"]["p95"]
+            if args.repeats == 1:
+                print(f"  {edge:>5}px  TTFT p50={s['ttft_ms']['p50']:.1f} ms")
+        if args.repeats > 1:
+            print(f"  sweep {rep + 1}/{args.repeats} done")
+
     rows = []
     for edge in sizes:
-        s = await run_arm(
-            arm, synthetic(args.n, width=edge, height=edge), mode="sequential",
-            results_root=args.out, run_id=f"{tag}-{edge}px",
-            unmeasured=["accuracy at this resolution", "batched TTFT"],
-        )
-        pt = s["prompt_tokens"]["mean"]
+        vals = [v for v in per_size[edge] if v is not None]
+        pt = tok_of.get(edge)
         vt = (pt - text_tokens) if (pt and text_tokens) else None
+        mean = st.mean(vals) if vals else None
         rows.append({
             "edge_px": edge,
             "image_px": edge * edge,
             "prompt_tokens": pt,
             "vision_tokens": vt,
-            "ttft_p50_ms": s["ttft_ms"]["p50"],
-            "ttft_p95_ms": s["ttft_ms"]["p95"],
-            "ms_per_vision_token": (s["ttft_ms"]["p50"] / vt) if vt else None,
+            "ttft_p50_ms": mean,
+            "ttft_p50_ms_sd": st.stdev(vals) if len(vals) > 1 else None,
+            "ttft_p50_ms_runs": [round(v, 1) for v in vals],
+            "ttft_p95_ms": p95_of.get(edge),
+            "ms_per_vision_token": (mean / vt) if (vt and mean) else None,
+            "repeats": args.repeats,
         })
-        print(f"  {edge:>5}px  vision_tokens={vt}  TTFT p50={s['ttft_ms']['p50']:.1f} ms")
+        sd = rows[-1]["ttft_p50_ms_sd"]
+        print(f"  {edge:>5}px  vision_tokens={vt}  TTFT p50={mean:.1f} ms"
+              + (f" ± {sd:.1f}" if sd else ""))
 
     print("\nE2 · TTFT vs vision tokens (concurrency 1)")
     table(rows, [("edge_px", "edge px"), ("vision_tokens", "vis tok"),
                  ("prompt_tokens", "prompt tok"), ("ttft_p50_ms", "TTFT p50"),
-                 ("ttft_p95_ms", "TTFT p95"), ("ms_per_vision_token", "ms/vis tok")])
+                 ("ttft_p50_ms_sd", "sd"), ("ms_per_vision_token", "ms/vis tok")])
 
     fit = None
     pts = [(r["vision_tokens"], r["ttft_p50_ms"]) for r in rows
@@ -95,6 +121,7 @@ async def main() -> None:
 
     write_sweep(args.out, tag, rows,
                 {"experiment": "e2-ttft-vs-tokens", "arm": arm.id, "sizes": sizes,
+                 "repeats": args.repeats,
                  "text_only_prompt_tokens": text_tokens,
                  "text_only_ttft_p50_ms": ctrl["ttft_ms"]["p50"], "fit": fit})
 
