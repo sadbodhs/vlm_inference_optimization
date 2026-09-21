@@ -3,13 +3,12 @@
 #   docker/run_vllm.sh start arms/B_vllm_awq.yaml
 #   docker/run_vllm.sh stop
 #
-# VLLM_IMAGE defaults to :latest for convenience. Pin it to a DIGEST before any
-# run whose numbers you intend to publish -- the resolved digest is recorded into
-# every meta.json either way, so a `latest` run is traceable but not repeatable.
+# Pinned to a stable release, not :latest -- :latest moved under us once already.
+# The resolved digest is recorded into every meta.json regardless.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-IMAGE="${VLLM_IMAGE:-vllm/vllm-openai:latest}"
+IMAGE="${VLLM_IMAGE:-vllm/vllm-openai:v0.29.0}"
 NET="${BENCH_NET:-vlmbench}"
 NAME="${VLLM_NAME:-vlm-server}"
 PORT="${VLLM_PORT:-8000}"
@@ -31,7 +30,20 @@ case "${1:-start}" in
           --limit-mm-per-prompt '{"image":1}')
     [ -n "$QUANT" ] && [ "$QUANT" != "null" ] && ARGS+=(--quantization "$QUANT")
 
-    echo "starting $NAME  image=$IMAGE  model=$MODEL"
+    # vLLM sizes its pool as util x TOTAL vram, not util x FREE vram. If another
+    # process is holding memory, it will ask for more than exists and OOM at load.
+    # Check before downloading 7 GB of weights to find out.
+    read -r FREE TOTAL < <(nvidia-smi --query-gpu=memory.free,memory.total \
+        --format=csv,noheader,nounits | tr -d ',' )
+    WANT=$(python3 -c "print(int($TOTAL * ${GPU_UTIL:-0.90}))" 2>/dev/null || echo 0)
+    if [ "$WANT" -gt "$FREE" ] 2>/dev/null; then
+      echo "REFUSING TO START: --gpu-memory-utilization ${GPU_UTIL:-0.90} asks for ${WANT} MiB" >&2
+      echo "of ${TOTAL} MiB total, but only ${FREE} MiB is free. Holders:" >&2
+      nvidia-smi --query-compute-apps=pid,used_memory,process_name --format=csv >&2
+      echo "Free the memory, or lower GPU_UTIL (max safe now: $(python3 -c "print(round($FREE/$TOTAL - 0.02, 2))"))." >&2
+      exit 1
+    fi
+    echo "starting $NAME  image=$IMAGE  model=$MODEL  util=${GPU_UTIL:-0.90} (free ${FREE}/${TOTAL} MiB)"
     docker run -d --rm --name "$NAME" --network "$NET" \
       --gpus all --ipc=host --shm-size=8g \
       -v "$HF_CACHE:/root/.cache/huggingface" \
