@@ -45,7 +45,20 @@ The YOLO study had one bottleneck axis and constant quality. A VLM breaks that:
 | **E2** TTFT vs vision tokens | What does one vision token cost, and what is the fixed floor underneath it? | measured |
 | **E3** token budget | How far can the budget fall before accuracy does — and does the limit depend on the task? | measured on DocVQA only |
 
-E0 runs first on purpose. It is the only experiment that can invalidate all the others.
+**Execution order is E1 → E2 → E0 → E3**, which is not the numeric order.
+
+The numbers say what each experiment is prerequisite *for*; the order says what has
+to be true before the next measurement means anything.
+
+- **E1 first** because it validates the instrument. A decode rate above the
+  memory-bandwidth ceiling is physically impossible, so it can only mean the harness
+  is wrong. If E1 fails, the runner refuses to run anything else — every later number
+  assumes the harness is honest.
+- **E2 second**: concurrency 1, so the TTFT-vs-tokens curve is measured with no
+  queueing mixed into it.
+- **E0 third**. It is numbered zero because it is the prerequisite for any
+  *throughput* claim — "saturate before you measure" — not because it runs first.
+- **E3 last**: the expensive one, and the only one needing a dataset.
 
 ## The 3090 sets the questions
 
