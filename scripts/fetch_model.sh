@@ -42,4 +42,10 @@ PY
     # a shared cache breaks them later, so hand ownership back on the way out.
     chown -R "$HOST_UID:$HOST_GID" /hf
   '
-echo "cache now: $(du -sh "$HF_CACHE" | cut -f1)"
+# Refuse to report success on a cache with half-written blobs.
+INCOMPLETE=$(find "$HF_CACHE" -name '*.incomplete' 2>/dev/null | wc -l | tr -d ' ')
+if [ "$INCOMPLETE" != "0" ]; then
+  echo "FAILED: $INCOMPLETE incomplete blob(s) left in $HF_CACHE" >&2
+  exit 1
+fi
+echo "ok: cache now $(du -sh "$HF_CACHE" | cut -f1)"
