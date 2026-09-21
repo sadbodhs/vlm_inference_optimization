@@ -19,6 +19,7 @@ case "${1:-start}" in
     ARM="${2:?usage: $0 start <arm.yaml>}"
     MODEL=$(grep -E '^model:' "$ARM" | head -1 | sed 's/^model:[[:space:]]*//')
     QUANT=$(grep -E '^quantization:' "$ARM" | head -1 | sed 's/^quantization:[[:space:]]*//')
+    REV=$(grep -E '^revision:' "$ARM" | head -1 | sed 's/^revision:[[:space:]]*//')
 
     docker network inspect "$NET" >/dev/null 2>&1 || docker network create "$NET" >/dev/null
     docker rm -f "$NAME" >/dev/null 2>&1 || true
@@ -29,6 +30,7 @@ case "${1:-start}" in
           --gpu-memory-utilization "${GPU_UTIL:-0.90}"
           --limit-mm-per-prompt '{"image":1}')
     [ -n "$QUANT" ] && [ "$QUANT" != "null" ] && ARGS+=(--quantization "$QUANT")
+    [ -n "$REV" ] && ARGS+=(--revision "$REV")
 
     # vLLM sizes its pool as util x TOTAL vram, not util x FREE vram. If another
     # process is holding memory, it will ask for more than exists and OOM at load.

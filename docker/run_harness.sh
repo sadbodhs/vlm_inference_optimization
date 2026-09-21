@@ -24,7 +24,7 @@ exec docker run --rm -i \
   -v "$PWD:/work" \
   -w /work \
   -e HARNESS_IMAGE="$(docker image inspect "$IMAGE" --format '{{index .RepoDigests 0}}' 2>/dev/null || echo "$IMAGE")" \
-  -e SERVER_IMAGE="${SERVER_IMAGE:-}" \
+  -e SERVER_IMAGE="${SERVER_IMAGE:-$(docker image inspect "${VLLM_IMAGE:-vllm/vllm-openai:v0.29.0}" --format '{{index .RepoDigests 0}}' 2>/dev/null || true)}" \
   -e PYTHONPATH=/work \
   -u "$(id -u):$(id -g)" \
   "$IMAGE" "$@"
