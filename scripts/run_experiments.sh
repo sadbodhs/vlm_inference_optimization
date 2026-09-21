@@ -48,7 +48,7 @@ $H python3 experiments/e2_ttft_vs_tokens.py --arm "$ARM" --out "$OUT" \
 
 echo; echo "########## E0 saturation ##########"
 $H python3 experiments/e0_saturation.py --arm "$ARM" --out "$OUT" \
-    --n 60 --rates 0.5,1,2,4,8 --max-tokens 64
+    --n 80 --rates 2,8,16,32,64 --max-tokens 64
 
 echo; echo "########## E3 token budget x accuracy ##########"
 if [ -s "$DATA/manifest.jsonl" ]; then

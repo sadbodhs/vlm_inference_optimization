@@ -7,7 +7,19 @@ Single RTX 3090, 24 GB, sm_86. Sibling study to
 [computer_vision_optimization](https://github.com/sadbodhs/computer_vision_optimization),
 which asked the same kind of question about YOLO serving stacks.
 
-Status: **harness built and dry-run verified. No GPU numbers yet.**
+Status: **first results measured.** One model, one arm, one dataset — see
+[docs/results.md](docs/results.md) for the numbers and what they do not cover.
+
+## Headline
+
+| | |
+|---|---|
+| Decode is at the physical limit | **149.3 tok/s = 92.7%** of the 936 GB/s roofline — nothing left to win at batch 1 |
+| A vision token costs | **0.32 ms** of TTFT, over a 17.5 ms floor (R² = 0.9994) |
+| Past peak accuracy, pixels hurt | doubling the token budget: **+101% TTFT, −0.007 ANLS** |
+| Cheap accuracy trade | give up 3.6 ANLS points → **67% faster TTFT** |
+| Throughput lies after saturation | raw ceiling **9.96 req/s**, usable **6.58 req/s** — goodput hits **zero** while req/s still reads 9.9 |
+| The 3090 is power-limited | 349.2 W of 350 W at 66 °C — capped, not thermally throttled |
 
 ---
 
@@ -28,10 +40,10 @@ The YOLO study had one bottleneck axis and constant quality. A VLM breaks that:
 
 | | Question | Status |
 |---|---|---|
-| **E0** saturation | At what arrival rate does this arm stop keeping up — and was the *client* the real bottleneck? | harness verified |
-| **E1** roofline | Does single-stream decode land where 936 GB/s says it must? | harness verified |
-| **E2** TTFT vs vision tokens | What does one vision token cost, and what is the fixed floor underneath it? | harness verified |
-| **E3** token budget | How far can the budget fall before accuracy does — and does the limit depend on the task? | harness verified |
+| **E0** saturation | At what arrival rate does this arm stop keeping up — and was the *client* the real bottleneck? | measured |
+| **E1** roofline | Does single-stream decode land where 936 GB/s says it must? | measured |
+| **E2** TTFT vs vision tokens | What does one vision token cost, and what is the fixed floor underneath it? | measured |
+| **E3** token budget | How far can the budget fall before accuracy does — and does the limit depend on the task? | measured on DocVQA only |
 
 E0 runs first on purpose. It is the only experiment that can invalidate all the others.
 
@@ -118,8 +130,10 @@ PLAN.md         full project plan
 
 ## Not measured yet
 
-Everything. No number in this repo came off a GPU. Specifically open: whether CPU-side
-image preprocessing outweighs the vision encoder in TTFT (E2); whether prefix caching
-changes the stack ranking under realistic multi-turn reuse; whether a disaggregated
-encoder service pays for its embedding-transport hop; video, multi-image, and anything
-requiring FP8.
+One model, one arm, one dataset, one run per point — so nothing here separates "how
+VLM serving behaves" from "how this checkpoint behaves on this card". Full list in
+[docs/results.md](docs/results.md#not-measured). Still open: the 3B and FP16 controls;
+ChartQA and natural-image sets (frozen, unrun); prefix caching measured as an
+optimisation rather than as a confound; whether CPU-side image preprocessing outweighs
+the vision encoder in TTFT; a disaggregated encoder service and its embedding-transport
+hop; video and multi-image; and anything requiring FP8.

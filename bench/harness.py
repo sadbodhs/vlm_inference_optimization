@@ -34,6 +34,15 @@ from .scorers import SCORERS
 
 
 def _git_sha() -> str | None:
+    """Commit that produced this run.
+
+    git is not installed in the harness image, so shelling out inside the container
+    silently returns None and every result loses its provenance. run_harness.sh
+    resolves it on the host and passes it in; the subprocess call is the fallback
+    for running outside a container.
+    """
+    if sha := os.environ.get("GIT_SHA"):
+        return sha
     try:
         return subprocess.run(
             ["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True
@@ -51,6 +60,7 @@ async def run_arm(
     concurrency: int = 1,
     repeats: int = 1,
     scorer: str | None = None,
+    prompt_suffix: str = "",
     slo: SLO | None = None,
     results_root: str | Path = "results",
     run_id: str | None = None,
@@ -74,7 +84,7 @@ async def run_arm(
                 http,
                 base_url=arm.base_url,
                 model=arm.model,
-                messages=s.to_messages(),
+                messages=s.to_messages(prompt_suffix),
                 arm_id=arm.id,
                 sample_id=s.id,
                 scheduled_s=scheduled_s,
@@ -138,9 +148,14 @@ async def run_arm(
         "run_id": run_id,
         "created_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "git_sha": _git_sha(),
+        # A dirty tree means the code that ran is not the code at that commit.
+        "git_dirty": os.environ.get("GIT_DIRTY"),
         "arm": asdict(arm),
         "load": {"mode": mode, "rate_qps": rate_qps, "concurrency": concurrency,
                   "repeats": repeats, "n_requests": len(work), "seed": seed},
+        # Part of the measurement, not a detail: DocVQA-style metrics score a bare
+        # span, so the instruction that produces one belongs in the record.
+        "prompt_suffix": prompt_suffix,
         "host": {"platform": platform.platform(), "python": platform.python_version()},
         # Container provenance. Every arm runs in Docker; these are injected by
         # docker/run_harness.sh and docker/run_vllm.sh so a result is traceable to

@@ -37,6 +37,13 @@ async def main() -> None:
                    help="max_pixels values, comma separated")
     p.add_argument("--limit", type=int, default=100, help="samples per budget")
     p.add_argument("--max-tokens", type=int, default=64)
+    # DocVQA/ChartQA metrics score an exact span. Without this instruction the model
+    # answers correctly in a full sentence and ANLS scores it zero: measured on this
+    # rig, 92/100 predictions contained the gold answer while ANLS read 0.03. That is
+    # a prompt artefact masquerading as a catastrophic accuracy result, and it made
+    # every token budget look equally useless.
+    p.add_argument("--prompt-suffix",
+                   default="\nAnswer the question using a single word or phrase.")
     args = p.parse_args()
 
     from bench.data import load_manifest, synthetic
@@ -63,6 +70,7 @@ async def main() -> None:
         arm.max_pixels = budget
         s = await run_arm(
             arm, samples, mode="sequential", scorer=scorer,
+            prompt_suffix=args.prompt_suffix,
             results_root=args.out, run_id=f"{tag}-px{budget}",
             unmeasured=(["accuracy"] if not scorer else [])
             + ["throughput under load", "multi-image prompts"],
@@ -81,6 +89,7 @@ async def main() -> None:
               f"acc={'n/a' if acc is None else f'{acc:.3f}'}")
 
     print(f"\nE3 · token budget vs accuracy   dataset={dataset}  scorer={scorer}")
+    print(f"   prompt suffix: {args.prompt_suffix!r}")
     table(rows, [("max_pixels", "max_pixels"), ("prompt_tokens", "prompt tok"),
                  ("ttft_p50_ms", "TTFT p50"), ("accuracy", "accuracy"),
                  ("n_scored", "n scored")])
@@ -88,17 +97,30 @@ async def main() -> None:
     scored = [r for r in rows if r["accuracy"] is not None]
     if len(scored) >= 2:
         best = max(scored, key=lambda r: r["accuracy"])
-        # Cheapest budget within 1 point of the best: the practical operating point.
-        knee = min(
-            (r for r in scored if r["accuracy"] >= best["accuracy"] - 0.01),
-            key=lambda r: r["ttft_p50_ms"],
-        )
-        saved = 100.0 * (1 - knee["ttft_p50_ms"] / best["ttft_p50_ms"])
-        print(f"\n  best accuracy {best['accuracy']:.3f} at max_pixels={best['max_pixels']}")
-        print(f"  knee          {knee['accuracy']:.3f} at max_pixels={knee['max_pixels']}"
-              f"  ({saved:+.1f}% TTFT vs best)")
-        print("  -> everything above the knee is token budget you are paying for and "
-              "not using.")
+        print(f"\n  peak accuracy {best['accuracy']:.3f} at max_pixels="
+              f"{best['max_pixels']} ({best['ttft_p50_ms']:.0f} ms)")
+
+        # A single "knee" hides the shape. What a practitioner actually asks is:
+        # how much accuracy am I willing to give up, and what does that buy?
+        print("\n  cheapest budget within N points of peak:")
+        for tol in (0.01, 0.02, 0.03, 0.05):
+            cands = [r for r in scored if r["accuracy"] >= best["accuracy"] - tol]
+            if not cands:
+                continue
+            k = min(cands, key=lambda r: r["ttft_p50_ms"])
+            saved = 100.0 * (1 - k["ttft_p50_ms"] / best["ttft_p50_ms"])
+            print(f"    -{tol*100:.0f} pts: max_pixels={k['max_pixels']:<8} "
+                  f"acc={k['accuracy']:.3f}  TTFT {k['ttft_p50_ms']:.0f} ms "
+                  f"({saved:+.0f}% vs peak)")
+
+        # Past the peak, more tokens cost time and buy nothing -- or hurt. That is
+        # the finding that justifies capping max_pixels at all.
+        over = [r for r in scored if r["max_pixels"] > best["max_pixels"]]
+        for r in over:
+            dt = 100.0 * (r["ttft_p50_ms"] / best["ttft_p50_ms"] - 1)
+            da = r["accuracy"] - best["accuracy"]
+            print(f"\n  beyond peak: max_pixels={r['max_pixels']} costs {dt:+.0f}% TTFT "
+                  f"for {da:+.3f} accuracy")
 
     write_sweep(args.out, tag, rows,
                 {"experiment": "e3-token-budget", "arm": arm.id, "dataset": dataset,
