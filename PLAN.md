@@ -1,6 +1,6 @@
 # VLM Inference Optimization — Project Plan
 
-Sibling study to [`computer_vision_optmization`](https://github.com/sadbodhs/computer_vision_optmization).
+Sibling study to [`computer_vision_optimization`](https://github.com/sadbodhs/computer_vision_optimization).
 Same method (controlled arms, one harness, measured not asserted), different physics.
 
 ---
@@ -404,7 +404,8 @@ is an `if` statement the repo dies in week 4.
 
 ## 9. Naming note
 
-Your existing repo is `computer_vision_optmization` (missing the `i` in "optimization") and
-this local folder repeats it. Worth deciding now whether the new repo matches the typo for
-consistency or spells it correctly — mixed spelling across two linked repos is the worst of
-the three options.
+Resolved: the GitHub repo is **`computer_vision_optimization`**, spelled correctly
+(confirmed via the GitHub API — an earlier reading of the profile page was wrong).
+Only the local working folder here is `inference_optmization`, which is a directory
+name and has no bearing on the repo. So: name this one **`vlm_inference_optimization`**
+and the pair is consistent.
