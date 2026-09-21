@@ -16,8 +16,8 @@ Status: **first results measured.** One model, one arm, one dataset — see
 |---|---|
 | Decode is at the physical limit | **149.3 tok/s = 92.7%** of the 936 GB/s roofline — nothing left to win at batch 1 |
 | A vision token costs | **0.32 ms** of TTFT, over a 17.5 ms floor (R² = 0.9994) |
-| Past peak accuracy, pixels hurt | doubling the token budget: **+101% TTFT, −0.007 ANLS** |
-| Cheap accuracy trade | give up 3.6 ANLS points → **67% faster TTFT** |
+| Above ~600 vision tokens | accuracy flat within error while TTFT grows **6×** |
+| Cheap accuracy trade | **67% faster TTFT** for no *measurable* accuracy cost (n=100) |
 | Throughput lies after saturation | raw ceiling **9.96 req/s**, usable **6.58 req/s** — goodput hits **zero** while req/s still reads 9.9 |
 | The 3090 is power-limited | 349.2 W of 350 W at 66 °C — capped, not thermally throttled |
 

@@ -38,33 +38,46 @@ consequences:
   resolution it is 2.6% of TTFT — so at the resolutions that matter, TTFT *is*
   vision tokens, and almost nothing else.
 
-## E3 · The accuracy–latency frontier (DocVQA, 200 samples, ANLS)
+## E3 · The accuracy–latency frontier (DocVQA, 200-sample subset, n=100 scored, ANLS)
 
-| max_pixels | prompt tokens | TTFT p50 | ANLS |
-|---|---|---|---|
-| 200,704 | 288 | 130 ms | 0.784 |
-| 451,584 | 598 | 232 ms | 0.903 |
-| 802,816 | 1,034 | 370 ms | 0.915 |
-| **1,605,632** | **1,994** | **706 ms** | **0.939** |
-| 3,211,264 | 3,830 | 1,421 ms | 0.932 |
+| max_pixels | prompt tokens | TTFT p50 | ANLS | 95% CI |
+|---|---|---|---|---|
+| 200,704 | 288 | 130 ms | 0.784 | [0.713, 0.851] |
+| 451,584 | 598 | **232 ms** | 0.903 | [0.848, 0.951] |
+| 802,816 | 1,034 | 370 ms | 0.915 | [0.863, 0.960] |
+| 1,605,632 | 1,994 | 706 ms | 0.939 | [0.895, 0.976] |
+| 3,211,264 | 3,830 | 1,421 ms | 0.932 | [0.884, 0.973] |
 
-Peak ANLS 0.939 matches Qwen2.5-VL-7B's published DocVQA score, which is the
-calibration check — the harness agrees with a known value, not just with itself.
+The top value, 0.939, is consistent with Qwen2.5-VL-7B's published DocVQA score.
+That is the calibration check: the harness agrees with a known external value, not
+only with itself.
 
-**Past the peak, more pixels are strictly worse.** Doubling the budget costs
-**+101% TTFT for −0.007 ANLS**. The generous default is not a safe choice; it is a
-slower and slightly less accurate one.
+### What n=100 does and does not support
 
-**The trade is steep and cheap.**
+Bootstrapped paired differences (same documents at both budgets, 10k resamples):
 
-| give up | budget | TTFT | vs peak |
-|---|---|---|---|
-| 2.4 pts | 802,816 | 370 ms | **48% faster** |
-| 3.6 pts | 451,584 | 232 ms | **67% faster** |
+| A | B | Δ | 95% CI | |
+|---|---|---|---|---|
+| 200,704 | 451,584 | −0.120 | [−0.192, −0.051] | **different** |
+| 200,704 | 1,605,632 | −0.156 | [−0.229, −0.088] | **different** |
+| 451,584 | 1,605,632 | −0.036 | [−0.083, +0.006] | indistinguishable |
+| 802,816 | 1,605,632 | −0.024 | [−0.059, +0.005] | indistinguishable |
+| 1,605,632 | 3,211,264 | +0.007 | [−0.013, +0.033] | indistinguishable |
 
-**The cliff is at the bottom.** 0.903 → 0.784 between 598 and 288 tokens: a 12-point
-collapse where the text stops being resolvable. For documents the usable floor is
-around 600 vision tokens.
+**Above ~600 vision tokens, accuracy is flat within measurement error while TTFT
+grows 6×** — 232 ms to 1,421 ms across budgets whose accuracy cannot be told apart.
+The practical consequence is strong and the statistical claim is weak, and they point
+the same way: run at 451,584 and save 67% of TTFT for no *measurable* accuracy cost.
+
+**The cliff at the bottom is real.** 288 tokens loses 0.12–0.16 ANLS against every
+larger budget, with confidence intervals well clear of zero. For documents the usable
+floor is somewhere between 288 and 598 vision tokens — this sweep does not resolve
+where.
+
+> An earlier draft of this page claimed a peak at 1,605,632 and that more pixels past
+> it were "strictly worse" (−0.007 ANLS). Neither survives the confidence interval:
+> the four largest budgets are statistically identical, and −0.007 sits inside
+> [−0.013, +0.033]. Resolving the top of the frontier needs n≈500–1000, not 100.
 
 ## E0 · Throughput keeps looking healthy after goodput dies
 
@@ -123,8 +136,11 @@ improvement would measure the same optimisation twice and credit it once.
   much larger prefills and will saturate earlier.
 - **No prefix-caching arm yet.** The 3× TTFT gap above is the confound measured,
   not the optimisation measured under a realistic reuse workload.
-- **Single run per point.** No repeats, so no error bars. Treat differences under
-  ~5% as noise.
+- **Single run per point.** No repeats, so no error bars on any *latency* number.
+  Treat latency differences under ~5% as noise.
+- **Accuracy resolves only large effects.** n=100 gives roughly ±0.05 ANLS at 95%,
+  which is wider than every difference above 600 vision tokens. The shape of the top
+  of the frontier is unmeasured, not flat-by-finding.
 - **E2's law under-predicts real documents by 6–18%.** Synthetic images of equal
   token count are cheaper than real ones; the cause is unexplained.
 - **No FP8, ever, on sm_86.** Out of scope for this rig.
