@@ -1,0 +1,10 @@
+# harness (CPU, runs anywhere incl. the Mac Studio)
+httpx>=0.27
+numpy>=1.26
+pandas>=2.0
+matplotlib>=3.8
+PyYAML>=6.0
+Pillow>=10.0
+
+# real runs on the 3090 additionally need a serving stack, installed per-arm
+# inside its own pinned container -- never into this env. See docker/.

@@ -1,0 +1,13 @@
+# Size-vs-design control: same architecture as B, smaller, and not memory-starved.
+id: S_qwen3b_fp16
+stack: vllm
+model: Qwen/Qwen2.5-VL-3B-Instruct
+base_url: http://127.0.0.1:8000
+quantization: null
+weight_bytes: 7.5e9
+max_tokens: 128
+temperature: 0.0
+max_pixels: 1605632
+notes: >
+  Runs un-starved on 24 GB. Any conclusion that holds for B but not for S is about
+  memory pressure on this card, not about the optimization.

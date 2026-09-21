@@ -1,0 +1,10 @@
+# Dry-run fixture. Points at tools/mock_vlm_server.py, not a GPU.
+id: Z_mock
+stack: mock
+model: mock-vlm-7b
+base_url: http://127.0.0.1:8077
+weight_bytes: 6.0e9
+max_tokens: 64
+temperature: 0.0
+max_pixels: 1605632
+notes: Exercises every code path in the harness without touching the 3090.

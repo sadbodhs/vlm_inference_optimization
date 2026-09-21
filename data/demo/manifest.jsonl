@@ -1,0 +1,4 @@
+{"id": "demo-0", "question": "What is the document title?", "answers": ["invoice"], "image": "images/doc0.png"}
+{"id": "demo-1", "question": "What is the document title?", "answers": ["receipt"], "image": "images/doc1.png"}
+{"id": "demo-2", "question": "What is the document title?", "answers": ["contract"], "image": "images/doc2.png"}
+{"id": "demo-3", "question": "What is the document title?", "answers": ["summary"], "image": "images/doc3.png"}
