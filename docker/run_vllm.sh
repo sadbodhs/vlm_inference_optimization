@@ -20,6 +20,8 @@ case "${1:-start}" in
     MODEL=$(grep -E '^model:' "$ARM" | head -1 | sed 's/^model:[[:space:]]*//')
     QUANT=$(grep -E '^quantization:' "$ARM" | head -1 | sed 's/^quantization:[[:space:]]*//')
     REV=$(grep -E '^revision:' "$ARM" | head -1 | sed 's/^revision:[[:space:]]*//')
+    # Free-form extra server flags, e.g. to turn OFF a default-on optimisation.
+    EXTRA=$(grep -E '^server_args:' "$ARM" | head -1 | sed 's/^server_args:[[:space:]]*//')
 
     docker network inspect "$NET" >/dev/null 2>&1 || docker network create "$NET" >/dev/null
     docker rm -f "$NAME" >/dev/null 2>&1 || true
@@ -31,6 +33,8 @@ case "${1:-start}" in
           --limit-mm-per-prompt '{"image":1}')
     [ -n "$QUANT" ] && [ "$QUANT" != "null" ] && ARGS+=(--quantization "$QUANT")
     [ -n "$REV" ] && ARGS+=(--revision "$REV")
+    # shellcheck disable=SC2206
+    [ -n "$EXTRA" ] && ARGS+=($EXTRA)
 
     # vLLM sizes its pool as util x TOTAL vram, not util x FREE vram. If another
     # process is holding memory, it will ask for more than exists and OOM at load.

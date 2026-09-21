@@ -103,7 +103,8 @@ def plot_e1(d, out):
         ax.annotate(f"{pctv:.0f}% of roofline", (0, r["decode_tok_s"]),
                     textcoords="offset points", xytext=(0, 6), ha="center",
                     fontsize=9, color=FG)
-    _style(ax, f"E1 · single-stream decode ({r['arm']}, {r['weight_GB']:.1f} GB weights)",
+    _style(ax, f"E1 · single-stream decode ({r['arm']}, "
+               f"{r.get('decode_weight_GB') or r['weight_GB']:.1f} GB re-read per token)",
            "", "tokens/s")
     fig.tight_layout()
     fig.savefig(out, dpi=160)

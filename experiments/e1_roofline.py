@@ -50,10 +50,11 @@ async def main() -> None:
     if s["tpot_ms"]["p50"]:
         measured = 1000.0 / s["tpot_ms"]["p50"]
 
-    roof = decode_roofline_tok_s(arm.weight_bytes) if arm.weight_bytes else None
+    roof = decode_roofline_tok_s(arm.roofline_bytes) if arm.roofline_bytes else None
     row = {
         "arm": arm.id,
         "weight_GB": (arm.weight_bytes / 1e9) if arm.weight_bytes else None,
+        "decode_weight_GB": (arm.roofline_bytes / 1e9) if arm.roofline_bytes else None,
         "tpot_p50_ms": s["tpot_ms"]["p50"],
         "decode_tok_s": measured,
         "roofline_tok_s": roof,

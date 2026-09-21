@@ -10,7 +10,11 @@ quantization: awq_marlin
 
 # LLM weights 4-bit + vision tower left FP16. Used for the E1 roofline; it is a
 # declared quantity, not a measured one -- verify with nvidia-smi after load.
-weight_bytes: 6.0e+9
+# Measured, not estimated: vLLM reported "Model loading took 6.67 GiB" on this rig.
+weight_bytes: 7.161e+9
+# Decode re-reads only the LLM weights; the ~675M-param bf16 vision tower (~1.26 GiB)
+# runs once in prefill and is never touched again while tokens stream.
+decode_weight_bytes: 5.807e+9
 max_tokens: 128
 temperature: 0.0
 
@@ -25,6 +29,9 @@ max_pixels: 1605632
 #   28 layers x 4 KV heads x 128 head_dim -> 56.0 KB of KV per token (FP16)
 #   spatial_patch_size 14 with 2x2 merge -> 784 px per vision token
 #   repo size on disk: 6.94 GB
+# NOT a neutral baseline: v0.29.0 enables prefix caching, chunked prefill and a
+# 4 GB multimodal cache by default. This arm answers "what does vLLM do as
+# shipped"; use B0_vllm_awq_clean as the reference point for attributing wins.
 notes: >
   Server: docker/run_vllm.sh start arms/B_vllm_awq.yaml
   (vllm/vllm-openai:v0.29.0, --quantization awq_marlin, --max-model-len 8192,

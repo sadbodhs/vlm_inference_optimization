@@ -13,27 +13,41 @@ import time
 
 _FIELDS = [
     "name", "memory.total", "memory.used", "temperature.gpu",
-    "clocks.sm", "clocks.max.sm", "power.draw", "utilization.gpu",
+    "clocks.sm", "clocks.max.sm", "power.draw", "power.limit", "utilization.gpu",
 ]
+
+# The driver reports WHY clocks are reduced. Ask it, rather than inferring from
+# the clock ratio: a healthy 3090 under full load boosts to roughly 1700 of its
+# 2100 MHz maximum, so a ratio test calls every single run throttled. Newer
+# drivers name these clocks_event_reasons.*, older ones clocks_throttle_reasons.*.
+_REASONS = ["hw_thermal_slowdown", "sw_thermal_slowdown",
+            "sw_power_cap", "hw_power_brake_slowdown"]
+_REASON_PREFIXES = ("clocks_event_reasons", "clocks_throttle_reasons")
 
 
 def available() -> bool:
     return shutil.which("nvidia-smi") is not None
 
 
-def probe() -> dict:
-    if not available():
-        return {"available": False, **{f: None for f in _FIELDS}}
+def _query(fields: list[str]) -> list[str] | None:
     try:
         out = subprocess.run(
-            ["nvidia-smi", f"--query-gpu={','.join(_FIELDS)}",
+            ["nvidia-smi", f"--query-gpu={','.join(fields)}",
              "--format=csv,noheader,nounits"],
             capture_output=True, text=True, timeout=10, check=True,
         ).stdout.strip().splitlines()[0]
-    except Exception as exc:  # noqa: BLE001
-        return {"available": False, "error": str(exc)}
+    except Exception:  # noqa: BLE001
+        return None
+    return [v.strip() for v in out.split(",")]
 
-    vals = [v.strip() for v in out.split(",")]
+
+def probe() -> dict:
+    if not available():
+        return {"available": False, **{f: None for f in _FIELDS}}
+    vals = _query(_FIELDS)
+    if vals is None:
+        return {"available": False, "error": "nvidia-smi query failed"}
+
     rec: dict = {"available": True}
     for f, v in zip(_FIELDS, vals):
         try:
@@ -42,6 +56,18 @@ def probe() -> dict:
             rec[f] = None
     if rec.get("clocks.sm") and rec.get("clocks.max.sm"):
         rec["clock_ratio"] = rec["clocks.sm"] / rec["clocks.max.sm"]
+
+    # Best effort: a driver without these fields fails the whole query, so it is
+    # asked for separately and its absence recorded rather than raised.
+    for prefix in _REASON_PREFIXES:
+        vals = _query([f"{prefix}.{r}" for r in _REASONS])
+        if vals is not None and len(vals) == len(_REASONS):
+            for r, v in zip(_REASONS, vals):
+                rec[r] = (v.lower() == "active")
+            rec["reasons_source"] = prefix
+            break
+    else:
+        rec["reasons_source"] = None
     return rec
 
 
@@ -116,14 +142,31 @@ class Sampler:
         ratios = sorted(s["clock_ratio"] for s in busy if s.get("clock_ratio"))
         clocks = [s["clocks.sm"] for s in busy if s.get("clocks.sm")]
         p50 = ratios[len(ratios) // 2] if ratios else None
+
+        # Authoritative: the driver says why clocks dropped. The clock ratio is kept
+        # as context but is NOT the verdict -- under full load this card sits near
+        # 1700/2100 MHz with nothing wrong, which a ratio test reads as throttling.
+        thermal = any(s.get("hw_thermal_slowdown") or s.get("sw_thermal_slowdown")
+                      for s in busy)
+        power = any(s.get("sw_power_cap") or s.get("hw_power_brake_slowdown")
+                    for s in busy)
+        have_reasons = any(s.get("reasons_source") for s in busy)
+        powers = [s["power.draw"] for s in busy if s.get("power.draw")]
+
         return {
             **base,
             "checked": True,
             "clock_ratio_p50": p50,
             "sm_clock_min": min(clocks) if clocks else None,
             "sm_clock_max": max(clocks) if clocks else None,
-            "throttled": (p50 is not None and p50 < floor),
-            "reason": None,
+            "power_draw_max": max(powers) if powers else None,
+            "power_limit": busy[0].get("power.limit"),
+            "throttled": (thermal or power) if have_reasons else None,
+            "thermal_throttled": thermal if have_reasons else None,
+            "power_capped": power if have_reasons else None,
+            "reason": None if have_reasons else
+                      "driver exposes no clock-event reasons; clock ratio alone "
+                      "cannot distinguish throttling from normal boost behaviour",
         }
 
 

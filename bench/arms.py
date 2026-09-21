@@ -34,8 +34,16 @@ class Arm:
     # trap on dynamic-resolution models -- see PLAN.md 3.
     max_pixels: int | None = None
 
-    # declared, not measured: used only for the roofline, and echoed into meta.json
+    # Total weight footprint in VRAM. Reported by the server at load; used for the
+    # memory budget, NOT for the decode roofline.
     weight_bytes: float | None = None
+
+    # Weights re-read on EVERY decode step. This excludes the vision tower, which
+    # runs once during prefill and is never touched again while tokens stream. Using
+    # the total footprint here understates the decode ceiling by the size of the
+    # ViT -- on a 7B VLM that is over a GiB, and it turns a passing roofline check
+    # into a failing one. Falls back to weight_bytes when unset.
+    decode_weight_bytes: float | None = None
 
     raw: dict = field(default_factory=dict)
 
@@ -44,7 +52,7 @@ class Arm:
         # sign (`6.0e+9`) to parse as a float. ruamel follows YAML 1.2 and parses it
         # as a number. Coerce here so an arm behaves identically whichever loader is
         # present, rather than failing only inside the container.
-        for f in ("weight_bytes",):
+        for f in ("weight_bytes", "decode_weight_bytes"):
             v = getattr(self, f)
             if isinstance(v, str):
                 setattr(self, f, float(v))
@@ -63,6 +71,10 @@ class Arm:
         kwargs = {k: v for k, v in raw.items() if k in known}
         kwargs.setdefault("id", path.stem)
         return cls(raw=raw, **kwargs)
+
+    @property
+    def roofline_bytes(self) -> float | None:
+        return self.decode_weight_bytes or self.weight_bytes
 
     def request_extra(self) -> dict:
         extra = dict(self.extra_body)

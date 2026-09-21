@@ -1,0 +1,31 @@
+# THE BASELINE. Identical to B_vllm_awq except that vLLM's default-on
+# optimisations are switched off, so later arms can attribute their wins.
+#
+# vLLM v0.29.0 ships with prefix caching, chunked prefill and a 4 GB multimodal
+# processor cache all enabled. Measured on this rig during E1, stock defaults gave
+# a 75.4% prefix cache hit rate and an 86.7% multimodal cache hit rate -- meaning
+# most of the "prefill" being timed was not prefill at all. Calling that a baseline
+# and then reporting prefix caching as an improvement would be measuring the same
+# optimisation twice and crediting it once.
+id: B0_vllm_awq_clean
+stack: vllm
+model: Qwen/Qwen2.5-VL-7B-Instruct-AWQ
+revision: 536a35794df8831aa814970ee8f89eff577e7718
+base_url: http://vlm-server:8000   # container name on the vlmbench network
+quantization: awq_marlin
+
+weight_bytes: 7.161e+9
+decode_weight_bytes: 5.807e+9
+
+max_tokens: 128
+temperature: 0.0
+max_pixels: 1605632
+
+# CUDA graphs stay ON: they are not a measurement confound, they are how the
+# engine runs. Prefix/MM caching are confounds because they make a repeated
+# input look fast without the model having done the work.
+server_args: --no-enable-prefix-caching --no-enable-chunked-prefill --mm-processor-cache-gb 0
+
+notes: >
+  The R1 reference point. Every optimisation arm is measured as a delta from this,
+  not from vLLM's shipped defaults.
