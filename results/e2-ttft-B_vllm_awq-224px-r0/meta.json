@@ -1,0 +1,108 @@
+{
+  "run_id": "e2-ttft-B_vllm_awq-224px-r0",
+  "created_utc": "2026-09-22T02:11:56Z",
+  "git_sha": "d1636e48711921be55d2a63acbc427eb2d7b3c8f",
+  "git_dirty": "dirty",
+  "arm": {
+    "id": "B_vllm_awq",
+    "model": "Qwen/Qwen2.5-VL-7B-Instruct-AWQ",
+    "base_url": "http://vlm-server:8000",
+    "stack": "vllm",
+    "quantization": "awq_marlin",
+    "notes": "Server: docker/run_vllm.sh start arms/B_vllm_awq.yaml (vllm/vllm-openai:v0.29.0, --quantization awq_marlin, --max-model-len 8192, --gpu-memory-utilization 0.90, --limit-mm-per-prompt image=1). Needs ~22.1 GB of the 24 GB card at util 0.90, so the GPU must be otherwise idle.\n",
+    "max_tokens": 8,
+    "temperature": 0.0,
+    "extra_body": {},
+    "max_pixels": 1605632,
+    "weight_bytes": 7161000000.0,
+    "decode_weight_bytes": 5807000000.0,
+    "raw": {
+      "id": "B_vllm_awq",
+      "stack": "vllm",
+      "model": "Qwen/Qwen2.5-VL-7B-Instruct-AWQ",
+      "revision": "536a35794df8831aa814970ee8f89eff577e7718",
+      "base_url": "http://vlm-server:8000",
+      "quantization": "awq_marlin",
+      "weight_bytes": 7161000000.0,
+      "decode_weight_bytes": 5807000000.0,
+      "max_tokens": 128,
+      "temperature": 0.0,
+      "max_pixels": 1605632,
+      "notes": "Server: docker/run_vllm.sh start arms/B_vllm_awq.yaml (vllm/vllm-openai:v0.29.0, --quantization awq_marlin, --max-model-len 8192, --gpu-memory-utilization 0.90, --limit-mm-per-prompt image=1). Needs ~22.1 GB of the 24 GB card at util 0.90, so the GPU must be otherwise idle.\n"
+    }
+  },
+  "load": {
+    "mode": "sequential",
+    "rate_qps": 1.0,
+    "concurrency": 1,
+    "repeats": 1,
+    "n_requests": 8,
+    "seed": 0
+  },
+  "prompt_suffix": "",
+  "host": {
+    "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "images": {
+    "harness": "vlmbench-harness@sha256:60591fccb4ae6730cff816464b2b8b7797a85cae5f65d2dc1d7fb786da955244",
+    "server": "vllm/vllm-openai@sha256:c2914767605584b6d8f45686b82de173ecc99e781897aa3d0a66dacd72c51ae1"
+  },
+  "gpu_before": {
+    "available": true,
+    "name": "NVIDIA GeForce RTX 3090",
+    "memory.total": 24576.0,
+    "memory.used": 20395.0,
+    "temperature.gpu": 50.0,
+    "clocks.sm": 1935.0,
+    "clocks.max.sm": 2100.0,
+    "power.draw": 217.53,
+    "power.limit": 350.0,
+    "utilization.gpu": 90.0,
+    "clock_ratio": 0.9214285714285714,
+    "hw_thermal_slowdown": false,
+    "sw_thermal_slowdown": false,
+    "sw_power_cap": true,
+    "hw_power_brake_slowdown": false,
+    "reasons_source": "clocks_event_reasons"
+  },
+  "gpu_after": {
+    "available": true,
+    "name": "NVIDIA GeForce RTX 3090",
+    "memory.total": 24576.0,
+    "memory.used": 20395.0,
+    "temperature.gpu": 50.0,
+    "clocks.sm": 1845.0,
+    "clocks.max.sm": 2100.0,
+    "power.draw": 315.6,
+    "power.limit": 350.0,
+    "utilization.gpu": 90.0,
+    "clock_ratio": 0.8785714285714286,
+    "hw_thermal_slowdown": false,
+    "sw_thermal_slowdown": false,
+    "sw_power_cap": true,
+    "hw_power_brake_slowdown": false,
+    "reasons_source": "clocks_event_reasons"
+  },
+  "thermal": {
+    "n_samples": 1,
+    "n_busy_samples": 1,
+    "util_mean": 90.0,
+    "temp_max": 50.0,
+    "temp_mean": 50.0,
+    "checked": true,
+    "clock_ratio_p50": 0.9285714285714286,
+    "sm_clock_min": 1950.0,
+    "sm_clock_max": 1950.0,
+    "power_draw_max": 223.03,
+    "power_limit": 350.0,
+    "throttled": true,
+    "thermal_throttled": false,
+    "power_capped": true,
+    "reason": null
+  },
+  "not_measured": [
+    "accuracy at this resolution",
+    "batched TTFT"
+  ]
+}

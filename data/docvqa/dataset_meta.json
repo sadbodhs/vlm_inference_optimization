@@ -1,0 +1,25 @@
+{
+  "dataset": "lmms-lab/DocVQA",
+  "config": "DocVQA",
+  "split": "validation",
+  "n": 1000,
+  "seed": 0,
+  "columns": [
+    "questionId",
+    "question",
+    "question_types",
+    "image",
+    "docId",
+    "ucsf_document_id",
+    "ucsf_document_page_no",
+    "answers",
+    "data_split"
+  ],
+  "detected": {
+    "question": "question",
+    "answers": "answers",
+    "image": "image",
+    "id": "questionId"
+  },
+  "n_without_answers": 0
+}
