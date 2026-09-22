@@ -3,6 +3,8 @@
 Measured answers to: **what does a vision-language model actually cost to serve, and
 what does making it cheaper cost you in accuracy?**
 
+**Full write-up: [sadbodhs.github.io/vlm_inference_optimization](https://sadbodhs.github.io/vlm_inference_optimization/)** — including [the measurement bugs that produced wrong numbers](https://sadbodhs.github.io/vlm_inference_optimization/corrections/) and [what these numbers do not support](https://sadbodhs.github.io/vlm_inference_optimization/not-measured/).
+
 Single RTX 3090, 24 GB, sm_86. Sibling study to
 [computer_vision_optimization](https://github.com/sadbodhs/computer_vision_optimization),
 which asked the same kind of question about YOLO serving stacks.
