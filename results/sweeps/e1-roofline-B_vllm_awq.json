@@ -11,11 +11,19 @@
       "arm": "B_vllm_awq",
       "weight_GB": 7.161,
       "decode_weight_GB": 5.807,
-      "tpot_p50_ms": 6.693759751774801,
-      "decode_tok_s": 149.3928729268865,
+      "tpot_p50_ms": 6.713897647568956,
+      "decode_tok_s": 149.11305316295548,
+      "decode_tok_s_sd": 0.1644271469053445,
+      "decode_tok_s_runs": [
+        149.27,
+        149.12,
+        148.94
+      ],
+      "repeats": 3,
       "roofline_tok_s": 161.18477699328398,
-      "pct_of_roofline": 92.68423216735361,
-      "ttft_p50_ms": 14.984639477916062
+      "pct_of_roofline": 92.51063031167547,
+      "ttft_p50_ms": 14.970639390715709,
+      "ttft_p50_ms_sd": 0.11879087131937893
     }
   ]
 }

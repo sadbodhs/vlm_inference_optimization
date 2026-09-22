@@ -1,7 +1,7 @@
 {
   "meta": {
     "experiment": "e3-token-budget",
-    "arm": "B0_vllm_awq_clean",
+    "arm": "B_vllm_awq",
     "dataset": "data/docvqa/manifest.jsonl",
     "scorer": "anls",
     "budgets": [
@@ -18,45 +18,45 @@
       "max_pixels": 200704,
       "max_edge_sq": 448,
       "prompt_tokens": 287.216,
-      "ttft_p50_ms": 129.7397359739989,
-      "ttft_p95_ms": 167.14785501244475,
-      "accuracy": 0.7773729001484709,
+      "ttft_p50_ms": 128.05328302783892,
+      "ttft_p95_ms": 164.9247074732557,
+      "accuracy": 0.7810472284257617,
       "n_scored": 500
     },
     {
       "max_pixels": 451584,
       "max_edge_sq": 672,
       "prompt_tokens": 598.7,
-      "ttft_p50_ms": 233.9052600436844,
-      "ttft_p95_ms": 271.13229398964904,
-      "accuracy": 0.9139670563857427,
+      "ttft_p50_ms": 230.16116447979584,
+      "ttft_p95_ms": 269.4417339458596,
+      "accuracy": 0.9101488745675608,
       "n_scored": 500
     },
     {
       "max_pixels": 802816,
       "max_edge_sq": 896,
       "prompt_tokens": 1032.27,
-      "ttft_p50_ms": 367.9521369631402,
-      "ttft_p95_ms": 408.1179722037632,
-      "accuracy": 0.9443752201316301,
+      "ttft_p50_ms": 367.1788525534794,
+      "ttft_p95_ms": 406.80345229338855,
+      "accuracy": 0.9458278517105775,
       "n_scored": 500
     },
     {
       "max_pixels": 1605632,
       "max_edge_sq": 1267,
       "prompt_tokens": 1994.248,
-      "ttft_p50_ms": 702.419952431228,
-      "ttft_p95_ms": 744.6707337279804,
-      "accuracy": 0.9547220843643001,
+      "ttft_p50_ms": 703.8147250423208,
+      "ttft_p95_ms": 746.4555793791078,
+      "accuracy": 0.9557220843643001,
       "n_scored": 500
     },
     {
       "max_pixels": 3211264,
       "max_edge_sq": 1792,
       "prompt_tokens": 3809.628,
-      "ttft_p50_ms": 1412.091511010658,
-      "ttft_p95_ms": 1456.000851240242,
-      "accuracy": 0.9560175705774333,
+      "ttft_p50_ms": 1416.6746300179511,
+      "ttft_p95_ms": 1456.7567747784778,
+      "accuracy": 0.9563985229583857,
       "n_scored": 500
     }
   ]

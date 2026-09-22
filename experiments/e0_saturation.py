@@ -43,19 +43,40 @@ async def main() -> None:
     arm.max_tokens = args.max_tokens
     tag = args.tag or f"e0-saturation-{arm.id}"
     rates = [float(x) for x in args.rates.split(",")]
+    # Every request gets its own document, and every rate its own slice.
+    #
+    # Cycling a small pool is harmless with all caches off, but with prefix/multimodal
+    # caching on it turns the sweep into a ~100% reuse workload -- the best case for a
+    # cache and a workload almost nobody has. A 32-sample pool made the defaults arm
+    # look 8x faster than the clean one; sharing a single 80-sample pool across rates
+    # then left only the FIRST rate cold, which showed up as that rate matching the
+    # no-cache arm to within 3 ms while every later rate was 13x faster. Sharing one pool across the sweep makes the
+    # first rate cold and every later rate a cache hit -- visible in the data as a
+    # first rate that matches the no-cache arm exactly and later rates that do not.
+    # Reuse must be a variable this experiment sets, not a side effect of sweep order.
+    need = args.n * len(rates)
     if args.manifest:
-        samples = load_manifest(args.manifest, limit=min(args.n, 32))
+        pool = load_manifest(args.manifest, limit=need)
         workload = args.manifest
+        if len(pool) < need:
+            print(f"  WARNING: manifest has {len(pool)} samples but this sweep needs "
+                  f"{need} for zero reuse across rates. Later rates will re-send "
+                  f"earlier documents and any enabled cache will serve them.")
     else:
-        samples = synthetic(min(args.n, 32), width=args.width, height=args.height)
+        pool = synthetic(need, width=args.width, height=args.height)
         workload = f"synthetic {args.width}x{args.height}"
-    print(f"workload: {workload}  ({len(samples)} distinct samples)")
+    reuse = max(0.0, 1 - len(pool) / need)
+    print(f"workload: {workload}  ({len(pool)} distinct samples across {len(rates)} "
+          f"rates x {args.n} requests -> reuse {reuse * 100:.0f}%)")
 
     rows = []
-    for rate in rates:
+    for i, rate in enumerate(rates):
+        # Disjoint slice per rate, so no rate benefits from a previous rate's cache.
+        lo = (i * args.n) % max(len(pool), 1)
+        samples = pool[lo:lo + args.n] or pool[: args.n]
         s = await run_arm(
             arm, samples, mode="open", rate_qps=rate,
-            repeats=max(args.n // len(samples), 1),
+            repeats=max(round(args.n / len(samples)), 1),
             results_root=args.out, run_id=f"{tag}-qps{rate:g}",
             unmeasured=["accuracy", "multi-turn reuse", "mixed request sizes"],
         )
@@ -105,7 +126,8 @@ async def main() -> None:
     write_sweep(args.out, tag, rows,
                 {"experiment": "e0-saturation", "arm": arm.id, "rates": rates,
                  "workload": workload, "image": [args.width, args.height],
-                 "n_per_rate": args.n})
+                 "n_per_rate": args.n, "distinct_samples": len(pool),
+                 "reuse_fraction": reuse})
 
 
 if __name__ == "__main__":

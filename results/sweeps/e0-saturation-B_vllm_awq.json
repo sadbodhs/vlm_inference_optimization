@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "experiment": "e0-saturation",
+    "arm": "B_vllm_awq",
+    "rates": [
+      0.5,
+      1.0,
+      1.5,
+      2.0,
+      4.0
+    ],
+    "workload": "data/docvqa/manifest.jsonl",
+    "image": [
+      448,
+      448
+    ],
+    "n_per_rate": 80,
+    "distinct_samples": 80,
+    "reuse_fraction": 0.0
+  },
+  "rows": [
+    {
+      "offered_qps": 0.5,
+      "achieved_qps": 0.4541478372709391,
+      "ratio": 0.99678771581177,
+      "ttft_p50_ms": 730.7285915012471,
+      "ttft_p99_ms": 4428.278251435817,
+      "tpot_p50_ms": 6.809523955278481,
+      "goodput_req_s": 0.3349340299873176,
+      "lag_p99_ms": 14.37148715951479,
+      "lag_drift": -1.1906906525837258,
+      "ttft_drift_frac": -0.22231244698781472,
+      "verdict": "not-saturated"
+    },
+    {
+      "offered_qps": 1.0,
+      "achieved_qps": 0.9094334447495377,
+      "ratio": 0.9980363349550732,
+      "ttft_p50_ms": 55.76760246185586,
+      "ttft_p99_ms": 286.1061726114711,
+      "tpot_p50_ms": 6.753144596386219,
+      "goodput_req_s": 0.9094334447495377,
+      "lag_p99_ms": 6.280812512850388,
+      "lag_drift": 0.16795500996522605,
+      "ttft_drift_frac": -0.18742187354217216,
+      "verdict": "not-saturated"
+    },
+    {
+      "offered_qps": 1.5,
+      "achieved_qps": 1.36281014916532,
+      "ratio": 0.9970559541687833,
+      "ttft_p50_ms": 54.86295948503539,
+      "ttft_p99_ms": 128.1094475882127,
+      "tpot_p50_ms": 6.745750603910822,
+      "goodput_req_s": 1.36281014916532,
+      "lag_p99_ms": 6.590962404152376,
+      "lag_drift": 0.09074964036699384,
+      "ttft_drift_frac": 0.02465426151398042,
+      "verdict": "not-saturated"
+    },
+    {
+      "offered_qps": 2.0,
+      "achieved_qps": 1.8153768328579512,
+      "ratio": 0.99612129468522,
+      "ttft_p50_ms": 56.82364496169612,
+      "ttft_p99_ms": 129.65834837406868,
+      "tpot_p50_ms": 6.757919596670792,
+      "goodput_req_s": 1.8153768328579512,
+      "lag_p99_ms": 7.741425893036648,
+      "lag_drift": 0.19428353698458523,
+      "ttft_drift_frac": 0.03156575125423806,
+      "verdict": "not-saturated"
+    },
+    {
+      "offered_qps": 4.0,
+      "achieved_qps": 3.617079826019405,
+      "ratio": 0.9923697862752815,
+      "ttft_p50_ms": 55.50669500371441,
+      "ttft_p99_ms": 119.6407457860185,
+      "tpot_p50_ms": 6.92289312216891,
+      "goodput_req_s": 3.617079826019405,
+      "lag_p99_ms": 8.003366704797347,
+      "lag_drift": 0.14835476176813245,
+      "ttft_drift_frac": -0.0017749425159742,
+      "verdict": "not-saturated"
+    }
+  ]
+}
