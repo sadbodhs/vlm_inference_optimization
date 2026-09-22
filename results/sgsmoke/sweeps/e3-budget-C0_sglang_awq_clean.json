@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "experiment": "e3-token-budget",
+    "arm": "C0_sglang_awq_clean",
+    "dataset": "data/docvqa/manifest.jsonl",
+    "scorer": "anls",
+    "budgets": [
+      200704,
+      802816,
+      1605632
+    ],
+    "limit": 20,
+    "resize": "client"
+  },
+  "rows": [
+    {
+      "max_pixels": 200704,
+      "max_edge_sq": 448,
+      "prompt_tokens": 290.0,
+      "ttft_p50_ms": 105.41555803501979,
+      "ttft_p95_ms": 114.55143644125206,
+      "accuracy": 0.7191666666666666,
+      "n_scored": 20
+    },
+    {
+      "max_pixels": 802816,
+      "max_edge_sq": 896,
+      "prompt_tokens": 1006.5,
+      "ttft_p50_ms": 349.673900520429,
+      "ttft_p95_ms": 352.54520097514614,
+      "accuracy": 0.7827777777777778,
+      "n_scored": 20
+    },
+    {
+      "max_pixels": 1605632,
+      "max_edge_sq": 1267,
+      "prompt_tokens": 1923.05,
+      "ttft_p50_ms": 702.7652164688334,
+      "ttft_p95_ms": 719.2027340468485,
+      "accuracy": 0.8577777777777778,
+      "n_scored": 20
+    }
+  ]
+}

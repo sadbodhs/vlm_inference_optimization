@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "experiment": "e3-token-budget",
+    "arm": "C0_sglang_awq_clean",
+    "dataset": "data/docvqa/manifest.jsonl",
+    "scorer": "anls",
+    "budgets": [
+      200704,
+      451584,
+      802816,
+      1605632,
+      3211264
+    ],
+    "limit": 500,
+    "resize": "client"
+  },
+  "rows": [
+    {
+      "max_pixels": 200704,
+      "max_edge_sq": 448,
+      "prompt_tokens": 287.216,
+      "ttft_p50_ms": 107.39222803385928,
+      "ttft_p95_ms": 111.85426005977206,
+      "accuracy": 0.7518204814339097,
+      "n_scored": 500
+    },
+    {
+      "max_pixels": 451584,
+      "max_edge_sq": 672,
+      "prompt_tokens": 598.7,
+      "ttft_p50_ms": 206.88872947357595,
+      "ttft_p95_ms": 211.3963718235027,
+      "accuracy": 0.874937727283496,
+      "n_scored": 500
+    },
+    {
+      "max_pixels": 802816,
+      "max_edge_sq": 896,
+      "prompt_tokens": 1032.27,
+      "ttft_p50_ms": 353.4389524720609,
+      "ttft_p95_ms": 357.3134973528795,
+      "accuracy": 0.8936707057408214,
+      "n_scored": 500
+    },
+    {
+      "max_pixels": 1605632,
+      "max_edge_sq": 1267,
+      "prompt_tokens": 1994.248,
+      "ttft_p50_ms": 715.3160294983536,
+      "ttft_p95_ms": 732.5671627477277,
+      "accuracy": 0.9074407416469443,
+      "n_scored": 500
+    },
+    {
+      "max_pixels": 3211264,
+      "max_edge_sq": 1792,
+      "prompt_tokens": 3809.628,
+      "ttft_p50_ms": 1551.40118295094,
+      "ttft_p95_ms": 1566.9476177718025,
+      "accuracy": 0.9089624404160114,
+      "n_scored": 500
+    }
+  ]
+}

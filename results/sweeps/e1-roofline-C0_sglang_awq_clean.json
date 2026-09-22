@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "experiment": "e1-roofline",
+    "hbm_gb_s": 936.0,
+    "arm": "C0_sglang_awq_clean",
+    "n": 12,
+    "max_tokens": 128
+  },
+  "rows": [
+    {
+      "arm": "C0_sglang_awq_clean",
+      "weight_GB": 7.161,
+      "decode_weight_GB": 5.807,
+      "tpot_p50_ms": 6.549169137282551,
+      "decode_tok_s": 152.61518438700313,
+      "decode_tok_s_sd": 0.07214023708437776,
+      "decode_tok_s_runs": [
+        152.61,
+        152.55,
+        152.69
+      ],
+      "repeats": 3,
+      "roofline_tok_s": 161.18477699328398,
+      "pct_of_roofline": 94.68337347599648,
+      "ttft_p50_ms": 34.92210267965371,
+      "ttft_p50_ms_sd": 0.2207386281491448
+    }
+  ]
+}
