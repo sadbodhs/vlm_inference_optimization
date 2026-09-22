@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "experiment": "e4-video-stream",
+    "arm": "B0_vllm_awq_clean",
+    "streams": [
+      "cam1",
+      "cam2",
+      "cam3",
+      "cam4",
+      "cam5",
+      "cam6",
+      "cam7",
+      "cam8"
+    ],
+    "task": "describe",
+    "question": "Describe this scene in one short sentence.",
+    "duration_s": 45.0,
+    "interval_s": 1.0,
+    "staleness_slo_ms": 2000.0,
+    "thermal": {
+      "n_samples": 44,
+      "n_busy_samples": 43,
+      "util_mean": 89.02272727272727,
+      "temp_max": 67.0,
+      "temp_mean": 65.22727272727273,
+      "checked": true,
+      "clock_ratio_p50": 0.8642857142857143,
+      "sm_clock_min": 1710.0,
+      "sm_clock_max": 1920.0,
+      "power_draw_max": 348.83,
+      "power_limit": 350.0,
+      "throttled": true,
+      "thermal_throttled": false,
+      "power_capped": true,
+      "reason": null
+    },
+    "not_measured": [
+      "scene-understanding accuracy (clip is 3D animation)",
+      "decode cost (runs in separate containers)"
+    ]
+  },
+  "rows": [
+    {
+      "streams": 8,
+      "task": "describe",
+      "interval_s": 1.0,
+      "analyses": 360,
+      "ok": 360,
+      "analyses_per_s": 8.0,
+      "per_stream_per_s": 1.0,
+      "staleness_p50_ms": 1430.5018186569214,
+      "staleness_p95_ms": 1918.8928008079529,
+      "staleness_max_ms": 2021.1327075958252,
+      "fresh_fraction": 0.9944444444444445,
+      "ttft_p50_ms": 804.6801449963823,
+      "prompt_tokens": 328.0
+    }
+  ]
+}

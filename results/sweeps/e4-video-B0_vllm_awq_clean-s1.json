@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "experiment": "e4-video-stream",
+    "arm": "B0_vllm_awq_clean",
+    "streams": [
+      "cam1"
+    ],
+    "task": "describe",
+    "question": "Describe this scene in one short sentence.",
+    "duration_s": 30.0,
+    "interval_s": 1.0,
+    "staleness_slo_ms": 2000.0,
+    "thermal": {
+      "n_samples": 30,
+      "n_busy_samples": 0,
+      "util_mean": 0.0,
+      "temp_max": 42.0,
+      "temp_mean": 38.266666666666666,
+      "checked": false,
+      "throttled": null,
+      "reason": "GPU never exceeded 25% utilisation during this run; no throttling judgement possible",
+      "clock_ratio_p50": null,
+      "sm_clock_min": null,
+      "sm_clock_max": null
+    },
+    "not_measured": [
+      "scene-understanding accuracy (clip is 3D animation)",
+      "decode cost (runs in separate containers)"
+    ]
+  },
+  "rows": [
+    {
+      "streams": 1,
+      "task": "describe",
+      "interval_s": 1.0,
+      "analyses": 30,
+      "ok": 30,
+      "analyses_per_s": 1.0,
+      "per_stream_per_s": 1.0,
+      "staleness_p50_ms": 750.9762048721313,
+      "staleness_p95_ms": 815.990960597992,
+      "staleness_max_ms": 820.2483654022217,
+      "fresh_fraction": 1.0,
+      "ttft_p50_ms": 117.42523149587214,
+      "prompt_tokens": 328.0
+    }
+  ]
+}

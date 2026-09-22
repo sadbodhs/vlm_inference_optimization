@@ -142,6 +142,49 @@ helps you is a property of your workload's reuse rate, not of the server.** A
 benchmark that reuses its inputs — which is the easy way to write one — measures the
 best case and reports it as the typical one.
 
+## E4 · Live RTSP: throughput rises as the system becomes useless
+
+Eight RTSP streams (640×360, 328 vision tokens per frame) decoded continuously in
+separate containers, each keeping only its newest frame. The metric is **staleness**
+— how old the frame is when its answer arrives — because a camera does not wait for
+the model. Freshness SLO: 2 s.
+
+| demand /s | achieved /s | frames dropped | staleness p50 | staleness p95 | fresh < 2 s |
+|---|---|---|---|---|---|
+| 8 | 8.00 | 0 | 1,467 ms | 1,941 ms | **98%** |
+| 16 | **13.64** | 106 | 20,029 ms | 28,525 ms | **0%** |
+| 32 | 13.64 | 826 | 25,745 ms | 30,192 ms | 0% |
+| 64 | 13.91 | 2,254 | 26,152 ms | 30,484 ms | 0% |
+
+Push past 8 analyses/s and **throughput goes UP by 70%** — 8.00 to 13.64 — while the
+fraction of answers describing a current frame goes from 98% to **zero**. Every
+answer past the knee describes a frame roughly 26 seconds old.
+
+The inversion is real, not an artefact: more requests in flight means larger batches
+and more total GPU work completed. The server is genuinely doing more. It is simply
+doing it about the past. A throughput-only benchmark would report 13.9 analyses/s as
+this system's capacity — a 74% *improvement* on the only rate that actually works.
+
+**Usable capacity is 8 analyses/s: eight streams at 1 fps, or one stream at 8 fps.**
+
+### Vision tokens predict stream capacity
+
+E2's law, fitted on synthetic squares, says TTFT = 17.5 ms + 319 ms per 1k vision
+tokens. A 328-token video frame should therefore cost 5.4× less than a 2,000-token
+DocVQA page. Measured capacity: 8.0 analyses/s on video against 1.56 req/s on
+documents — **5.1×**.
+
+Three independent experiments agree to within 6%, which means the token count is
+enough to size a deployment: **halve the resolution, double the streams**, without
+re-benchmarking.
+
+> E4 first reported a flat 8.18 analyses/s across 8, 16, 32 and 64 analyses/s of
+> demand, which read like clean saturation. It was a closed loop — the tick awaited
+> every analysis before starting the next, pinning concurrency at the stream count,
+> so 8 requests at ~980 ms each produced 8.16/s by arithmetic. `bench/loadgen.py`
+> warns about precisely this. Ticks now fire on schedule regardless of completion
+> and excess frames are dropped and counted.
+
 ## The card is power-limited, not heat-limited
 
 Under sustained load at 64 QPS: **349.2 W against a 350 W cap**, 66 °C, SM clock
@@ -189,3 +232,10 @@ improvement would measure the same optimisation twice and credit it once.
 - **E2's law under-predicts real documents by 6–18%.** Synthetic images of equal
   token count are cheaper than real ones; the cause is unexplained.
 - **No FP8, ever, on sm_86.** Out of scope for this rig.
+- **E4 measures no accuracy.** The stock clip is a 3D-animated short, so scene
+  descriptions are of animated content. The pipeline numbers are real; any claim
+  about scene-understanding quality on real cameras is not supported.
+- **E4 decode cost is excluded.** Decoders run in their own containers; their CPU
+  and NVDEC cost is not attributed to the numbers above.
+- **One frame rate per stream.** Motion-gated or keyframe sampling, which is what a
+  real deployment would use, is unmeasured.

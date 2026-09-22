@@ -19,6 +19,8 @@ Status: **first results measured.** One model, one arm, one dataset — see
 | Accuracy saturates at ~1,000 vision tokens | beyond that, **+284% TTFT for +0.012 ANLS** |
 | Synthetic images overstate capacity | by **6.4×** vs real document pages |
 | Caching is a workload property | **3×** on repeated inputs, **1.00×** on distinct ones |
+| Live video: 8 RTSP streams | at 1 fps each, 98% of answers inside a 2 s freshness budget |
+| Past that knee | throughput **rises 70%** while freshness drops to **zero** — answers describe 26-second-old frames |
 | Cheap accuracy trade | **74% faster TTFT** for 1.2 ANLS points (n=500) |
 | Throughput lies after saturation | on real pages: raw ceiling **1.56 req/s**, usable **0.43 req/s** — a 3.6× overstatement |
 | The 3090 is power-limited | 349.2 W of 350 W at 66 °C — capped, not thermally throttled |
@@ -46,6 +48,7 @@ The YOLO study had one bottleneck axis and constant quality. A VLM breaks that:
 | **E1** roofline | Does single-stream decode land where 936 GB/s says it must? | measured |
 | **E2** TTFT vs vision tokens | What does one vision token cost, and what is the fixed floor underneath it? | measured |
 | **E3** token budget | How far can the budget fall before accuracy does — and does the limit depend on the task? | measured on DocVQA only |
+| **E4** live RTSP | How many camera streams can one 3090 understand, and how stale is the answer? | measured (pipeline only, no accuracy) |
 
 **Execution order is E1 → E2 → E0 → E3**, which is not the numeric order.
 
