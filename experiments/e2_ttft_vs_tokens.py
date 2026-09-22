@@ -60,7 +60,8 @@ async def main() -> None:
     for rep in range(args.repeats):
         for edge in sizes:
             s = await run_arm(
-                arm, synthetic(args.n, width=edge, height=edge), mode="sequential",
+                arm, synthetic(args.n, width=edge, height=edge, seed=rep),
+                mode="sequential",
                 results_root=args.out,
                 run_id=f"{tag}-{edge}px" if args.repeats == 1 else f"{tag}-{edge}px-r{rep}",
                 unmeasured=["accuracy at this resolution", "batched TTFT"],

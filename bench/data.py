@@ -67,7 +67,13 @@ def load_manifest(path: str | Path, limit: int | None = None) -> list[Sample]:
 def synthetic(n: int, *, width: int, height: int, seed: int = 0,
               question: str = "What is written in this document?") -> list[Sample]:
     """n images of exactly width x height. Content is noise-free structured text-like
-    bars: the point is geometry, not legibility."""
+    bars: the point is geometry, not legibility.
+
+    `seed` genuinely changes the pixels, and must. Repeated runs that re-send
+    identical images are independent samples only while every cache is off; with a
+    multimodal cache enabled they become cache hits, and averaging them reports a
+    blend of one cold measurement and N-1 warm ones as if it were a spread.
+    """
     from PIL import Image, ImageDraw
 
     out: list[Sample] = []
@@ -75,16 +81,16 @@ def synthetic(n: int, *, width: int, height: int, seed: int = 0,
         img = Image.new("RGB", (width, height), (255, 255, 255))
         d = ImageDraw.Draw(img)
         step = max(height // 24, 4)
-        for y in range(step, height - step, step * 2):
-            d.rectangle(
-                [width // 20, y, width - width // 20 - ((i * 37) % (width // 3)), y + step // 2],
-                fill=(40, 40, 40),
-            )
+        jitter = (i * 37 + seed * 9173) % max(width // 3, 1)
+        for k, y in enumerate(range(step, height - step, step * 2)):
+            right = width - width // 20 - ((jitter + k * 13 * (seed + 1)) % max(width // 3, 1))
+            d.rectangle([width // 20, y, max(right, width // 10), y + step // 2],
+                        fill=(40, 40, 40))
         buf = io.BytesIO()
         img.save(buf, format="PNG")
         out.append(
             Sample(
-                id=f"syn-{width}x{height}-{i}",
+                id=f"syn-{width}x{height}-s{seed}-{i}",
                 question=question,
                 image_b64=base64.b64encode(buf.getvalue()).decode(),
                 image_px=width * height,
