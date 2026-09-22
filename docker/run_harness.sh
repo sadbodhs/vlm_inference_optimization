@@ -37,6 +37,7 @@ exec docker run --rm -i \
   --name "harness-$$" \
   --network "$NET" \
   -v "$PWD:/work" \
+  $([ -d "${FRAME_DIR:-/tmp/vlm_frames}" ] && echo "-v ${FRAME_DIR:-/tmp/vlm_frames}:${FRAME_DIR:-/tmp/vlm_frames}:ro") \
   -w /work \
   -e HARNESS_IMAGE="$(docker image inspect "$IMAGE" --format '{{index .RepoDigests 0}}' 2>/dev/null || echo "$IMAGE")" \
   -e SERVER_IMAGE="${SERVER_IMAGE:-$(docker image inspect "${VLLM_IMAGE:-vllm/vllm-openai:v0.29.0}" --format '{{index .RepoDigests 0}}' 2>/dev/null || true)}" \

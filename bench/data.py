@@ -21,11 +21,12 @@ class Sample:
     answers: list[str] = field(default_factory=list)
     image_path: str | None = None
     image_b64: str | None = None
+    image_mime: str = "png"
     image_px: int | None = None
 
     def data_url(self) -> str:
         if self.image_b64:
-            return f"data:image/png;base64,{self.image_b64}"
+            return f"data:image/{self.image_mime};base64,{self.image_b64}"
         raw = Path(self.image_path).read_bytes()
         suffix = Path(self.image_path).suffix.lstrip(".").lower() or "png"
         mime = "jpeg" if suffix in {"jpg", "jpeg"} else suffix
