@@ -8,7 +8,7 @@ Single RTX 3090, 24 GB, sm_86. Sibling study to
 which asked the same kind of question about YOLO serving stacks.
 
 Status: **first results measured.** One model, one arm, one dataset — see
-[docs/results.md](docs/results.md) for the numbers and what they do not cover.
+[the results site](https://sadbodhs.github.io/vlm_inference_optimization/) for the numbers and what they do not cover.
 
 ## Headline
 
@@ -150,7 +150,7 @@ PLAN.md         full project plan
 
 One model, one arm, one dataset, one run per point — so nothing here separates "how
 VLM serving behaves" from "how this checkpoint behaves on this card". Full list in
-[docs/results.md](docs/results.md#not-measured). Still open: the 3B and FP16 controls;
+[not measured](https://sadbodhs.github.io/vlm_inference_optimization/not-measured/). Still open: the 3B and FP16 controls;
 ChartQA and natural-image sets (frozen, unrun); prefix caching measured as an
 optimisation rather than as a confound; whether CPU-side image preprocessing outweighs
 the vision encoder in TTFT; a disaggregated encoder service and its embedding-transport

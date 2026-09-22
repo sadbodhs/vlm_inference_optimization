@@ -1,0 +1,55 @@
+site_name: VLM Inference Optimization
+site_description: What a vision-language model costs to serve on one RTX 3090, and what making it cheaper costs in accuracy
+repo_url: https://github.com/sadbodhs/vlm_inference_optimization
+repo_name: sadbodhs/vlm_inference_optimization
+docs_dir: site_src
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.sections
+    - content.code.copy
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+
+nav:
+  - The question: index.md
+  - Overview: overview.md
+  - Methodology: methodology.md
+  - Results:
+      - E1 · Decode vs the roofline: e1-roofline.md
+      - E2 · What a vision token costs: e2-vision-tokens.md
+      - E3 · The accuracy frontier: e3-token-budget.md
+      - E0 · Capacity and goodput: e0-saturation.md
+      - E4 · Live video: e4-video.md
+      - vLLM vs SGLang: stacks.md
+  - Corrections: corrections.md
+  - Not measured: not-measured.md
+  - Reproduce: reproduce.md
