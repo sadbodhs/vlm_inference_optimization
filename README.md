@@ -16,7 +16,7 @@ Status: **first results measured.** One model, one arm, one dataset — see
 
 | | |
 |---|---|
-| Decode is at the physical limit | **149.3 tok/s = 92.7%** of the 936 GB/s roofline — nothing left to win at batch 1 |
+| Decode is near the physical limit | **149.1 tok/s = 88.7%** of the 936 GB/s roofline |
 | A vision token costs | **0.32 ms** of TTFT, over a 17.5 ms floor (R² = 0.9994) |
 | Accuracy saturates at ~1,000 vision tokens | beyond that, **+284% TTFT for +0.012 ANLS** |
 | Synthetic images overstate capacity | by **6.4×** vs real document pages |

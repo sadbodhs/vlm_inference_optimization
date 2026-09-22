@@ -14,8 +14,8 @@ revision: 536a35794df8831aa814970ee8f89eff577e7718
 base_url: http://vlm-server:8000   # container name on the vlmbench network
 quantization: awq_marlin
 
-weight_bytes: 7.161e+9
-decode_weight_bytes: 5.807e+9
+weight_bytes: 6.924e+9
+decode_weight_bytes: 5.571e+9
 
 max_tokens: 128
 temperature: 0.0

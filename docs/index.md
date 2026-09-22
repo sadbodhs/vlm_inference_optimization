@@ -26,7 +26,7 @@ trades accuracy, so the deliverable is a frontier, not a ranking.
 
 | | |
 |---|---|
-| Decode is at the physical limit | **149.4 tok/s = 92.7%** of the 936 GB/s roofline |
+| Decode is near the physical limit | **149.1 tok/s = 88.7%** of the 936 GB/s roofline |
 | A vision token costs | **0.32 ms** of TTFT, over a 17.5 ms floor (R² = 0.9995) |
 | DocVQA accuracy saturates | at **~1,000 vision tokens**; 4× beyond buys +0.011 ANLS |
 | Throughput lies after saturation | raw ceiling **1.56 req/s**, usable **0.45 req/s** |

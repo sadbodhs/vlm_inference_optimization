@@ -1,0 +1,32 @@
+# Generational comparison: Qwen3-VL-8B against Qwen2.5-VL-7B on the same card,
+# same stack, same settings. Both 4-bit, both with the vision tower left
+# unquantised, both with every default-on optimisation disabled.
+#
+# The headline difference is not the parameter count, it is the KV geometry:
+#   Qwen2.5-VL-7B  28 layers x  4 KV heads x 128 ->  56.0 KB per token
+#   Qwen3-VL-8B    36 layers x  8 KV heads x 128 -> 144.0 KB per token
+# 2.6x more KV for every token, which on a 24 GB card is the constraint that
+# actually decides how many requests fit.
+id: Q3_vllm_awq_clean
+stack: vllm
+model: cyankiwi/Qwen3-VL-8B-Instruct-AWQ-4bit
+revision: 87196f7771efdd7022a8d8f094ac6e063bf87f5c
+base_url: http://vlm-server:8000
+quantization: compressed-tensors
+
+# Exact, summed from the safetensors headers (tools/weight_split.py).
+#   vision tower 1.153 GB (prefill only) + LLM 6.397 GB (re-read every token)
+# The LLM half is 15% larger than Qwen2.5-VL-7B's, so the decode ceiling is LOWER:
+# 146.3 tok/s against 168.0.
+weight_bytes: 7.550e+9
+decode_weight_bytes: 6.397e+9
+
+max_tokens: 128
+temperature: 0.0
+max_pixels: 1605632
+
+server_args: --no-enable-prefix-caching --no-enable-chunked-prefill --mm-processor-cache-gb 0
+
+notes: >
+  Compare against B0_vllm_awq_clean. Same stack, same harness, same prompts,
+  same client-side token budget -- so a difference in the table is the model.

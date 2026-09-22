@@ -10,11 +10,13 @@ quantization: awq_marlin
 
 # LLM weights 4-bit + vision tower left FP16. Used for the E1 roofline; it is a
 # declared quantity, not a measured one -- verify with nvidia-smi after load.
-# Measured, not estimated: vLLM reported "Model loading took 6.67 GiB" on this rig.
-weight_bytes: 7.161e+9
+# Exact, summed from the safetensors headers (tools/weight_split.py), not from
+# the server's loaded footprint: the 6.67 GiB vLLM reports includes allocator
+# padding, and an estimate here is what made E1 first read 114% of roofline.
+weight_bytes: 6.924e+9
 # Decode re-reads only the LLM weights; the ~675M-param bf16 vision tower (~1.26 GiB)
 # runs once in prefill and is never touched again while tokens stream.
-decode_weight_bytes: 5.807e+9
+decode_weight_bytes: 5.571e+9
 max_tokens: 128
 temperature: 0.0
 
