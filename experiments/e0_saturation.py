@@ -34,6 +34,10 @@ async def main() -> None:
     # times the vision tokens, and prefill is what saturates this server.
     p.add_argument("--manifest", default=None,
                    help="use real documents instead of synthetic images")
+    # Same reason as E3: asking the server to cap pixels works on vLLM and is
+    # ignored by SGLang, so a cross-stack saturation comparison would be run at
+    # different token counts per stack. Resizing before sending fixes the workload.
+    p.add_argument("--resize", choices=["client", "server"], default="client")
     args = p.parse_args()
 
     from bench.data import load_manifest, synthetic
@@ -65,6 +69,12 @@ async def main() -> None:
     else:
         pool = synthetic(need, width=args.width, height=args.height)
         workload = f"synthetic {args.width}x{args.height}"
+    if args.resize == "client" and arm.max_pixels:
+        budget = arm.max_pixels
+        arm.max_pixels = None            # stop asking the server to do it
+        pool = [s.resized(budget) for s in pool]   # outside the timed path
+        print(f"  client-side resize to <= {budget} px applied to {len(pool)} samples")
+
     reuse = max(0.0, 1 - len(pool) / need)
     print(f"workload: {workload}  ({len(pool)} distinct samples across {len(rates)} "
           f"rates x {args.n} requests -> reuse {reuse * 100:.0f}%)")
@@ -127,7 +137,7 @@ async def main() -> None:
                 {"experiment": "e0-saturation", "arm": arm.id, "rates": rates,
                  "workload": workload, "image": [args.width, args.height],
                  "n_per_rate": args.n, "distinct_samples": len(pool),
-                 "reuse_fraction": reuse})
+                 "reuse_fraction": reuse, "resize": args.resize})
 
 
 if __name__ == "__main__":

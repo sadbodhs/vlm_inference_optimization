@@ -14,6 +14,11 @@ max_tokens: 128
 temperature: 0.0
 max_pixels: 1605632
 
+# Chosen so SGLang's KV pool lands near vLLM's 213k tokens, which makes KV capacity
+# the controlled variable instead of an accident of two differently-defined flags.
+# See docker/run_server.sh for why 0.90 here is not 0.90 there.
+mem_fraction_static: 0.79
+
 # As-shipped defaults, like B_vllm_awq. SGLang's RadixAttention prefix cache is on
 # by default, so this arm is NOT a neutral baseline -- see C0 for that.
 notes: >

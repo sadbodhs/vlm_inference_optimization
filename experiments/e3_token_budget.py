@@ -42,6 +42,12 @@ async def main() -> None:
     # rig, 92/100 predictions contained the gold answer while ANLS read 0.03. That is
     # a prompt artefact masquerading as a catastrophic accuracy result, and it made
     # every token budget look equally useless.
+    # Where the pixel cap is applied. "server" asks the stack to resize via
+    # mm_processor_kwargs -- vLLM honours it and SGLang silently ignores it, which
+    # made both budgets produce an identical 4,568 prompt tokens there. "client"
+    # resizes before sending, so the budget exists on every stack and the server's
+    # preprocessing policy stops being a hidden variable.
+    p.add_argument("--resize", choices=["client", "server"], default="client")
     p.add_argument("--prompt-suffix",
                    default="\nAnswer the question using a single word or phrase.")
     args = p.parse_args()
@@ -67,9 +73,14 @@ async def main() -> None:
 
     rows = []
     for budget in budgets:
-        arm.max_pixels = budget
+        if args.resize == "client":
+            arm.max_pixels = None
+            batch = [s.resized(budget) for s in samples]   # outside the timed path
+        else:
+            arm.max_pixels = budget
+            batch = samples
         s = await run_arm(
-            arm, samples, mode="sequential", scorer=scorer,
+            arm, batch, mode="sequential", scorer=scorer,
             prompt_suffix=args.prompt_suffix,
             results_root=args.out, run_id=f"{tag}-px{budget}",
             unmeasured=(["accuracy"] if not scorer else [])
@@ -89,7 +100,7 @@ async def main() -> None:
               f"acc={'n/a' if acc is None else f'{acc:.3f}'}")
 
     print(f"\nE3 · token budget vs accuracy   dataset={dataset}  scorer={scorer}")
-    print(f"   prompt suffix: {args.prompt_suffix!r}")
+    print(f"   prompt suffix: {args.prompt_suffix!r}   resize: {args.resize}")
     table(rows, [("max_pixels", "max_pixels"), ("prompt_tokens", "prompt tok"),
                  ("ttft_p50_ms", "TTFT p50"), ("accuracy", "accuracy"),
                  ("n_scored", "n scored")])
@@ -124,7 +135,8 @@ async def main() -> None:
 
     write_sweep(args.out, tag, rows,
                 {"experiment": "e3-token-budget", "arm": arm.id, "dataset": dataset,
-                 "scorer": scorer, "budgets": budgets, "limit": args.limit})
+                 "scorer": scorer, "budgets": budgets, "limit": args.limit,
+                 "resize": args.resize})
 
 
 if __name__ == "__main__":

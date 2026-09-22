@@ -32,6 +32,23 @@ class Sample:
         mime = "jpeg" if suffix in {"jpg", "jpeg"} else suffix
         return f"data:image/{mime};base64,{base64.b64encode(raw).decode()}"
 
+    def resized(self, max_pixels: int | None) -> "Sample":
+        """Copy of this sample with the image re-encoded within a pixel budget.
+
+        Done once, up front, outside the timed path -- resizing inside the request
+        loop would bill image processing to the server's TTFT.
+        """
+        from .imaging import resize_to_budget
+
+        raw = (base64.b64decode(self.image_b64) if self.image_b64
+               else Path(self.image_path).read_bytes())
+        data, mime, h, w = resize_to_budget(raw, max_pixels)
+        return Sample(
+            id=self.id, question=self.question, answers=list(self.answers),
+            image_path=None, image_b64=base64.b64encode(data).decode(),
+            image_mime=mime, image_px=h * w,
+        )
+
     def to_messages(self, prompt_suffix: str = "") -> list[dict]:
         content: list[dict] = []
         if self.image_path or self.image_b64:

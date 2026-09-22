@@ -15,9 +15,20 @@ max_tokens: 128
 temperature: 0.0
 max_pixels: 1605632
 
+# Chosen so SGLang's KV pool lands near vLLM's 213k tokens, which makes KV capacity
+# the controlled variable instead of an accident of two differently-defined flags.
+# See docker/run_server.sh for why 0.90 here is not 0.90 there.
+mem_fraction_static: 0.79
+
 # Flags verified against the image's own parser before use -- vLLM's equivalents
 # were not guessable and SGLang's are differently named.
-server_args: --disable-radix-cache
+#
+# Chunked prefill is ON by default in BOTH stacks (SGLang chunked_prefill_size=4096,
+# vLLM enable_chunked_prefill=True), so it has to be disabled on both sides or the
+# "clean" arms are not clean in the same way. Disabling radix caching alone left
+# SGLang doing chunked prefill while B0 was not, which would have shown up as an
+# engine difference. -1 disables it, per the flag's own help text.
+server_args: --disable-radix-cache --chunked-prefill-size -1
 
 notes: >
   The R1 reference point for SGLang. Compared against B0_vllm_awq_clean this

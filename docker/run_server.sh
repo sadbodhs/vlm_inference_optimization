@@ -76,12 +76,25 @@ case "${1:-start}" in
       sglang)
         IMAGE="${SGLANG_IMAGE:-lmsysorg/sglang:v0.5.20}"
         PORT="${SERVER_PORT:-30000}"
-        # SGLang sizes its pool as a static fraction, the analogue of vLLM's
-        # gpu-memory-utilization. Same number so the two stacks get the same card.
+        # mem-fraction-static is NOT the analogue of vLLM's gpu-memory-utilization,
+        # despite both being "a fraction of the card".
+        #
+        #   vLLM  gpu-memory-utilization : TOTAL budget, profiled, activations inside
+        #   SGLang mem-fraction-static   : the STATIC pool only, activations on top
+        #
+        # Passing 0.90 to both gave SGLang a 23.01 GiB static pool of a 23.56 GiB
+        # card. Small images were fine; the vision encoder then OOMed on full-size
+        # documents and 475 of 500 requests returned HTTP 500. It also inflated its
+        # KV pool to 261k tokens against vLLM's 213k, which reads like an engine
+        # advantage and is really just a bigger budget.
+        #
+        # So the arm names this explicitly rather than inheriting GPU_UTIL.
+        MEMFRAC=$(arm_field "$ARM" mem_fraction_static)
+        MEMFRAC="${MEMFRAC:-0.79}"
         ARGS=(python3 -m sglang.launch_server --model-path "$MODEL"
               --host 0.0.0.0 --port "$PORT"
               --context-length "${MAX_MODEL_LEN:-8192}"
-              --mem-fraction-static "$UTIL")
+              --mem-fraction-static "$MEMFRAC")
         [ -n "$QUANT" ] && [ "$QUANT" != "null" ] && ARGS+=(--quantization "$QUANT")
         [ -n "$REV" ] && ARGS+=(--revision "$REV")
         ENTRY=(--entrypoint "")
