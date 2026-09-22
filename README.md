@@ -16,9 +16,11 @@ Status: **first results measured.** One model, one arm, one dataset — see
 |---|---|
 | Decode is at the physical limit | **149.3 tok/s = 92.7%** of the 936 GB/s roofline — nothing left to win at batch 1 |
 | A vision token costs | **0.32 ms** of TTFT, over a 17.5 ms floor (R² = 0.9994) |
-| Above ~600 vision tokens | accuracy flat within error while TTFT grows **6×** |
-| Cheap accuracy trade | **67% faster TTFT** for no *measurable* accuracy cost (n=100) |
-| Throughput lies after saturation | raw ceiling **9.96 req/s**, usable **6.58 req/s** — goodput hits **zero** while req/s still reads 9.9 |
+| Accuracy saturates at ~1,000 vision tokens | beyond that, **+284% TTFT for +0.012 ANLS** |
+| Synthetic images overstate capacity | by **6.4×** vs real document pages |
+| Caching is a workload property | **3×** on repeated inputs, **1.00×** on distinct ones |
+| Cheap accuracy trade | **74% faster TTFT** for 1.2 ANLS points (n=500) |
+| Throughput lies after saturation | on real pages: raw ceiling **1.56 req/s**, usable **0.43 req/s** — a 3.6× overstatement |
 | The 3090 is power-limited | 349.2 W of 350 W at 66 °C — capped, not thermally throttled |
 
 ---

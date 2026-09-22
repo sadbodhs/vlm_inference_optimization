@@ -79,23 +79,68 @@ where.
 > the four largest budgets are statistically identical, and −0.007 sits inside
 > [−0.013, +0.033]. Resolving the top of the frontier needs n≈500–1000, not 100.
 
-## E0 · Throughput keeps looking healthy after goodput dies
+## E0 · Capacity on real documents, and what synthetic images hide
 
-| offered | achieved | goodput @ SLO | TTFT p99 | verdict |
-|---|---|---|---|---|
-| 2 | 1.72 | 1.72 | 196 ms | not-saturated |
-| 8 | 6.58 | **6.58** | 295 ms | not-saturated |
-| 16 | 9.52 | 0.59 | 1,667 ms | saturated |
-| 32 | 9.90 | **0.00** | 3,517 ms | saturated |
-| 64 | 9.96 | **0.00** | 4,489 ms | saturated |
+400 distinct DocVQA pages, one per request, a disjoint slice per rate — **zero input
+reuse**. SLO: TTFT ≤ 1 s, TPOT ≤ 50 ms.
 
-SLO: TTFT ≤ 1 s, TPOT ≤ 50 ms.
+| offered | achieved | goodput @ SLO | TTFT p50 | TTFT p99 | verdict |
+|---|---|---|---|---|---|
+| 0.5 | 0.45 | 0.35 | 724 ms | 4,085 ms | not-saturated |
+| 1.0 | 0.90 | **0.43** | 798 ms | 2,024 ms | not-saturated |
+| 1.5 | 1.32 | 0.21 | 1,606 ms | 3,837 ms | saturated |
+| 2.0 | 1.52 | 0.04 | 4,083 ms | 10,633 ms | saturated |
+| 4.0 | **1.56** | **0.00** | 14,554 ms | 29,085 ms | saturated |
 
-This is the result worth publishing. **Raw throughput plateaus at 9.96 req/s and
-stays there** while goodput falls to *zero*. A benchmark reporting req/s would call
-this a 10 req/s server. Every request on it misses SLO by 3.5 seconds.
+**Raw ceiling 1.56 req/s. Usable capacity 0.43 req/s.** Reporting the raw number
+overstates what this server can actually deliver under SLO by **3.6×** — throughput
+keeps reading 1.56 req/s while every request on it is 14 seconds late.
 
-**Usable capacity is 6.58 req/s. Reporting the raw ceiling overstates it by 51%.**
+### Synthetic images overstate capacity by 6×
+
+The same experiment on synthetic 448×448 squares gives a 9.96 req/s ceiling. Those
+carry ~256 vision tokens; a DocVQA page carries ~2,000. Prefill is what saturates
+this server, so **an image benchmark that does not use the real document size is
+measuring a workload nobody runs** — here, by a factor of 6.4.
+
+### Caching buys nothing when inputs do not repeat
+
+Same sweep, both arms, zero reuse:
+
+| offered | achieved ratio (defaults ÷ clean) |
+|---|---|
+| 0.5 | 1.00× |
+| 1.0 | 1.00× |
+| 1.5 | 1.01× |
+| 2.0 | 1.05× |
+| 4.0 | 1.00× |
+
+Both saturate at 1.56 req/s. E3 independently agrees: across 500 distinct documents
+the two arms match to ≤0.004 ANLS and ≤1.5% TTFT.
+
+> Getting here took three corrections, each caught because the data contradicted
+> itself. A 32-document pool cycled across requests made the defaults arm look **8×
+> faster**. Fixing that left all five rates sharing one 80-document pool, so only the
+> first rate was cold — visible as the two arms agreeing to within **3 ms at 0.5 QPS**
+> while every later rate was 13× apart. Reuse is now a variable the experiment sets,
+> recorded in `meta.json`, rather than a side effect of sweep order.
+
+## What prefix and multimodal caching are actually worth
+
+| workload | TTFT clean | TTFT defaults | gain |
+|---|---|---|---|
+| 12 repeated images (E1) | 45.5 ± 0.1 ms | **15.0 ± 0.1 ms** | **3.0×** |
+| 500 distinct documents (E3) | 129.7 ms | 128.1 ms | 1.01× |
+| 400 distinct documents (E0) | 724 ms | 735 ms | 1.00× |
+
+Decode is untouched in every case — 149.36 ± 0.21 vs 149.11 ± 0.16 tok/s, a
+difference of about one standard deviation. That is the signature of a prefill-side
+cache, and it means:
+
+**Caching is worth 3× on repeated inputs and nothing on distinct ones. Whether it
+helps you is a property of your workload's reuse rate, not of the server.** A
+benchmark that reuses its inputs — which is the easy way to write one — measures the
+best case and reports it as the typical one.
 
 ## The card is power-limited, not heat-limited
 
