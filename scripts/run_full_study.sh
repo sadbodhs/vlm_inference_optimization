@@ -7,6 +7,13 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# A multi-hour run that dies silently is worse than one that crashes: the log just
+# stops, and "is it still going?" has no answer you can trust. Announce the failure,
+# and write an explicit terminal marker either way so progress can be read from the
+# log alone rather than inferred from a process listing.
+trap 'echo "### STUDY FAILED at line $LINENO (exit $?)"' ERR
+trap 'echo "### STUDY EXITED $?"' EXIT
+
 OUT="${OUT:-results}"
 DATA="${DATA:-data/docvqa}"
 H=docker/run_harness.sh
@@ -39,9 +46,16 @@ run_arm_suite () {
       --max-tokens 64 --budgets 200704,451584,802816,1605632,3211264
 }
 
-run_arm_suite arms/B0_vllm_awq_clean.yaml B0_clean
-run_arm_suite arms/B_vllm_awq.yaml        B_defaults
+# Arms to run; default is both. Pass paths to re-run a subset without redoing
+# hours of completed work.
+if [ "$#" -gt 0 ]; then
+  for A in "$@"; do run_arm_suite "$A" "$(basename "$A" .yaml)"; done
+else
+  run_arm_suite arms/B0_vllm_awq_clean.yaml B0_clean
+  run_arm_suite arms/B_vllm_awq.yaml        B_defaults
+fi
 
+echo; echo "### ALL ARMS COMPLETE"
 echo; echo "################ plots ################"
 $H python3 experiments/plot.py $(ls "$OUT"/sweeps/*.json | sed 's|^|/work/|' | tr '\n' ' ')
 

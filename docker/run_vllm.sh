@@ -14,14 +14,27 @@ NAME="${VLLM_NAME:-vlm-server}"
 PORT="${VLLM_PORT:-8000}"
 HF_CACHE="${HF_CACHE:-$HOME/.cache/huggingface}"
 
+# Read an optional scalar field from an arm YAML.
+#
+# Written as a function because the obvious inline form is a landmine:
+#   FOO=$(grep -E '^foo:' "$ARM" | sed ...)
+# grep exits 1 when the field is absent, pipefail propagates it, and set -e kills
+# the script on the assignment. It looks harmless and works for every arm that
+# happens to define the field -- then silently aborts a multi-hour run on the
+# first arm that does not. That is exactly how the B_defaults arm died.
+arm_field () {
+  grep -E "^$2:" "$1" 2>/dev/null | head -1 | sed "s/^$2:[[:space:]]*//" || true
+}
+
 case "${1:-start}" in
   start)
     ARM="${2:?usage: $0 start <arm.yaml>}"
-    MODEL=$(grep -E '^model:' "$ARM" | head -1 | sed 's/^model:[[:space:]]*//')
-    QUANT=$(grep -E '^quantization:' "$ARM" | head -1 | sed 's/^quantization:[[:space:]]*//')
-    REV=$(grep -E '^revision:' "$ARM" | head -1 | sed 's/^revision:[[:space:]]*//')
+    MODEL=$(arm_field "$ARM" model)
+    QUANT=$(arm_field "$ARM" quantization)
+    REV=$(arm_field "$ARM" revision)
     # Free-form extra server flags, e.g. to turn OFF a default-on optimisation.
-    EXTRA=$(grep -E '^server_args:' "$ARM" | head -1 | sed 's/^server_args:[[:space:]]*//')
+    EXTRA=$(arm_field "$ARM" server_args)
+    [ -n "$MODEL" ] || { echo "no 'model:' field in $ARM" >&2; exit 1; }
 
     docker network inspect "$NET" >/dev/null 2>&1 || docker network create "$NET" >/dev/null
     docker rm -f "$NAME" >/dev/null 2>&1 || true
