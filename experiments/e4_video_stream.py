@@ -49,6 +49,8 @@ async def main() -> None:
     p.add_argument("--max-tokens", type=int, default=32)
     p.add_argument("--staleness-slo", type=float, default=2000.0,
                    help="ms; an answer older than this is stale, not wrong")
+    p.add_argument("--max-inflight", type=int, default=256,
+                   help="cap on concurrent analyses; beyond this, frames are dropped")
     args = p.parse_args()
 
     from bench.client import stream_chat
@@ -106,14 +108,37 @@ async def main() -> None:
                 "text": (r.text or "").strip()[:160],
             })
 
+        # Open loop. Ticks fire on a fixed schedule whether or not the previous
+        # tick finished, so demand is independent of the server's completion rate.
+        #
+        # The obvious `await gather(...)` per tick is a CLOSED loop: it pins
+        # concurrency at the stream count and cannot offer more load than it
+        # completes, so tightening the interval changes nothing and the measurement
+        # reports its own pacing as the server's capacity. Measured here, that gave
+        # an identical 8.18 analyses/s across an 8x range of demand.
+        inflight: set[asyncio.Task] = set()
         tick = 0
+        dropped = 0
+        next_tick = time.time()
         while time.time() < t_end:
-            started = time.time()
-            await asyncio.gather(*(analyse(s) for s in live))
+            for stream in live:
+                if len(inflight) >= args.max_inflight:
+                    # Shedding load is a result, not an error: a live system that
+                    # cannot keep up should drop frames rather than grow a queue.
+                    dropped += 1
+                    continue
+                t = asyncio.create_task(analyse(stream))
+                inflight.add(t)
+                t.add_done_callback(inflight.discard)
             tick += 1
-            slack = args.interval - (time.time() - started)
+            next_tick += args.interval
+            slack = next_tick - time.time()
             if slack > 0:
                 await asyncio.sleep(slack)
+        if inflight:
+            # Let what is already running finish, but do not wait forever on a
+            # server that has fallen far behind.
+            await asyncio.wait(inflight, timeout=30)
 
     sampler.__exit__()
     wall = args.duration
@@ -127,6 +152,9 @@ async def main() -> None:
 
     row = {
         "streams": len(live),
+        "ticks": tick,
+        "dropped": dropped,
+        "demand_per_s": len(live) / args.interval,
         "task": args.task,
         "interval_s": args.interval,
         "analyses": len(records),
@@ -142,8 +170,8 @@ async def main() -> None:
     }
 
     print(f"\nE4 · {len(live)} stream(s), {args.task}, {args.duration:.0f}s")
-    table([row], [("streams", "streams"), ("analyses_per_s", "analyses/s"),
-                  ("per_stream_per_s", "per stream/s"),
+    table([row], [("streams", "streams"), ("demand_per_s", "demand/s"),
+                  ("analyses_per_s", "analyses/s"), ("dropped", "dropped"),
                   ("staleness_p50_ms", "stale p50"), ("staleness_p95_ms", "stale p95"),
                   ("fresh_fraction", f"<{args.staleness_slo:.0f}ms"),
                   ("prompt_tokens", "vis tok")])
