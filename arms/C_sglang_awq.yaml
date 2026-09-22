@@ -1,14 +1,23 @@
-# Same model and quantization as B; only the serving stack changes (R1).
+# Same model, same weights, same quantisation as B_vllm_awq. Only the serving
+# stack changes -- that is the whole point of the arm (R1).
 id: C_sglang_awq
 stack: sglang
 model: Qwen/Qwen2.5-VL-7B-Instruct-AWQ
+revision: 536a35794df8831aa814970ee8f89eff577e7718
 base_url: http://vlm-server:30000   # container name on the vlmbench network
 quantization: awq_marlin
-weight_bytes: 6.0e+9
+
+weight_bytes: 7.161e+9
+decode_weight_bytes: 5.807e+9
+
 max_tokens: 128
 temperature: 0.0
 max_pixels: 1605632
+
+# As-shipped defaults, like B_vllm_awq. SGLang's RadixAttention prefix cache is on
+# by default, so this arm is NOT a neutral baseline -- see C0 for that.
 notes: >
-  RadixAttention prefix cache is the reason this arm exists. It should be
-  indistinguishable from B on zero-reuse workloads; if it is not, something other
-  than the cache differs and R1 is violated.
+  Server: docker/run_server.sh start arms/C_sglang_awq.yaml (lmsysorg/sglang:v0.5.20).
+  The interesting comparison against B is not raw speed but whether RadixAttention
+  changes the ranking once input reuse is a controlled variable rather than an
+  accident of the workload.

@@ -20,8 +20,12 @@ OUT="${OUT:-results}"
 ID=$(grep -E '^id:' "$ARM" | head -1 | sed 's/^id:[[:space:]]*//')
 H=docker/run_harness.sh
 
-command -v curl >/dev/null && SERVER_UP=$(curl -sf "http://127.0.0.1:${VLLM_PORT:-8000}/v1/models" >/dev/null 2>&1 && echo yes || echo no)
-[ "${SERVER_UP:-no}" = "yes" ] || { echo "no server on :${VLLM_PORT:-8000} -- start it with docker/run_vllm.sh start $ARM" >&2; exit 1; }
+# Port comes from the arm's base_url: vLLM listens on 8000, SGLang on 30000, and
+# hardcoding one of them silently checks the wrong port when the stack changes.
+PORT=$(grep -E '^base_url:' "$ARM" | head -1 | sed -E 's|.*:([0-9]+).*|\1|')
+PORT="${PORT:-8000}"
+curl -sf "http://127.0.0.1:$PORT/v1/models" >/dev/null 2>&1 || {
+  echo "no server on :$PORT -- start it with docker/run_server.sh start $ARM" >&2; exit 1; }
 
 echo "########## E1 roofline (harness validation) ##########"
 $H python3 experiments/e1_roofline.py --arm "$ARM" --out "$OUT" --n 12 --max-tokens 128

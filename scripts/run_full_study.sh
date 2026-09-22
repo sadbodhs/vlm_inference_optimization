@@ -25,8 +25,8 @@ run_arm_suite () {
   echo "################################################################"
   echo "## ARM: $ID"
   echo "################################################################"
-  docker/run_vllm.sh stop >/dev/null 2>&1 || true
-  WAIT_S=900 docker/run_vllm.sh start "$ARM"
+  docker/run_server.sh stop >/dev/null 2>&1 || true
+  WAIT_S=900 docker/run_server.sh start "$ARM"
 
   echo; echo "--- E1 roofline x$REPEATS ---"
   $H python3 experiments/e1_roofline.py --arm "$ARM" --out "$OUT" \

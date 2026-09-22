@@ -1,0 +1,24 @@
+# SGLang with its default-on caching disabled -- the counterpart to
+# B0_vllm_awq_clean, so the two stacks are compared with the same things switched
+# off rather than with each vendor's defaults doing different amounts of work.
+id: C0_sglang_awq_clean
+stack: sglang
+model: Qwen/Qwen2.5-VL-7B-Instruct-AWQ
+revision: 536a35794df8831aa814970ee8f89eff577e7718
+base_url: http://vlm-server:30000
+quantization: awq_marlin
+
+weight_bytes: 7.161e+9
+decode_weight_bytes: 5.807e+9
+
+max_tokens: 128
+temperature: 0.0
+max_pixels: 1605632
+
+# Flags verified against the image's own parser before use -- vLLM's equivalents
+# were not guessable and SGLang's are differently named.
+server_args: --disable-radix-cache
+
+notes: >
+  The R1 reference point for SGLang. Compared against B0_vllm_awq_clean this
+  isolates the stack; compared against C_sglang_awq it isolates the cache.
