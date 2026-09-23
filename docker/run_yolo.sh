@@ -12,7 +12,10 @@ IMAGE="${YOLO_IMAGE:-triton-bench:v3}"
 MODELS="${MODELS_DIR:-$HOME/sadbodh/model_exports}"
 
 if [ "${ALLOW_CONCURRENT:-0}" != "1" ]; then
-  BUSY=$(docker ps --format '{{.Names}}' | grep -E '^(harness|yolo)-' || true)
+  # vlm-server claims 90% of the card; a detector beside it risks CUDA OOM on
+  # either side and contaminates both timings. The co-hosted run is a separate,
+  # deliberate experiment (ALLOW_CONCURRENT=1), never an accident.
+  BUSY=$(docker ps --format '{{.Names}}' | grep -E '^(harness-|yolo-|vlm-server$)' || true)
   if [ -n "$BUSY" ]; then
     echo "REFUSING TO START: another measurement container is running:" >&2
     echo "$BUSY" | sed 's/^/  /' >&2

@@ -3,15 +3,15 @@
 # bucket (anonymous; CC BY 4.0), then probe each so a truncated download fails
 # here rather than as a short clip in the middle of an experiment.
 #
-# Throttled on purpose. Twice, a full-speed transfer (a 7.6 GB git clone, then an
-# unthrottled S3 copy) was followed within seconds by the rig dropping off the
-# network entirely -- the first time until a hard power cycle. Until the cause is
-# known, bulk transfers stay well under line rate. MAX_BW=0 disables the cap.
+# MAX_BW caps the transfer (e.g. MAX_BW=25MB/s). Off by default: the two rig
+# network drops that first looked transfer-induced were traced to an IP conflict
+# between the rig's own Wi-Fi and Ethernet interfaces (NetworkManager "conflict
+# detected" at a DHCP renewal), not to transfer load.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 SEL="${SEL:-results/e7/selection.json}"
 OUT=data/meva/video
-MAX_BW="${MAX_BW:-25MB/s}"
+MAX_BW="${MAX_BW:-0}"
 mkdir -p "$OUT"
 
 CFG=$(mktemp -d)

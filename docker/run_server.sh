@@ -65,6 +65,12 @@ case "${1:-start}" in
     docker network inspect "$NET" >/dev/null 2>&1 || docker network create "$NET" >/dev/null
     docker rm -f "$NAME" >/dev/null 2>&1 || true
     mkdir -p "$HF_CACHE"
+    # The VRAM preflight alone does not catch a detector: YOLO holds ~0.6 GB, so
+    # 90% still "fits" -- and then both grow into the same 24 GB. Refuse outright.
+    if [ "${ALLOW_CONCURRENT:-0}" != "1" ] && docker ps --format '{{.Names}}' | grep -qE '^yolo-'; then
+      echo "REFUSING TO START: a detector run (docker/run_yolo.sh) is using the GPU." >&2
+      exit 1
+    fi
     preflight_vram "$UTIL"
 
     case "$STACK" in

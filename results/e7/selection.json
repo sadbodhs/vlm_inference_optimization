@@ -1,0 +1,289 @@
+{
+  "seed": 0,
+  "per_bin": 6,
+  "bins": {
+    "empty": [
+      null,
+      null
+    ],
+    "sparse": [
+      0.0,
+      0.1
+    ],
+    "moderate": [
+      0.1,
+      0.5
+    ],
+    "busy": [
+      0.5,
+      1.01
+    ]
+  },
+  "eligible": 768,
+  "clips": [
+    {
+      "bin": "empty",
+      "clip": "2018-03-11.16-40-00.16-45-00.bus.G509",
+      "site": "bus",
+      "camera": "G509",
+      "coverage": 0.0,
+      "n_activities": 0,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-11/16/2018-03-11.16-40-00.16-45-00.bus.G509.r13.avi",
+      "bytes": 203208244
+    },
+    {
+      "bin": "empty",
+      "clip": "2018-03-11.16-25-01.16-30-01.admin.G326",
+      "site": "admin",
+      "camera": "G326",
+      "coverage": 0.0,
+      "n_activities": 0,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-11/16/2018-03-11.16-25-01.16-30-01.admin.G326.r13.avi",
+      "bytes": 95800670
+    },
+    {
+      "bin": "empty",
+      "clip": "2018-03-07.16-55-01.17-00-01.school.G420",
+      "site": "school",
+      "camera": "G420",
+      "coverage": 0.0,
+      "n_activities": 0,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-07/17/2018-03-07.16-55-01.17-00-01.school.G420.r13.avi",
+      "bytes": 69469456
+    },
+    {
+      "bin": "empty",
+      "clip": "2018-03-11.16-20-08.16-25-08.hospital.G301",
+      "site": "hospital",
+      "camera": "G301",
+      "coverage": 0.0,
+      "n_activities": 0,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-11/16/2018-03-11.16-20-08.16-25-08.hospital.G301.r13.avi",
+      "bytes": 140399830
+    },
+    {
+      "bin": "empty",
+      "clip": "2018-03-11.16-30-00.16-35-00.bus.G505",
+      "site": "bus",
+      "camera": "G505",
+      "coverage": 0.0,
+      "n_activities": 0,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-11/16/2018-03-11.16-30-00.16-35-00.bus.G505.r13.avi",
+      "bytes": 134950954
+    },
+    {
+      "bin": "empty",
+      "clip": "2018-03-11.16-30-01.16-35-01.admin.G329",
+      "site": "admin",
+      "camera": "G329",
+      "coverage": 0.0,
+      "n_activities": 0,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-11/16/2018-03-11.16-30-01.16-35-01.admin.G329.r13.avi",
+      "bytes": 135056734
+    },
+    {
+      "bin": "sparse",
+      "clip": "2018-03-07.17-35-01.17-40-01.school.G420",
+      "site": "school",
+      "camera": "G420",
+      "coverage": 0.038,
+      "n_activities": 1,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-07/17/2018-03-07.17-35-01.17-40-01.school.G420.r13.avi",
+      "bytes": 66596932
+    },
+    {
+      "bin": "sparse",
+      "clip": "2018-03-07.17-20-07.17-25-07.hospital.G301",
+      "site": "hospital",
+      "camera": "G301",
+      "coverage": 0.0339,
+      "n_activities": 1,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-07/17/2018-03-07.17-20-07.17-25-07.hospital.G301.r13.avi",
+      "bytes": 101492668
+    },
+    {
+      "bin": "sparse",
+      "clip": "2018-03-11.16-10-00.16-15-00.bus.G509",
+      "site": "bus",
+      "camera": "G509",
+      "coverage": 0.0079,
+      "n_activities": 1,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-11/16/2018-03-11.16-10-00.16-15-00.bus.G509.r13.avi",
+      "bytes": 231612840
+    },
+    {
+      "bin": "sparse",
+      "clip": "2018-03-09.10-15-01.10-20-01.admin.G326",
+      "site": "admin",
+      "camera": "G326",
+      "coverage": 0.0267,
+      "n_activities": 5,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-09/10/2018-03-09.10-15-01.10-20-01.admin.G326.r13.avi",
+      "bytes": 99758616
+    },
+    {
+      "bin": "sparse",
+      "clip": "2018-03-09.10-20-00.10-25-00.school.G336",
+      "site": "school",
+      "camera": "G336",
+      "coverage": 0.0502,
+      "n_activities": 7,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-09/10/2018-03-09.10-20-00.10-25-00.school.G336.r13.avi",
+      "bytes": 172295254
+    },
+    {
+      "bin": "sparse",
+      "clip": "2018-03-11.16-25-08.16-30-08.hospital.G436",
+      "site": "hospital",
+      "camera": "G436",
+      "coverage": 0.0744,
+      "n_activities": 4,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-11/16/2018-03-11.16-25-08.16-30-08.hospital.G436.r13.avi",
+      "bytes": 149779996
+    },
+    {
+      "bin": "moderate",
+      "clip": "2018-03-15.15-05-00.15-10-00.bus.G508",
+      "site": "bus",
+      "camera": "G508",
+      "coverage": 0.1449,
+      "n_activities": 15,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-15/15/2018-03-15.15-05-00.15-10-00.bus.G508.r13.avi",
+      "bytes": 108212458
+    },
+    {
+      "bin": "moderate",
+      "clip": "2018-03-07.16-55-00.17-00-00.school.G638",
+      "site": "school",
+      "camera": "G638",
+      "coverage": 0.3856,
+      "n_activities": 37,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-07/17/2018-03-07.16-55-00.17-00-00.school.G638.r13.avi",
+      "bytes": 188013332
+    },
+    {
+      "bin": "moderate",
+      "clip": "2018-03-15.15-50-06.15-55-06.hospital.G341",
+      "site": "hospital",
+      "camera": "G341",
+      "coverage": 0.4402,
+      "n_activities": 52,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-15/15/2018-03-15.15-50-06.15-55-06.hospital.G341.r13.avi",
+      "bytes": 163548910
+    },
+    {
+      "bin": "moderate",
+      "clip": "2018-03-07.16-55-00.17-00-00.admin.G329",
+      "site": "admin",
+      "camera": "G329",
+      "coverage": 0.1823,
+      "n_activities": 41,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-07/17/2018-03-07.16-55-00.17-00-00.admin.G329.r13.avi",
+      "bytes": 153387340
+    },
+    {
+      "bin": "moderate",
+      "clip": "2018-03-05.13-15-00.13-20-00.bus.G340",
+      "site": "bus",
+      "camera": "G340",
+      "coverage": 0.2949,
+      "n_activities": 24,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-05/13/2018-03-05.13-15-00.13-20-00.bus.G340.r13.avi",
+      "bytes": 192872886
+    },
+    {
+      "bin": "moderate",
+      "clip": "2018-03-11.11-20-00.11-25-00.school.G423",
+      "site": "school",
+      "camera": "G423",
+      "coverage": 0.1664,
+      "n_activities": 29,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-11/11/2018-03-11.11-20-00.11-25-00.school.G423.r13.avi",
+      "bytes": 80051612
+    },
+    {
+      "bin": "busy",
+      "clip": "2018-03-13.16-05-00.16-10-00.bus.G506",
+      "site": "bus",
+      "camera": "G506",
+      "coverage": 1.0,
+      "n_activities": 11,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-13/16/2018-03-13.16-05-00.16-10-00.bus.G506.r13.avi",
+      "bytes": 136823060
+    },
+    {
+      "bin": "busy",
+      "clip": "2018-03-12.10-45-00.10-50-00.school.G421",
+      "site": "school",
+      "camera": "G421",
+      "coverage": 0.519,
+      "n_activities": 19,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-12/10/2018-03-12.10-45-00.10-50-00.school.G421.r13.avi",
+      "bytes": 126772378
+    },
+    {
+      "bin": "busy",
+      "clip": "2018-03-13.16-00-02.16-05-02.hospital.G436",
+      "site": "hospital",
+      "camera": "G436",
+      "coverage": 1.0,
+      "n_activities": 131,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-13/16/2018-03-13.16-00-02.16-05-02.hospital.G436.r13.avi",
+      "bytes": 274396286
+    },
+    {
+      "bin": "busy",
+      "clip": "2018-03-07.11-05-06.11-10-06.bus.G340",
+      "site": "bus",
+      "camera": "G340",
+      "coverage": 1.0,
+      "n_activities": 87,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-07/11/2018-03-07.11-05-06.11-10-06.bus.G340.r13.avi",
+      "bytes": 161524466
+    },
+    {
+      "bin": "busy",
+      "clip": "2018-03-13.17-15-03.17-20-03.school.G336",
+      "site": "school",
+      "camera": "G336",
+      "coverage": 1.0,
+      "n_activities": 60,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-13/17/2018-03-13.17-15-03.17-20-03.school.G336.r13.avi",
+      "bytes": 263129664
+    },
+    {
+      "bin": "busy",
+      "clip": "2018-03-15.15-00-06.15-05-06.hospital.G341",
+      "site": "hospital",
+      "camera": "G341",
+      "coverage": 1.0,
+      "n_activities": 63,
+      "duration_s": 300.0,
+      "s3_key": "drops-123-r13/2018-03-15/15/2018-03-15.15-00-06.15-05-06.hospital.G341.r13.avi",
+      "bytes": 160643200
+    }
+  ]
+}

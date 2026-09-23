@@ -6,6 +6,9 @@ by replay (e7_report.py). That is exact, not an approximation: a gate only decid
 *whether* a window is sent, never what the VLM sees, so the answer for a sent
 window is the same whichever gate sent it.
 
+Server arm: V_vllm_video -- the B0 weights and settings, but --limit-mm-per-prompt
+16. B0 allows ONE image per request, and every window here carries two.
+
 Arms (PLAN.md 10):
   full   both frames of the window, whole 1080p frame, capped at --max-pixels each
   roi    both frames cropped to the union of the detector's boxes (people if any,
@@ -17,7 +20,7 @@ The VLM answers a fixed multi-select over eight activity groups that partition
 MEVA's 36 types. Scoring is per activity *instance*: recognised if any window
 overlapping it contains its group's letter.
 
-    docker/run_harness.sh python3 experiments/e7_vlm.py --arm arms/B0_vllm_awq_clean.yaml --arms full,roi
+    docker/run_harness.sh python3 experiments/e7_vlm.py --arm arms/V_vllm_video.yaml --arms full,roi
 """
 from __future__ import annotations
 

@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "weights": "/models/yolov8s.pt",
+    "sizes": [
+      640,
+      1280
+    ],
+    "stride": 6,
+    "window": 60,
+    "vlm_offsets": [
+      18,
+      48
+    ],
+    "classes": {
+      "0": "person",
+      "1": "bicycle",
+      "2": "car",
+      "3": "motorcycle",
+      "5": "bus",
+      "7": "truck"
+    },
+    "conf": 0.25,
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "torch": "2.14.0+cu130",
+    "ultralytics": "8.4.146"
+  },
+  "cost_ms": {
+    "640": {
+      "n": 36009,
+      "ms_p50": 3.44,
+      "ms_p90": 3.728,
+      "ms_mean": 3.447,
+      "note": "YOLOv8s PyTorch fp32, batch 1, predict() incl. pre/post-processing; decode excluded"
+    },
+    "1280": {
+      "n": 36009,
+      "ms_p50": 7.034,
+      "ms_p90": 7.148,
+      "ms_mean": 6.99,
+      "note": "YOLOv8s PyTorch fp32, batch 1, predict() incl. pre/post-processing; decode excluded"
+    }
+  },
+  "clips": [
+    {
+      "clip": "2018-03-11.16-40-00.16-45-00.bus.G509",
+      "frames": 9000,
+      "wall_s": 17.9
+    },
+    {
+      "clip": "2018-03-11.16-25-01.16-30-01.admin.G326",
+      "frames": 9000,
+      "wall_s": 17.7
+    },
+    {
+      "clip": "2018-03-07.16-55-01.17-00-01.school.G420",
+      "frames": 9000,
+      "wall_s": 17.9
+    },
+    {
+      "clip": "2018-03-11.16-20-08.16-25-08.hospital.G301",
+      "frames": 9000,
+      "wall_s": 19.0
+    },
+    {
+      "clip": "2018-03-11.16-30-00.16-35-00.bus.G505",
+      "frames": 9002,
+      "wall_s": 18.6
+    },
+    {
+      "clip": "2018-03-11.16-30-01.16-35-01.admin.G329",
+      "frames": 9000,
+      "wall_s": 17.7
+    },
+    {
+      "clip": "2018-03-07.17-35-01.17-40-01.school.G420",
+      "frames": 9001,
+      "wall_s": 18.1
+    },
+    {
+      "clip": "2018-03-07.17-20-07.17-25-07.hospital.G301",
+      "frames": 9000,
+      "wall_s": 19.2
+    },
+    {
+      "clip": "2018-03-11.16-10-00.16-15-00.bus.G509",
+      "frames": 9001,
+      "wall_s": 17.9
+    },
+    {
+      "clip": "2018-03-09.10-15-01.10-20-01.admin.G326",
+      "frames": 9001,
+      "wall_s": 17.8
+    },
+    {
+      "clip": "2018-03-09.10-20-00.10-25-00.school.G336",
+      "frames": 9006,
+      "wall_s": 19.2
+    },
+    {
+      "clip": "2018-03-11.16-25-08.16-30-08.hospital.G436",
+      "frames": 9000,
+      "wall_s": 19.1
+    },
+    {
+      "clip": "2018-03-15.15-05-00.15-10-00.bus.G508",
+      "frames": 9001,
+      "wall_s": 18.1
+    },
+    {
+      "clip": "2018-03-07.16-55-00.17-00-00.school.G638",
+      "frames": 9001,
+      "wall_s": 19.0
+    },
+    {
+      "clip": "2018-03-15.15-50-06.15-55-06.hospital.G341",
+      "frames": 9000,
+      "wall_s": 19.0
+    },
+    {
+      "clip": "2018-03-07.16-55-00.17-00-00.admin.G329",
+      "frames": 9000,
+      "wall_s": 18.1
+    },
+    {
+      "clip": "2018-03-05.13-15-00.13-20-00.bus.G340",
+      "frames": 9005,
+      "wall_s": 19.4
+    },
+    {
+      "clip": "2018-03-11.11-20-00.11-25-00.school.G423",
+      "frames": 9000,
+      "wall_s": 17.9
+    },
+    {
+      "clip": "2018-03-13.16-05-00.16-10-00.bus.G506",
+      "frames": 9000,
+      "wall_s": 19.0
+    },
+    {
+      "clip": "2018-03-12.10-45-00.10-50-00.school.G421",
+      "frames": 9003,
+      "wall_s": 18.5
+    },
+    {
+      "clip": "2018-03-13.16-00-02.16-05-02.hospital.G436",
+      "frames": 9000,
+      "wall_s": 19.3
+    },
+    {
+      "clip": "2018-03-07.11-05-06.11-10-06.bus.G340",
+      "frames": 9000,
+      "wall_s": 20.0
+    },
+    {
+      "clip": "2018-03-13.17-15-03.17-20-03.school.G336",
+      "frames": 9000,
+      "wall_s": 19.3
+    },
+    {
+      "clip": "2018-03-15.15-00-06.15-05-06.hospital.G341",
+      "frames": 9000,
+      "wall_s": 19.0
+    }
+  ]
+}

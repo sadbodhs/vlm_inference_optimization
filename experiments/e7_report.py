@@ -15,7 +15,7 @@ Per cascade:
   cameras per 3090     usable capacity / (0.5 windows/s x call rate), when the
                        capacity sweep for that arm exists
 
-    docker/run_harness.sh python3 experiments/e7_report.py --arm-id B0_vllm_awq_clean
+    docker/run_harness.sh python3 experiments/e7_report.py --arm-id V_vllm_video
 """
 from __future__ import annotations
 
@@ -77,7 +77,7 @@ def main() -> None:
     ap.add_argument("--index", default="data/meva/index.json")
     ap.add_argument("--det-dir", default="data/meva/det")
     ap.add_argument("--results", default="results")
-    ap.add_argument("--arm-id", default="B0_vllm_awq_clean")
+    ap.add_argument("--arm-id", default="V_vllm_video")
     ap.add_argument("--sizes", default="640,1280")
     ap.add_argument("--out", default="results/e7/cascades.json")
     args = ap.parse_args()

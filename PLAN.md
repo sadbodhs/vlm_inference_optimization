@@ -427,8 +427,9 @@ MEVA (CC BY 4.0), the **Kitware** annotation set: 769 five-minute 1080p clips fr
 labelling is non-negotiable here — a gate that skips an unlabelled event would score
 as a correct skip. (The 65-clip NIST set is a sample, ~120 activities; not used.)
 
-Corpus profile (tools/meva_index.py): the median clip has an activity under way
-**9%** of the time; 274 clips have none; the top decile is busy 100% of the time.
+Corpus profile (tools/meva_index.py): *superseded — see the amendment below.* As
+pre-registered it read: the median clip has an activity under way **9%** of the
+time; 274 clips have none; the top decile is busy 100% of the time.
 Median activity lasts **2.4 s**, the 10th percentile **0.6 s**.
 
 **Selection:** 24 clips (2 hours), stratified into four duty-cycle bins — empty (0),
@@ -472,6 +473,27 @@ any real deployment.
 4. Full-frame recognition is weak (the people are small — the feature-size rule);
    `roi-crop` raises instance recall by **≥ 10 points with fewer tokens**.
 5. Savings track emptiness: **> 90%** of calls saved on empty clips, **< 30%** on busy.
+
+### Amendment, 2026-09-23 (before any VLM measurement)
+
+The corpus profile above is **wrong**, and so was the first clip selection.
+
+MEVA ships KPF annotations in two layouts. `tools/meva_index.py` accepted only the
+quoted one and silently skipped the other — 266 of 769 clips — which then indexed
+as "no activity at all". It also counted the annotators' whole-clip `empty_37`
+marker ("none of the 37 activities occur") as an activity. Corrected:
+
+| | as pre-registered | corrected |
+|---|---|---|
+| activities | 23,920 | **31,002** |
+| median clip, share of time active | 9% | **26%** |
+| clips with no activity | 274 | **53** (all annotator-verified) |
+
+The first selection's "empty" bin was drawn from busy clips, so the first gate
+analysis is void; its outputs are kept as `results/e7/*.INVALID-unparsed-layout.json`.
+The parser now accepts both layouts and **refuses** a file whose activity lines do
+not all parse. **Design, bins, gates, metrics and all five predictions are unchanged**;
+the clips were re-selected by the same rule and seed on the corrected index.
 
 ### Not measured, by design
 

@@ -11,7 +11,7 @@ Usable capacity is the highest offered rate whose verdict is not `saturated` and
 whose TTFT p99 is inside the 2 s freshness budget E4 used -- a surveillance answer
 about a frame older than that is not an answer about the present.
 
-    docker/run_harness.sh python3 experiments/e7_capacity.py --arm arms/B0_vllm_awq_clean.yaml \\
+    docker/run_harness.sh python3 experiments/e7_capacity.py --arm arms/V_vllm_video.yaml \\
         --which full --rates 1,2,3,4,6
 """
 from __future__ import annotations

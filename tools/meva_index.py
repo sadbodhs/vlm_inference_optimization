@@ -38,19 +38,47 @@ def clip_frames(t0: str, t1: str) -> int:
 
 
 def parse_activities(path: str) -> list[dict]:
-    out = []
+    """Every activity in a KPF activities.yml -- in EITHER of MEVA's two layouts:
+
+      - {'act': {'act2': {'person_opens_facility_door': 1.0}, ..., 'timespan': [...]}}
+      - { act: { act2: {person_stands_up: 1.0}, id2: 5037..., timespan: [...], ... } }
+
+    The first version filtered on the quoted form and silently skipped the other,
+    which is 266 of the 769 clips: they indexed as "no activity at all", the corpus
+    looked far emptier than it is, and the E7 "empty" bin was built from busy
+    clips. So: parse any line carrying an act record, and refuse a file that has
+    act lines but yields nothing.
+    """
+    out, n_lines = [], 0
     with open(path) as f:
         for line in f:
             line = line.strip()
-            if not line.startswith("- {'act'"):
+            if not line.startswith("-") or "act2" not in line:
                 continue
+            n_lines += 1
             rec = yaml.safe_load(line)[0]["act"]
             (name, _), = rec["act2"].items()
+            if name == EMPTY_MARKER:
+                n_lines -= 1          # a whole-clip "verified empty" marker, not an event
+                continue
             s, e = rec["timespan"][0]["tsr0"]
             actors = [a["id1"] for a in rec.get("actors", [])]
             out.append({"type": name, "start": int(s), "end": int(e),
                         "actors": actors, "id": rec.get("id2")})
+    if n_lines and len(out) != n_lines:
+        raise ValueError(f"{path}: {n_lines} activity lines, {len(out)} parsed")
     return out
+
+
+EMPTY_MARKER = "empty_37"
+
+
+def verified_empty(path: str) -> bool:
+    """Annotators mark a clip with none of the 37 activities as `empty_37` -- as an
+    act record spanning the whole clip, or as a meta comment. Counting the record
+    as an activity made verified-empty clips look 100% busy."""
+    with open(path) as f:
+        return any(EMPTY_MARKER in line for line in f)
 
 
 def coverage(acts: list[dict], n_frames: int) -> float:
@@ -81,6 +109,7 @@ def main() -> None:
             "annotation_dir": os.path.relpath(os.path.dirname(f), args.root),
             "n_frames": n, "duration_s": n / FPS,
             "n_activities": len(acts), "coverage": round(coverage(acts, n), 4),
+            "verified_empty": verified_empty(f),
             "activities": acts,
         })
 
@@ -100,7 +129,11 @@ def main() -> None:
     print("coverage (share of the 5 min with >=1 activity under way):")
     print(f"  p10 {q(.1):.2f}  p25 {q(.25):.2f}  median {q(.5):.2f}  "
           f"p75 {q(.75):.2f}  p90 {q(.9):.2f}")
-    print(f"  clips with no activity at all: {sum(1 for c in clips if not c['n_activities'])}")
+    print(f"  clips with no activity at all: {sum(1 for c in clips if not c['n_activities'])}"
+          f"  (verified empty by annotators: {sum(1 for c in clips if c['verified_empty'])})")
+    bad = [c["clip"] for c in clips if c["verified_empty"] and c["n_activities"]]
+    if bad:
+        raise SystemExit(f"{len(bad)} clips marked empty but carrying activities, e.g. {bad[0]}")
     durs = sorted((a["end"] - a["start"]) / FPS for c in clips for a in c["activities"])
     print(f"activity duration (s): p10 {durs[len(durs)//10]:.1f}  "
           f"median {st.median(durs):.1f}  p90 {durs[9*len(durs)//10]:.1f}")

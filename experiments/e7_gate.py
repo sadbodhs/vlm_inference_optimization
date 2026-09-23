@@ -35,29 +35,48 @@ MOVE_FRAC = 0.1        # "moved": centre displacement > 0.1 x box height
 
 
 # ── annotations ──────────────────────────────────────────────────────────────
-_geom_re = re.compile(r"id1: (\d+).*?ts0: (\d+).*?g0: (-?\d+) (-?\d+) (-?\d+) (-?\d+)")
-_type_re = re.compile(r"id1: (\d+).*?cset3: \{\s*'?(\w+)'?\s*:")
+# MEVA ships KPF in two layouts, sometimes within one date directory:
+#   - { geom: {id1: 561..., id0: 1, ts0: 942, ts1: 31.4, g0: 0 548 36 635, ...} }
+#   - {'geom': {'g0': '1578 321 1650 488', 'id0': 1, 'id1': 39, 'ts0': 8483}}
+# Different key order, different quoting. Each field is matched on its own, and a
+# file with geometry lines that yields no tracks is an error -- a parser that
+# silently returns nothing is how the first run's detector-recall table came out
+# blank without anything failing.
+_id1 = re.compile(r"'?id1'?:\s*(\d+)")
+_ts0 = re.compile(r"'?ts0'?:\s*(\d+)")
+_g0 = re.compile(r"'?g0'?:\s*'?(-?\d+)\s+(-?\d+)\s+(-?\d+)\s+(-?\d+)")
+_cset = re.compile(r"'?cset3'?:\s*\{\s*'?(\w+)'?\s*:")
 
 
 def load_geom(path: Path) -> dict[int, dict[int, tuple]]:
-    """{track id: {frame: (x1, y1, x2, y2)}} from a KPF geom.yml."""
+    """{track id: {frame: (x1, y1, x2, y2)}} from a KPF geom.yml, either layout."""
     tracks: dict[int, dict[int, tuple]] = collections.defaultdict(dict)
+    n_geom = 0
     with open(path) as f:
         for line in f:
-            m = _geom_re.search(line)
-            if m:
-                tid, fr, *box = map(int, m.groups())
-                tracks[tid][fr] = tuple(box)
+            if "geom" not in line:
+                continue
+            n_geom += 1
+            i, t, g = _id1.search(line), _ts0.search(line), _g0.search(line)
+            if i and t and g:
+                tracks[int(i.group(1))][int(t.group(1))] = tuple(map(int, g.groups()))
+    if n_geom and not tracks:
+        raise ValueError(f"{path}: {n_geom} geom lines, none parsed -- unknown KPF layout")
     return tracks
 
 
 def load_types(path: Path) -> dict[int, str]:
-    out = {}
+    out, n = {}, 0
     with open(path) as f:
         for line in f:
-            m = _type_re.search(line)
-            if m:
-                out[int(m.group(1))] = m.group(2).lower()
+            if "types" not in line:
+                continue
+            n += 1
+            i, c = _id1.search(line), _cset.search(line)
+            if i and c:
+                out[int(i.group(1))] = c.group(1).lower()
+    if n and not out:
+        raise ValueError(f"{path}: {n} types lines, none parsed -- unknown KPF layout")
     return out
 
 

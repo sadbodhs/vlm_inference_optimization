@@ -1,0 +1,3179 @@
+{
+ "meta": {
+  "window_frames": 60,
+  "stride": 6,
+  "iou_match": 0.3,
+  "move_frac": 0.1,
+  "sizes": [
+   640,
+   1280
+  ],
+  "gates": [
+   "dense",
+   "presence",
+   "person",
+   "motion",
+   "person-motion"
+  ]
+ },
+ "calls": {
+  "1280|dense|all": {
+   "hit": 3600,
+   "n": 3600,
+   "rate": 1.0
+  },
+  "1280|dense|busy": {
+   "hit": 900,
+   "n": 900,
+   "rate": 1.0
+  },
+  "1280|dense|empty": {
+   "hit": 900,
+   "n": 900,
+   "rate": 1.0
+  },
+  "1280|dense|moderate": {
+   "hit": 900,
+   "n": 900,
+   "rate": 1.0
+  },
+  "1280|dense|sparse": {
+   "hit": 900,
+   "n": 900,
+   "rate": 1.0
+  },
+  "1280|motion|all": {
+   "hit": 1754,
+   "n": 3600,
+   "rate": 0.4872222222222222
+  },
+  "1280|motion|busy": {
+   "hit": 690,
+   "n": 900,
+   "rate": 0.7666666666666667
+  },
+  "1280|motion|empty": {
+   "hit": 216,
+   "n": 900,
+   "rate": 0.24
+  },
+  "1280|motion|moderate": {
+   "hit": 476,
+   "n": 900,
+   "rate": 0.5288888888888889
+  },
+  "1280|motion|sparse": {
+   "hit": 372,
+   "n": 900,
+   "rate": 0.41333333333333333
+  },
+  "1280|person|all": {
+   "hit": 1542,
+   "n": 3600,
+   "rate": 0.42833333333333334
+  },
+  "1280|person|busy": {
+   "hit": 765,
+   "n": 900,
+   "rate": 0.85
+  },
+  "1280|person|empty": {
+   "hit": 190,
+   "n": 900,
+   "rate": 0.2111111111111111
+  },
+  "1280|person|moderate": {
+   "hit": 498,
+   "n": 900,
+   "rate": 0.5533333333333333
+  },
+  "1280|person|sparse": {
+   "hit": 89,
+   "n": 900,
+   "rate": 0.09888888888888889
+  },
+  "1280|person-motion|all": {
+   "hit": 1272,
+   "n": 3600,
+   "rate": 0.35333333333333333
+  },
+  "1280|person-motion|busy": {
+   "hit": 597,
+   "n": 900,
+   "rate": 0.6633333333333333
+  },
+  "1280|person-motion|empty": {
+   "hit": 167,
+   "n": 900,
+   "rate": 0.18555555555555556
+  },
+  "1280|person-motion|moderate": {
+   "hit": 420,
+   "n": 900,
+   "rate": 0.4666666666666667
+  },
+  "1280|person-motion|sparse": {
+   "hit": 88,
+   "n": 900,
+   "rate": 0.09777777777777778
+  },
+  "1280|presence|all": {
+   "hit": 2417,
+   "n": 3600,
+   "rate": 0.6713888888888889
+  },
+  "1280|presence|busy": {
+   "hit": 868,
+   "n": 900,
+   "rate": 0.9644444444444444
+  },
+  "1280|presence|empty": {
+   "hit": 364,
+   "n": 900,
+   "rate": 0.40444444444444444
+  },
+  "1280|presence|moderate": {
+   "hit": 693,
+   "n": 900,
+   "rate": 0.77
+  },
+  "1280|presence|sparse": {
+   "hit": 492,
+   "n": 900,
+   "rate": 0.5466666666666666
+  },
+  "640|dense|all": {
+   "hit": 3600,
+   "n": 3600,
+   "rate": 1.0
+  },
+  "640|dense|busy": {
+   "hit": 900,
+   "n": 900,
+   "rate": 1.0
+  },
+  "640|dense|empty": {
+   "hit": 900,
+   "n": 900,
+   "rate": 1.0
+  },
+  "640|dense|moderate": {
+   "hit": 900,
+   "n": 900,
+   "rate": 1.0
+  },
+  "640|dense|sparse": {
+   "hit": 900,
+   "n": 900,
+   "rate": 1.0
+  },
+  "640|motion|all": {
+   "hit": 1569,
+   "n": 3600,
+   "rate": 0.43583333333333335
+  },
+  "640|motion|busy": {
+   "hit": 694,
+   "n": 900,
+   "rate": 0.7711111111111111
+  },
+  "640|motion|empty": {
+   "hit": 168,
+   "n": 900,
+   "rate": 0.18666666666666668
+  },
+  "640|motion|moderate": {
+   "hit": 458,
+   "n": 900,
+   "rate": 0.5088888888888888
+  },
+  "640|motion|sparse": {
+   "hit": 249,
+   "n": 900,
+   "rate": 0.27666666666666667
+  },
+  "640|person|all": {
+   "hit": 1261,
+   "n": 3600,
+   "rate": 0.3502777777777778
+  },
+  "640|person|busy": {
+   "hit": 728,
+   "n": 900,
+   "rate": 0.8088888888888889
+  },
+  "640|person|empty": {
+   "hit": 140,
+   "n": 900,
+   "rate": 0.15555555555555556
+  },
+  "640|person|moderate": {
+   "hit": 317,
+   "n": 900,
+   "rate": 0.3522222222222222
+  },
+  "640|person|sparse": {
+   "hit": 76,
+   "n": 900,
+   "rate": 0.08444444444444445
+  },
+  "640|person-motion|all": {
+   "hit": 1067,
+   "n": 3600,
+   "rate": 0.29638888888888887
+  },
+  "640|person-motion|busy": {
+   "hit": 613,
+   "n": 900,
+   "rate": 0.6811111111111111
+  },
+  "640|person-motion|empty": {
+   "hit": 116,
+   "n": 900,
+   "rate": 0.1288888888888889
+  },
+  "640|person-motion|moderate": {
+   "hit": 267,
+   "n": 900,
+   "rate": 0.2966666666666667
+  },
+  "640|person-motion|sparse": {
+   "hit": 71,
+   "n": 900,
+   "rate": 0.07888888888888888
+  },
+  "640|presence|all": {
+   "hit": 2343,
+   "n": 3600,
+   "rate": 0.6508333333333334
+  },
+  "640|presence|busy": {
+   "hit": 825,
+   "n": 900,
+   "rate": 0.9166666666666666
+  },
+  "640|presence|empty": {
+   "hit": 338,
+   "n": 900,
+   "rate": 0.37555555555555553
+  },
+  "640|presence|moderate": {
+   "hit": 686,
+   "n": 900,
+   "rate": 0.7622222222222222
+  },
+  "640|presence|sparse": {
+   "hit": 494,
+   "n": 900,
+   "rate": 0.5488888888888889
+  }
+ },
+ "recall": {
+  "1280|dense|all": {
+   "hit": 658,
+   "n": 658,
+   "rate": 1.0
+  },
+  "1280|dense|busy": {
+   "hit": 451,
+   "n": 451,
+   "rate": 1.0
+  },
+  "1280|dense|moderate": {
+   "hit": 150,
+   "n": 150,
+   "rate": 1.0
+  },
+  "1280|dense|sparse": {
+   "hit": 57,
+   "n": 57,
+   "rate": 1.0
+  },
+  "1280|motion|all": {
+   "hit": 639,
+   "n": 658,
+   "rate": 0.9711246200607903
+  },
+  "1280|motion|busy": {
+   "hit": 435,
+   "n": 451,
+   "rate": 0.9645232815964523
+  },
+  "1280|motion|moderate": {
+   "hit": 147,
+   "n": 150,
+   "rate": 0.98
+  },
+  "1280|motion|sparse": {
+   "hit": 57,
+   "n": 57,
+   "rate": 1.0
+  },
+  "1280|person|all": {
+   "hit": 628,
+   "n": 658,
+   "rate": 0.9544072948328267
+  },
+  "1280|person|busy": {
+   "hit": 437,
+   "n": 451,
+   "rate": 0.9689578713968958
+  },
+  "1280|person|moderate": {
+   "hit": 145,
+   "n": 150,
+   "rate": 0.9666666666666667
+  },
+  "1280|person|sparse": {
+   "hit": 46,
+   "n": 57,
+   "rate": 0.8070175438596491
+  },
+  "1280|person-motion|all": {
+   "hit": 611,
+   "n": 658,
+   "rate": 0.9285714285714286
+  },
+  "1280|person-motion|busy": {
+   "hit": 422,
+   "n": 451,
+   "rate": 0.9356984478935698
+  },
+  "1280|person-motion|moderate": {
+   "hit": 143,
+   "n": 150,
+   "rate": 0.9533333333333334
+  },
+  "1280|person-motion|sparse": {
+   "hit": 46,
+   "n": 57,
+   "rate": 0.8070175438596491
+  },
+  "1280|presence|all": {
+   "hit": 658,
+   "n": 658,
+   "rate": 1.0
+  },
+  "1280|presence|busy": {
+   "hit": 451,
+   "n": 451,
+   "rate": 1.0
+  },
+  "1280|presence|moderate": {
+   "hit": 150,
+   "n": 150,
+   "rate": 1.0
+  },
+  "1280|presence|sparse": {
+   "hit": 57,
+   "n": 57,
+   "rate": 1.0
+  },
+  "640|dense|all": {
+   "hit": 658,
+   "n": 658,
+   "rate": 1.0
+  },
+  "640|dense|busy": {
+   "hit": 451,
+   "n": 451,
+   "rate": 1.0
+  },
+  "640|dense|moderate": {
+   "hit": 150,
+   "n": 150,
+   "rate": 1.0
+  },
+  "640|dense|sparse": {
+   "hit": 57,
+   "n": 57,
+   "rate": 1.0
+  },
+  "640|motion|all": {
+   "hit": 638,
+   "n": 658,
+   "rate": 0.9696048632218845
+  },
+  "640|motion|busy": {
+   "hit": 433,
+   "n": 451,
+   "rate": 0.9600886917960089
+  },
+  "640|motion|moderate": {
+   "hit": 148,
+   "n": 150,
+   "rate": 0.9866666666666667
+  },
+  "640|motion|sparse": {
+   "hit": 57,
+   "n": 57,
+   "rate": 1.0
+  },
+  "640|person|all": {
+   "hit": 565,
+   "n": 658,
+   "rate": 0.8586626139817629
+  },
+  "640|person|busy": {
+   "hit": 400,
+   "n": 451,
+   "rate": 0.8869179600886918
+  },
+  "640|person|moderate": {
+   "hit": 119,
+   "n": 150,
+   "rate": 0.7933333333333333
+  },
+  "640|person|sparse": {
+   "hit": 46,
+   "n": 57,
+   "rate": 0.8070175438596491
+  },
+  "640|person-motion|all": {
+   "hit": 553,
+   "n": 658,
+   "rate": 0.8404255319148937
+  },
+  "640|person-motion|busy": {
+   "hit": 389,
+   "n": 451,
+   "rate": 0.8625277161862528
+  },
+  "640|person-motion|moderate": {
+   "hit": 118,
+   "n": 150,
+   "rate": 0.7866666666666666
+  },
+  "640|person-motion|sparse": {
+   "hit": 46,
+   "n": 57,
+   "rate": 0.8070175438596491
+  },
+  "640|presence|all": {
+   "hit": 652,
+   "n": 658,
+   "rate": 0.9908814589665653
+  },
+  "640|presence|busy": {
+   "hit": 445,
+   "n": 451,
+   "rate": 0.9866962305986696
+  },
+  "640|presence|moderate": {
+   "hit": 150,
+   "n": 150,
+   "rate": 1.0
+  },
+  "640|presence|sparse": {
+   "hit": 57,
+   "n": 57,
+   "rate": 1.0
+  }
+ },
+ "recall_by_height": {},
+ "recall_by_type": {
+  "1280|dense|hand_interacts_with_person": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|dense|person_carries_heavy_object": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "1280|dense|person_closes_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|dense|person_closes_vehicle_door": {
+   "hit": 18,
+   "n": 18,
+   "rate": 1.0
+  },
+  "1280|dense|person_embraces_person": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "1280|dense|person_enters_scene_through_structure": {
+   "hit": 106,
+   "n": 106,
+   "rate": 1.0
+  },
+  "1280|dense|person_enters_vehicle": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|dense|person_exits_scene_through_structure": {
+   "hit": 83,
+   "n": 83,
+   "rate": 1.0
+  },
+  "1280|dense|person_exits_vehicle": {
+   "hit": 10,
+   "n": 10,
+   "rate": 1.0
+  },
+  "1280|dense|person_opens_facility_door": {
+   "hit": 40,
+   "n": 40,
+   "rate": 1.0
+  },
+  "1280|dense|person_opens_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|dense|person_opens_vehicle_door": {
+   "hit": 19,
+   "n": 19,
+   "rate": 1.0
+  },
+  "1280|dense|person_picks_up_object": {
+   "hit": 31,
+   "n": 31,
+   "rate": 1.0
+  },
+  "1280|dense|person_purchases": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "1280|dense|person_puts_down_object": {
+   "hit": 51,
+   "n": 51,
+   "rate": 1.0
+  },
+  "1280|dense|person_reads_document": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|dense|person_sits_down": {
+   "hit": 36,
+   "n": 36,
+   "rate": 1.0
+  },
+  "1280|dense|person_stands_up": {
+   "hit": 13,
+   "n": 13,
+   "rate": 1.0
+  },
+  "1280|dense|person_talks_on_phone": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "1280|dense|person_talks_to_person": {
+   "hit": 54,
+   "n": 54,
+   "rate": 1.0
+  },
+  "1280|dense|person_texts_on_phone": {
+   "hit": 35,
+   "n": 35,
+   "rate": 1.0
+  },
+  "1280|dense|person_transfers_object": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|dense|person_unloads_vehicle": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "1280|dense|vehicle_drops_off_person": {
+   "hit": 3,
+   "n": 3,
+   "rate": 1.0
+  },
+  "1280|dense|vehicle_makes_u_turn": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|dense|vehicle_reverses": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "1280|dense|vehicle_starts": {
+   "hit": 20,
+   "n": 20,
+   "rate": 1.0
+  },
+  "1280|dense|vehicle_stops": {
+   "hit": 22,
+   "n": 22,
+   "rate": 1.0
+  },
+  "1280|dense|vehicle_turns_left": {
+   "hit": 19,
+   "n": 19,
+   "rate": 1.0
+  },
+  "1280|dense|vehicle_turns_right": {
+   "hit": 27,
+   "n": 27,
+   "rate": 1.0
+  },
+  "1280|motion|hand_interacts_with_person": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|motion|person_carries_heavy_object": {
+   "hit": 15,
+   "n": 16,
+   "rate": 0.9375
+  },
+  "1280|motion|person_closes_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|motion|person_closes_vehicle_door": {
+   "hit": 18,
+   "n": 18,
+   "rate": 1.0
+  },
+  "1280|motion|person_embraces_person": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "1280|motion|person_enters_scene_through_structure": {
+   "hit": 104,
+   "n": 106,
+   "rate": 0.9811320754716981
+  },
+  "1280|motion|person_enters_vehicle": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|motion|person_exits_scene_through_structure": {
+   "hit": 82,
+   "n": 83,
+   "rate": 0.9879518072289156
+  },
+  "1280|motion|person_exits_vehicle": {
+   "hit": 10,
+   "n": 10,
+   "rate": 1.0
+  },
+  "1280|motion|person_opens_facility_door": {
+   "hit": 40,
+   "n": 40,
+   "rate": 1.0
+  },
+  "1280|motion|person_opens_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|motion|person_opens_vehicle_door": {
+   "hit": 17,
+   "n": 19,
+   "rate": 0.8947368421052632
+  },
+  "1280|motion|person_picks_up_object": {
+   "hit": 27,
+   "n": 31,
+   "rate": 0.8709677419354839
+  },
+  "1280|motion|person_purchases": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "1280|motion|person_puts_down_object": {
+   "hit": 48,
+   "n": 51,
+   "rate": 0.9411764705882353
+  },
+  "1280|motion|person_reads_document": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|motion|person_sits_down": {
+   "hit": 35,
+   "n": 36,
+   "rate": 0.9722222222222222
+  },
+  "1280|motion|person_stands_up": {
+   "hit": 12,
+   "n": 13,
+   "rate": 0.9230769230769231
+  },
+  "1280|motion|person_talks_on_phone": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "1280|motion|person_talks_to_person": {
+   "hit": 54,
+   "n": 54,
+   "rate": 1.0
+  },
+  "1280|motion|person_texts_on_phone": {
+   "hit": 32,
+   "n": 35,
+   "rate": 0.9142857142857143
+  },
+  "1280|motion|person_transfers_object": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|motion|person_unloads_vehicle": {
+   "hit": 1,
+   "n": 2,
+   "rate": 0.5
+  },
+  "1280|motion|vehicle_drops_off_person": {
+   "hit": 3,
+   "n": 3,
+   "rate": 1.0
+  },
+  "1280|motion|vehicle_makes_u_turn": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|motion|vehicle_reverses": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "1280|motion|vehicle_starts": {
+   "hit": 20,
+   "n": 20,
+   "rate": 1.0
+  },
+  "1280|motion|vehicle_stops": {
+   "hit": 22,
+   "n": 22,
+   "rate": 1.0
+  },
+  "1280|motion|vehicle_turns_left": {
+   "hit": 19,
+   "n": 19,
+   "rate": 1.0
+  },
+  "1280|motion|vehicle_turns_right": {
+   "hit": 27,
+   "n": 27,
+   "rate": 1.0
+  },
+  "1280|person|hand_interacts_with_person": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|person|person_carries_heavy_object": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "1280|person|person_closes_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|person|person_closes_vehicle_door": {
+   "hit": 16,
+   "n": 18,
+   "rate": 0.8888888888888888
+  },
+  "1280|person|person_embraces_person": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "1280|person|person_enters_scene_through_structure": {
+   "hit": 106,
+   "n": 106,
+   "rate": 1.0
+  },
+  "1280|person|person_enters_vehicle": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|person|person_exits_scene_through_structure": {
+   "hit": 83,
+   "n": 83,
+   "rate": 1.0
+  },
+  "1280|person|person_exits_vehicle": {
+   "hit": 9,
+   "n": 10,
+   "rate": 0.9
+  },
+  "1280|person|person_opens_facility_door": {
+   "hit": 40,
+   "n": 40,
+   "rate": 1.0
+  },
+  "1280|person|person_opens_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|person|person_opens_vehicle_door": {
+   "hit": 17,
+   "n": 19,
+   "rate": 0.8947368421052632
+  },
+  "1280|person|person_picks_up_object": {
+   "hit": 31,
+   "n": 31,
+   "rate": 1.0
+  },
+  "1280|person|person_purchases": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "1280|person|person_puts_down_object": {
+   "hit": 51,
+   "n": 51,
+   "rate": 1.0
+  },
+  "1280|person|person_reads_document": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|person|person_sits_down": {
+   "hit": 36,
+   "n": 36,
+   "rate": 1.0
+  },
+  "1280|person|person_stands_up": {
+   "hit": 13,
+   "n": 13,
+   "rate": 1.0
+  },
+  "1280|person|person_talks_on_phone": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "1280|person|person_talks_to_person": {
+   "hit": 54,
+   "n": 54,
+   "rate": 1.0
+  },
+  "1280|person|person_texts_on_phone": {
+   "hit": 35,
+   "n": 35,
+   "rate": 1.0
+  },
+  "1280|person|person_transfers_object": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|person|person_unloads_vehicle": {
+   "hit": 1,
+   "n": 2,
+   "rate": 0.5
+  },
+  "1280|person|vehicle_drops_off_person": {
+   "hit": 3,
+   "n": 3,
+   "rate": 1.0
+  },
+  "1280|person|vehicle_makes_u_turn": {
+   "hit": 4,
+   "n": 6,
+   "rate": 0.6666666666666666
+  },
+  "1280|person|vehicle_reverses": {
+   "hit": 3,
+   "n": 4,
+   "rate": 0.75
+  },
+  "1280|person|vehicle_starts": {
+   "hit": 14,
+   "n": 20,
+   "rate": 0.7
+  },
+  "1280|person|vehicle_stops": {
+   "hit": 15,
+   "n": 22,
+   "rate": 0.6818181818181818
+  },
+  "1280|person|vehicle_turns_left": {
+   "hit": 15,
+   "n": 19,
+   "rate": 0.7894736842105263
+  },
+  "1280|person|vehicle_turns_right": {
+   "hit": 23,
+   "n": 27,
+   "rate": 0.8518518518518519
+  },
+  "1280|person-motion|hand_interacts_with_person": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|person-motion|person_carries_heavy_object": {
+   "hit": 15,
+   "n": 16,
+   "rate": 0.9375
+  },
+  "1280|person-motion|person_closes_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|person-motion|person_closes_vehicle_door": {
+   "hit": 16,
+   "n": 18,
+   "rate": 0.8888888888888888
+  },
+  "1280|person-motion|person_embraces_person": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "1280|person-motion|person_enters_scene_through_structure": {
+   "hit": 104,
+   "n": 106,
+   "rate": 0.9811320754716981
+  },
+  "1280|person-motion|person_enters_vehicle": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|person-motion|person_exits_scene_through_structure": {
+   "hit": 82,
+   "n": 83,
+   "rate": 0.9879518072289156
+  },
+  "1280|person-motion|person_exits_vehicle": {
+   "hit": 9,
+   "n": 10,
+   "rate": 0.9
+  },
+  "1280|person-motion|person_opens_facility_door": {
+   "hit": 40,
+   "n": 40,
+   "rate": 1.0
+  },
+  "1280|person-motion|person_opens_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|person-motion|person_opens_vehicle_door": {
+   "hit": 16,
+   "n": 19,
+   "rate": 0.8421052631578947
+  },
+  "1280|person-motion|person_picks_up_object": {
+   "hit": 27,
+   "n": 31,
+   "rate": 0.8709677419354839
+  },
+  "1280|person-motion|person_purchases": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "1280|person-motion|person_puts_down_object": {
+   "hit": 48,
+   "n": 51,
+   "rate": 0.9411764705882353
+  },
+  "1280|person-motion|person_reads_document": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|person-motion|person_sits_down": {
+   "hit": 35,
+   "n": 36,
+   "rate": 0.9722222222222222
+  },
+  "1280|person-motion|person_stands_up": {
+   "hit": 12,
+   "n": 13,
+   "rate": 0.9230769230769231
+  },
+  "1280|person-motion|person_talks_on_phone": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "1280|person-motion|person_talks_to_person": {
+   "hit": 54,
+   "n": 54,
+   "rate": 1.0
+  },
+  "1280|person-motion|person_texts_on_phone": {
+   "hit": 32,
+   "n": 35,
+   "rate": 0.9142857142857143
+  },
+  "1280|person-motion|person_transfers_object": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|person-motion|person_unloads_vehicle": {
+   "hit": 1,
+   "n": 2,
+   "rate": 0.5
+  },
+  "1280|person-motion|vehicle_drops_off_person": {
+   "hit": 3,
+   "n": 3,
+   "rate": 1.0
+  },
+  "1280|person-motion|vehicle_makes_u_turn": {
+   "hit": 4,
+   "n": 6,
+   "rate": 0.6666666666666666
+  },
+  "1280|person-motion|vehicle_reverses": {
+   "hit": 3,
+   "n": 4,
+   "rate": 0.75
+  },
+  "1280|person-motion|vehicle_starts": {
+   "hit": 14,
+   "n": 20,
+   "rate": 0.7
+  },
+  "1280|person-motion|vehicle_stops": {
+   "hit": 15,
+   "n": 22,
+   "rate": 0.6818181818181818
+  },
+  "1280|person-motion|vehicle_turns_left": {
+   "hit": 15,
+   "n": 19,
+   "rate": 0.7894736842105263
+  },
+  "1280|person-motion|vehicle_turns_right": {
+   "hit": 23,
+   "n": 27,
+   "rate": 0.8518518518518519
+  },
+  "1280|presence|hand_interacts_with_person": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|presence|person_carries_heavy_object": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "1280|presence|person_closes_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|presence|person_closes_vehicle_door": {
+   "hit": 18,
+   "n": 18,
+   "rate": 1.0
+  },
+  "1280|presence|person_embraces_person": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "1280|presence|person_enters_scene_through_structure": {
+   "hit": 106,
+   "n": 106,
+   "rate": 1.0
+  },
+  "1280|presence|person_enters_vehicle": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|presence|person_exits_scene_through_structure": {
+   "hit": 83,
+   "n": 83,
+   "rate": 1.0
+  },
+  "1280|presence|person_exits_vehicle": {
+   "hit": 10,
+   "n": 10,
+   "rate": 1.0
+  },
+  "1280|presence|person_opens_facility_door": {
+   "hit": 40,
+   "n": 40,
+   "rate": 1.0
+  },
+  "1280|presence|person_opens_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|presence|person_opens_vehicle_door": {
+   "hit": 19,
+   "n": 19,
+   "rate": 1.0
+  },
+  "1280|presence|person_picks_up_object": {
+   "hit": 31,
+   "n": 31,
+   "rate": 1.0
+  },
+  "1280|presence|person_purchases": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "1280|presence|person_puts_down_object": {
+   "hit": 51,
+   "n": 51,
+   "rate": 1.0
+  },
+  "1280|presence|person_reads_document": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "1280|presence|person_sits_down": {
+   "hit": 36,
+   "n": 36,
+   "rate": 1.0
+  },
+  "1280|presence|person_stands_up": {
+   "hit": 13,
+   "n": 13,
+   "rate": 1.0
+  },
+  "1280|presence|person_talks_on_phone": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "1280|presence|person_talks_to_person": {
+   "hit": 54,
+   "n": 54,
+   "rate": 1.0
+  },
+  "1280|presence|person_texts_on_phone": {
+   "hit": 35,
+   "n": 35,
+   "rate": 1.0
+  },
+  "1280|presence|person_transfers_object": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|presence|person_unloads_vehicle": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "1280|presence|vehicle_drops_off_person": {
+   "hit": 3,
+   "n": 3,
+   "rate": 1.0
+  },
+  "1280|presence|vehicle_makes_u_turn": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "1280|presence|vehicle_reverses": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "1280|presence|vehicle_starts": {
+   "hit": 20,
+   "n": 20,
+   "rate": 1.0
+  },
+  "1280|presence|vehicle_stops": {
+   "hit": 22,
+   "n": 22,
+   "rate": 1.0
+  },
+  "1280|presence|vehicle_turns_left": {
+   "hit": 19,
+   "n": 19,
+   "rate": 1.0
+  },
+  "1280|presence|vehicle_turns_right": {
+   "hit": 27,
+   "n": 27,
+   "rate": 1.0
+  },
+  "640|dense|hand_interacts_with_person": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|dense|person_carries_heavy_object": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "640|dense|person_closes_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|dense|person_closes_vehicle_door": {
+   "hit": 18,
+   "n": 18,
+   "rate": 1.0
+  },
+  "640|dense|person_embraces_person": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "640|dense|person_enters_scene_through_structure": {
+   "hit": 106,
+   "n": 106,
+   "rate": 1.0
+  },
+  "640|dense|person_enters_vehicle": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|dense|person_exits_scene_through_structure": {
+   "hit": 83,
+   "n": 83,
+   "rate": 1.0
+  },
+  "640|dense|person_exits_vehicle": {
+   "hit": 10,
+   "n": 10,
+   "rate": 1.0
+  },
+  "640|dense|person_opens_facility_door": {
+   "hit": 40,
+   "n": 40,
+   "rate": 1.0
+  },
+  "640|dense|person_opens_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|dense|person_opens_vehicle_door": {
+   "hit": 19,
+   "n": 19,
+   "rate": 1.0
+  },
+  "640|dense|person_picks_up_object": {
+   "hit": 31,
+   "n": 31,
+   "rate": 1.0
+  },
+  "640|dense|person_purchases": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "640|dense|person_puts_down_object": {
+   "hit": 51,
+   "n": 51,
+   "rate": 1.0
+  },
+  "640|dense|person_reads_document": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|dense|person_sits_down": {
+   "hit": 36,
+   "n": 36,
+   "rate": 1.0
+  },
+  "640|dense|person_stands_up": {
+   "hit": 13,
+   "n": 13,
+   "rate": 1.0
+  },
+  "640|dense|person_talks_on_phone": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "640|dense|person_talks_to_person": {
+   "hit": 54,
+   "n": 54,
+   "rate": 1.0
+  },
+  "640|dense|person_texts_on_phone": {
+   "hit": 35,
+   "n": 35,
+   "rate": 1.0
+  },
+  "640|dense|person_transfers_object": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|dense|person_unloads_vehicle": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "640|dense|vehicle_drops_off_person": {
+   "hit": 3,
+   "n": 3,
+   "rate": 1.0
+  },
+  "640|dense|vehicle_makes_u_turn": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|dense|vehicle_reverses": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "640|dense|vehicle_starts": {
+   "hit": 20,
+   "n": 20,
+   "rate": 1.0
+  },
+  "640|dense|vehicle_stops": {
+   "hit": 22,
+   "n": 22,
+   "rate": 1.0
+  },
+  "640|dense|vehicle_turns_left": {
+   "hit": 19,
+   "n": 19,
+   "rate": 1.0
+  },
+  "640|dense|vehicle_turns_right": {
+   "hit": 27,
+   "n": 27,
+   "rate": 1.0
+  },
+  "640|motion|hand_interacts_with_person": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|motion|person_carries_heavy_object": {
+   "hit": 15,
+   "n": 16,
+   "rate": 0.9375
+  },
+  "640|motion|person_closes_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|motion|person_closes_vehicle_door": {
+   "hit": 17,
+   "n": 18,
+   "rate": 0.9444444444444444
+  },
+  "640|motion|person_embraces_person": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "640|motion|person_enters_scene_through_structure": {
+   "hit": 105,
+   "n": 106,
+   "rate": 0.9905660377358491
+  },
+  "640|motion|person_enters_vehicle": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|motion|person_exits_scene_through_structure": {
+   "hit": 81,
+   "n": 83,
+   "rate": 0.9759036144578314
+  },
+  "640|motion|person_exits_vehicle": {
+   "hit": 10,
+   "n": 10,
+   "rate": 1.0
+  },
+  "640|motion|person_opens_facility_door": {
+   "hit": 40,
+   "n": 40,
+   "rate": 1.0
+  },
+  "640|motion|person_opens_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|motion|person_opens_vehicle_door": {
+   "hit": 18,
+   "n": 19,
+   "rate": 0.9473684210526315
+  },
+  "640|motion|person_picks_up_object": {
+   "hit": 28,
+   "n": 31,
+   "rate": 0.9032258064516129
+  },
+  "640|motion|person_purchases": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "640|motion|person_puts_down_object": {
+   "hit": 49,
+   "n": 51,
+   "rate": 0.9607843137254902
+  },
+  "640|motion|person_reads_document": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|motion|person_sits_down": {
+   "hit": 35,
+   "n": 36,
+   "rate": 0.9722222222222222
+  },
+  "640|motion|person_stands_up": {
+   "hit": 13,
+   "n": 13,
+   "rate": 1.0
+  },
+  "640|motion|person_talks_on_phone": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "640|motion|person_talks_to_person": {
+   "hit": 54,
+   "n": 54,
+   "rate": 1.0
+  },
+  "640|motion|person_texts_on_phone": {
+   "hit": 33,
+   "n": 35,
+   "rate": 0.9428571428571428
+  },
+  "640|motion|person_transfers_object": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|motion|person_unloads_vehicle": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "640|motion|vehicle_drops_off_person": {
+   "hit": 3,
+   "n": 3,
+   "rate": 1.0
+  },
+  "640|motion|vehicle_makes_u_turn": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|motion|vehicle_reverses": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "640|motion|vehicle_starts": {
+   "hit": 18,
+   "n": 20,
+   "rate": 0.9
+  },
+  "640|motion|vehicle_stops": {
+   "hit": 19,
+   "n": 22,
+   "rate": 0.8636363636363636
+  },
+  "640|motion|vehicle_turns_left": {
+   "hit": 18,
+   "n": 19,
+   "rate": 0.9473684210526315
+  },
+  "640|motion|vehicle_turns_right": {
+   "hit": 27,
+   "n": 27,
+   "rate": 1.0
+  },
+  "640|person|hand_interacts_with_person": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|person|person_carries_heavy_object": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "640|person|person_closes_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|person|person_closes_vehicle_door": {
+   "hit": 10,
+   "n": 18,
+   "rate": 0.5555555555555556
+  },
+  "640|person|person_embraces_person": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "640|person|person_enters_scene_through_structure": {
+   "hit": 106,
+   "n": 106,
+   "rate": 1.0
+  },
+  "640|person|person_enters_vehicle": {
+   "hit": 4,
+   "n": 6,
+   "rate": 0.6666666666666666
+  },
+  "640|person|person_exits_scene_through_structure": {
+   "hit": 83,
+   "n": 83,
+   "rate": 1.0
+  },
+  "640|person|person_exits_vehicle": {
+   "hit": 5,
+   "n": 10,
+   "rate": 0.5
+  },
+  "640|person|person_opens_facility_door": {
+   "hit": 40,
+   "n": 40,
+   "rate": 1.0
+  },
+  "640|person|person_opens_trunk": {
+   "hit": 0,
+   "n": 1,
+   "rate": 0.0
+  },
+  "640|person|person_opens_vehicle_door": {
+   "hit": 10,
+   "n": 19,
+   "rate": 0.5263157894736842
+  },
+  "640|person|person_picks_up_object": {
+   "hit": 31,
+   "n": 31,
+   "rate": 1.0
+  },
+  "640|person|person_purchases": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "640|person|person_puts_down_object": {
+   "hit": 51,
+   "n": 51,
+   "rate": 1.0
+  },
+  "640|person|person_reads_document": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|person|person_sits_down": {
+   "hit": 36,
+   "n": 36,
+   "rate": 1.0
+  },
+  "640|person|person_stands_up": {
+   "hit": 13,
+   "n": 13,
+   "rate": 1.0
+  },
+  "640|person|person_talks_on_phone": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "640|person|person_talks_to_person": {
+   "hit": 53,
+   "n": 54,
+   "rate": 0.9814814814814815
+  },
+  "640|person|person_texts_on_phone": {
+   "hit": 35,
+   "n": 35,
+   "rate": 1.0
+  },
+  "640|person|person_transfers_object": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|person|person_unloads_vehicle": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "640|person|vehicle_drops_off_person": {
+   "hit": 0,
+   "n": 3,
+   "rate": 0.0
+  },
+  "640|person|vehicle_makes_u_turn": {
+   "hit": 2,
+   "n": 6,
+   "rate": 0.3333333333333333
+  },
+  "640|person|vehicle_reverses": {
+   "hit": 2,
+   "n": 4,
+   "rate": 0.5
+  },
+  "640|person|vehicle_starts": {
+   "hit": 8,
+   "n": 20,
+   "rate": 0.4
+  },
+  "640|person|vehicle_stops": {
+   "hit": 8,
+   "n": 22,
+   "rate": 0.36363636363636365
+  },
+  "640|person|vehicle_turns_left": {
+   "hit": 6,
+   "n": 19,
+   "rate": 0.3157894736842105
+  },
+  "640|person|vehicle_turns_right": {
+   "hit": 8,
+   "n": 27,
+   "rate": 0.2962962962962963
+  },
+  "640|person-motion|hand_interacts_with_person": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|person-motion|person_carries_heavy_object": {
+   "hit": 15,
+   "n": 16,
+   "rate": 0.9375
+  },
+  "640|person-motion|person_closes_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|person-motion|person_closes_vehicle_door": {
+   "hit": 10,
+   "n": 18,
+   "rate": 0.5555555555555556
+  },
+  "640|person-motion|person_embraces_person": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "640|person-motion|person_enters_scene_through_structure": {
+   "hit": 105,
+   "n": 106,
+   "rate": 0.9905660377358491
+  },
+  "640|person-motion|person_enters_vehicle": {
+   "hit": 4,
+   "n": 6,
+   "rate": 0.6666666666666666
+  },
+  "640|person-motion|person_exits_scene_through_structure": {
+   "hit": 81,
+   "n": 83,
+   "rate": 0.9759036144578314
+  },
+  "640|person-motion|person_exits_vehicle": {
+   "hit": 5,
+   "n": 10,
+   "rate": 0.5
+  },
+  "640|person-motion|person_opens_facility_door": {
+   "hit": 40,
+   "n": 40,
+   "rate": 1.0
+  },
+  "640|person-motion|person_opens_trunk": {
+   "hit": 0,
+   "n": 1,
+   "rate": 0.0
+  },
+  "640|person-motion|person_opens_vehicle_door": {
+   "hit": 10,
+   "n": 19,
+   "rate": 0.5263157894736842
+  },
+  "640|person-motion|person_picks_up_object": {
+   "hit": 28,
+   "n": 31,
+   "rate": 0.9032258064516129
+  },
+  "640|person-motion|person_purchases": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "640|person-motion|person_puts_down_object": {
+   "hit": 49,
+   "n": 51,
+   "rate": 0.9607843137254902
+  },
+  "640|person-motion|person_reads_document": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|person-motion|person_sits_down": {
+   "hit": 35,
+   "n": 36,
+   "rate": 0.9722222222222222
+  },
+  "640|person-motion|person_stands_up": {
+   "hit": 13,
+   "n": 13,
+   "rate": 1.0
+  },
+  "640|person-motion|person_talks_on_phone": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "640|person-motion|person_talks_to_person": {
+   "hit": 53,
+   "n": 54,
+   "rate": 0.9814814814814815
+  },
+  "640|person-motion|person_texts_on_phone": {
+   "hit": 33,
+   "n": 35,
+   "rate": 0.9428571428571428
+  },
+  "640|person-motion|person_transfers_object": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|person-motion|person_unloads_vehicle": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "640|person-motion|vehicle_drops_off_person": {
+   "hit": 0,
+   "n": 3,
+   "rate": 0.0
+  },
+  "640|person-motion|vehicle_makes_u_turn": {
+   "hit": 2,
+   "n": 6,
+   "rate": 0.3333333333333333
+  },
+  "640|person-motion|vehicle_reverses": {
+   "hit": 2,
+   "n": 4,
+   "rate": 0.5
+  },
+  "640|person-motion|vehicle_starts": {
+   "hit": 8,
+   "n": 20,
+   "rate": 0.4
+  },
+  "640|person-motion|vehicle_stops": {
+   "hit": 8,
+   "n": 22,
+   "rate": 0.36363636363636365
+  },
+  "640|person-motion|vehicle_turns_left": {
+   "hit": 6,
+   "n": 19,
+   "rate": 0.3157894736842105
+  },
+  "640|person-motion|vehicle_turns_right": {
+   "hit": 8,
+   "n": 27,
+   "rate": 0.2962962962962963
+  },
+  "640|presence|hand_interacts_with_person": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|presence|person_carries_heavy_object": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "640|presence|person_closes_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|presence|person_closes_vehicle_door": {
+   "hit": 18,
+   "n": 18,
+   "rate": 1.0
+  },
+  "640|presence|person_embraces_person": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "640|presence|person_enters_scene_through_structure": {
+   "hit": 106,
+   "n": 106,
+   "rate": 1.0
+  },
+  "640|presence|person_enters_vehicle": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|presence|person_exits_scene_through_structure": {
+   "hit": 83,
+   "n": 83,
+   "rate": 1.0
+  },
+  "640|presence|person_exits_vehicle": {
+   "hit": 10,
+   "n": 10,
+   "rate": 1.0
+  },
+  "640|presence|person_opens_facility_door": {
+   "hit": 40,
+   "n": 40,
+   "rate": 1.0
+  },
+  "640|presence|person_opens_trunk": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|presence|person_opens_vehicle_door": {
+   "hit": 19,
+   "n": 19,
+   "rate": 1.0
+  },
+  "640|presence|person_picks_up_object": {
+   "hit": 31,
+   "n": 31,
+   "rate": 1.0
+  },
+  "640|presence|person_purchases": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "640|presence|person_puts_down_object": {
+   "hit": 51,
+   "n": 51,
+   "rate": 1.0
+  },
+  "640|presence|person_reads_document": {
+   "hit": 1,
+   "n": 1,
+   "rate": 1.0
+  },
+  "640|presence|person_sits_down": {
+   "hit": 36,
+   "n": 36,
+   "rate": 1.0
+  },
+  "640|presence|person_stands_up": {
+   "hit": 13,
+   "n": 13,
+   "rate": 1.0
+  },
+  "640|presence|person_talks_on_phone": {
+   "hit": 16,
+   "n": 16,
+   "rate": 1.0
+  },
+  "640|presence|person_talks_to_person": {
+   "hit": 54,
+   "n": 54,
+   "rate": 1.0
+  },
+  "640|presence|person_texts_on_phone": {
+   "hit": 35,
+   "n": 35,
+   "rate": 1.0
+  },
+  "640|presence|person_transfers_object": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|presence|person_unloads_vehicle": {
+   "hit": 2,
+   "n": 2,
+   "rate": 1.0
+  },
+  "640|presence|vehicle_drops_off_person": {
+   "hit": 3,
+   "n": 3,
+   "rate": 1.0
+  },
+  "640|presence|vehicle_makes_u_turn": {
+   "hit": 6,
+   "n": 6,
+   "rate": 1.0
+  },
+  "640|presence|vehicle_reverses": {
+   "hit": 4,
+   "n": 4,
+   "rate": 1.0
+  },
+  "640|presence|vehicle_starts": {
+   "hit": 18,
+   "n": 20,
+   "rate": 0.9
+  },
+  "640|presence|vehicle_stops": {
+   "hit": 19,
+   "n": 22,
+   "rate": 0.8636363636363636
+  },
+  "640|presence|vehicle_turns_left": {
+   "hit": 18,
+   "n": 19,
+   "rate": 0.9473684210526315
+  },
+  "640|presence|vehicle_turns_right": {
+   "hit": 27,
+   "n": 27,
+   "rate": 1.0
+  }
+ },
+ "detector_recall": {},
+ "per_clip": [
+  {
+   "clip": "2018-03-11.16-15-08.16-20-08.hospital.G436",
+   "bin": "empty",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "presence": {
+    "call_rate": 0.9866666666666667,
+    "recall": null
+   },
+   "person": {
+    "call_rate": 0.6666666666666666,
+    "recall": null
+   },
+   "motion": {
+    "call_rate": 0.9,
+    "recall": null
+   },
+   "person-motion": {
+    "call_rate": 0.6133333333333333,
+    "recall": null
+   }
+  },
+  {
+   "clip": "2018-03-11.16-15-08.16-20-08.hospital.G436",
+   "bin": "empty",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "person": {
+    "call_rate": 0.98,
+    "recall": null
+   },
+   "motion": {
+    "call_rate": 0.9866666666666667,
+    "recall": null
+   },
+   "person-motion": {
+    "call_rate": 0.9333333333333333,
+    "recall": null
+   }
+  },
+  {
+   "clip": "2018-03-11.16-15-01.16-20-01.admin.G329",
+   "bin": "empty",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "presence": {
+    "call_rate": 0.07333333333333333,
+    "recall": null
+   },
+   "person": {
+    "call_rate": 0.07333333333333333,
+    "recall": null
+   },
+   "motion": {
+    "call_rate": 0.06,
+    "recall": null
+   },
+   "person-motion": {
+    "call_rate": 0.06,
+    "recall": null
+   }
+  },
+  {
+   "clip": "2018-03-11.16-15-01.16-20-01.admin.G329",
+   "bin": "empty",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "presence": {
+    "call_rate": 0.07333333333333333,
+    "recall": null
+   },
+   "person": {
+    "call_rate": 0.07333333333333333,
+    "recall": null
+   },
+   "motion": {
+    "call_rate": 0.06,
+    "recall": null
+   },
+   "person-motion": {
+    "call_rate": 0.06,
+    "recall": null
+   }
+  },
+  {
+   "clip": "2018-03-11.16-30-00.16-35-00.school.G421",
+   "bin": "empty",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "presence": {
+    "call_rate": 0.006666666666666667,
+    "recall": null
+   },
+   "person": {
+    "call_rate": 0.006666666666666667,
+    "recall": null
+   },
+   "motion": {
+    "call_rate": 0.006666666666666667,
+    "recall": null
+   },
+   "person-motion": {
+    "call_rate": 0.006666666666666667,
+    "recall": null
+   }
+  },
+  {
+   "clip": "2018-03-11.16-30-00.16-35-00.school.G421",
+   "bin": "empty",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "presence": {
+    "call_rate": 0.013333333333333334,
+    "recall": null
+   },
+   "person": {
+    "call_rate": 0.013333333333333334,
+    "recall": null
+   },
+   "motion": {
+    "call_rate": 0.013333333333333334,
+    "recall": null
+   },
+   "person-motion": {
+    "call_rate": 0.013333333333333334,
+    "recall": null
+   }
+  },
+  {
+   "clip": "2018-03-11.16-35-00.16-40-00.bus.G331",
+   "bin": "empty",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "presence": {
+    "call_rate": 0.10666666666666667,
+    "recall": null
+   },
+   "person": {
+    "call_rate": 0.10666666666666667,
+    "recall": null
+   },
+   "motion": {
+    "call_rate": 0.013333333333333334,
+    "recall": null
+   },
+   "person-motion": {
+    "call_rate": 0.013333333333333334,
+    "recall": null
+   }
+  },
+  {
+   "clip": "2018-03-11.16-35-00.16-40-00.bus.G331",
+   "bin": "empty",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "presence": {
+    "call_rate": 0.26,
+    "recall": null
+   },
+   "person": {
+    "call_rate": 0.10666666666666667,
+    "recall": null
+   },
+   "motion": {
+    "call_rate": 0.24666666666666667,
+    "recall": null
+   },
+   "person-motion": {
+    "call_rate": 0.013333333333333334,
+    "recall": null
+   }
+  },
+  {
+   "clip": "2018-03-11.16-25-08.16-30-08.hospital.G301",
+   "bin": "empty",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "person": {
+    "call_rate": 0.0,
+    "recall": null
+   },
+   "motion": {
+    "call_rate": 0.06,
+    "recall": null
+   },
+   "person-motion": {
+    "call_rate": 0.0,
+    "recall": null
+   }
+  },
+  {
+   "clip": "2018-03-11.16-25-08.16-30-08.hospital.G301",
+   "bin": "empty",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "person": {
+    "call_rate": 0.013333333333333334,
+    "recall": null
+   },
+   "motion": {
+    "call_rate": 0.05333333333333334,
+    "recall": null
+   },
+   "person-motion": {
+    "call_rate": 0.013333333333333334,
+    "recall": null
+   }
+  },
+  {
+   "clip": "2018-03-11.16-40-01.16-45-01.admin.G326",
+   "bin": "empty",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "presence": {
+    "call_rate": 0.08,
+    "recall": null
+   },
+   "person": {
+    "call_rate": 0.08,
+    "recall": null
+   },
+   "motion": {
+    "call_rate": 0.08,
+    "recall": null
+   },
+   "person-motion": {
+    "call_rate": 0.08,
+    "recall": null
+   }
+  },
+  {
+   "clip": "2018-03-11.16-40-01.16-45-01.admin.G326",
+   "bin": "empty",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": null
+   },
+   "presence": {
+    "call_rate": 0.08,
+    "recall": null
+   },
+   "person": {
+    "call_rate": 0.08,
+    "recall": null
+   },
+   "motion": {
+    "call_rate": 0.08,
+    "recall": null
+   },
+   "person-motion": {
+    "call_rate": 0.08,
+    "recall": null
+   }
+  },
+  {
+   "clip": "2018-03-07.17-05-01.17-10-01.school.G420",
+   "bin": "sparse",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 0.04666666666666667,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.04666666666666667,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.03333333333333333,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.03333333333333333,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-07.17-05-01.17-10-01.school.G420",
+   "bin": "sparse",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 0.04,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.04,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.03333333333333333,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.03333333333333333,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-09.10-15-01.10-20-01.admin.G329",
+   "bin": "sparse",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 0.10666666666666667,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.10666666666666667,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.07333333333333333,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.07333333333333333,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-09.10-15-01.10-20-01.admin.G329",
+   "bin": "sparse",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 0.1,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.1,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.07333333333333333,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.07333333333333333,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-12.10-15-00.10-20-00.bus.G506",
+   "bin": "sparse",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.0,
+    "recall": 0.0
+   },
+   "motion": {
+    "call_rate": 0.38,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.0,
+    "recall": 0.0
+   }
+  },
+  {
+   "clip": "2018-03-12.10-15-00.10-20-00.bus.G506",
+   "bin": "sparse",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.0,
+    "recall": 0.0
+   },
+   "motion": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.0,
+    "recall": 0.0
+   }
+  },
+  {
+   "clip": "2018-03-09.10-25-01.10-30-01.hospital.G436",
+   "bin": "sparse",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.02,
+    "recall": 0.0
+   },
+   "motion": {
+    "call_rate": 0.8333333333333334,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.02666666666666667,
+    "recall": 0.0
+   }
+  },
+  {
+   "clip": "2018-03-09.10-25-01.10-30-01.hospital.G436",
+   "bin": "sparse",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.1,
+    "recall": 0.0
+   },
+   "motion": {
+    "call_rate": 0.82,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.11333333333333333,
+    "recall": 0.0
+   }
+  },
+  {
+   "clip": "2018-03-11.13-55-01.14-00-01.school.G639",
+   "bin": "sparse",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.19333333333333333,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.2,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.2,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-11.13-55-01.14-00-01.school.G639",
+   "bin": "sparse",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.21333333333333335,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.41333333333333333,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.22666666666666666,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-07.17-30-01.17-35-01.admin.G326",
+   "bin": "sparse",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 0.14,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.14,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.14,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.14,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-07.17-30-01.17-35-01.admin.G326",
+   "bin": "sparse",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 0.14,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.14,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.14,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.14,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-11.11-35-08.11-40-08.hospital.G436",
+   "bin": "moderate",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.28,
+    "recall": 0.2608695652173913
+   },
+   "motion": {
+    "call_rate": 0.9733333333333334,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.22666666666666666,
+    "recall": 0.2608695652173913
+   }
+  },
+  {
+   "clip": "2018-03-11.11-35-08.11-40-08.hospital.G436",
+   "bin": "moderate",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.8266666666666667,
+    "recall": 0.9130434782608695
+   },
+   "motion": {
+    "call_rate": 0.8933333333333333,
+    "recall": 0.9565217391304348
+   },
+   "person-motion": {
+    "call_rate": 0.68,
+    "recall": 0.8695652173913043
+   }
+  },
+  {
+   "clip": "2018-03-07.17-00-00.17-05-00.bus.G509",
+   "bin": "moderate",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 0.38666666666666666,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.37333333333333335,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.25333333333333335,
+    "recall": 0.8888888888888888
+   },
+   "person-motion": {
+    "call_rate": 0.24,
+    "recall": 0.8888888888888888
+   }
+  },
+  {
+   "clip": "2018-03-07.17-00-00.17-05-00.bus.G509",
+   "bin": "moderate",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 0.4266666666666667,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.38,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.31333333333333335,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.26,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-13.15-55-00.16-00-00.school.G638",
+   "bin": "moderate",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.8133333333333334,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.8066666666666666,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.72,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-13.15-55-00.16-00-00.school.G638",
+   "bin": "moderate",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.8333333333333334,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.7333333333333333,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.7333333333333333,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-09.10-40-01.10-45-01.admin.G326",
+   "bin": "moderate",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 0.18666666666666668,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.18666666666666668,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.14666666666666667,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.14666666666666667,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-09.10-40-01.10-45-01.admin.G326",
+   "bin": "moderate",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 0.19333333333333333,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.19333333333333333,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.18,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.18,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-13.15-55-02.16-00-02.hospital.G301",
+   "bin": "moderate",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.12666666666666668,
+    "recall": 0.75
+   },
+   "motion": {
+    "call_rate": 0.13333333333333333,
+    "recall": 0.875
+   },
+   "person-motion": {
+    "call_rate": 0.11333333333333333,
+    "recall": 0.75
+   }
+  },
+  {
+   "clip": "2018-03-13.15-55-02.16-00-02.hospital.G301",
+   "bin": "moderate",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.10666666666666667,
+    "recall": 0.625
+   },
+   "motion": {
+    "call_rate": 0.08,
+    "recall": 0.75
+   },
+   "person-motion": {
+    "call_rate": 0.06,
+    "recall": 0.625
+   }
+  },
+  {
+   "clip": "2018-03-07.17-20-01.17-25-01.bus.G505",
+   "bin": "moderate",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.3333333333333333,
+    "recall": 0.42857142857142855
+   },
+   "motion": {
+    "call_rate": 0.74,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.3333333333333333,
+    "recall": 0.42857142857142855
+   }
+  },
+  {
+   "clip": "2018-03-07.17-20-01.17-25-01.bus.G505",
+   "bin": "moderate",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.98,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.9733333333333334,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.8866666666666667,
+    "recall": 0.9523809523809523
+   }
+  },
+  {
+   "clip": "2018-03-07.17-00-00.17-05-00.bus.G506",
+   "bin": "busy",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.96,
+    "recall": 0.9921875
+   },
+   "motion": {
+    "call_rate": 0.9533333333333334,
+    "recall": 0.9921875
+   },
+   "person-motion": {
+    "call_rate": 0.92,
+    "recall": 0.9921875
+   }
+  },
+  {
+   "clip": "2018-03-07.17-00-00.17-05-00.bus.G506",
+   "bin": "busy",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.98,
+    "recall": 0.9921875
+   },
+   "motion": {
+    "call_rate": 0.9733333333333334,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.8866666666666667,
+    "recall": 0.9921875
+   }
+  },
+  {
+   "clip": "2018-03-12.10-05-00.10-10-00.school.G299",
+   "bin": "busy",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-12.10-05-00.10-10-00.school.G299",
+   "bin": "busy",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-11.13-50-08.13-55-08.hospital.G341",
+   "bin": "busy",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.8533333333333334,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.88,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.8266666666666667,
+    "recall": 1.0
+   }
+  },
+  {
+   "clip": "2018-03-11.13-50-08.13-55-08.hospital.G341",
+   "bin": "busy",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.6733333333333333,
+    "recall": 0.8461538461538461
+   },
+   "motion": {
+    "call_rate": 0.6666666666666666,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.54,
+    "recall": 0.8461538461538461
+   }
+  },
+  {
+   "clip": "2018-03-07.10-55-00.11-00-00.bus.G508",
+   "bin": "busy",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.5,
+    "recall": 0.8596491228070176
+   },
+   "person-motion": {
+    "call_rate": 0.5,
+    "recall": 0.8596491228070176
+   }
+  },
+  {
+   "clip": "2018-03-07.10-55-00.11-00-00.bus.G508",
+   "bin": "busy",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.46,
+    "recall": 0.8245614035087719
+   },
+   "person-motion": {
+    "call_rate": 0.46,
+    "recall": 0.8245614035087719
+   }
+  },
+  {
+   "clip": "2018-03-12.10-50-01.10-55-01.school.G423",
+   "bin": "busy",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.7933333333333333,
+    "recall": 0.9571428571428572
+   },
+   "person-motion": {
+    "call_rate": 0.7933333333333333,
+    "recall": 0.9571428571428572
+   }
+  },
+  {
+   "clip": "2018-03-12.10-50-01.10-55-01.school.G423",
+   "bin": "busy",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "motion": {
+    "call_rate": 0.6933333333333334,
+    "recall": 0.9142857142857143
+   },
+   "person-motion": {
+    "call_rate": 0.6933333333333334,
+    "recall": 0.9142857142857143
+   }
+  },
+  {
+   "clip": "2018-03-12.10-00-00.10-05-00.hospital.G436",
+   "bin": "busy",
+   "size": 640,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 0.5,
+    "recall": 0.8947368421052632
+   },
+   "person": {
+    "call_rate": 0.04,
+    "recall": 0.12280701754385964
+   },
+   "motion": {
+    "call_rate": 0.5,
+    "recall": 0.8947368421052632
+   },
+   "person-motion": {
+    "call_rate": 0.04666666666666667,
+    "recall": 0.12280701754385964
+   }
+  },
+  {
+   "clip": "2018-03-12.10-00-00.10-05-00.hospital.G436",
+   "bin": "busy",
+   "size": 1280,
+   "dense": {
+    "call_rate": 1.0,
+    "recall": 1.0
+   },
+   "presence": {
+    "call_rate": 0.7866666666666666,
+    "recall": 1.0
+   },
+   "person": {
+    "call_rate": 0.44666666666666666,
+    "recall": 0.8070175438596491
+   },
+   "motion": {
+    "call_rate": 0.8066666666666666,
+    "recall": 1.0
+   },
+   "person-motion": {
+    "call_rate": 0.4,
+    "recall": 0.8245614035087719
+   }
+  }
+ ]
+}
