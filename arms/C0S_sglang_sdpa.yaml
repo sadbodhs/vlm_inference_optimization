@@ -1,0 +1,43 @@
+# SGLang with its default-on caching disabled -- the counterpart to
+# B0_vllm_awq_clean, so the two stacks are compared with the same things switched
+# off rather than with each vendor's defaults doing different amounts of work.
+id: C0S_sglang_sdpa
+stack: sglang
+model: Qwen/Qwen2.5-VL-7B-Instruct-AWQ
+revision: 536a35794df8831aa814970ee8f89eff577e7718
+base_url: http://vlm-server:30000
+quantization: awq_marlin
+
+weight_bytes: 6.924e+9
+decode_weight_bytes: 5.571e+9
+
+max_tokens: 128
+temperature: 0.0
+max_pixels: 1605632
+
+# Chosen so SGLang's KV pool lands near vLLM's 213k tokens, which makes KV capacity
+# the controlled variable instead of an accident of two differently-defined flags.
+# See docker/run_server.sh for why 0.90 here is not 0.90 there.
+mem_fraction_static: 0.79
+
+# Flags verified against the image's own parser before use -- vLLM's equivalents
+# were not guessable and SGLang's are differently named.
+#
+# Chunked prefill is ON by default in BOTH stacks (SGLang chunked_prefill_size=4096,
+# vLLM enable_chunked_prefill=True), so it has to be disabled on both sides or the
+# "clean" arms are not clean in the same way. Disabling radix caching alone left
+# SGLang doing chunked prefill while B0 was not, which would have shown up as an
+# engine difference. -1 disables it, per the flag's own help text.
+server_args: --disable-radix-cache --chunked-prefill-size -1 --mm-attention-backend sdpa
+
+# Vision tower pinned to torch SDPA, the one attention backend BOTH stacks offer
+# (vLLM TORCH_SDPA, SGLang sdpa). Everything else is identical to the arm this was
+# derived from.
+#
+# Purpose: SGLang scored 3-5 ANLS points below vLLM on identical inputs with greedy
+# decoding, and the gap grew with vision-token count -- the shape of numerical
+# divergence accumulating in the vision tower. SGLang defaults to triton_attn there
+# while vLLM does not. If pinning both to SDPA closes the gap, that was the cause.
+notes: >
+  The R1 reference point for SGLang. Compared against B0_vllm_awq_clean this
+  isolates the stack; compared against C_sglang_awq it isolates the cache.

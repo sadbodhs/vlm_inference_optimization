@@ -1,5 +1,9 @@
 # What does a VLM cost to serve?
 
+*One topic on [Sadbodh](https://sadbodhs.github.io/) — an open bench for deep
+learning systems. See also the [CV inference serving
+study](https://sadbodhs.github.io/computer_vision_optimization/).*
+
 Two questions, measured on one RTX 3090:
 
 1. **What does a vision-language model actually cost to serve?**

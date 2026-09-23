@@ -29,6 +29,18 @@ theme:
         icon: material/weather-sunny
         name: Light mode
 
+extra:
+  social:
+    - icon: material/home
+      link: https://sadbodhs.github.io/
+      name: Sadbodh — the bench
+    - icon: material/microscope
+      link: https://sadbodhs.github.io/computer_vision_optimization/
+      name: The CV serving study
+    - icon: fontawesome/brands/github
+      link: https://github.com/sadbodhs/vlm_inference_optimization
+      name: This repository
+
 markdown_extensions:
   - admonition
   - attr_list
@@ -40,6 +52,7 @@ markdown_extensions:
   - pymdownx.details
 
 nav:
+  - ← Sadbodh · the bench: https://sadbodhs.github.io/
   - The question: index.md
   - Overview: overview.md
   - Methodology: methodology.md
