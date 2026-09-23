@@ -88,7 +88,8 @@ async def main() -> None:
         rows.append({"offered_qps": rate, "achieved_qps": h["achieved_qps"],
                      "prompt_tokens": s["prompt_tokens"]["mean"],
                      "ttft_p50_ms": s["ttft_ms"]["p50"], "ttft_p99_ms": s["ttft_ms"]["p99"],
-                     "goodput_req_s": s["goodput_req_s"], "verdict": h["verdict"]})
+                     "goodput_req_s": s["goodput_req_s"], "failed_frac": s["failed_frac"],
+                     "verdict": h["verdict"] if s["valid"] else "failures"})
         print(f"  qps={rate:<5g} {h['verdict']:<14} TTFT p99 {s['ttft_ms']['p99']:.0f} ms")
 
     print(f"\nE7 capacity · {args.which} · {rows[0]['prompt_tokens']:.0f} prompt tokens/request")

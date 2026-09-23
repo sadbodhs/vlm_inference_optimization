@@ -16,6 +16,13 @@ SGLang  TTFT =  4.5 ms + 354 ms per 1,000 vision tokens     (R² = 0.9987)
 
 ![E2](img/e2-ttft-B0_vllm_awq_clean.png){ width="560" }
 
+![TTFT against vision tokens, per stack and model](img/e2-arms.png){ width="620" }
+
+*All three measured laws on one chart. SGLang's lower floor and steeper slope
+cross vLLM's near 440 tokens; Qwen3-VL-8B's slope is the steepest. The vLLM
+defaults arm is left out: its apparent 115 ms/1k-token slope was a cache-hit
+artefact ([corrections](corrections.md)).*
+
 Two consequences:
 
 **0.32 ms per vision token** is the exchange rate between image resolution and

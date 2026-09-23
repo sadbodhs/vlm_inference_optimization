@@ -102,7 +102,10 @@ async def main() -> None:
             "lag_p99_ms": h["loadgen_lag_ms"]["p99"],
             "lag_drift": h["loadgen_lag_ms"]["drift"],
             "ttft_drift_frac": h.get("ttft_drift_frac"),
-            "verdict": h["verdict"],
+            "failed_frac": s["failed_frac"],
+            # a rate with failed requests is not a capacity measurement: its latency
+            # and goodput are computed over the survivors
+            "verdict": h["verdict"] if s["valid"] else "failures",
         })
         print(f"  qps={rate:<6g} verdict={h['verdict']:<14} "
               f"ttft_p99={s['ttft_ms']['p99']:.0f}ms")
@@ -113,7 +116,7 @@ async def main() -> None:
                  ("ttft_p99_ms", "TTFT p99"), ("goodput_req_s", "goodput"),
                  ("ttft_drift_frac", "queue growth"), ("verdict", "verdict")])
 
-    valid = [r for r in rows if r["verdict"] != "client-bound"]
+    valid = [r for r in rows if r["verdict"] not in ("client-bound", "failures")]
     sat = [r for r in valid if r["verdict"] == "saturated"]
     print()
     if not valid:

@@ -1,6 +1,6 @@
 # Corrections
 
-Nine measurement bugs found while building this. Four produced
+Ten measurement bugs found while building this. Four produced
 **publishable-looking numbers that were wrong**. None were caught by inspection —
 every one was caught by a physical bound, a cross-experiment contradiction, or an
 internal inconsistency in the data.
@@ -132,6 +132,27 @@ What exposed it was a *second* parser with the same blind spot: the detector-rec
 table came out entirely blank. The parsers now refuse any file whose annotation
 lines do not all parse, and PLAN.md carries a dated amendment rather than a silent
 rewrite.
+
+## The best result was the one where 43% of requests crashed
+
+The vLLM-vs-SGLang page reported SGLang's usable goodput as **0.55 req/s, 22%
+above vLLM**. It was the highest SGLang value in its E0 sweep — at 2.0 req/s,
+where **34 of 80 requests had returned HTTP 500**.
+
+The harness computed latency percentiles and goodput over the requests that
+succeeded, and raised an error only if *every* request failed. So failures did
+not merely go unreported; they *improved* the numbers: the slow requests are the
+ones that crash under memory pressure, and removing them from the denominator of
+a latency distribution leaves a faster one. Every column at that rate moved the
+wrong way at once — fewer completions than the lower rate, a lower p99, higher
+goodput — and nothing flagged it.
+
+It surfaced while plotting all arms' E0 curves together for the first time: a
+point that bends back is visible on a chart and invisible in a table. An audit of
+every run in the study found failures in exactly three, all SGLang E0 rates. The
+corrected figure is 0.35 req/s, 22% *below* vLLM, and SGLang's saturated capacity
+is recorded as not measured. The harness now records the failed fraction of every
+run and disqualifies any rate over 1%.
 
 ## The pattern
 

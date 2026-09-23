@@ -130,6 +130,12 @@ freshness budget: **0.91 windows/s** full frame (1,315 tokens), **1.80** ROI
 (1,065 tokens). Cameras = 1 / (detector share + VLM share), where a camera sends
 0.5 windows/s × the gate's call rate.
 
+![Where E7 answers stop being fresh](img/e7-capacity.png){ width="600" }
+
+*Both capacity sweeps, both arms. The 80-request sweep reads lower at most rates;
+it drew different windows and ran half as long per rate, and the tail of a
+latency distribution moves with both. The 160-request sweep is the one used.*
+
 | configuration (YOLO @ 1280) | cameras | activities covered |
 |---|---|---|
 | dense, full frame | 1.8 | 100% |

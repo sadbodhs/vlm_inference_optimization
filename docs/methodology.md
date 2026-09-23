@@ -3,6 +3,8 @@
 The [bar for a number here](https://sadbodhs.github.io/) is enforced in code rather
 than in prose.
 
+![How a number is produced](img/harness.svg)
+
 ## R1 · One variable at a time
 
 Every stack is driven through one OpenAI-compatible streaming path. An arm is a

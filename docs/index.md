@@ -58,5 +58,5 @@ two-thirds of its accuracy. Details: [the per-task frontier](task-frontier.md).
 - [E2 · what a vision token costs](e2-vision-tokens.md) — the law the rest hangs off
 - [E3 · the accuracy frontier](e3-token-budget.md) — the thesis experiment
 - [Qwen2.5 vs Qwen3](models.md) — a generational comparison, and a prediction that was wrong
-- [Corrections](corrections.md) — nine measurement bugs and what each would have published
+- [Corrections](corrections.md) — ten measurement bugs and what each would have published
 - [Not measured](not-measured.md) — what these numbers do **not** entitle you to claim

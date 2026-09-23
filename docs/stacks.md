@@ -14,9 +14,21 @@ caching, chunked prefill, multimodal caching. KV capacity matched to within 0.14
 |---|---|---|
 | decode | 149.05 ± 0.08 tok/s | **152.62 ± 0.07** (+2.4%) |
 | TTFT p50 | 46.1 ms | **34.9 ms** (−24%) |
-| usable goodput | 0.45 req/s | **0.55 req/s** (+22%) |
-| raw ceiling | 1.56 req/s | 1.56 req/s |
+| usable goodput (TTFT ≤ 1 s) | **0.45 req/s** | 0.35 req/s (−22%) |
+| raw ceiling | 1.56 req/s | not measured — see below |
 | cold start (CUDA graphs) | **4 s** | 125 s |
+
+!!! danger "Corrected: SGLang's capacity was not +22%"
+    This table previously gave SGLang **0.55 req/s** of usable goodput, 22% *above*
+    vLLM. That number came from the 2.0 req/s rate, where **34 of 80 requests
+    returned HTTP 500**. Latency and goodput were computed over the survivors, so
+    losing 43% of the requests made that rate look like SGLang's best. Every SGLang
+    rate at or above 1.5 req/s had failures (4%, 43%, 21%), so its saturated
+    capacity is **not measured**; the valid rates put its usable goodput at 0.35
+    req/s. The harness now disqualifies any rate with more than 1% failed requests.
+    See [corrections](corrections.md).
+
+![Capacity and goodput per arm](img/e0-arms.png)
 
 The TTFT laws **cross** rather than one dominating:
 
@@ -66,6 +78,12 @@ server match on 12/12 samples, so the client is not dropping a final token.
     | 1,605,632 | 0.957 | 0.904 | **0.053** | *0.049* |
 
     **Unchanged.** The vision attention kernel is not the cause.
+
+![vLLM minus SGLang accuracy gap by budget](img/stacks-gap.png){ width="600" }
+
+*The two lines are the same gap measured twice — once with each stack's default
+vision attention, once with both pinned to SDPA. If the kernel were the cause, the
+second line would sit at zero.*
 
 ### What is ruled out
 

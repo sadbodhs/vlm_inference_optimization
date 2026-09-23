@@ -27,6 +27,12 @@ was replaced rather than defended.
 overstates what the server can deliver under SLO by **3.5×** — throughput keeps
 reading 1.56 req/s while every request on it is 14 seconds late.
 
+![Throughput and goodput against offered load, per arm](img/e0-arms.png)
+
+*Left, what each server completes; right, what it completes inside the SLO. The
+hollow SGLang points are rates at which requests failed — they are not measurements
+and are drawn so that they cannot be mistaken for one.*
+
 ## Synthetic images overstate capacity by 6×
 
 The same experiment on synthetic 448×448 squares gives a **9.96 req/s** ceiling.

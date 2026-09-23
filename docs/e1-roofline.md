@@ -28,6 +28,12 @@ SGLang was measured back-to-back.)
 Three independent runs per arm; run-to-run spread is **0.11–0.14%**, which is what
 lets a 2.4% difference between stacks be called real rather than noise.
 
+![Decode against the ceiling, every arm](img/e1-arms.png){ width="640" }
+
+*Every arm against its own ceiling, computed from the exact decode-weight bytes in
+its arm file. Qwen3-VL-8B re-reads 6.40 GB per token, so its ceiling is lower and
+it sits further below it.*
+
 ## There is little left to win at batch 1
 
 At 88.7% of the ceiling, no kernel, scheduler or quantisation change can buy more

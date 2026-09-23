@@ -523,6 +523,167 @@ def plot_e7_cameras(cascades_json, out, size=1280):
     fig.tight_layout()
     fig.savefig(out, dpi=160)
 
+
+# ── cross-arm figures: one colour per arm on every figure ────────────────────
+ARMS = [("B0_vllm_awq_clean", "vLLM, Qwen2.5-VL-7B", SERIES[1], "-"),
+        ("C0_sglang_awq_clean", "SGLang, Qwen2.5-VL-7B", SERIES[0], "-"),
+        ("Q3_vllm_awq_clean", "vLLM, Qwen3-VL-8B", SERIES[3], "-"),
+        ("B_vllm_awq", "vLLM defaults (caches on)", WARN, "--")]
+
+
+def _sweep(root, name):
+    f = Path(root) / f"{name}.json"
+    return json.loads(f.read_text()) if f.exists() else None
+
+
+def plot_e1_arms(root, out):
+    """Single-stream decode against each arm's own bandwidth ceiling."""
+    import yaml
+    fig, ax = plt.subplots(figsize=(7.4, 4.0))
+    xs, labels = [], []
+    for i, (arm, lab, c, _) in enumerate(ARMS):
+        d = _sweep(root, f"e1-roofline-{arm}")
+        if not d:
+            continue
+        r = dict(d["rows"][0])
+        # The ceiling comes from the arm's EXACT decode-weight bytes. Two stored
+        # sweeps (SGLang, vLLM defaults) predate the exact basis and carry the
+        # 5.807 GB estimate -- plotted as stored, SGLang read 94.7% instead of 90.8%.
+        spec = yaml.safe_load(Path(f"arms/{arm}.yaml").read_text())
+        gb = float(spec.get("decode_weight_bytes") or spec["weight_bytes"]) / 1e9
+        r["decode_weight_GB"] = gb
+        r["roofline_tok_s"] = 936.0 / gb
+        r["pct_of_roofline"] = 100 * r["decode_tok_s"] / r["roofline_tok_s"]
+        ax.bar(i, r["roofline_tok_s"], width=0.62, color="none", edgecolor=c, lw=1.4,
+               ls="--")
+        ax.bar(i, r["decode_tok_s"], width=0.62, color=c)
+        ax.annotate(f"{r['pct_of_roofline']:.1f}%", (i, r["decode_tok_s"]),
+                    textcoords="offset points", xytext=(0, -14), ha="center",
+                    fontsize=9, color="white", fontweight="bold")
+        ax.annotate(f"ceiling {r['roofline_tok_s']:.0f}", (i, r["roofline_tok_s"]),
+                    textcoords="offset points", xytext=(0, 3), ha="center", fontsize=7, color=FG)
+        xs.append(i)
+        labels.append(f"{lab}\n{r['decode_weight_GB'] or r['weight_GB']:.2f} GB/token")
+    ax.set_xticks(xs); ax.set_xticklabels(labels, fontsize=7.5)
+    ax.set_ylim(0, 200)
+    _style(ax, "Batch-1 decode: measured (solid) vs memory-bandwidth ceiling (dashed)", "",
+           "tokens/s")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+def plot_e2_arms(root, out):
+    """TTFT against vision tokens, per arm, with each arm's linear fit."""
+    fig, ax = plt.subplots(figsize=(7.0, 4.3))
+    # ARMS[:3]: the defaults arm is left out on purpose -- its 115 ms/1k-token slope
+    # is the synthetic-image cache-hit artefact documented in corrections.md
+    for arm, lab, c, ls in ARMS[:3]:
+        d = _sweep(root, f"e2-ttft-{arm}")
+        if not d:
+            continue
+        rows = [r for r in d["rows"] if r.get("vision_tokens")]
+        x = [r["vision_tokens"] for r in rows]
+        ax.plot(x, [r["ttft_p50_ms"] for r in rows], "o", color=c, ms=6, mec="white", mew=1)
+        fit = d["meta"].get("fit")
+        if fit:
+            xs = [0, max(x)]
+            ax.plot(xs, [fit["intercept_ms"] + fit["slope_ms_per_token"] * v for v in xs], ls,
+                    color=c, lw=1.6,
+                    label=f"{lab}: {fit['intercept_ms']:.0f} ms + "
+                          f"{fit['slope_ms_per_token']*1000:.0f} ms/1k tok")
+    ax.set_xlim(0); ax.set_ylim(0)
+    ax.legend(fontsize=7.5, frameon=False, loc="upper left")
+    _style(ax, "What a vision token costs, per stack and model", "vision tokens",
+           "TTFT p50 (ms)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+def plot_e0_arms(root, out):
+    """Raw throughput vs throughput that meets the SLO, per arm."""
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(11.6, 4.1))
+    top = 0
+    for arm, lab, c, ls in ARMS[:3]:
+        d = _sweep(root, f"e0-saturation-{arm}")
+        if not d:
+            continue
+        rows = d["rows"]
+        # failure share per rate, from the run records: a rate where requests
+        # failed is not a measurement (latency and goodput cover survivors only)
+        for r in rows:
+            f = Path("results") / f"e0-saturation-{arm}-qps{r['offered_qps']:g}" / "summary.json"
+            sm = json.loads(f.read_text()) if f.exists() else {}
+            n = sm.get("n_requests") or 0
+            r["_failed"] = (1 - sm["n_ok"] / n) if n else 0.0
+        good = [r for r in rows if r["_failed"] <= 0.01]
+        bad = [r for r in rows if r["_failed"] > 0.01]
+        for ax_, key in ((a1, "achieved_qps"), (a2, "goodput_req_s")):
+            ax_.plot([r["offered_qps"] for r in good], [r[key] or 0 for r in good], "o" + ls,
+                     color=c, lw=2, label=lab)
+            if bad:
+                ax_.plot([r["offered_qps"] for r in bad], [r[key] or 0 for r in bad], "o",
+                         mfc="none", mec=c, mew=1.5, ms=8)
+                for r in bad:
+                    ax_.annotate(f"{100*r['_failed']:.0f}% failed", (r["offered_qps"], r[key] or 0),
+                                 textcoords="offset points", xytext=(6, 4), fontsize=7, color=FG)
+        top = max(top, max(r["offered_qps"] for r in rows))
+    a1.plot([0, top], [0, top], ":", color=WARN, lw=1, label="offered")
+    a1.plot([], [], "o", mfc="none", mec=FG, label="rate with failed requests (not a measurement)")
+    a1.legend(fontsize=7.5, frameon=False, loc="upper left")
+    _style(a1, "What the server completes", "offered load (req/s)", "completed (req/s)")
+    a2.legend(fontsize=7.5, frameon=False, loc="upper right")
+    _style(a2, "What it completes inside the SLO (TTFT <= 1 s)", "offered load (req/s)",
+           "goodput (req/s)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+def plot_stacks_gap(root, out):
+    """vLLM - SGLang accuracy gap by budget, default kernels vs both on SDPA."""
+    fig, ax = plt.subplots(figsize=(6.8, 4.0))
+    pairs = [("B0_vllm_awq_clean", "C0_sglang_awq_clean", "each stack's default vision attention",
+              SERIES[1]),
+             ("B0S_vllm_sdpa", "C0S_sglang_sdpa", "both pinned to SDPA", SERIES[0])]
+    for a, b, lab, c in pairs:
+        da, db = _sweep(root, f"e3-budget-{a}"), _sweep(root, f"e3-budget-{b}")
+        if not (da and db):
+            continue
+        ra = {r["max_pixels"]: r for r in da["rows"]}
+        rb = {r["max_pixels"]: r for r in db["rows"]}
+        common = sorted(set(ra) & set(rb))
+        x = [ra[k]["prompt_tokens"] for k in common]
+        y = [100 * (ra[k]["accuracy"] - rb[k]["accuracy"]) for k in common]
+        ax.plot(x, y, "o-", color=c, lw=2, label=lab)
+    ax.axhline(0, color=FG, lw=0.7)
+    ax.legend(fontsize=8, frameon=False, loc="lower right")
+    _style(ax, "vLLM minus SGLang, DocVQA (ANLS points)", "prompt tokens",
+           "accuracy gap (points)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+def plot_e7_capacity(root, out, fresh_ms=2000):
+    """Tail latency against offered rate for both arms and both sweep sizes."""
+    fig, ax = plt.subplots(figsize=(6.8, 4.1))
+    for which, c in (("full", SERIES[1]), ("roi", SERIES[0])):
+        for suffix, mk, ls, n in (("", "o", "-", 160), ("-n80", "s", ":", 80)):
+            d = _sweep(root, f"e7-capacity-{which}-V_vllm_video{suffix}")
+            if not d:
+                continue
+            rows = d["rows"]
+            ax.plot([r["achieved_qps"] for r in rows], [r["ttft_p99_ms"] / 1000 for r in rows],
+                    mk + ls, color=c, lw=1.8 if n == 160 else 1.1, ms=6 if n == 160 else 4,
+                    label=f"{'full frame' if which == 'full' else 'ROI crop'} (n={n}/rate)")
+    ax.axhline(fresh_ms / 1000, color=ACCENT, lw=1, ls="--")
+    ax.annotate("2 s freshness budget", (0.95, fresh_ms / 1000), textcoords="offset points",
+                xytext=(0, 4), fontsize=7, color=FG)
+    ax.set_yscale("log")
+    ax.legend(fontsize=7.5, frameon=False, loc="upper left")
+    _style(ax, "E7 capacity: where answers stop being fresh", "achieved windows/s",
+           "TTFT p99 (s, log)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
 def comparisons(root="results/sweeps", out_dir="docs/img"):
     """Build the cross-sweep figures the comparison pages need."""
     root, out_dir = Path(root), Path(out_dir)
@@ -545,6 +706,12 @@ def comparisons(root="results/sweeps", out_dir="docs/img"):
                        {g: d[0] for g, d in GROUPS.items()})
         plot_e7_cameras(e7 / "cascades.json", out_dir / "e7-cameras.png")
         print(f"  wrote {out_dir/'e7-groups.png'}, {out_dir/'e7-cameras.png'}")
+
+    for fn, name in ((plot_e1_arms, "e1-arms.png"), (plot_e2_arms, "e2-arms.png"),
+                     (plot_e0_arms, "e0-arms.png"), (plot_stacks_gap, "stacks-gap.png"),
+                     (plot_e7_capacity, "e7-capacity.png")):
+        fn(root, out_dir / name)
+        print(f"  wrote {out_dir/name}")
 
     tasks = [root / f"e3-{t}.json" for t in TASKS]
     tasks = [p for p in tasks if p.exists()]

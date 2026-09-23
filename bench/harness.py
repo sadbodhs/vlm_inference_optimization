@@ -51,6 +51,9 @@ def _git_sha() -> str | None:
         return None
 
 
+MAX_FAILED_FRAC = 0.01
+
+
 async def run_arm(
     arm: Arm,
     samples: list[Sample],
@@ -186,6 +189,18 @@ async def run_arm(
             f"arm {arm.id!r}: all {len(results)} requests failed against "
             f"{arm.base_url} -- first error: {first}"
         )
+    # ...and a run in which SOME requests failed must not pass as a measurement
+    # either. Latency percentiles and goodput are computed over the successful
+    # requests, so failures silently improve them: an SGLang E0 rate at which 43%
+    # of requests returned HTTP 500 read as that stack's BEST goodput, and was
+    # published as "+22% over vLLM". Anything over 1% failed is flagged here and
+    # disqualified by the sweeps (MAX_FAILED_FRAC).
+    summary["failed_frac"] = (1 - summary["n_ok"] / len(results)) if results else 0.0
+    summary["valid"] = summary["failed_frac"] <= MAX_FAILED_FRAC
+    if not summary["valid"]:
+        first = next((r.error for r in results if r.error), "unknown")
+        print(f"  WARNING {run_id}: {summary['failed_frac']:.1%} of requests failed "
+              f"-- this rate is not a measurement. First error: {first[:160]}")
     return summary
 
 
