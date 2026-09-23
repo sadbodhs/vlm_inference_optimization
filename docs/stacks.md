@@ -32,6 +32,8 @@ answer would be wrong.
 
 ## Cost — SGLang scores 3–5 ANLS points lower
 
+![stacks](img/stacks.png){ width="600" }
+
 | vision tokens | vLLM | SGLang | gap |
 |---|---|---|---|
 | 287 | 0.783 | 0.752 | +0.031 |

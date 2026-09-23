@@ -20,6 +20,8 @@ or comparison. Same clips, same format, same scorer; only the question type vari
 | 4 | 1,050 | 335 ms | 0.70 | 0.96 | 0.86 | 0.71 | 0.54 | 0.41 |
 | 8 | 2,039 | 655 ms | 0.71 | 0.98 | 0.87 | 0.71 | 0.56 | 0.38 |
 
+![E6](img/e6-temporal.png){ width="720" }
+
 Bootstrapped paired differences, 1 → 8 frames (same clips at both counts):
 
 | dimension | n | Δ | 95% CI | |

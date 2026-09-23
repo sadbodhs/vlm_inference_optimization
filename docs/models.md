@@ -37,6 +37,8 @@ accuracy at all five token budgets.
 The decode result is structural and was predicted correctly: a larger LLM half
 means a lower bandwidth ceiling, and 125.8 tok/s is 86% of *its own* 146.3.
 
+![models](img/models.png){ width="600" }
+
 ## The prediction that was wrong
 
 From 2.6× the KV per token and 2.8× less KV cache, the obvious conclusion was that

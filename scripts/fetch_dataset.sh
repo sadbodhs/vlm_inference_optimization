@@ -11,6 +11,8 @@ case "${1:?usage: $0 <docvqa|chartqa|textvqa>}" in
   docvqa)  DS=lmms-lab/DocVQA;  CFG=DocVQA;  SPLIT="${SPLIT:-validation}"; OUT=data/docvqa ;;
   chartqa) DS=lmms-lab/ChartQA; CFG=default; SPLIT="${SPLIT:-test}";       OUT=data/chartqa ;;
   textvqa) DS=lmms-lab/textvqa; CFG=default; SPLIT="${SPLIT:-validation}"; OUT=data/textvqa ;;
+  # No text at all: the pure-appearance arm the frontier claim actually needs.
+  vqav2)   DS=lmms-lab/VQAv2;    CFG=default; SPLIT="${SPLIT:-validation}"; OUT=data/vqav2 ;;
   *) echo "unknown dataset" >&2; exit 2 ;;
 esac
 

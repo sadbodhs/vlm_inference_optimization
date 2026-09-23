@@ -32,5 +32,6 @@ run () {
 run data/docvqa  anls    docvqa
 run data/chartqa relaxed chartqa
 run data/textvqa em      textvqa
+run data/vqav2   em      vqav2
 
 echo; echo "### FRONTIER COMPLETE"

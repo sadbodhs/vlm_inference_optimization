@@ -110,15 +110,23 @@ def plot_e1(d, out):
     fig.savefig(out, dpi=160)
 
 
+# plot_e6 is defined further down, so the registry is populated lazily at call
+# time rather than at import -- see _plotter().
 PLOTS = {"e0-saturation": plot_e0, "e1-roofline": plot_e1, "e2-ttft-vs-tokens": plot_e2,
          "e3-token-budget": plot_e3}
+
+
+def _plotter(name):
+    if name == "e6-temporal-budget":
+        return plot_e6
+    return PLOTS.get(name)
 
 
 def main(paths: list[str]) -> None:
     for p in paths:
         d = json.loads(Path(p).read_text())
         exp = d["meta"].get("experiment")
-        fn = PLOTS.get(exp)
+        fn = _plotter(exp)
         if not fn:
             print(f"  no plotter for {exp!r} ({p})")
             continue
@@ -127,5 +135,113 @@ def main(paths: list[str]) -> None:
         print(f"  wrote {out}")
 
 
+# ── comparison plots: several sweeps on one pair of axes ─────────────────────
+# These answer questions no single sweep can: does the budget depend on the task,
+# does the frame count matter differently per question type, how do two stacks or
+# two model generations differ. Each takes a list of sweep files.
+
+SERIES = ["#c1440e", "#1f4e8c", "#3f7d5a", "#8a5cb8", "#b0892a"]
+
+
+def plot_task_frontier(paths, out):
+    """Accuracy vs vision tokens, one line per task (each on its own metric)."""
+    fig, ax = plt.subplots(figsize=(6.8, 4.2))
+    for i, p in enumerate(paths):
+        d = json.loads(Path(p).read_text())
+        rows = [r for r in d["rows"] if r.get("accuracy") is not None]
+        if not rows:
+            continue
+        name = d["meta"].get("dataset", p)
+        label = Path(str(name)).parts[1] if "data/" in str(name) else Path(p).stem
+        peak = max(r["accuracy"] for r in rows)
+        x = [r["prompt_tokens"] for r in rows]
+        # normalised to each task's own peak: the metrics differ, so only the
+        # SHAPE of each curve is comparable across tasks
+        y = [100 * r["accuracy"] / peak for r in rows]
+        ax.plot(x, y, "o-", color=SERIES[i % len(SERIES)], label=f"{label} (peak {peak:.3f})")
+    ax.axhline(100, color=WARN, lw=0.7, ls=":")
+    ax.set_xscale("log")
+    ax.legend(fontsize=8, frameon=False)
+    _style(ax, "Per-task frontier · accuracy as % of that task's own peak",
+           "vision tokens (log)", "% of own peak")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+def plot_e6(d, out):
+    """Per-dimension accuracy vs frame count, against the chance floor."""
+    rows = d["rows"]
+    dims = d["meta"].get("dims") or []
+    chance = d["meta"].get("chance_level", 1 / 3)
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 4.2))
+
+    for i, dim in enumerate(dims):
+        xs = [r["frames"] for r in rows if r.get(dim) is not None]
+        ys = [r[dim] for r in rows if r.get(dim) is not None]
+        if xs:
+            a1.plot(xs, ys, "o-", color=SERIES[i % len(SERIES)], label=dim)
+    a1.axhline(chance, color=WARN, lw=1, ls="--", label=f"chance ({chance:.2f})")
+    a1.set_xscale("log", base=2)
+    a1.set_xticks([r["frames"] for r in rows])
+    a1.set_xticklabels([str(r["frames"]) for r in rows])
+    a1.legend(fontsize=8, frameon=False)
+    _style(a1, "E6 · accuracy by question type", "frames per clip", "accuracy")
+
+    a2.plot([r["frames"] for r in rows], [r["ttft_p50_ms"] for r in rows],
+            "o-", color=ACCENT)
+    a2.set_xscale("log", base=2)
+    a2.set_xticks([r["frames"] for r in rows])
+    a2.set_xticklabels([str(r["frames"]) for r in rows])
+    _style(a2, "E6 · what frames cost", "frames per clip", "TTFT p50 (ms)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+def plot_compare_e3(paths, labels, title, out):
+    """Two arms' accuracy/TTFT frontiers overlaid — stacks, or model generations."""
+    fig, ax = plt.subplots(figsize=(6.6, 4.2))
+    for i, (p, lab) in enumerate(zip(paths, labels)):
+        d = json.loads(Path(p).read_text())
+        rows = [r for r in d["rows"] if r.get("accuracy") is not None]
+        ax.plot([r["ttft_p50_ms"] for r in rows], [r["accuracy"] for r in rows],
+                "o-", color=SERIES[i % len(SERIES)], label=lab)
+        for r in rows:
+            ax.annotate(f"{r['prompt_tokens']:.0f}", (r["ttft_p50_ms"], r["accuracy"]),
+                        textcoords="offset points", xytext=(4, -9), fontsize=6, color=WARN)
+    ax.legend(fontsize=8, frameon=False)
+    _style(ax, title, "TTFT p50 (ms)", "accuracy (ANLS)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+def comparisons(root="results/sweeps", out_dir="docs/img"):
+    """Build the cross-sweep figures the comparison pages need."""
+    root, out_dir = Path(root), Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    tasks = [root / f"e3-{t}.json" for t in ("docvqa", "chartqa", "textvqa", "vqav2")]
+    tasks = [p for p in tasks if p.exists()]
+    if len(tasks) >= 2:
+        plot_task_frontier([str(p) for p in tasks], out_dir / "task-frontier.png")
+        print(f"  wrote {out_dir/'task-frontier.png'}")
+
+    pairs = [
+        (["e3-budget-B0_vllm_awq_clean.json", "e3-budget-C0_sglang_awq_clean.json"],
+         ["vLLM", "SGLang"], "vLLM vs SGLang · accuracy against TTFT", "stacks.png"),
+        (["e3-budget-B0_vllm_awq_clean.json", "e3-budget-Q3_vllm_awq_clean.json"],
+         ["Qwen2.5-VL-7B", "Qwen3-VL-8B"], "Model generations · accuracy against TTFT",
+         "models.png"),
+    ]
+    for files, labels, title, name in pairs:
+        paths = [root / f for f in files]
+        if all(p.exists() for p in paths):
+            plot_compare_e3([str(p) for p in paths], labels, title, out_dir / name)
+            print(f"  wrote {out_dir/name}")
+
+
 if __name__ == "__main__":
-    main(sys.argv[1:] or [str(p) for p in Path("results/sweeps").glob("*.json")])
+    args = sys.argv[1:]
+    if args and args[0] == "--comparisons":
+        comparisons()
+    else:
+        main(args or [str(p) for p in Path("results/sweeps").glob("*.json")])

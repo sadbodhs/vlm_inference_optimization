@@ -15,6 +15,11 @@ across columns**; only the shape of each curve is. 400 samples per point.
 | 802,816 | 1,034 | 0.943 | 0.895 | 0.873 |
 | 1,605,632 | 1,999 | 0.944 | 0.897 | 0.880 |
 
+![per-task frontier](img/task-frontier.png){ width="620" }
+
+Each curve is normalised to its **own** peak, because the three metrics are not
+comparable in absolute terms — only the shape is.
+
 ## Saturation is task-dependent
 
 | task | saturates at | peak |
