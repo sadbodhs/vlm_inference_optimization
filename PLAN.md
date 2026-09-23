@@ -409,3 +409,73 @@ Resolved: the GitHub repo is **`computer_vision_optimization`**, spelled correct
 Only the local working folder here is `inference_optmization`, which is a directory
 name and has no bearing on the repo. So: name this one **`vlm_inference_optimization`**
 and the pair is consistent.
+
+## 10. E7 · The cascade — pre-registered 2026-09-23, before any measurement
+
+**Question.** On real surveillance video, how much VLM work does a cheap detector
+gate save — and what does it cost in activities the VLM never gets to see?
+
+This is the bench's own "next up" question (*do application-level tricks dwarf the
+serving layer?*) asked of a VLM. The serving experiments moved TTFT by tens of
+percent; a gate that skips 80% of windows would move cost by 5×. Whether it can do
+that without losing the events that matter is the whole question.
+
+### Data
+
+MEVA (CC BY 4.0), the **Kitware** annotation set: 769 five-minute 1080p clips from
+28 cameras, annotated **exhaustively** for 37 ActEV activity types. Exhaustive
+labelling is non-negotiable here — a gate that skips an unlabelled event would score
+as a correct skip. (The 65-clip NIST set is a sample, ~120 activities; not used.)
+
+Corpus profile (tools/meva_index.py): the median clip has an activity under way
+**9%** of the time; 274 clips have none; the top decile is busy 100% of the time.
+Median activity lasts **2.4 s**, the 10th percentile **0.6 s**.
+
+**Selection:** 24 clips (2 hours), stratified into four duty-cycle bins — empty (0),
+sparse (<10%), moderate (10–50%), busy (≥50%) — six per bin, at most one clip per
+camera per bin, spread across sites, seed 0. Savings are reported **per bin**,
+because a single average would be a statement about this sample's mix, not about
+any real deployment.
+
+### The pipeline
+
+- **Windows:** 2 s, non-overlapping. The VLM sees **2 frames** per window (E6's knee).
+- **Detector:** YOLOv8s (COCO), person + vehicle classes, conf ≥ 0.25, sampled at
+  5 fps. Input 640 *and* 1280 — MEVA people are often 30–80 px tall in 1080p.
+- **Gates**, all computed from the same detections:
+  - `dense` — every window (the reference)
+  - `presence` — any person or vehicle detected
+  - `person` — any person detected
+  - `motion` — a detection appeared, vanished, or moved > 0.1× its own height
+  - `person-motion` — `motion`, restricted to people
+- **VLM arms** (Qwen2.5-VL-7B-AWQ, vLLM, B0 settings): `full-frame` on every window;
+  `roi-crop` — the union of the gate's detections, padded, as the image.
+
+### Metrics
+
+- **Call rate** — fraction of windows sent to the VLM (the cost lever)
+- **Activity recall** — fraction of annotated activity instances overlapped by at
+  least one fired window (the price), overall, per type, per actor size
+- **Detector recall vs actor height** — YOLO boxes against MEVA's actor tracks
+- **Recognition** — the VLM picks the activity groups present from a fixed list;
+  instance recall and false-alarm rate, `full-frame` vs `roi-crop`
+- **Cameras per 3090** — usable VLM capacity ÷ (windows per camera-second × call
+  rate), with YOLO's GPU cost measured, not assumed
+
+### Predictions (written before running; the page will say which held)
+
+1. `presence` saves little: it fires on **≥ 70%** of windows, because parked
+   vehicles never leave.
+2. `person-motion` fires on **15–35%** of windows at **≥ 90%** activity recall.
+3. At 640, YOLO recall on actors **under 50 px tall is below 50%**; 1280 recovers
+   most of it, and even at 4× the detector cost YOLO stays **< 10%** of VLM cost.
+4. Full-frame recognition is weak (the people are small — the feature-size rule);
+   `roi-crop` raises instance recall by **≥ 10 points with fewer tokens**.
+5. Savings track emptiness: **> 90%** of calls saved on empty clips, **< 30%** on busy.
+
+### Not measured, by design
+
+A tracker between detections, re-identification across cameras, alert logic on
+the VLM's answer, and anything night-time or UAV. Recognition uses a coarse
+activity-group list, not the 37-way ActEV task — this measures whether the cascade
+preserves *what the VLM can see*, not the VLM's ceiling on ActEV.
