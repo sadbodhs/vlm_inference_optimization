@@ -2,25 +2,25 @@
   "n_requests": 80,
   "n_ok": 80,
   "n_failed": 0,
-  "wall_s": 88.5683774050558,
+  "wall_s": 88.57079858499998,
   "ttft_ms": {
-    "p50": 762.3549095005728,
-    "p95": 1656.8025316169949,
-    "p99": 1867.8111976827488,
-    "mean": 920.2269567744224
+    "p50": 743.5740960000032,
+    "p95": 1651.373448800018,
+    "p99": 1856.398419730048,
+    "mean": 916.0163801250028
   },
   "tpot_ms": {
-    "p50": 30.781502625412216,
-    "p95": 283.7347055524169,
-    "mean": 61.75037975731914
+    "p50": 30.760553037036665,
+    "p95": 283.1683209038473,
+    "mean": 61.67394266298095
   },
   "e2e_ms": {
-    "p50": 1684.9280864698812,
-    "p95": 5454.9245293485
+    "p50": 1680.9840170000143,
+    "p95": 5440.062441100002
   },
-  "throughput_req_s": 0.9032569224355387,
-  "output_tok_s": 24.24115765586377,
-  "goodput_req_s": 0.45162846121776934,
+  "throughput_req_s": 0.9032322309166636,
+  "output_tok_s": 23.96952532795096,
+  "goodput_req_s": 0.4516161154583318,
   "slo": {
     "ttft_ms": 1000.0,
     "tpot_ms": 50.0,
@@ -33,19 +33,19 @@
     "verdict": "not-saturated",
     "note": "Client kept up and the server absorbed everything without a growing queue. Latency numbers are valid; throughput is a floor, not a capacity.",
     "loadgen_lag_ms": {
-      "p50": 1.1345638195052743,
-      "p99": 3.6325225629843723,
-      "drift": 0.035879717324860394
+      "p50": 1.0411194501216414,
+      "p99": 3.561226433839123,
+      "drift": -0.15297187196949835
     },
-    "ttft_drift_ms": 195.457982600783,
-    "ttft_drift_frac": 0.23763947244311362,
+    "ttft_drift_ms": 195.92379585000822,
+    "ttft_drift_frac": 0.23949969117351352,
     "offered_qps": 1.0,
-    "offered_qps_realized": 0.9112227810728715,
-    "achieved_qps": 0.9032569224355387,
-    "achieved_over_offered": 0.9912580558752561
+    "offered_qps_realized": 0.9112227810732761,
+    "achieved_qps": 0.9032322309166636,
+    "achieved_over_offered": 0.9912309587484183
   },
   "mode": "open",
-  "wall_clock_s": 88.576886364026,
+  "wall_clock_s": 88.57889767300003,
   "accuracy": {
     "scorer": null,
     "score": null,

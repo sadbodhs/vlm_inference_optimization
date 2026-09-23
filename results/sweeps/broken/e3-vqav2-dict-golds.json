@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "experiment": "e3-token-budget",
+    "arm": "B0_vllm_awq_clean",
+    "dataset": "data/vqav2/manifest.jsonl",
+    "scorer": "em",
+    "budgets": [
+      50176,
+      200704,
+      451584,
+      802816,
+      1605632
+    ],
+    "limit": 400,
+    "resize": "client",
+    "broken": "gold answers were str(dict): tools/build_manifest.py before the fix",
+    "source": "reconstructed from the original run's printed table; the sweep file was lost when the rig rebooted (it had been moved to /tmp)"
+  },
+  "rows": [
+    {
+      "max_pixels": 50176,
+      "prompt_tokens": 93.01,
+      "ttft_p50_ms": 45.53,
+      "accuracy": 0.0,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 200704,
+      "prompt_tokens": 276.05,
+      "ttft_p50_ms": 99.47,
+      "accuracy": 0.0,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 451584,
+      "prompt_tokens": 384.66,
+      "ttft_p50_ms": 136.24,
+      "accuracy": 0.0,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 802816,
+      "prompt_tokens": 384.66,
+      "ttft_p50_ms": 136.23,
+      "accuracy": 0.0,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 1605632,
+      "prompt_tokens": 384.66,
+      "ttft_p50_ms": 136.3,
+      "accuracy": 0.0,
+      "n_scored": 400
+    }
+  ]
+}

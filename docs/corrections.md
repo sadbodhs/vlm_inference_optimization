@@ -7,6 +7,13 @@ internal inconsistency in the data.
 
 This page exists because the corrections are more useful than the numbers.
 
+![Three bugs next to their fixes](img/corrections.png)
+
+*What three of these bugs looked like.* Each one produced a clean, plausible
+shape; none raised an error. Left: VQAv2 scored against serialised dicts. Middle:
+a closed-loop harness reporting its own pacing as capacity. Right: a decode rate
+above the ceiling it was measured against.
+
 ## The three that would have been published
 
 ### The caching result, wrong by 8×

@@ -34,6 +34,12 @@ do and what keeps staleness bounded by the model instead of growing without limi
 | 16 | **13.64** | 106 | 20,029 ms | **0%** |
 | 64 | 13.91 | 2,254 | 26,152 ms | 0% |
 
+![Staleness against streams, and throughput against freshness past the knee](img/e4-video.png)
+
+*Left:* up to eight 1 fps streams, the p95 answer stays inside the 2 s budget.
+*Middle:* past 8 analyses/s the server keeps completing more work. *Right:* but
+none of it is about the present.
+
 Past the knee **throughput rises 70%** while the fraction of answers describing a
 current frame goes to **zero**. Every answer past that point describes a frame
 roughly 26 seconds old.

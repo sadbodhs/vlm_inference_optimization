@@ -17,15 +17,21 @@ Status: **first results measured.** One model, one arm, one dataset — see
 | | |
 |---|---|
 | Decode is near the physical limit | **149.1 tok/s = 88.7%** of the 936 GB/s roofline |
-| A vision token costs | **0.32 ms** of TTFT, over a 17.5 ms floor (R² = 0.9994) |
+| A vision token costs | **0.32 ms** of TTFT, over a 17.3 ms floor (R² = 0.9995) |
 | Accuracy saturates at ~1,000 vision tokens | beyond that, **+284% TTFT for +0.012 ANLS** |
 | Synthetic images overstate capacity | by **6.4×** vs real document pages |
 | Caching is a workload property | **3×** on repeated inputs, **1.00×** on distinct ones |
 | Live video: 8 RTSP streams | at 1 fps each, 98% of answers inside a 2 s freshness budget |
 | Past that knee | throughput **rises 70%** while freshness drops to **zero** — answers describe 26-second-old frames |
 | Cheap accuracy trade | **74% faster TTFT** for 1.2 ANLS points (n=500) |
-| Throughput lies after saturation | on real pages: raw ceiling **1.56 req/s**, usable **0.43 req/s** — a 3.6× overstatement |
+| Throughput lies after saturation | on real pages: raw ceiling **1.56 req/s**, usable **0.45 req/s** — a 3.5× overstatement |
 | The 3090 is power-limited | 349.2 W of 350 W at 66 °C — capped, not thermally throttled |
+
+![Accuracy retained against time to first token, per task](docs/img/headline.png)
+
+*Shrinking the image cuts latency for every task; what it costs depends on what the
+question needs to see.* At ~100 vision tokens, VQAv2 (objects, no text) keeps 91%
+of its peak accuracy and DocVQA keeps 31%.
 
 ---
 

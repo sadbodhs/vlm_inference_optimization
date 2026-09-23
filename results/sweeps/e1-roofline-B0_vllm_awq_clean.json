@@ -9,21 +9,21 @@
   "rows": [
     {
       "arm": "B0_vllm_awq_clean",
-      "weight_GB": 7.161,
-      "decode_weight_GB": 5.807,
-      "tpot_p50_ms": 6.711318392522767,
-      "decode_tok_s": 149.04765795230966,
-      "decode_tok_s_sd": 0.07673885742568695,
+      "weight_GB": 6.924,
+      "decode_weight_GB": 5.571,
+      "tpot_p50_ms": 6.6987761420458405,
+      "decode_tok_s": 149.36060315084708,
+      "decode_tok_s_sd": 0.09344787217499971,
       "decode_tok_s_runs": [
-        149.14,
-        149.0,
-        149.0
+        149.46,
+        149.34,
+        149.28
       ],
       "repeats": 3,
-      "roofline_tok_s": 161.18477699328398,
-      "pct_of_roofline": 92.47005873173741,
-      "ttft_p50_ms": 46.111291681881994,
-      "ttft_p50_ms_sd": 0.25600466546913714
+      "roofline_tok_s": 168.01292407108238,
+      "pct_of_roofline": 88.89828206766765,
+      "ttft_p50_ms": 45.93275383334117,
+      "ttft_p50_ms_sd": 0.32036426562668197
     }
   ]
 }

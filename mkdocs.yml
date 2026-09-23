@@ -6,6 +6,7 @@ docs_dir: site_src
 
 theme:
   name: material
+  custom_dir: overrides
   features:
     - navigation.instant
     - navigation.tracking

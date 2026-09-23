@@ -103,8 +103,8 @@ def plot_e1(d, out):
         ax.annotate(f"{pctv:.0f}% of roofline", (0, r["decode_tok_s"]),
                     textcoords="offset points", xytext=(0, 6), ha="center",
                     fontsize=9, color=FG)
-    _style(ax, f"E1 · single-stream decode ({r['arm']}, "
-               f"{r.get('decode_weight_GB') or r['weight_GB']:.1f} GB re-read per token)",
+    _style(ax, f"E1 · single-stream decode, {r['arm']}\n"
+               f"{r.get('decode_weight_GB') or r['weight_GB']:.2f} GB re-read per token",
            "", "tokens/s")
     fig.tight_layout()
     fig.savefig(out, dpi=160)
@@ -140,7 +140,13 @@ def main(paths: list[str]) -> None:
 # does the frame count matter differently per question type, how do two stacks or
 # two model generations differ. Each takes a list of sweep files.
 
-SERIES = ["#c1440e", "#1f4e8c", "#3f7d5a", "#8a5cb8", "#b0892a"]
+# Categorical order is fixed: a task keeps its colour on every figure. Validated with
+# the dataviz palette checker (lightness band, chroma floor, CVD and normal-vision
+# separation, contrast) -- the previous blue was too dark and the green too grey.
+SERIES = ["#c1440e", "#2a64b4", "#1f8a52", "#8a5cb8", "#b0892a"]
+TASKS = ("docvqa", "chartqa", "textvqa", "vqav2")
+TASK_LABEL = {"docvqa": "DocVQA", "chartqa": "ChartQA", "textvqa": "TextVQA",
+              "vqav2": "VQAv2"}
 
 
 def plot_task_frontier(paths, out):
@@ -152,13 +158,16 @@ def plot_task_frontier(paths, out):
         if not rows:
             continue
         name = d["meta"].get("dataset", p)
-        label = Path(str(name)).parts[1] if "data/" in str(name) else Path(p).stem
+        task = Path(str(name)).parts[1] if "data/" in str(name) else Path(p).stem
+        # colour follows the task, not its position in the list
+        color = SERIES[TASKS.index(task)] if task in TASKS else SERIES[i % len(SERIES)]
         peak = max(r["accuracy"] for r in rows)
         x = [r["prompt_tokens"] for r in rows]
         # normalised to each task's own peak: the metrics differ, so only the
         # SHAPE of each curve is comparable across tasks
         y = [100 * r["accuracy"] / peak for r in rows]
-        ax.plot(x, y, "o-", color=SERIES[i % len(SERIES)], label=f"{label} (peak {peak:.3f})")
+        ax.plot(x, y, "o-", color=color, lw=2,
+                label=f"{TASK_LABEL.get(task, task)} (peak {peak:.3f})")
     ax.axhline(100, color=WARN, lw=0.7, ls=":")
     ax.set_xscale("log")
     ax.legend(fontsize=8, frameon=False)
@@ -214,12 +223,179 @@ def plot_compare_e3(paths, labels, title, out):
     fig.savefig(out, dpi=160)
 
 
+
+def _task_rows(root):
+    """{task: rows-with-accuracy} for whichever per-task sweeps exist."""
+    out = {}
+    for t in TASKS:
+        f = Path(root) / f"e3-{t}.json"
+        if f.exists():
+            rows = [r for r in json.loads(f.read_text())["rows"]
+                    if r.get("accuracy") is not None]
+            if rows:
+                out[t] = rows
+    return out
+
+
+def plot_headline(root, out):
+    """The thesis in one picture: what each task keeps as TTFT is cut."""
+    data = _task_rows(root)
+    fig, ax = plt.subplots(figsize=(7.2, 4.3))
+    for t, rows in data.items():
+        c = SERIES[TASKS.index(t)]
+        peak = max(r["accuracy"] for r in rows)
+        x = [r["ttft_p50_ms"] for r in rows]
+        y = [100 * r["accuracy"] / peak for r in rows]
+        ax.plot(x, y, "-", color=c, lw=2, label=TASK_LABEL[t])
+        ax.plot(x, y, "o", color=c, ms=7, mec="white", mew=1.5)
+        # direct label at the cheapest point: that is where the tasks separate
+        ax.annotate(TASK_LABEL[t], (x[0], y[0]), textcoords="offset points",
+                    xytext=(-8, 0), ha="right", va="center", fontsize=8, color=FG)
+    ax.axhline(100, color=WARN, lw=0.7, ls=":")
+    ax.set_xscale("log")
+    ax.set_xlim(25, 900)
+    ax.set_ylim(25, 105)
+    ax.legend(fontsize=8, frameon=False, loc="lower right")
+    _style(ax, "What each task keeps as the image is shrunk\n"
+               "Qwen2.5-VL-7B-AWQ, one RTX 3090, 400 samples per point",
+           "time to first token, p50 (ms, log)", "% of the task's own peak accuracy")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+def plot_e4(root, out):
+    """Live video: staleness as streams grow, and what happens past the knee."""
+    root = Path(root)
+    streams = []
+    for n in (1, 2, 4, 8):
+        f = root / f"e4-video-B0-s{n}.json"
+        if f.exists():
+            streams.append(json.loads(f.read_text())["rows"][0])
+    load = []
+    for iv in ("1.0", "0.5", "0.25", "0.125"):
+        f = root / f"e4-open-iv{iv}.json"
+        if f.exists():
+            load.append(json.loads(f.read_text())["rows"][0])
+    if not streams or not load:
+        print("  e4: sweeps missing, skipping")
+        return
+    slo = 2000
+    fig, (a1, a2, a3) = plt.subplots(1, 3, figsize=(12.5, 3.9))
+
+    n = [r["streams"] for r in streams]
+    a1.plot(n, [r["staleness_p50_ms"] for r in streams], "o-", color=SERIES[1], lw=2,
+            label="p50")
+    a1.plot(n, [r["staleness_p95_ms"] for r in streams], "o--", color=SERIES[1], lw=1.5,
+            alpha=0.6, label="p95")
+    a1.axhline(slo, color=ACCENT, lw=1, ls=":")
+    a1.annotate("2 s freshness budget", (1, slo), textcoords="offset points",
+                xytext=(0, 4), fontsize=7, color=FG)
+    a1.set_xscale("log", base=2); a1.set_xticks(n); a1.set_xticklabels(map(str, n))
+    a1.set_ylim(0, 2400)
+    a1.legend(fontsize=8, frameon=False, loc="lower right")
+    _style(a1, "Staleness, 1 fps per stream", "RTSP streams", "answer age (ms)")
+
+    d = [r["demand_per_s"] for r in load]
+    a2.plot([min(d), max(d)], [min(d), max(d)], ":", color=WARN, lw=1,
+            label="completed = demanded")
+    a2.plot(d, [r["analyses_per_s"] for r in load], "o-", color=SERIES[1], lw=2,
+            label="completed")
+    a2.axhline(8, color=ACCENT, lw=1, ls=":", label="usable (fresh) capacity")
+    a2.legend(fontsize=7, frameon=False, loc="lower right")
+    a2.set_xscale("log", base=2); a2.set_xticks(d); a2.set_xticklabels([f"{x:.0f}" for x in d])
+    a2.set_ylim(0, 18)
+    _style(a2, "Throughput keeps rising past the knee", "analyses demanded /s",
+           "analyses completed /s")
+
+    a3.bar([str(int(x)) for x in d], [100 * r["fresh_fraction"] for r in load],
+           color=SERIES[1], width=0.55)
+    for i, r in enumerate(load):
+        a3.annotate(f"{100*r['fresh_fraction']:.0f}%", (i, 100 * r["fresh_fraction"]),
+                    textcoords="offset points", xytext=(0, 3), ha="center", fontsize=8,
+                    color=FG)
+    a3.set_ylim(0, 110)
+    _style(a3, "…while every answer goes stale", "analyses demanded /s",
+           "answers under 2 s old (%)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+# Historical bases for the roofline correction (docs/corrections.md, e1-roofline.md).
+# Kept as constants: the first two no longer exist in any arm file, by design.
+HBM_BW_GB_S = 936.0
+ROOFLINE_BASES = [("total weights (first basis)", 7.161),
+                  ("LLM weights, estimated", 5.807),
+                  ("LLM weights, exact", 5.571)]
+
+
+def plot_corrections(root, out):
+    """Three bugs next to their fixes, each on its own axes."""
+    root = Path(root)
+    fig, (a1, a2, a3) = plt.subplots(1, 3, figsize=(12.5, 3.9))
+
+    # 1 · VQAv2 scored against stringified dicts
+    bad = root / "broken" / "e3-vqav2-dict-golds.json"
+    good = root / "e3-vqav2.json"
+    if bad.exists() and good.exists():
+        for f, lab, c, st in ((good, "fixed", SERIES[3], "o-"),
+                              (bad, "gold = str(dict)", WARN, "s--")):
+            rows = json.loads(f.read_text())["rows"]
+            a1.plot([r["prompt_tokens"] for r in rows], [r["accuracy"] for r in rows],
+                    st, color=c, lw=2, label=lab)
+        a1.set_ylim(-0.05, 1.0)
+        a1.legend(fontsize=8, frameon=False, loc="center right")
+    _style(a1, "VQAv2: 0.000 at every budget", "vision tokens", "exact-match accuracy")
+
+    # 2 · E4 closed loop measured its own pacing
+    closed, opened = [], []
+    for iv in ("1.0", "0.5", "0.25", "0.125"):
+        fc, fo = root / f"e4-load-iv{iv}.json", root / f"e4-open-iv{iv}.json"
+        if fc.exists() and fo.exists():
+            closed.append(json.loads(fc.read_text())["rows"][0])
+            opened.append(json.loads(fo.read_text())["rows"][0])
+    if opened:
+        d = [r["demand_per_s"] for r in opened]
+        a2.plot(d, [r["analyses_per_s"] for r in opened], "o-", color=SERIES[1], lw=2,
+                label="open loop (fixed)")
+        a2.plot(d, [r["analyses_per_s"] for r in closed], "s--", color=WARN, lw=2,
+                label="closed loop (bug)")
+        a2.set_xscale("log", base=2); a2.set_xticks(d)
+        a2.set_xticklabels([f"{x:.0f}" for x in d])
+        a2.set_ylim(0, 16)
+        a2.legend(fontsize=8, frameon=False, loc="lower right")
+    _style(a2, "E4: a flat line that was the harness", "analyses demanded /s",
+           "analyses completed /s")
+
+    # 3 · roofline basis
+    e1 = root / "e1-roofline-B0_vllm_awq_clean.json"
+    if e1.exists():
+        meas = json.loads(e1.read_text())["rows"][0]["decode_tok_s"]
+        a3.bar(["measured"], [meas], color=ACCENT, width=0.45)
+        styles = [(WARN, ":"), (WARN, "--"), (FG, "-")]
+        for (lab, gb), (c, ls) in zip(ROOFLINE_BASES, styles):
+            ceil = HBM_BW_GB_S / gb
+            a3.axhline(ceil, color=c, lw=1.2, ls=ls,
+                       label=f"{lab}: {ceil:.0f} tok/s → {100*meas/ceil:.0f}%")
+        a3.set_xlim(-0.5, 2.8)
+        a3.set_ylim(0, 190)
+        a3.legend(fontsize=7, frameon=False, loc="lower right", title="ceiling basis",
+                  title_fontsize=7)
+    _style(a3, "E1: 114% of a ceiling cannot exist", "", "decode tokens/s")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
 def comparisons(root="results/sweeps", out_dir="docs/img"):
     """Build the cross-sweep figures the comparison pages need."""
     root, out_dir = Path(root), Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    tasks = [root / f"e3-{t}.json" for t in ("docvqa", "chartqa", "textvqa", "vqav2")]
+    for fn, name in ((plot_headline, "headline.png"), (plot_e4, "e4-video.png"),
+                     (plot_corrections, "corrections.png")):
+        fn(root, out_dir / name)
+        print(f"  wrote {out_dir/name}")
+
+    tasks = [root / f"e3-{t}.json" for t in TASKS]
     tasks = [p for p in tasks if p.exists()]
     if len(tasks) >= 2:
         plot_task_frontier([str(p) for p in tasks], out_dir / "task-frontier.png")

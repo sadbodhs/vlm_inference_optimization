@@ -10,16 +10,21 @@ input reuse. SLO: TTFT ≤ 1 s, TPOT ≤ 50 ms.
 
 | offered | achieved | goodput @ SLO | TTFT p50 | TTFT p99 | verdict |
 |---|---|---|---|---|---|
-| 0.5 | 0.45 | 0.35 | 724 ms | 4,085 ms | not-saturated |
-| 1.0 | 0.90 | **0.45** | 798 ms | 2,024 ms | not-saturated |
-| 1.5 | 1.32 | 0.21 | 1,606 ms | 3,837 ms | saturated |
-| 2.0 | 1.52 | 0.04 | 4,083 ms | 10,633 ms | saturated |
-| 4.0 | **1.56** | **0.00** | 14,554 ms | 29,085 ms | saturated |
+| 0.5 | 0.45 | 0.36 | 668 ms | 1,275 ms | not-saturated |
+| 1.0 | 0.90 | **0.45** | 744 ms | 1,856 ms | not-saturated |
+| 1.5 | 1.32 | 0.21 | 1,576 ms | 3,805 ms | saturated |
+| 2.0 | 1.52 | 0.04 | 4,157 ms | 10,552 ms | saturated |
+| 4.0 | **1.56** | **0.00** | 14,635 ms | 29,243 ms | saturated |
+
+Rerun on 23 September; it reproduces the committed per-rate data to within ~2% on
+every latency. An earlier version of this table came from a run whose data was
+never committed — its 0.5 QPS p99 of 4,085 ms appears in no result file — so it
+was replaced rather than defended.
 
 ![E0](img/e0-saturation-B0_vllm_awq_clean.png){ width="620" }
 
 **Raw ceiling 1.56 req/s. Usable capacity 0.45 req/s.** Reporting the raw number
-overstates what the server can deliver under SLO by **3.6×** — throughput keeps
+overstates what the server can deliver under SLO by **3.5×** — throughput keeps
 reading 1.56 req/s while every request on it is 14 seconds late.
 
 ## Synthetic images overstate capacity by 6×

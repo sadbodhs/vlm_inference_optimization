@@ -20,6 +20,11 @@ LLM tensors from the safetensors headers (`tools/weight_split.py`) — not the
 
 ![E1](img/e1-roofline-B0_vllm_awq_clean.png){ width="520" }
 
+The figure is a **rerun on 23 September**, after a reboot and a day apart from the
+table's paired runs: **149.36 ± 0.09 tok/s, 88.9%** of the ceiling — within 0.2% of
+the original. (The table keeps the original vLLM run because its comparison with
+SGLang was measured back-to-back.)
+
 Three independent runs per arm; run-to-run spread is **0.11–0.14%**, which is what
 lets a 2.4% difference between stacks be called real rather than noise.
 

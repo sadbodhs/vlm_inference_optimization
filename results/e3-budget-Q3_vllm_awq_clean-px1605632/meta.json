@@ -1,0 +1,109 @@
+{
+  "run_id": "e3-budget-Q3_vllm_awq_clean-px1605632",
+  "created_utc": "2026-09-22T23:58:29Z",
+  "git_sha": "60eedcf4609d9c53b6ad8d7112a5be3f5cf18384",
+  "git_dirty": "clean",
+  "arm": {
+    "id": "Q3_vllm_awq_clean",
+    "model": "cyankiwi/Qwen3-VL-8B-Instruct-AWQ-4bit",
+    "base_url": "http://vlm-server:8000",
+    "stack": "vllm",
+    "quantization": "compressed-tensors",
+    "notes": "Compare against B0_vllm_awq_clean. Same stack, same harness, same prompts, same client-side token budget -- so a difference in the table is the model.\n",
+    "max_tokens": 64,
+    "temperature": 0.0,
+    "extra_body": {},
+    "max_pixels": null,
+    "weight_bytes": 7550000000.0,
+    "decode_weight_bytes": 6397000000.0,
+    "raw": {
+      "id": "Q3_vllm_awq_clean",
+      "stack": "vllm",
+      "model": "cyankiwi/Qwen3-VL-8B-Instruct-AWQ-4bit",
+      "revision": "87196f7771efdd7022a8d8f094ac6e063bf87f5c",
+      "base_url": "http://vlm-server:8000",
+      "quantization": "compressed-tensors",
+      "weight_bytes": 7550000000.0,
+      "decode_weight_bytes": 6397000000.0,
+      "max_tokens": 128,
+      "temperature": 0.0,
+      "max_pixels": 1605632,
+      "server_args": "--no-enable-prefix-caching --no-enable-chunked-prefill --mm-processor-cache-gb 0",
+      "notes": "Compare against B0_vllm_awq_clean. Same stack, same harness, same prompts, same client-side token budget -- so a difference in the table is the model.\n"
+    }
+  },
+  "load": {
+    "mode": "sequential",
+    "rate_qps": 1.0,
+    "concurrency": 1,
+    "repeats": 1,
+    "n_requests": 500,
+    "seed": 0
+  },
+  "prompt_suffix": "\nAnswer the question using a single word or phrase.",
+  "host": {
+    "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "images": {
+    "harness": "vlmbench-harness@sha256:60591fccb4ae6730cff816464b2b8b7797a85cae5f65d2dc1d7fb786da955244",
+    "server": "vllm/vllm-openai@sha256:c2914767605584b6d8f45686b82de173ecc99e781897aa3d0a66dacd72c51ae1"
+  },
+  "gpu_before": {
+    "available": true,
+    "name": "NVIDIA GeForce RTX 3090",
+    "memory.total": 24576.0,
+    "memory.used": 21981.0,
+    "temperature.gpu": 50.0,
+    "clocks.sm": 210.0,
+    "clocks.max.sm": 2100.0,
+    "power.draw": 14.36,
+    "power.limit": 350.0,
+    "utilization.gpu": 0.0,
+    "clock_ratio": 0.1,
+    "hw_thermal_slowdown": false,
+    "sw_thermal_slowdown": false,
+    "sw_power_cap": false,
+    "hw_power_brake_slowdown": false,
+    "reasons_source": "clocks_event_reasons"
+  },
+  "gpu_after": {
+    "available": true,
+    "name": "NVIDIA GeForce RTX 3090",
+    "memory.total": 24576.0,
+    "memory.used": 21981.0,
+    "temperature.gpu": 67.0,
+    "clocks.sm": 1800.0,
+    "clocks.max.sm": 2100.0,
+    "power.draw": 346.78,
+    "power.limit": 350.0,
+    "utilization.gpu": 100.0,
+    "clock_ratio": 0.8571428571428571,
+    "hw_thermal_slowdown": false,
+    "sw_thermal_slowdown": false,
+    "sw_power_cap": true,
+    "hw_power_brake_slowdown": false,
+    "reasons_source": "clocks_event_reasons"
+  },
+  "thermal": {
+    "n_samples": 292,
+    "n_busy_samples": 291,
+    "util_mean": 95.70890410958904,
+    "temp_max": 71.0,
+    "temp_mean": 67.88013698630137,
+    "checked": true,
+    "clock_ratio_p50": 0.8642857142857143,
+    "sm_clock_min": 1770.0,
+    "sm_clock_max": 1920.0,
+    "power_draw_max": 350.46,
+    "power_limit": 350.0,
+    "throttled": true,
+    "thermal_throttled": false,
+    "power_capped": true,
+    "reason": null
+  },
+  "not_measured": [
+    "throughput under load",
+    "multi-image prompts"
+  ]
+}

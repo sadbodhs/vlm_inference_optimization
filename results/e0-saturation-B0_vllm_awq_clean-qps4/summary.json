@@ -2,24 +2,24 @@
   "n_requests": 80,
   "n_ok": 80,
   "n_failed": 0,
-  "wall_s": 51.289765025954694,
+  "wall_s": 51.302068291999944,
   "ttft_ms": {
-    "p50": 14614.590641460381,
-    "p95": 28325.82448607427,
-    "p99": 29220.31905475538,
-    "mean": 15391.524610188208
+    "p50": 14634.683923000011,
+    "p95": 28348.446152649973,
+    "p99": 29242.733450879998,
+    "mean": 15406.990464700002
   },
   "tpot_ms": {
-    "p50": 1122.400638914971,
-    "p95": 2332.1691304963315,
-    "mean": 1205.8383064497507
+    "p50": 1122.4496366249996,
+    "p95": 2333.586534863181,
+    "mean": 1212.3740320768732
   },
   "e2e_ms": {
-    "p50": 37548.68831997737,
-    "p95": 49021.96116387495
+    "p50": 37569.327706499964,
+    "p95": 49042.97007885008
   },
-  "throughput_req_s": 1.5597653832010494,
-  "output_tok_s": 37.99978414823556,
+  "throughput_req_s": 1.5593913201444007,
+  "output_tok_s": 37.81523951350172,
   "goodput_req_s": 0.0,
   "slo": {
     "ttft_ms": 1000.0,
@@ -33,19 +33,19 @@
     "verdict": "saturated",
     "note": "Queue is growing: TTFT climbs across the run and/or completions trail arrivals. This is the regime throughput numbers are valid in.",
     "loadgen_lag_ms": {
-      "p50": 0.9695834014564753,
-      "p99": 2.0097376045305277,
-      "drift": 0.04368252702988684
+      "p50": 1.038627593459296,
+      "p99": 2.1420235562550243,
+      "drift": 0.007942063260202303
     },
-    "ttft_drift_ms": 13719.62686633342,
-    "ttft_drift_frac": 1.6080744626335408,
+    "ttft_drift_ms": 13730.840472049991,
+    "ttft_drift_frac": 1.6075311803857824,
     "offered_qps": 4.0,
-    "offered_qps_realized": 3.644891124301152,
-    "achieved_qps": 1.5597653832010494,
-    "achieved_over_offered": 0.4279319546204851
+    "offered_qps_realized": 3.6448911242931095,
+    "achieved_qps": 1.5593913201444007,
+    "achieved_over_offered": 0.4278293279464772
   },
   "mode": "open",
-  "wall_clock_s": 51.290939241996966,
+  "wall_clock_s": 51.30307057499999,
   "accuracy": {
     "scorer": null,
     "score": null,

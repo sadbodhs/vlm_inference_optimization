@@ -2,25 +2,25 @@
   "n_requests": 80,
   "n_ok": 80,
   "n_failed": 0,
-  "wall_s": 52.67055085103493,
+  "wall_s": 52.71276610699999,
   "ttft_ms": {
-    "p50": 4154.3759210035205,
-    "p95": 9507.595275039783,
-    "p99": 10535.950292473426,
-    "mean": 4619.167032963014
+    "p50": 4156.94504649997,
+    "p95": 9522.899101749997,
+    "p99": 10551.660031939993,
+    "mean": 4624.636609062497
   },
   "tpot_ms": {
-    "p50": 775.2465903440357,
-    "p95": 1536.9433696400808,
-    "mean": 775.5436158941696
+    "p50": 776.4588930259729,
+    "p95": 1537.4855559878615,
+    "mean": 775.9597509661802
   },
   "e2e_ms": {
-    "p50": 19531.889777979814,
-    "p95": 36183.10217890539
+    "p50": 19545.471684999997,
+    "p95": 36198.67186800002
   },
-  "throughput_req_s": 1.518875324206488,
-  "output_tok_s": 38.86422235813352,
-  "goodput_req_s": 0.0379718831051622,
+  "throughput_req_s": 1.5176589260675584,
+  "output_tok_s": 39.117658819391316,
+  "goodput_req_s": 0.037941473151688956,
   "slo": {
     "ttft_ms": 1000.0,
     "tpot_ms": 50.0,
@@ -33,19 +33,19 @@
     "verdict": "saturated",
     "note": "Queue is growing: TTFT climbs across the run and/or completions trail arrivals. This is the regime throughput numbers are valid in.",
     "loadgen_lag_ms": {
-      "p50": 1.1018840014003217,
-      "p99": 2.7578226558398446,
-      "drift": 0.05802638188470155
+      "p50": 1.0931693228712902,
+      "p99": 2.3876184660707604,
+      "drift": 0.07033867649965941
     },
-    "ttft_drift_ms": 4339.16520086932,
-    "ttft_drift_frac": 1.7713882988677483,
+    "ttft_drift_ms": 4345.882069775002,
+    "ttft_drift_frac": 1.7726026491838835,
     "offered_qps": 2.0,
-    "offered_qps_realized": 1.822445562145743,
-    "achieved_qps": 1.518875324206488,
-    "achieved_over_offered": 0.8334269926933608
+    "offered_qps_realized": 1.8224455621465547,
+    "achieved_qps": 1.5176589260675584,
+    "achieved_over_offered": 0.8327595389351408
   },
   "mode": "open",
-  "wall_clock_s": 52.68533231806941,
+  "wall_clock_s": 52.71385006100002,
   "accuracy": {
     "scorer": null,
     "score": null,

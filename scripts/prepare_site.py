@@ -58,6 +58,10 @@ def fix_readme_link(m):
         return f"](index.md{hashmark}{frag})"
     if target.startswith("docs/") and target.endswith(".md"):
         return f"]({target[5:]}{hashmark}{frag})"
+    if target.startswith("docs/"):
+        # an asset under docs/ (a figure) is copied to the site root with the pages;
+        # a GitHub blob URL would be an HTML page, not an image
+        return f"]({target[5:]}{hashmark}{frag})"
     return f"]({BLOB}/{href})"
 
 
