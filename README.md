@@ -25,6 +25,7 @@ Status: **first results measured.** One model, one arm, one dataset — see
 | Past that knee | throughput **rises 70%** while freshness drops to **zero** — answers describe 26-second-old frames |
 | Cheap accuracy trade | **74% faster TTFT** for 1.2 ANLS points (n=500) |
 | Throughput lies after saturation | on real pages: raw ceiling **1.56 req/s**, usable **0.45 req/s** — a 3.5× overstatement |
+| A detector gate beats the serving layer | YOLO → VLM cascade on MEVA surveillance video: **1.8 → 4.1 cameras** per 3090 (7.1 with ROI crops), 97–99% of activities kept |
 | The 3090 is power-limited | 349.2 W of 350 W at 66 °C — capped, not thermally throttled |
 
 ![Accuracy retained against time to first token, per task](docs/img/headline.png)

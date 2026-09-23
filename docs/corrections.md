@@ -1,6 +1,6 @@
 # Corrections
 
-Eight measurement bugs found while building this. Four produced
+Nine measurement bugs found while building this. Four produced
 **publishable-looking numbers that were wrong**. None were caught by inspection —
 every one was caught by a physical bound, a cross-experiment contradiction, or an
 internal inconsistency in the data.
@@ -112,6 +112,26 @@ serialised containers, because scoring against one yields a clean 0.0, not an er
 A subtler version — a dataset where only *some* answers were dicts — would have
 produced a depressed but plausible score, and would have passed every check here
 except that guard.
+
+## The parser that emptied the corpus
+
+E7 needed MEVA's *exhaustive* activity labels, because a cascade's cost is the
+activities it skips. The indexer read the annotation files, reported 274 of 769
+clips as having no activity at all, and the median clip as active 9% of the time.
+Both numbers went into the pre-registration.
+
+MEVA writes its annotations in **two layouts** — `{'act': {...}}` and
+`{ act: {...} }` — and the indexer filtered on the first. It skipped 266 clips
+without a warning, and they indexed as empty. It also counted the annotators'
+whole-clip "none of the 37 activities" marker as a five-minute activity. The
+corrected corpus has **53** empty clips and a median of **26%**. The first clip
+selection had built its "empty" bin from busy cameras, so the first gate analysis
+was void.
+
+What exposed it was a *second* parser with the same blind spot: the detector-recall
+table came out entirely blank. The parsers now refuse any file whose annotation
+lines do not all parse, and PLAN.md carries a dated amendment rather than a silent
+rewrite.
 
 ## The pattern
 

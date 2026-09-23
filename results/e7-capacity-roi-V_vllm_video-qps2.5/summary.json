@@ -1,0 +1,54 @@
+{
+  "n_requests": 160,
+  "n_ok": 160,
+  "n_failed": 0,
+  "wall_s": 71.43364505400041,
+  "ttft_ms": {
+    "p50": 663.6552969998775,
+    "p95": 1584.6052770003553,
+    "p99": 2080.221655339537,
+    "mean": 754.9157777875223
+  },
+  "tpot_ms": {
+    "p50": 181.86679199970968,
+    "p95": 545.9148085999002,
+    "mean": 197.89595924189328
+  },
+  "e2e_ms": {
+    "p50": 768.9238760003718,
+    "p95": 2270.7397388503505
+  },
+  "throughput_req_s": 2.2398409024073693,
+  "output_tok_s": 8.623387474268373,
+  "goodput_req_s": 0.3079781240810133,
+  "slo": {
+    "ttft_ms": 2000.0,
+    "tpot_ms": 50.0,
+    "fraction_met": 0.1375
+  },
+  "prompt_tokens": {
+    "mean": 1082.075
+  },
+  "harness": {
+    "verdict": "saturated",
+    "note": "Queue is growing: TTFT climbs across the run and/or completions trail arrivals. This is the regime throughput numbers are valid in.",
+    "loadgen_lag_ms": {
+      "p50": 0.9400751723660505,
+      "p99": 2.618060605182107,
+      "drift": 0.05174317878982038
+    },
+    "ttft_drift_ms": 274.32417627506993,
+    "ttft_drift_frac": 0.4440672405056764,
+    "offered_qps": 2.5,
+    "offered_qps_realized": 2.2659678880860152,
+    "achieved_qps": 2.2398409024073693,
+    "achieved_over_offered": 0.9884698340978193
+  },
+  "mode": "open",
+  "wall_clock_s": 71.44179444200017,
+  "accuracy": {
+    "scorer": null,
+    "score": null,
+    "note": "not scored in this run"
+  }
+}

@@ -38,6 +38,7 @@ trades accuracy, so the deliverable is a frontier, not a ranking.
 | Live video | **8 RTSP streams** at 1 fps inside a 2 s freshness budget |
 | One frame answers "what is happening" | `action` **0.90 from a single frame**, +0.08 from eight |
 | Frames buy ordering | `order` **0.41 → 0.87**, chance to solved |
+| A detector gate beats the serving layer | YOLO → VLM cascade: **1.8 → 4.1 cameras** per 3090 (7.1 with ROI crops), 97–99% of activities kept |
 
 ![Accuracy retained against time to first token, per task](img/headline.png){ width="680" }
 
@@ -57,5 +58,5 @@ two-thirds of its accuracy. Details: [the per-task frontier](task-frontier.md).
 - [E2 · what a vision token costs](e2-vision-tokens.md) — the law the rest hangs off
 - [E3 · the accuracy frontier](e3-token-budget.md) — the thesis experiment
 - [Qwen2.5 vs Qwen3](models.md) — a generational comparison, and a prediction that was wrong
-- [Corrections](corrections.md) — eight measurement bugs and what each would have published
+- [Corrections](corrections.md) — nine measurement bugs and what each would have published
 - [Not measured](not-measured.md) — what these numbers do **not** entitle you to claim

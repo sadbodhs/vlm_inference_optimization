@@ -385,6 +385,144 @@ def plot_corrections(root, out):
     fig.savefig(out, dpi=160)
 
 
+
+# ── E7 · the cascade ─────────────────────────────────────────────────────────
+E7_GATES = ("presence", "person", "motion", "person-motion")
+E7_BINS = ("empty", "sparse", "moderate", "busy")
+
+
+def _e7(path):
+    return json.loads(Path(path).read_text())
+
+
+def plot_e7_gates(gates_json, out):
+    """Left: what each gate sends vs what it keeps. Right: savings by scene."""
+    d = _e7(gates_json)
+    calls, rec = d["calls"], d["recall"]
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(12, 4.3))
+    for i, size in enumerate((640, 1280)):
+        c = SERIES[1] if size == 1280 else WARN
+        xs = [100 * calls[f"{size}|{g}|all"]["rate"] for g in E7_GATES]
+        ys = [100 * rec[f"{size}|{g}|all"]["rate"] for g in E7_GATES]
+        a1.plot(xs, ys, "o", color=c, ms=8, mec="white", mew=1.5, label=f"YOLOv8s @ {size}")
+        for g, x, y in zip(E7_GATES, xs, ys):
+            if size == 1280:
+                a1.annotate(g, (x, y), textcoords="offset points", xytext=(7, -3),
+                            fontsize=8, color=FG)
+    a1.plot([100], [100], "s", color=FG, ms=7, label="dense (every window)")
+    a1.set_xlim(25, 108); a1.set_ylim(92, 100.8)
+    a1.legend(fontsize=8, frameon=False, loc="lower right")
+    _style(a1, "What a gate sends, and what it keeps", "windows sent to the VLM (%)",
+           "annotated activities covered (%)")
+
+    size, w = 1280, 0.2
+    for j, g in enumerate(E7_GATES):
+        ys = [100 * (1 - calls[f"{size}|{g}|{b}"]["rate"]) for b in E7_BINS]
+        a2.bar([k + (j - 1.5) * w for k in range(len(E7_BINS))], ys, width=w * 0.92,
+               color=SERIES[j], label=g)
+    a2.set_xticks(range(len(E7_BINS)))
+    a2.set_xticklabels(["empty\n(verified)", "sparse\n(<10% active)", "moderate\n(10-50%)",
+                        "busy\n(>=50%)"], fontsize=8)
+    a2.set_ylim(0, 105)
+    a2.legend(fontsize=8, frameon=False, loc="upper right", ncol=2)
+    _style(a2, "VLM calls saved depend on the scene (YOLO @ 1280)", "",
+           "calls saved vs dense (%)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+def plot_e7_detector(gates_json, out):
+    """Detector recall on annotated people, by box height, at both input sizes."""
+    d = _e7(gates_json)["detector_recall"]
+    bins = ["0-25", "25-50", "50-100", "100-200", "200+"]
+    fig, ax = plt.subplots(figsize=(6.6, 4.0))
+    for size, c in ((640, WARN), (1280, SERIES[1])):
+        ys = [100 * (d.get(f"{size}|person|{b}", {}).get("rate") or 0) for b in bins]
+        ax.plot(range(len(bins)), ys, "o-", color=c, lw=2, label=f"YOLOv8s @ {size}")
+    ns = [d.get(f"1280|person|{b}", {}).get("n", 0) for b in bins]
+    ax.set_xticks(range(len(bins)))
+    ax.set_xticklabels([f"{b}\nn={n:,}" for b, n in zip(bins, ns)], fontsize=8)
+    ax.set_ylim(0, 102)
+    ax.legend(fontsize=8, frameon=False, loc="lower right")
+    _style(ax, "Does the detector see the people doing things?",
+           "annotated actor height in the 1080p frame (px)", "detected (%)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+E7_GROUP_SHORT = {"A": "gets into / out of a vehicle, doors, trunk",
+                  "B": "vehicle starts, stops, turns, reverses",
+                  "C": "walks through a doorway, opens a door",
+                  "D": "picks up, puts down, carries an object",
+                  "E": "uses a phone",
+                  "F": "people talk to / touch each other",
+                  "G": "sits down / stands up",
+                  "H": "bicycle, reading, laptop, buying"}
+
+
+def plot_e7_groups(cascades_json, out, groups_desc=None, min_n=20):
+    """Chance-corrected recognition per activity group, full frame vs ROI crop.
+    Groups with fewer than `min_n` instances are drawn hollow: too few to read."""
+    rows = [r for r in _e7(cascades_json)["rows"]
+            if r["gate"] == "dense" and r["bin"] == "all" and r["size"] == 1280]
+    by = {r["arm"]: r["per_group"] for r in rows}
+    groups = sorted(by["full"], key=lambda g: (by["full"][g]["n"] < min_n, -by["full"][g]["lift"]))
+    fig, ax = plt.subplots(figsize=(8.4, 4.6))
+    h = 0.38
+    for j, (arm, c) in enumerate((("full", SERIES[1]), ("roi", SERIES[0]))):
+        if arm not in by:
+            continue
+        for k, g in enumerate(groups):
+            small = by["full"][g]["n"] < min_n
+            ax.barh(k + (j - 0.5) * h, 100 * by[arm][g]["lift"], height=h * 0.9,
+                    color="none" if small else c, edgecolor=c, lw=1.2,
+                    label=(("full frame" if arm == "full" else "ROI crop") if k == 0 else None))
+    ax.axvline(0, color=FG, lw=0.8)
+    ax.set_yticks(range(len(groups)))
+    ax.set_yticklabels([f"{E7_GROUP_SHORT[g]}  (n={by['full'][g]['n']})"
+                        + ("  too few" if by["full"][g]["n"] < min_n else "")
+                        for g in groups], fontsize=8)
+    ax.invert_yaxis()
+    ax.legend(fontsize=8, frameon=False, loc="lower right")
+    _style(ax, "What Qwen2.5-VL-7B can see at surveillance distance",
+           "recognised above chance (percentage points)", "")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+
+def plot_e7_cameras(cascades_json, out, size=1280):
+    """Cameras per 3090, and what each camera's GPU budget is spent on."""
+    rows = {(r["gate"], r["arm"]): r for r in _e7(cascades_json)["rows"]
+            if r["bin"] == "all" and r["size"] == size}
+    configs = [("dense", "full"), ("motion", "full"), ("person-motion", "full"),
+               ("dense", "roi"), ("motion", "roi"), ("person-motion", "roi")]
+    labels = [f"{g}\n{'full frame' if a == 'full' else 'ROI crop'}\n"
+              f"{100*rows[(g, a)]['gate_recall']:.0f}% covered" for g, a in configs]
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(12.4, 4.3))
+    cams = [rows[k]["cameras_per_gpu"] or 0 for k in configs]
+    cols = [SERIES[1] if a == "full" else SERIES[0] for _, a in configs]
+    a1.bar(range(len(configs)), cams, color=cols, width=0.62)
+    for i, k in enumerate(configs):
+        r = rows[k]
+        a1.annotate(f"{cams[i]:.1f}", (i, cams[i]), textcoords="offset points",
+                    xytext=(0, 3), ha="center", fontsize=9, color=FG)
+    a1.set_xticks(range(len(configs))); a1.set_xticklabels(labels, fontsize=7.5)
+    _style(a1, f"Cameras per RTX 3090 (YOLOv8s @ {size}, answers < 2 s old)", "",
+               "cameras")
+
+    det = [100 * rows[k]["detector_share"] for k in configs]
+    vlm = [100 * (rows[k]["vlm_share"] or 0) for k in configs]
+    a2.bar(range(len(configs)), vlm, color=cols, width=0.62, label="VLM")
+    a2.bar(range(len(configs)), det, bottom=vlm, color=WARN, width=0.62,
+           label="detector (PyTorch fp32, 5 fps)")
+    a2.set_xticks(range(len(configs))); a2.set_xticklabels(labels, fontsize=7.5)
+    a2.set_ylim(0, max(d + v for d, v in zip(det, vlm)) * 1.12)
+    a2.legend(fontsize=8, frameon=False, loc="upper right")
+    _style(a2, "What one camera costs", "", "share of the GPU per camera (%)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
 def comparisons(root="results/sweeps", out_dir="docs/img"):
     """Build the cross-sweep figures the comparison pages need."""
     root, out_dir = Path(root), Path(out_dir)
@@ -394,6 +532,19 @@ def comparisons(root="results/sweeps", out_dir="docs/img"):
                      (plot_corrections, "corrections.png")):
         fn(root, out_dir / name)
         print(f"  wrote {out_dir/name}")
+
+    e7 = Path("results/e7")
+    if (e7 / "gates.json").exists():
+        plot_e7_gates(e7 / "gates.json", out_dir / "e7-gates.png")
+        plot_e7_detector(e7 / "gates.json", out_dir / "e7-detector.png")
+        print(f"  wrote {out_dir/'e7-gates.png'}, {out_dir/'e7-detector.png'}")
+    if (e7 / "cascades.json").exists():
+        sys.path.insert(0, str(Path(__file__).parent))
+        from e7_vlm import GROUPS
+        plot_e7_groups(e7 / "cascades.json", out_dir / "e7-groups.png",
+                       {g: d[0] for g, d in GROUPS.items()})
+        plot_e7_cameras(e7 / "cascades.json", out_dir / "e7-cameras.png")
+        print(f"  wrote {out_dir/'e7-groups.png'}, {out_dir/'e7-cameras.png'}")
 
     tasks = [root / f"e3-{t}.json" for t in TASKS]
     tasks = [p for p in tasks if p.exists()]

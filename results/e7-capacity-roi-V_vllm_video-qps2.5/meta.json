@@ -1,0 +1,111 @@
+{
+  "run_id": "e7-capacity-roi-V_vllm_video-qps2.5",
+  "created_utc": "2026-09-23T19:12:53Z",
+  "git_sha": "54a8d06e28ded9386282183d0b53493c7a76dbd0",
+  "git_dirty": "dirty",
+  "arm": {
+    "id": "V_vllm_video",
+    "model": "Qwen/Qwen2.5-VL-7B-Instruct-AWQ",
+    "base_url": "http://vlm-server:8000",
+    "stack": "vllm",
+    "quantization": "awq_marlin",
+    "notes": "Only the multimodal limit and context length differ from B0_vllm_awq_clean, so an E6 result is about frames rather than about a differently-configured server.\n",
+    "max_tokens": 16,
+    "temperature": 0.0,
+    "extra_body": {},
+    "max_pixels": null,
+    "weight_bytes": 6924000000.0,
+    "decode_weight_bytes": 5571000000.0,
+    "raw": {
+      "id": "V_vllm_video",
+      "stack": "vllm",
+      "model": "Qwen/Qwen2.5-VL-7B-Instruct-AWQ",
+      "revision": "536a35794df8831aa814970ee8f89eff577e7718",
+      "base_url": "http://vlm-server:8000",
+      "quantization": "awq_marlin",
+      "weight_bytes": 6924000000.0,
+      "decode_weight_bytes": 5571000000.0,
+      "max_tokens": 16,
+      "temperature": 0.0,
+      "max_pixels": null,
+      "max_images": 16,
+      "max_model_len": 16384,
+      "server_args": "--no-enable-prefix-caching --no-enable-chunked-prefill --mm-processor-cache-gb 0",
+      "notes": "Only the multimodal limit and context length differ from B0_vllm_awq_clean, so an E6 result is about frames rather than about a differently-configured server.\n"
+    }
+  },
+  "load": {
+    "mode": "open",
+    "rate_qps": 2.5,
+    "concurrency": 1,
+    "repeats": 1,
+    "n_requests": 160,
+    "seed": 0
+  },
+  "prompt_suffix": "",
+  "host": {
+    "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "images": {
+    "harness": "vlmbench-harness@sha256:a364c5de5040c0198f8d602859117cfac85893695d3180be8b93cab6c01a59c7",
+    "server": "vllm/vllm-openai@sha256:c2914767605584b6d8f45686b82de173ecc99e781897aa3d0a66dacd72c51ae1"
+  },
+  "gpu_before": {
+    "available": true,
+    "name": "NVIDIA GeForce RTX 3090",
+    "memory.total": 24576.0,
+    "memory.used": 22983.0,
+    "temperature.gpu": 68.0,
+    "clocks.sm": 1830.0,
+    "clocks.max.sm": 2100.0,
+    "power.draw": 349.23,
+    "power.limit": 350.0,
+    "utilization.gpu": 100.0,
+    "clock_ratio": 0.8714285714285714,
+    "hw_thermal_slowdown": false,
+    "sw_thermal_slowdown": false,
+    "sw_power_cap": true,
+    "hw_power_brake_slowdown": false,
+    "reasons_source": "clocks_event_reasons"
+  },
+  "gpu_after": {
+    "available": true,
+    "name": "NVIDIA GeForce RTX 3090",
+    "memory.total": 24576.0,
+    "memory.used": 22983.0,
+    "temperature.gpu": 69.0,
+    "clocks.sm": 1800.0,
+    "clocks.max.sm": 2100.0,
+    "power.draw": 348.61,
+    "power.limit": 350.0,
+    "utilization.gpu": 100.0,
+    "clock_ratio": 0.8571428571428571,
+    "hw_thermal_slowdown": false,
+    "sw_thermal_slowdown": false,
+    "sw_power_cap": true,
+    "hw_power_brake_slowdown": false,
+    "reasons_source": "clocks_event_reasons"
+  },
+  "thermal": {
+    "n_samples": 70,
+    "n_busy_samples": 56,
+    "util_mean": 78.74285714285715,
+    "temp_max": 70.0,
+    "temp_mean": 67.67142857142858,
+    "checked": true,
+    "clock_ratio_p50": 0.8642857142857143,
+    "sm_clock_min": 1725.0,
+    "sm_clock_max": 1920.0,
+    "power_draw_max": 350.71,
+    "power_limit": 350.0,
+    "throttled": true,
+    "thermal_throttled": false,
+    "power_capped": true,
+    "reason": null
+  },
+  "not_measured": [
+    "accuracy (see e7_vlm.py)",
+    "detector sharing the GPU"
+  ]
+}
