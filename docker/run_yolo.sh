@@ -23,8 +23,12 @@ if [ "${ALLOW_CONCURRENT:-0}" != "1" ]; then
   fi
 fi
 
+NET="${BENCH_NET:-vlmbench}"
+docker network inspect "$NET" >/dev/null 2>&1 || docker network create "$NET" >/dev/null
+
 exec docker run --rm -i --gpus all \
   --name "yolo-$$" \
+  --network "$NET" \
   --ipc host \
   -v "$PWD:/work" -w /work \
   -v "$MODELS:/models:ro" \

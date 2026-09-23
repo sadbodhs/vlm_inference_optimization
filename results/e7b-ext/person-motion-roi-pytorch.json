@@ -1,0 +1,39 @@
+{
+ "meta": {
+  "experiment": "e7b-live",
+  "gate": "person-motion",
+  "arm": "roi",
+  "detector": "pytorch",
+  "duration_s": 120.0,
+  "warmup_s": 10.0,
+  "fresh_s": 2.0,
+  "stale_drop_s": 1.0,
+  "max_pixels": 451584
+ },
+ "rows": [
+  {
+   "cams": 9,
+   "gate": "person-motion",
+   "arm": "roi",
+   "detector": "pytorch",
+   "windows": 540,
+   "sent": 162,
+   "ok": 162,
+   "call_rate": 0.3,
+   "staleness_p50_s": 1.6235613822937012,
+   "staleness_p95_s": 2.1476922035217285,
+   "fresh_fraction": 0.8580246913580247,
+   "ttft_p50_s": 0.9067502021789551,
+   "det_frames": 5859,
+   "det_drop_frac": 0.0,
+   "det_latency_p50_s": 0.1867990493774414,
+   "det_latency_p99_s": 0.5475740432739258,
+   "emit_late_p99_s": 0.001982450485229492,
+   "client_bound": false,
+   "gpu_util_mean": 82.8076923076923,
+   "gpu_mem_max_mib": 22156.0,
+   "supported": false
+  }
+ ],
+ "max_supported": 0
+}

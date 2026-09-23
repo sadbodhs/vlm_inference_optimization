@@ -684,6 +684,103 @@ def plot_e7_capacity(root, out, fresh_ms=2000):
     fig.tight_layout()
     fig.savefig(out, dpi=160)
 
+
+# ── E7b · the live cascade ───────────────────────────────────────────────────
+E7B_CONFIGS = [("dense-full-none", "VLM alone, every window", WARN, "o"),
+               ("motion-full-pytorch", "motion gate, full frame, PyTorch YOLO", SERIES[1], "o"),
+               ("motion-full-trt", "motion gate, full frame, TensorRT YOLO", SERIES[1], "s"),
+               ("person-motion-roi-pytorch", "person-motion, ROI crop, PyTorch YOLO", SERIES[0], "o"),
+               ("person-motion-roi-trt", "person-motion, ROI crop, TensorRT YOLO", SERIES[0], "s")]
+
+
+def e7b_rows(tag, roots=("results/e7b", "results/e7b-ext")):
+    """Every live run for one configuration, main sweep and extension merged."""
+    rows = {}
+    for r in roots:
+        f = Path(r) / f"{tag}.json"
+        if f.exists():
+            for row in json.loads(f.read_text())["rows"]:
+                rows[row["cams"]] = row
+    return [rows[k] for k in sorted(rows)]
+
+
+def e7b_max_supported(rows):
+    """Highest N such that it and every tested smaller N passed."""
+    best = 0
+    for r in rows:
+        if not r["supported"]:
+            break
+        best = r["cams"]
+    return best
+
+
+def plot_e7b_live(out):
+    fig, (a1, a2, a3) = plt.subplots(1, 3, figsize=(14.2, 4.3))
+    for tag, lab, c, mk in E7B_CONFIGS:
+        rows = e7b_rows(tag)
+        if not rows:
+            continue
+        ls = "--" if mk == "s" else "-"
+        n = [r["cams"] for r in rows]
+        a1.plot(n, [100 * (r["fresh_fraction"] or 0) for r in rows], mk + ls, color=c, lw=1.8,
+                ms=6, label=lab)
+        if tag != "dense-full-none":
+            a2.plot(n, [1000 * (r["det_latency_p99_s"] or 0) for r in rows], mk + ls, color=c,
+                    lw=1.8, ms=6, label=lab)
+        # points, not lines: runs come from two server sessions, and vLLM's footprint
+        # carries over within a session, so adjacent N are not comparable states
+        for r in rows:
+            a3.plot(r["cams"], (r["gpu_mem_max_mib"] or 0) / 1024, mk, color=c, ms=7,
+                    mfc=c if r["supported"] else "none", mec=c, mew=1.5)
+    a1.axhline(95, color=ACCENT, lw=1, ls=":")
+    a1.annotate("95% fresh (< 2 s) required", (1, 95), textcoords="offset points",
+                xytext=(0, -12), fontsize=7, color=FG)
+    a1.set_ylim(-3, 104)
+    a1.legend(fontsize=6.8, frameon=False, loc="lower left")
+    _style(a1, "Answers under 2 s old", "cameras", "fresh answers (%)")
+    a2.axhline(1000, color=ACCENT, lw=1, ls=":")
+    a2.annotate("frames older than 1 s are dropped", (1, 1000), textcoords="offset points",
+                xytext=(0, 4), fontsize=7, color=FG)
+    a2.set_yscale("log")
+    _style(a2, "Detector latency p99, sharing the GPU", "cameras", "capture to detections (ms, log)")
+    a3.axhline(24.0, color=ACCENT, lw=1, ls=":")
+    a3.annotate("24 GiB: the card", (1, 24.0), textcoords="offset points", xytext=(0, 4),
+                fontsize=7, color=FG)
+    a3.set_ylim(15, 25)
+    a3.plot([], [], "o", color=FG, label="met the freshness bar")
+    a3.plot([], [], "o", mfc="none", mec=FG, label="overloaded")
+    a3.legend(fontsize=7.5, frameon=False, loc="lower right")
+    _style(a3, "Peak GPU memory per run, both models", "cameras", "GiB")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
+
+def plot_e7b_model(out, modelled):
+    """Measured supported cameras against the E7 time-sharing model."""
+    tags = [t for t in E7B_CONFIGS if e7b_rows(t[0])]
+    fig, ax = plt.subplots(figsize=(8.6, 4.2))
+    w = 0.38
+    for i, (tag, lab, c, _) in enumerate(tags):
+        meas = e7b_max_supported(e7b_rows(tag))
+        mod = modelled.get(tag)
+        ax.bar(i + w / 2, meas, width=w, color=c)
+        ax.annotate(f"{meas}", (i + w / 2, meas), textcoords="offset points", xytext=(0, 3),
+                    ha="center", fontsize=9, color=FG)
+        if mod:
+            ax.bar(i - w / 2, mod, width=w, color="none", edgecolor=c, lw=1.4, hatch="//")
+            ax.annotate(f"{mod:.1f}", (i - w / 2, mod), textcoords="offset points",
+                        xytext=(0, 3), ha="center", fontsize=8, color=FG)
+    ax.set_xticks(range(len(tags)))
+    ax.set_xticklabels([t[1].replace(", ", "\n", 1) for t in tags], fontsize=7)
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(facecolor="none", edgecolor=FG, hatch="//",
+                             label="E7 model (detector and VLM measured separately)"),
+                       Patch(facecolor=WARN, label="E7b measured live (both on the card)")],
+              fontsize=8, frameon=False, loc="upper left")
+    _style(ax, "Cameras one RTX 3090 carries: modelled vs measured", "", "cameras")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
 def comparisons(root="results/sweeps", out_dir="docs/img"):
     """Build the cross-sweep figures the comparison pages need."""
     root, out_dir = Path(root), Path(out_dir)
@@ -712,6 +809,19 @@ def comparisons(root="results/sweeps", out_dir="docs/img"):
                      (plot_e7_capacity, "e7-capacity.png")):
         fn(root, out_dir / name)
         print(f"  wrote {out_dir/name}")
+
+    if Path("results/e7b").exists():
+        plot_e7b_live(out_dir / "e7b-live.png")
+        cas = Path("results/e7/cascades.json")
+        modelled = {}
+        if cas.exists():
+            rows = {(r["gate"], r["arm"]): r for r in json.loads(cas.read_text())["rows"]
+                    if r["bin"] == "all" and r["size"] == 1280}
+            modelled = {"dense-full-none": rows[("dense", "full")]["cameras_per_gpu"],
+                        "motion-full-pytorch": rows[("motion", "full")]["cameras_per_gpu"],
+                        "person-motion-roi-pytorch": rows[("person-motion", "roi")]["cameras_per_gpu"]}
+        plot_e7b_model(out_dir / "e7b-model.png", modelled)
+        print(f"  wrote {out_dir/'e7b-live.png'}, {out_dir/'e7b-model.png'}")
 
     tasks = [root / f"e3-{t}.json" for t in TASKS]
     tasks = [p for p in tasks if p.exists()]

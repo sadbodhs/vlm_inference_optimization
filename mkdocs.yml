@@ -66,6 +66,7 @@ nav:
       - E4 · Live video: e4-video.md
       - E6 · Temporal budget: e6-temporal-budget.md
       - E7 · The cascade: e7-cascade.md
+      - E7b · The cascade, live: e7b-live.md
       - vLLM vs SGLang: stacks.md
       - Qwen2.5 vs Qwen3: models.md
   - Corrections: corrections.md

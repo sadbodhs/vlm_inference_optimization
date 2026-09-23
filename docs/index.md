@@ -38,7 +38,7 @@ trades accuracy, so the deliverable is a frontier, not a ranking.
 | Live video | **8 RTSP streams** at 1 fps inside a 2 s freshness budget |
 | One frame answers "what is happening" | `action` **0.90 from a single frame**, +0.08 from eight |
 | Frames buy ordering | `order` **0.41 → 0.87**, chance to solved |
-| A detector gate beats the serving layer | YOLO → VLM cascade: **1.8 → 4.1 cameras** per 3090 (7.1 with ROI crops), 97–99% of activities kept |
+| A detector gate beats the serving layer | YOLO → VLM cascade, both on one 3090, live: **5 → 8 cameras** (10 with ROI crops + TensorRT YOLO), 97–99% of activities kept |
 
 ![Accuracy retained against time to first token, per task](img/headline.png){ width="680" }
 

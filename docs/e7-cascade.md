@@ -3,13 +3,14 @@
 **Question:** on real surveillance video, how much VLM work does a cheap detector
 gate save — and what does it cost in activities the VLM never gets to see?
 
-**Answer:** a YOLO gate roughly **doubles the cameras one 3090 can watch** (1.8 →
-3.5–4.1), keeps **97–99% of annotated activities** in front of the VLM, loses **at
-most 1 point** of genuine recognition, and removes a quarter to a third of the
-false alarms. With a crop to the detected people as well, **7.1 cameras**. The
-savings are a property of the scene: **98%** of calls on an empty camera, **12–15%**
-on a busy one. And the weak link is not the gate — it is what a 7B VLM can see at
-surveillance distance.
+**Answer:** a YOLO gate keeps **97–99% of annotated activities** in front of the
+VLM, loses **at most 1 point** of genuine recognition, and removes a quarter to a
+third of the false alarms, while sending the VLM only 38–45% of windows. Measured
+live with both models on the card ([E7b](e7b-live.md)), that takes one 3090 from
+**5 to 8 cameras**, and to **10** with ROI crops and a TensorRT detector. The
+savings are a property of the scene: **98%** of calls on an empty camera,
+**12–15%** on a busy one. And the weak link is not the gate — it is what a 7B VLM
+can see at surveillance distance.
 
 This is the bench's "next up" question — *do application-level tricks dwarf the
 serving layer?* — asked of a VLM. Most serving-layer changes measured in this study moved cost by
@@ -152,9 +153,12 @@ measured YOLOv8s at ~1.2 ms per 640 frame under TensorRT, against 3.4 ms here in
 PyTorch. If the same ~3× held at 1280 (not measured), the detector's share would
 fall from 3.5% to ~1.2% per camera. The detector's serving stack matters again.
 
-!!! note "A model, not a co-hosted measurement"
-    Cameras per GPU assumes detector and VLM time-share one GPU linearly. They were
-    measured separately; a live run with both on the card is not in this page.
+!!! warning "Superseded by the live measurement"
+    This table is a time-sharing *model* of a detector and a VLM measured
+    separately. [E7b](e7b-live.md) ran both on the card with real-time cameras:
+    **5 / 8 / 10** cameras for VLM-alone / `motion` gate / `person-motion` + ROI +
+    TensorRT. The model undercounts most where the VLM does all the work (1.8 vs 5),
+    because its capacity came from a Poisson sweep and cameras arrive on a beat.
 
 ## Predictions: which held
 
@@ -183,7 +187,8 @@ fall from 3.5% to ~1.2% per camera. The detector's serving stack matters again.
 
 ## Not measured
 
-A tracker between detections; the detector and VLM running on the card at the same
-time; TensorRT for the detector; night, rain or UAV footage; a stronger VLM. The
+A tracker between detections; night, rain or UAV footage; a stronger VLM. (The
+detector and VLM on the card together, and TensorRT for the detector, are measured
+in [E7b](e7b-live.md).) The
 recognition task is a coarse eight-group choice, not the 37-way ActEV task — this
 measures whether the cascade preserves what the VLM can see, not the VLM's ceiling.
