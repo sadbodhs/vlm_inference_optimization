@@ -8,7 +8,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-IMAGE="${YOLO_IMAGE:-triton-bench:v3}"
+IMAGE="${YOLO_IMAGE:-vlmbench-yolo:latest}"   # docker/Dockerfile.yolo
 MODELS="${MODELS_DIR:-$HOME/sadbodh/model_exports}"
 
 if [ "${ALLOW_CONCURRENT:-0}" != "1" ]; then

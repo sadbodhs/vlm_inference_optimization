@@ -1,0 +1,8 @@
+# The detector image for E7: the CV study's triton-bench:v3 (torch, ultralytics,
+# OpenCV, TensorRT 10.7.0 system libraries) plus the TensorRT Python bindings of
+# the SAME version, so ultralytics can load a .engine with identical pre- and
+# post-processing to the PyTorch path. A mismatched binding would load against
+# different libraries than the ones trtexec and the engine were built with.
+FROM triton-bench:v3
+RUN pip install --no-cache-dir --disable-pip-version-check tensorrt-cu12==10.7.0 \
+ && python3 -c "import tensorrt as t; assert t.__version__.startswith('10.7.0'), t.__version__; print('tensorrt', t.__version__)"

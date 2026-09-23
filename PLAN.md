@@ -501,3 +501,55 @@ A tracker between detections, re-identification across cameras, alert logic on
 the VLM's answer, and anything night-time or UAV. Recognition uses a coarse
 activity-group list, not the 37-way ActEV task — this measures whether the cascade
 preserves *what the VLM can see*, not the VLM's ceiling on ActEV.
+
+## 11. E7b · The live cascade, co-hosted — pre-registered 2026-09-23, before any measurement
+
+**Question.** E7's "cameras per 3090" was a time-sharing *model* of a detector and a
+VLM measured separately. Run both on the card at once, with cameras arriving in
+real time: how many cameras does one 3090 actually carry?
+
+### Feasibility (measured before registering, so stated as fact, not prediction)
+
+vLLM at `--gpu-memory-utilization 0.80` holds 17,981 MiB (KV cache 168k tokens —
+E7 requests are ~1.3k tokens, so capacity is not KV-bound). YOLOv8s at 1280 running
+flat out beside it adds ~530 MiB: **18,514 of 24,576 MiB**, ~6 GB free. A TensorRT
+FP16 engine of the same model (TensorRT 10.7) gives the same detections on a test
+frame. Both models fit; both run.
+
+### Design
+
+- **One GPU, two processes:** vLLM (V_vllm_video, util 0.80) and one detector
+  process (docker/Dockerfile.yolo) running cameras, detector, gate and VLM client.
+- **Cameras:** N simulated cameras, each replaying a different E7 MEVA clip (bins
+  interleaved so every N has a mixed scene), emitting the 5 fps detection frames on
+  a real-time clock, random start offset per camera. Video decode is **not** part of
+  the measurement: frames are pre-extracted JPEGs (a deployment decodes on NVDEC or
+  at the camera).
+- **Detector:** one worker, batch 1, frames processed in arrival order; a frame older
+  than 1 s when its turn comes is dropped (a stale detection gates nothing).
+- **Gate:** evaluated when a window's last sampled frame is detected; the request
+  carries the window's two VLM frames. Dense sends at the second VLM frame without
+  waiting. Staleness = answer complete − capture time of the newest frame sent.
+- **Runs:** 120 s per N after a 10 s warm-up.
+  - VLM alone, dense, full frame — the baseline at util 0.80
+  - `motion` + full frame, PyTorch detector
+  - `person-motion` + ROI crop, PyTorch detector
+  - `person-motion` + ROI crop, TensorRT detector
+  - `motion` + full frame, TensorRT detector
+- **Supported** = ≥ 95% of answers under 2 s old **and** < 1% of detector frames
+  dropped. The result is the highest supported N.
+
+### Predictions
+
+6. Measured cameras land within **±30%** of E7's time-sharing model for each config.
+7. The model **overstates** the detector's cost — it counted 7.0 ms of wall clock
+   (CPU letterbox and NMS included) as GPU time — so gated configs support **at
+   least** as many cameras as modelled.
+8. TensorRT raises supported cameras for `person-motion` + ROI by **≥ 15%** over
+   PyTorch.
+
+### Not measured
+
+Video decode; more than one detector worker; detector batching across cameras;
+MPS or any GPU partitioning — the two processes time-slice by default, which is
+what an untuned deployment does.
