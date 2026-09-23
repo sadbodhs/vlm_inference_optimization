@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "experiment": "e3-token-budget",
+    "arm": "B0_vllm_awq_clean",
+    "dataset": "data/chartqa/manifest.jsonl",
+    "scorer": "relaxed",
+    "budgets": [
+      50176,
+      200704,
+      451584,
+      802816,
+      1605632
+    ],
+    "limit": 400,
+    "resize": "client"
+  },
+  "rows": [
+    {
+      "max_pixels": 50176,
+      "max_edge_sq": 224,
+      "prompt_tokens": 101.2225,
+      "ttft_p50_ms": 48.715811455622315,
+      "ttft_p95_ms": 50.654397532343864,
+      "accuracy": 0.2975,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 200704,
+      "max_edge_sq": 448,
+      "prompt_tokens": 287.0675,
+      "ttft_p50_ms": 102.86365053616464,
+      "ttft_p95_ms": 104.06374113517813,
+      "accuracy": 0.8725,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 451584,
+      "max_edge_sq": 672,
+      "prompt_tokens": 577.25,
+      "ttft_p50_ms": 202.25281646708027,
+      "ttft_p95_ms": 205.85946416831575,
+      "accuracy": 0.8925,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 802816,
+      "max_edge_sq": 896,
+      "prompt_tokens": 628.7625,
+      "ttft_p50_ms": 212.54984301049262,
+      "ttft_p95_ms": 303.7294740439387,
+      "accuracy": 0.895,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 1605632,
+      "max_edge_sq": 1267,
+      "prompt_tokens": 637.5075,
+      "ttft_p50_ms": 212.63299050042406,
+      "ttft_p95_ms": 303.96898351609656,
+      "accuracy": 0.8975,
+      "n_scored": 400
+    }
+  ]
+}

@@ -7,9 +7,10 @@ What these numbers do **not** entitle you to claim.
 - **Two checkpoints, one family.** Qwen2.5-VL-7B-AWQ and Qwen3-VL-8B-AWQ. No
   InternVL, no FP16 comparison — so nothing here separates "how VLM serving behaves" from "how
   this checkpoint behaves on this card".
-- **One dataset for accuracy.** DocVQA. ChartQA, TextVQA and InfographicVQA are
-  frozen on disk and unrun, so the claim that the token-budget cliff is
-  task-dependent remains a **hypothesis**. This is the largest open gap.
+- **No text-free VQA.** DocVQA, ChartQA and TextVQA all require reading something.
+  A pure-appearance task (VQAv2-style) is untested, so "natural images tolerate
+  aggressive pruning" remains unmeasured — see [the per-task
+  frontier](task-frontier.md).
 - **Short outputs only.** Every accuracy number comes from ~6-token answers, so
   everything measured is prefill-dominated. Decode at 92.7% of roofline is
   currently a rounding error against 700 ms of prefill; on a reasoning workload it

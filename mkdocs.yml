@@ -60,6 +60,7 @@ nav:
       - E1 · Decode vs the roofline: e1-roofline.md
       - E2 · What a vision token costs: e2-vision-tokens.md
       - E3 · The accuracy frontier: e3-token-budget.md
+      - The per-task frontier: task-frontier.md
       - E0 · Capacity and goodput: e0-saturation.md
       - E4 · Live video: e4-video.md
       - E6 · Temporal budget: e6-temporal-budget.md

@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "experiment": "e3-token-budget",
+    "arm": "B0_vllm_awq_clean",
+    "dataset": "data/textvqa/manifest.jsonl",
+    "scorer": "em",
+    "budgets": [
+      50176,
+      200704,
+      451584,
+      802816,
+      1605632
+    ],
+    "limit": 400,
+    "resize": "client"
+  },
+  "rows": [
+    {
+      "max_pixels": 50176,
+      "max_edge_sq": 224,
+      "prompt_tokens": 95.0375,
+      "ttft_p50_ms": 45.994093525223434,
+      "ttft_p95_ms": 49.668075871886685,
+      "accuracy": 0.53,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 200704,
+      "max_edge_sq": 448,
+      "prompt_tokens": 281.2325,
+      "ttft_p50_ms": 99.96551147196442,
+      "ttft_p95_ms": 106.41022131312639,
+      "accuracy": 0.7925,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 451584,
+      "max_edge_sq": 672,
+      "prompt_tokens": 590.1875,
+      "ttft_p50_ms": 199.89153899950907,
+      "ttft_p95_ms": 207.2417215036694,
+      "accuracy": 0.86,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 802816,
+      "max_edge_sq": 896,
+      "prompt_tokens": 977.05,
+      "ttft_p50_ms": 334.1030685114674,
+      "ttft_p95_ms": 344.2152463248931,
+      "accuracy": 0.8725,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 1605632,
+      "max_edge_sq": 1267,
+      "prompt_tokens": 1029.185,
+      "ttft_p50_ms": 335.7775065815076,
+      "ttft_p95_ms": 460.1881707669236,
+      "accuracy": 0.88,
+      "n_scored": 400
+    }
+  ]
+}

@@ -33,6 +33,7 @@ trades accuracy, so the deliverable is a frontier, not a ranking.
 | Decode is near the physical limit | **149.1 tok/s = 88.7%** of the 936 GB/s roofline |
 | A vision token costs | **0.32 ms** of TTFT, over a 17.5 ms floor (R² = 0.9995) |
 | DocVQA accuracy saturates | at **~1,000 vision tokens**; 4× beyond buys +0.011 ANLS |
+| The budget is task-dependent | ChartQA saturates at **577 tokens**, DocVQA needs **1,034** |
 | Throughput lies after saturation | raw ceiling **1.56 req/s**, usable **0.45 req/s** |
 | Live video | **8 RTSP streams** at 1 fps inside a 2 s freshness budget |
 | One frame answers "what is happening" | `action` **0.90 from a single frame**, +0.08 from eight |
