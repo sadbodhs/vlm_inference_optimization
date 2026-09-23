@@ -23,6 +23,9 @@ class Sample:
     image_b64: str | None = None
     image_mime: str = "png"
     image_px: int | None = None
+    # Video: several frames in one prompt. A clip costs frames x tokens-per-frame,
+    # so these two are in direct competition inside a fixed context budget.
+    frames_b64: list[str] = field(default_factory=list)
 
     def data_url(self) -> str:
         if self.image_b64:
@@ -31,6 +34,25 @@ class Sample:
         suffix = Path(self.image_path).suffix.lstrip(".").lower() or "png"
         mime = "jpeg" if suffix in {"jpg", "jpeg"} else suffix
         return f"data:image/{mime};base64,{base64.b64encode(raw).decode()}"
+
+    def with_frames(self, frames: list[bytes], max_pixels: int | None,
+                    mime: str = "jpeg") -> "Sample":
+        """Copy carrying `frames`, each re-encoded within the per-frame budget.
+
+        Done up front, outside the timed path: decoding and resizing N frames
+        inside the request loop would bill video preprocessing to the server's TTFT.
+        """
+        import base64 as _b64
+
+        from .imaging import resize_to_budget
+
+        out, px = [], 0
+        for raw in frames:
+            data, _, h, w = resize_to_budget(raw, max_pixels)
+            out.append(_b64.b64encode(data).decode())
+            px += h * w
+        return Sample(id=self.id, question=self.question, answers=list(self.answers),
+                      frames_b64=out, image_mime=mime, image_px=px)
 
     def resized(self, max_pixels: int | None) -> "Sample":
         """Copy of this sample with the image re-encoded within a pixel budget.
@@ -51,11 +73,21 @@ class Sample:
 
     def to_messages(self, prompt_suffix: str = "") -> list[dict]:
         content: list[dict] = []
-        if self.image_path or self.image_b64:
+        if self.frames_b64:
+            # Frames first, in temporal order. Anything asking about direction,
+            # speed or ordering depends on that order being preserved.
+            for f in self.frames_b64:
+                content.append({"type": "image_url", "image_url": {
+                    "url": f"data:image/{self.image_mime};base64,{f}"}})
+        elif self.image_path or self.image_b64:
             content.append({"type": "image_url",
                             "image_url": {"url": self.data_url()}})
         content.append({"type": "text", "text": self.question + prompt_suffix})
         return [{"role": "user", "content": content}]
+
+    @property
+    def n_images(self) -> int:
+        return len(self.frames_b64) or (1 if (self.image_b64 or self.image_path) else 0)
 
 
 def load_manifest(path: str | Path, limit: int | None = None) -> list[Sample]:

@@ -35,6 +35,9 @@ trades accuracy, so the deliverable is a frontier, not a ranking.
 | DocVQA accuracy saturates | at **~1,000 vision tokens**; 4× beyond buys +0.011 ANLS |
 | Throughput lies after saturation | raw ceiling **1.56 req/s**, usable **0.45 req/s** |
 | Live video | **8 RTSP streams** at 1 fps inside a 2 s freshness budget |
+| One frame answers "what is happening" | `action` **0.90 from a single frame**, +0.08 from eight |
+| Frames buy ordering | `order` **0.41 → 0.87**, chance to solved |
+| Speed is unrecoverable | **at chance regardless of frame count** — uniform sampling discards the timing |
 | Past that knee | throughput **rises 70%** while freshness drops to **zero** |
 | Synthetic images | overstate capacity by **6.4×** versus real document pages |
 | Caching is a workload property | **3×** on repeated inputs, **1.00×** on distinct ones |

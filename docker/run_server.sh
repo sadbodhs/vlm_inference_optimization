@@ -53,6 +53,12 @@ case "${1:-start}" in
     QUANT=$(arm_field "$ARM" quantization)
     REV=$(arm_field "$ARM" revision)
     EXTRA=$(arm_field "$ARM" server_args)
+    # A video prompt carries several frames; the default of one image per prompt
+    # rejects them outright.
+    MAXIMG=$(arm_field "$ARM" max_images)
+    MAXIMG="${MAXIMG:-1}"
+    MAXLEN=$(arm_field "$ARM" max_model_len)
+    MAXLEN="${MAXLEN:-${MAX_MODEL_LEN:-8192}}"
     UTIL="${GPU_UTIL:-0.90}"
     [ -n "$MODEL" ] || { echo "no 'model:' in $ARM" >&2; exit 1; }
 
@@ -66,9 +72,9 @@ case "${1:-start}" in
         IMAGE="${VLLM_IMAGE:-vllm/vllm-openai:v0.29.0}"
         PORT="${SERVER_PORT:-8000}"
         ARGS=(--model "$MODEL" --port "$PORT"
-              --max-model-len "${MAX_MODEL_LEN:-8192}"
+              --max-model-len "$MAXLEN"
               --gpu-memory-utilization "$UTIL"
-              --limit-mm-per-prompt '{"image":1}')
+              --limit-mm-per-prompt "{\"image\":$MAXIMG}")
         [ -n "$QUANT" ] && [ "$QUANT" != "null" ] && ARGS+=(--quantization "$QUANT")
         [ -n "$REV" ] && ARGS+=(--revision "$REV")
         ENTRY=()
@@ -93,7 +99,7 @@ case "${1:-start}" in
         MEMFRAC="${MEMFRAC:-0.79}"
         ARGS=(python3 -m sglang.launch_server --model-path "$MODEL"
               --host 0.0.0.0 --port "$PORT"
-              --context-length "${MAX_MODEL_LEN:-8192}"
+              --context-length "$MAXLEN"
               --mem-fraction-static "$MEMFRAC")
         [ -n "$QUANT" ] && [ "$QUANT" != "null" ] && ARGS+=(--quantization "$QUANT")
         [ -n "$REV" ] && ARGS+=(--revision "$REV")

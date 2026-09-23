@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "experiment": "e6-temporal-budget",
+    "arm": "V_vllm_video",
+    "manifest": "data/tempcompass/manifest.jsonl",
+    "frames": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "max_pixels_per_frame": 200704,
+    "limit": 200,
+    "dims": [
+      "action",
+      "attribute_change",
+      "direction",
+      "order",
+      "speed"
+    ],
+    "chance_level": 0.3333333333333333,
+    "prompt_suffix": "\nAnswer with the option letter only."
+  },
+  "rows": [
+    {
+      "frames": 1,
+      "prompt_tokens": 308.4,
+      "ttft_p50_ms": 104.21945998677984,
+      "accuracy": 0.54,
+      "n_scored": 200,
+      "skipped_clips": 0,
+      "action": 0.8979591836734694,
+      "attribute_change": 0.4117647058823529,
+      "direction": 0.43902439024390244,
+      "order": 0.40540540540540543,
+      "speed": 0.4358974358974359
+    },
+    {
+      "frames": 2,
+      "prompt_tokens": 555.61,
+      "ttft_p50_ms": 180.25752698304132,
+      "accuracy": 0.665,
+      "n_scored": 200,
+      "skipped_clips": 0,
+      "action": 0.9183673469387755,
+      "attribute_change": 0.6176470588235294,
+      "direction": 0.5365853658536586,
+      "order": 0.8108108108108109,
+      "speed": 0.38461538461538464
+    },
+    {
+      "frames": 4,
+      "prompt_tokens": 1050.03,
+      "ttft_p50_ms": 334.73038248484954,
+      "accuracy": 0.705,
+      "n_scored": 200,
+      "skipped_clips": 0,
+      "action": 0.9591836734693877,
+      "attribute_change": 0.7058823529411765,
+      "direction": 0.5365853658536586,
+      "order": 0.8648648648648649,
+      "speed": 0.41025641025641024
+    },
+    {
+      "frames": 8,
+      "prompt_tokens": 2038.87,
+      "ttft_p50_ms": 654.5549730071798,
+      "accuracy": 0.71,
+      "n_scored": 200,
+      "skipped_clips": 0,
+      "action": 0.9795918367346939,
+      "attribute_change": 0.7058823529411765,
+      "direction": 0.5609756097560976,
+      "order": 0.8648648648648649,
+      "speed": 0.38461538461538464
+    }
+  ]
+}

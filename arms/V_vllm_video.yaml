@@ -1,0 +1,29 @@
+# Video arm: same model, stack and settings as B0_vllm_awq_clean, with the two
+# things a clip needs -- several images per prompt, and context for them.
+#
+# A clip costs frames x tokens-per-frame. At 8 frames and ~1,000 tokens each that
+# is 8,000 tokens of context before the question is even asked, which is why the
+# default 8,192 does not stretch and the per-frame budget has to be chosen against
+# the frame count rather than independently of it.
+id: V_vllm_video
+stack: vllm
+model: Qwen/Qwen2.5-VL-7B-Instruct-AWQ
+revision: 536a35794df8831aa814970ee8f89eff577e7718
+base_url: http://vlm-server:8000
+quantization: awq_marlin
+
+weight_bytes: 6.924e+9
+decode_weight_bytes: 5.571e+9
+
+max_tokens: 16
+temperature: 0.0
+max_pixels: null          # the per-frame budget is applied client-side by E6
+
+max_images: 16
+max_model_len: 16384
+
+server_args: --no-enable-prefix-caching --no-enable-chunked-prefill --mm-processor-cache-gb 0
+
+notes: >
+  Only the multimodal limit and context length differ from B0_vllm_awq_clean, so
+  an E6 result is about frames rather than about a differently-configured server.

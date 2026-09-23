@@ -7,6 +7,12 @@ ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     MPLCONFIGDIR=/tmp/mpl
 
+# ffmpeg for E6: clips are decoded to frames client-side, before the request is
+# timed, so video decode is never billed to the server's TTFT.
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ffmpeg \
+ && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /work
 
 COPY requirements.txt /tmp/requirements.txt
