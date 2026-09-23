@@ -47,16 +47,53 @@ becomes `'43'`, `'Reynolds Tobacco Co.'` becomes `'Reynolds Tobacco'`.
 Ruled out as a harness artefact: streamed and non-streamed output from the same
 server match on 12/12 samples, so the client is not dropping a final token.
 
-!!! warning "Unresolved — stated as a hypothesis, not a finding"
-    The gap **tracks vision-token count** (0.031 → 0.043 → 0.051 at 287 / 599 /
-    1,032 tokens), which is the shape of numerical divergence accumulating in the
-    vision tower rather than random sampling noise.
+!!! failure "Tested, and the hypothesis was wrong"
+    The gap **tracks vision-token count** (0.031 → 0.043 → 0.051), which is the
+    shape of numerical divergence accumulating in the vision tower. SGLang defaults
+    to `triton_attn` there while vLLM does not, so the obvious explanation was a
+    different vision attention kernel.
 
-    SGLang logs `Multimodal attention backend not set. Use triton_attn`, so the two
-    stacks run the vision encoder on **different kernels**. Confirming that means
-    pinning both to the same backend and re-running. Until then this is a measured
-    difference with an unproven cause.
+    Both stacks were pinned to the one backend they share — vLLM `TORCH_SDPA`,
+    SGLang `sdpa`, each verified in the server's own startup log — and E3 re-run at
+    n=500:
+
+    | budget | vLLM-SDPA | SGLang-SDPA | gap | *(gap before)* |
+    |---|---|---|---|---|
+    | 451,584 | 0.911 | 0.870 | **0.041** | *0.043* |
+    | 802,816 | 0.944 | 0.893 | **0.051** | *0.050* |
+    | 1,605,632 | 0.957 | 0.904 | **0.053** | *0.049* |
+
+    **Unchanged.** The vision attention kernel is not the cause.
+
+### What is ruled out
+
+- **Inputs** — prompt token counts match to the decimal, so tokenisation and the
+  chat template are identical.
+- **Weights** — same snapshot, loaded from the same cache.
+- **Sampling** — greedy on both; 74.4% of outputs match byte for byte.
+- **The harness** — streamed and non-streamed output from one server match 12/12.
+- **Vision attention kernel** — pinned to SDPA on both, gap unchanged.
+
+What remains: numerical differences elsewhere in the forward pass — the 4-bit
+dequantisation kernel, RoPE/mRoPE for vision positions, normalisation, or the
+projector. **Unresolved.**
+
+### A side finding worth more than the test
+
+Forcing SDPA costs speed, and costs SGLang far more:
+
+| budget | vLLM default → SDPA | SGLang `triton_attn` → SDPA |
+|---|---|---|
+| 451,584 | +6% TTFT | **+19%** |
+| 802,816 | +6% | **+34%** |
+| 1,605,632 | +7% | **+66%** |
+
+Accuracy moved by ≤0.005 in both cases. So SGLang's `triton_attn` default is a
+**real optimisation — up to 66% faster TTFT at no measurable accuracy cost** — and
+not the quality compromise this test was built to expose.
 
 **The honest headline: SGLang is 2.4% faster at decode and 24% faster to first
-token, and 3–5 ANLS points less accurate on DocVQA.** Publishing the speed half
-alone would be the failure R3 exists to prevent.
+token, and 4–5 ANLS points less accurate on DocVQA with every variable we can
+control held identical.** The cause is unknown, and the most plausible explanation
+has been tested and refuted. Publishing the speed half alone would be the failure
+R3 exists to prevent.

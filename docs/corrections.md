@@ -73,6 +73,19 @@ the LLM weights — the bf16 vision tower runs once in prefill — so the real b
 roofline**: impossible. The gate fired correctly, on a wrong model rather than
 wrong code.
 
+## The hypothesis that was tested and failed
+
+The SGLang accuracy gap grew with vision-token count, which is the signature of
+numerical divergence accumulating in the vision tower — and SGLang defaults to a
+different vision attention kernel than vLLM. A clean mechanism, fitting the data.
+
+Pinning both stacks to the same backend changed the gap by 0.002. The mechanism
+was wrong.
+
+It is on this page because a plausible story that fits the data is not evidence,
+and the only thing separating this from the four entries above is that it was
+tested before being published.
+
 ## The pattern
 
 Every one of these **reported plausible success while doing something other than
