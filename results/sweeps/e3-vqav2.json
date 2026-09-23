@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "experiment": "e3-token-budget",
+    "arm": "B0_vllm_awq_clean",
+    "dataset": "data/vqav2/manifest.jsonl",
+    "scorer": "em",
+    "budgets": [
+      50176,
+      200704,
+      451584,
+      802816,
+      1605632
+    ],
+    "limit": 400,
+    "resize": "client"
+  },
+  "rows": [
+    {
+      "max_pixels": 50176,
+      "max_edge_sq": 224,
+      "prompt_tokens": 93.0075,
+      "ttft_p50_ms": 45.157172018662095,
+      "ttft_p95_ms": 48.15686386427842,
+      "accuracy": 0.815,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 200704,
+      "max_edge_sq": 448,
+      "prompt_tokens": 276.0475,
+      "ttft_p50_ms": 98.84394350228831,
+      "ttft_p95_ms": 104.74619274609722,
+      "accuracy": 0.8775,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 451584,
+      "max_edge_sq": 672,
+      "prompt_tokens": 384.6625,
+      "ttft_p50_ms": 158.41719351010397,
+      "ttft_p95_ms": 194.85589552205056,
+      "accuracy": 0.8925,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 802816,
+      "max_edge_sq": 896,
+      "prompt_tokens": 384.6625,
+      "ttft_p50_ms": 137.35284749418497,
+      "ttft_p95_ms": 159.82277147122647,
+      "accuracy": 0.8925,
+      "n_scored": 400
+    },
+    {
+      "max_pixels": 1605632,
+      "max_edge_sq": 1267,
+      "prompt_tokens": 384.6625,
+      "ttft_p50_ms": 136.474079976324,
+      "ttft_p95_ms": 159.26324613392345,
+      "accuracy": 0.8925,
+      "n_scored": 400
+    }
+  ]
+}

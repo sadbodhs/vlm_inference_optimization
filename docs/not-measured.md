@@ -7,12 +7,13 @@ What these numbers do **not** entitle you to claim.
 - **Two checkpoints, one family.** Qwen2.5-VL-7B-AWQ and Qwen3-VL-8B-AWQ. No
   InternVL, no FP16 comparison — so nothing here separates "how VLM serving behaves" from "how
   this checkpoint behaves on this card".
-- **No text-free VQA.** DocVQA, ChartQA and TextVQA all require reading something.
-  A pure-appearance task (VQAv2-style) is untested, so "natural images tolerate
-  aggressive pruning" remains unmeasured — see [the per-task
-  frontier](task-frontier.md).
+- **Appearance measured on one dataset, capped by it.** VQAv2 is the only
+  text-free task, and its COCO images are small, so its curve stops at 385 tokens
+  (native size). High-resolution appearance tasks — small distant objects, fine
+  surveillance detail — are untested; the feature-size rule predicts they behave
+  like reading, not like VQAv2. See [the per-task frontier](task-frontier.md).
 - **Short outputs only.** Every accuracy number comes from ~6-token answers, so
-  everything measured is prefill-dominated. Decode at 92.7% of roofline is
+  everything measured is prefill-dominated. Decode at 88.7% of roofline is
   currently a rounding error against 700 ms of prefill; on a reasoning workload it
   would become the bottleneck, and these conclusions may not transfer.
 

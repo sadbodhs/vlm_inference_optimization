@@ -19,8 +19,8 @@
       "max_pixels": 50176,
       "max_edge_sq": 224,
       "prompt_tokens": 95.0375,
-      "ttft_p50_ms": 45.994093525223434,
-      "ttft_p95_ms": 49.668075871886685,
+      "ttft_p50_ms": 46.14629753632471,
+      "ttft_p95_ms": 49.50070144259371,
       "accuracy": 0.53,
       "n_scored": 400
     },
@@ -28,8 +28,8 @@
       "max_pixels": 200704,
       "max_edge_sq": 448,
       "prompt_tokens": 281.2325,
-      "ttft_p50_ms": 99.96551147196442,
-      "ttft_p95_ms": 106.41022131312639,
+      "ttft_p50_ms": 99.714434472844,
+      "ttft_p95_ms": 105.86671917117201,
       "accuracy": 0.7925,
       "n_scored": 400
     },
@@ -37,8 +37,8 @@
       "max_pixels": 451584,
       "max_edge_sq": 672,
       "prompt_tokens": 590.1875,
-      "ttft_p50_ms": 199.89153899950907,
-      "ttft_p95_ms": 207.2417215036694,
+      "ttft_p50_ms": 199.8882059706375,
+      "ttft_p95_ms": 207.40377333713695,
       "accuracy": 0.86,
       "n_scored": 400
     },
@@ -46,8 +46,8 @@
       "max_pixels": 802816,
       "max_edge_sq": 896,
       "prompt_tokens": 977.05,
-      "ttft_p50_ms": 334.1030685114674,
-      "ttft_p95_ms": 344.2152463248931,
+      "ttft_p50_ms": 333.5802734945901,
+      "ttft_p95_ms": 344.1798393439967,
       "accuracy": 0.8725,
       "n_scored": 400
     },
@@ -55,8 +55,8 @@
       "max_pixels": 1605632,
       "max_edge_sq": 1267,
       "prompt_tokens": 1029.185,
-      "ttft_p50_ms": 335.7775065815076,
-      "ttft_p95_ms": 460.1881707669236,
+      "ttft_p50_ms": 335.32853150973096,
+      "ttft_p95_ms": 460.3908981545828,
       "accuracy": 0.88,
       "n_scored": 400
     }

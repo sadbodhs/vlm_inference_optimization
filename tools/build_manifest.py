@@ -32,14 +32,41 @@ def _pick(cols: list[str], candidates: tuple[str, ...]) -> str | None:
     return None
 
 
+def _answer(v) -> str:
+    # VQAv2 stores each annotator's answer as a dict:
+    #   {'answer': 'double decker', 'answer_confidence': 'maybe', 'answer_id': 4}
+    # str() on that gives a Python repr no prediction can ever equal -- which is
+    # how a 7B model scored exactly 0.000 at every budget.
+    if isinstance(v, dict):
+        for k in ("answer", "text", "label"):
+            if k in v:
+                return str(v[k])
+        raise ValueError(f"answer dict with no recognised text field: {v!r}")
+    return str(v)
+
+
 def _answers(val) -> list[str]:
     if val is None:
         return []
     if isinstance(val, str):
         return [val]
     if isinstance(val, (list, tuple)):
-        return [str(v) for v in val]
-    return [str(val)]
+        return [_answer(v) for v in val]
+    return [_answer(val)]
+
+
+def _check_answers(rows) -> None:
+    """Refuse to write a manifest whose golds are serialised containers.
+
+    A gold like "{'answer': ...}" or "['a', 'b']" is never a real answer; it
+    means a structured field was stringified. Scoring against it yields a clean,
+    plausible-looking 0.0 rather than an error, so it has to be caught here."""
+    bad = [(r["id"], a) for r in rows for a in r["answers"]
+           if a[:1] in "{[" and a[-1:] in "}]"]
+    if bad:
+        sid, a = bad[0]
+        raise SystemExit(f"{len(bad)} gold answers look like serialised containers, "
+                         f"e.g. sample {sid}: {a[:80]!r}")
 
 
 def main() -> None:
@@ -83,6 +110,7 @@ def main() -> None:
         n_no_answer += not answers
         rows.append({"id": sid, "question": rec[q_k], "answers": answers, "image": rel})
 
+    _check_answers(rows)
     (out / "manifest.jsonl").write_text(
         "\n".join(json.dumps(r) for r in rows) + "\n"
     )

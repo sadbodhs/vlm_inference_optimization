@@ -1,6 +1,6 @@
 # Corrections
 
-Seven measurement bugs found while building this. Four produced
+Eight measurement bugs found while building this. Four produced
 **publishable-looking numbers that were wrong**. None were caught by inspection —
 every one was caught by a physical bound, a cross-experiment contradiction, or an
 internal inconsistency in the data.
@@ -85,6 +85,26 @@ was wrong.
 It is on this page because a plausible story that fits the data is not evidence,
 and the only thing separating this from the four entries above is that it was
 tested before being published.
+
+## The one that was too wrong to believe
+
+The first VQAv2 run scored **exactly 0.000 at all five budgets**. A 7B VLM scores
+around 0.8 on VQAv2, so zero is not a weak result — it is a broken pipeline, and
+a physical bound in the same sense as a decode rate above the roofline.
+
+VQAv2 stores each annotator's answer as a dict. `tools/build_manifest.py` called
+`str()` on every list element, which is right for TextVQA's plain strings and wrong
+here — every gold answer became
+
+> `"{'answer': 'double decker', 'answer_confidence': 'maybe', 'answer_id': 4}"`
+
+which no prediction can equal. The model was never evaluated at all. The builder
+now unwraps answer dicts and **refuses to write a manifest** whose golds look like
+serialised containers, because scoring against one yields a clean 0.0, not an error.
+
+A subtler version — a dataset where only *some* answers were dicts — would have
+produced a depressed but plausible score, and would have passed every check here
+except that guard.
 
 ## The pattern
 

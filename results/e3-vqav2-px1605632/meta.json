@@ -1,0 +1,109 @@
+{
+  "run_id": "e3-vqav2-px1605632",
+  "created_utc": "2026-09-23T15:56:05Z",
+  "git_sha": "1af52eb064e0e7e4f4fbddf6c5f05ad92582b680",
+  "git_dirty": "dirty",
+  "arm": {
+    "id": "B0_vllm_awq_clean",
+    "model": "Qwen/Qwen2.5-VL-7B-Instruct-AWQ",
+    "base_url": "http://vlm-server:8000",
+    "stack": "vllm",
+    "quantization": "awq_marlin",
+    "notes": "The R1 reference point. Every optimisation arm is measured as a delta from this, not from vLLM's shipped defaults.\n",
+    "max_tokens": 64,
+    "temperature": 0.0,
+    "extra_body": {},
+    "max_pixels": null,
+    "weight_bytes": 6924000000.0,
+    "decode_weight_bytes": 5571000000.0,
+    "raw": {
+      "id": "B0_vllm_awq_clean",
+      "stack": "vllm",
+      "model": "Qwen/Qwen2.5-VL-7B-Instruct-AWQ",
+      "revision": "536a35794df8831aa814970ee8f89eff577e7718",
+      "base_url": "http://vlm-server:8000",
+      "quantization": "awq_marlin",
+      "weight_bytes": 6924000000.0,
+      "decode_weight_bytes": 5571000000.0,
+      "max_tokens": 128,
+      "temperature": 0.0,
+      "max_pixels": 1605632,
+      "server_args": "--no-enable-prefix-caching --no-enable-chunked-prefill --mm-processor-cache-gb 0",
+      "notes": "The R1 reference point. Every optimisation arm is measured as a delta from this, not from vLLM's shipped defaults.\n"
+    }
+  },
+  "load": {
+    "mode": "sequential",
+    "rate_qps": 1.0,
+    "concurrency": 1,
+    "repeats": 1,
+    "n_requests": 400,
+    "seed": 0
+  },
+  "prompt_suffix": "\nAnswer the question using a single word or phrase.",
+  "host": {
+    "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "images": {
+    "harness": "vlmbench-harness@sha256:a364c5de5040c0198f8d602859117cfac85893695d3180be8b93cab6c01a59c7",
+    "server": "vllm/vllm-openai@sha256:c2914767605584b6d8f45686b82de173ecc99e781897aa3d0a66dacd72c51ae1"
+  },
+  "gpu_before": {
+    "available": true,
+    "name": "NVIDIA GeForce RTX 3090",
+    "memory.total": 24576.0,
+    "memory.used": 20521.0,
+    "temperature.gpu": 60.0,
+    "clocks.sm": 1695.0,
+    "clocks.max.sm": 2100.0,
+    "power.draw": 141.7,
+    "power.limit": 350.0,
+    "utilization.gpu": 0.0,
+    "clock_ratio": 0.8071428571428572,
+    "hw_thermal_slowdown": false,
+    "sw_thermal_slowdown": false,
+    "sw_power_cap": false,
+    "hw_power_brake_slowdown": false,
+    "reasons_source": "clocks_event_reasons"
+  },
+  "gpu_after": {
+    "available": true,
+    "name": "NVIDIA GeForce RTX 3090",
+    "memory.total": 24576.0,
+    "memory.used": 20521.0,
+    "temperature.gpu": 65.0,
+    "clocks.sm": 1800.0,
+    "clocks.max.sm": 2100.0,
+    "power.draw": 347.15,
+    "power.limit": 350.0,
+    "utilization.gpu": 100.0,
+    "clock_ratio": 0.8571428571428571,
+    "hw_thermal_slowdown": false,
+    "sw_thermal_slowdown": false,
+    "sw_power_cap": true,
+    "hw_power_brake_slowdown": false,
+    "reasons_source": "clocks_event_reasons"
+  },
+  "thermal": {
+    "n_samples": 56,
+    "n_busy_samples": 55,
+    "util_mean": 96.28571428571429,
+    "temp_max": 66.0,
+    "temp_mean": 64.89285714285714,
+    "checked": true,
+    "clock_ratio_p50": 0.8571428571428571,
+    "sm_clock_min": 1770.0,
+    "sm_clock_max": 1875.0,
+    "power_draw_max": 349.08,
+    "power_limit": 350.0,
+    "throttled": true,
+    "thermal_throttled": false,
+    "power_capped": true,
+    "reason": null
+  },
+  "not_measured": [
+    "throughput under load",
+    "multi-image prompts"
+  ]
+}
