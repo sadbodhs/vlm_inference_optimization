@@ -28,7 +28,13 @@ import statistics as st
 import yaml
 
 FPS = 30.0            # MEVA ground cameras are 30 fps; file-index confirms per clip
-CLIP_FRAMES = 9000    # 5 minutes
+
+
+def clip_frames(t0: str, t1: str) -> int:
+    """Clip length from its name ('14-50-00', '14-55-00'). Most clips are 5 min,
+    but not all -- some are 20-odd seconds -- so this is never assumed."""
+    sec = lambda t: int(t[:2]) * 3600 + int(t[3:5]) * 60 + int(t[6:8])
+    return int(round((sec(t1) - sec(t0)) * FPS))
 
 
 def parse_activities(path: str) -> list[dict]:
@@ -47,7 +53,7 @@ def parse_activities(path: str) -> list[dict]:
     return out
 
 
-def coverage(acts: list[dict], n_frames: int = CLIP_FRAMES) -> float:
+def coverage(acts: list[dict], n_frames: int) -> float:
     """Fraction of the clip during which at least one activity is under way."""
     covered = [False] * n_frames
     for a in acts:
@@ -69,10 +75,12 @@ def main() -> None:
         base = os.path.basename(f).removesuffix(".activities.yml")
         date, t0, t1, site, cam = base.split(".")[:5]
         acts = parse_activities(f)
+        n = clip_frames(t0, t1)
         clips.append({
             "clip": base, "date": date, "site": site, "camera": cam,
             "annotation_dir": os.path.relpath(os.path.dirname(f), args.root),
-            "n_activities": len(acts), "coverage": round(coverage(acts), 4),
+            "n_frames": n, "duration_s": n / FPS,
+            "n_activities": len(acts), "coverage": round(coverage(acts, n), 4),
             "activities": acts,
         })
 
@@ -87,6 +95,8 @@ def main() -> None:
     q = lambda p: covs[int(p * (len(covs) - 1))]
     print(f"clips {len(clips)}   activities {sum(types.values())}   types {len(types)}")
     print("sites", dict(collections.Counter(c["site"] for c in clips)))
+    short = [c for c in clips if c["duration_s"] < 290]
+    print(f"clips shorter than 290 s: {len(short)}")
     print("coverage (share of the 5 min with >=1 activity under way):")
     print(f"  p10 {q(.1):.2f}  p25 {q(.25):.2f}  median {q(.5):.2f}  "
           f"p75 {q(.75):.2f}  p90 {q(.9):.2f}")

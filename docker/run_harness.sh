@@ -25,6 +25,12 @@ if [ "${ALLOW_CONCURRENT:-0}" != "1" ]; then
     echo "Wait, or set ALLOW_CONCURRENT=1 if you genuinely mean to overlap them." >&2
     exit 1
   fi
+  # ...and never alongside a detector run, which shares the GPU (docker/run_yolo.sh)
+  YOLO_BUSY=$(docker ps --format '{{.Names}}' | grep -E '^yolo-' || true)
+  if [ -n "$YOLO_BUSY" ]; then
+    echo "REFUSING TO START: a detector run is using the GPU: $YOLO_BUSY" >&2
+    exit 1
+  fi
 fi
 
 GPU_ARGS=()
