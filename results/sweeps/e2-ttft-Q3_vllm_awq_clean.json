@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "experiment": "e2-ttft-vs-tokens",
+    "arm": "Q3_vllm_awq_clean",
+    "sizes": [
+      224,
+      448,
+      672,
+      896,
+      1120,
+      1344
+    ],
+    "repeats": 3,
+    "text_only_prompt_tokens": 15.0,
+    "text_only_ttft_p50_ms": 12.008341494947672,
+    "fit": {
+      "slope_ms_per_token": 0.36078399873485584,
+      "intercept_ms": 6.320700880925842,
+      "r2": 0.9973952403329105
+    }
+  },
+  "rows": [
+    {
+      "edge_px": 224,
+      "image_px": 50176,
+      "prompt_tokens": 81.0,
+      "vision_tokens": 66.0,
+      "ttft_p50_ms": 40.75137748926257,
+      "ttft_p50_ms_sd": 0.9715021005002664,
+      "ttft_p50_ms_runs": [
+        39.6,
+        41.4,
+        41.2
+      ],
+      "ttft_p95_ms": 43.33148304722272,
+      "ms_per_vision_token": 0.6174451134736754,
+      "repeats": 3
+    },
+    {
+      "edge_px": 448,
+      "image_px": 200704,
+      "prompt_tokens": 213.0,
+      "vision_tokens": 198.0,
+      "ttft_p50_ms": 81.63959548498194,
+      "ttft_p50_ms_sd": 0.5853865318530865,
+      "ttft_p50_ms_runs": [
+        81.0,
+        81.7,
+        82.2
+      ],
+      "ttft_p95_ms": 82.42534410092048,
+      "ms_per_vision_token": 0.4123211893180906,
+      "repeats": 3
+    },
+    {
+      "edge_px": 672,
+      "image_px": 451584,
+      "prompt_tokens": 458.0,
+      "vision_tokens": 443.0,
+      "ttft_p50_ms": 157.0236484791773,
+      "ttft_p50_ms_sd": 0.45252072276898503,
+      "ttft_p50_ms_runs": [
+        156.5,
+        157.2,
+        157.4
+      ],
+      "ttft_p95_ms": 157.9080173629336,
+      "ms_per_vision_token": 0.3544551884405808,
+      "repeats": 3
+    },
+    {
+      "edge_px": 896,
+      "image_px": 802816,
+      "prompt_tokens": 801.0,
+      "vision_tokens": 786.0,
+      "ttft_p50_ms": 277.9576970109095,
+      "ttft_p50_ms_sd": 0.5386781671901254,
+      "ttft_p50_ms_runs": [
+        277.4,
+        277.9,
+        278.5
+      ],
+      "ttft_p95_ms": 279.19344207039103,
+      "ms_per_vision_token": 0.3536357468332182,
+      "repeats": 3
+    },
+    {
+      "edge_px": 1120,
+      "image_px": 1254400,
+      "prompt_tokens": 1242.0,
+      "vision_tokens": 1227.0,
+      "ttft_p50_ms": 442.3671434827459,
+      "ttft_p50_ms_sd": 1.434041082131043,
+      "ttft_p50_ms_runs": [
+        441.3,
+        441.8,
+        444.0
+      ],
+      "ttft_p95_ms": 445.4353217210155,
+      "ms_per_vision_token": 0.3605274193013414,
+      "repeats": 3
+    },
+    {
+      "edge_px": 1344,
+      "image_px": 1806336,
+      "prompt_tokens": 1538.0,
+      "vision_tokens": 1523.0,
+      "ttft_p50_ms": 568.9912499704709,
+      "ttft_p50_ms_sd": 1.7601685074341642,
+      "ttft_p50_ms_runs": [
+        567.6,
+        568.5,
+        571.0
+      ],
+      "ttft_p95_ms": 571.9530926493462,
+      "ms_per_vision_token": 0.37359898225244315,
+      "repeats": 3
+    }
+  ]
+}

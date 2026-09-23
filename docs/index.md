@@ -40,5 +40,6 @@ trades accuracy, so the deliverable is a frontier, not a ranking.
 - [Methodology](methodology.md) — how the harness makes a wrong number loud
 - [E2 · what a vision token costs](e2-vision-tokens.md) — the law the rest hangs off
 - [E3 · the accuracy frontier](e3-token-budget.md) — the thesis experiment
+- [Qwen2.5 vs Qwen3](models.md) — a generational comparison, and a prediction that was wrong
 - [Corrections](corrections.md) — seven measurement bugs and what each would have published
 - [Not measured](not-measured.md) — what these numbers do **not** entitle you to claim

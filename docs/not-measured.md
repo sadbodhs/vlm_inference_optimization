@@ -4,8 +4,8 @@ What these numbers do **not** entitle you to claim.
 
 ## Scope
 
-- **One model family.** Qwen2.5-VL-7B-AWQ only. No 3B control, no InternVL, no
-  FP16 comparison — so nothing here separates "how VLM serving behaves" from "how
+- **Two checkpoints, one family.** Qwen2.5-VL-7B-AWQ and Qwen3-VL-8B-AWQ. No
+  InternVL, no FP16 comparison — so nothing here separates "how VLM serving behaves" from "how
   this checkpoint behaves on this card".
 - **One dataset for accuracy.** DocVQA. ChartQA, TextVQA and InfographicVQA are
   frozen on disk and unrun, so the claim that the token-budget cliff is

@@ -50,6 +50,7 @@ nav:
       - E0 · Capacity and goodput: e0-saturation.md
       - E4 · Live video: e4-video.md
       - vLLM vs SGLang: stacks.md
+      - Qwen2.5 vs Qwen3: models.md
   - Corrections: corrections.md
   - Not measured: not-measured.md
   - Reproduce: reproduce.md
