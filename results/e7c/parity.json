@@ -1,0 +1,42 @@
+{
+ "objects": {
+  "ds": 181794,
+  "yolo": 195882,
+  "bin_empty_ds": 6052,
+  "bin_empty_yolo": 6092,
+  "yolo_matched": 170658,
+  "bin_sparse_ds": 23168,
+  "bin_sparse_yolo": 24234,
+  "bin_moderate_ds": 29341,
+  "bin_moderate_yolo": 33452,
+  "bin_busy_ds": 123233,
+  "bin_busy_yolo": 132104
+ },
+ "actor_recall_by_height": {
+  "0-25": {
+   "n": 454,
+   "deepstream": 0.2422907488986784,
+   "ultralytics": 0.27312775330396477
+  },
+  "25-50": {
+   "n": 31712,
+   "deepstream": 0.5027119071644803,
+   "ultralytics": 0.5549003531786074
+  },
+  "50-100": {
+   "n": 28942,
+   "deepstream": 0.7246216571073181,
+   "ultralytics": 0.7457328450003455
+  },
+  "100-200": {
+   "n": 10097,
+   "deepstream": 0.7693374269585025,
+   "ultralytics": 0.7783500049519659
+  },
+  "200+": {
+   "n": 2653,
+   "deepstream": 0.9370523935167735,
+   "ultralytics": 0.9528835280814173
+  }
+ }
+}

@@ -1,0 +1,7 @@
+# The E7c CV service: the CV study's DeepStream 7.1 image (pyds, TensorRT 10.3,
+# the DeepStream-Yolo parser mounted at /opt/ds) plus the two client libraries the
+# live run needs to talk to the separate vLLM service.
+FROM ds-build-fixed:latest
+# pyds needs the GPU driver to import, which a build does not have: checked at runtime
+RUN pip install --no-cache-dir --disable-pip-version-check httpx pillow \
+ && python3 -c "import httpx, PIL; print('ok')"

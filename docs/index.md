@@ -39,6 +39,7 @@ trades accuracy, so the deliverable is a frontier, not a ranking.
 | One frame answers "what is happening" | `action` **0.90 from a single frame**, +0.08 from eight |
 | Frames buy ordering | `order` **0.41 → 0.87**, chance to solved |
 | A detector gate beats the serving layer | YOLO → VLM cascade, both on one 3090, live: **5 → 8 cameras** (10 with ROI crops + TensorRT YOLO), 97–99% of activities kept |
+| The industry-shaped pipeline removes the detector bottleneck | DeepStream + NvDCF instead of a Python detector: **8 → 9 cameras** full-frame, 10 → 10 with ROI; the VLM becomes the only limit |
 
 ![Accuracy retained against time to first token, per task](img/headline.png){ width="680" }
 

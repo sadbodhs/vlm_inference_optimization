@@ -26,6 +26,7 @@ Status: **first results measured.** One model, one arm, one dataset — see
 | Cheap accuracy trade | **74% faster TTFT** for 1.2 ANLS points (n=500) |
 | Throughput lies after saturation | on real pages: raw ceiling **1.56 req/s**, usable **0.45 req/s** — a 3.5× overstatement |
 | A detector gate beats the serving layer | YOLO → VLM cascade, both on one 3090, live: **5 → 8 cameras** (10 with ROI crops + TensorRT YOLO), 97–99% of activities kept |
+| The industry-shaped pipeline removes the detector bottleneck | DeepStream + NvDCF instead of a Python detector: **8 → 9 cameras** full-frame, 10 → 10 with ROI; the VLM becomes the only limit |
 | The 3090 is power-limited | 349.2 W of 350 W at 66 °C — capped, not thermally throttled |
 
 ![Accuracy retained against time to first token, per task](docs/img/headline.png)

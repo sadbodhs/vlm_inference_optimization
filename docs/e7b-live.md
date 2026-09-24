@@ -128,3 +128,6 @@ GPU. Every number above is from the out-of-process version.
   configuration, where the detector is the margin.
 - **Not measured:** video decode, MPS or MIG partitioning, more than one detector
   worker, a VLM other than Qwen2.5-VL-7B.
+
+**Next:** [E7c](e7c-deepstream.md) rebuilds the CV side the industry way (DeepStream,
+batched detector, tracker). It gains one camera with full frames and none with crops.

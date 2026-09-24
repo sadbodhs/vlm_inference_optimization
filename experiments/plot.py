@@ -781,6 +781,58 @@ def plot_e7b_model(out, modelled):
     fig.tight_layout()
     fig.savefig(out, dpi=160)
 
+
+# ── E7c · the DeepStream cascade ─────────────────────────────────────────────
+def plot_e7c(out):
+    """E7b's Python detector vs E7c's DeepStream pipeline, same cameras, same bar."""
+    pairs = [("motion-full-trt", "track-motion-full-deepstream", "full frame", SERIES[1]),
+             ("person-motion-roi-trt", "person-track-motion-roi-deepstream", "ROI crop", SERIES[0])]
+    fig, (a1, a2, a3) = plt.subplots(1, 3, figsize=(14.2, 4.3))
+    for b_tag, c_tag, lab, col in pairs:
+        rb = e7b_rows(b_tag)
+        f = Path("results/e7c") / f"{c_tag}.json"
+        rc = json.loads(f.read_text())["rows"] if f.exists() else []
+        for rows, ls, mk, who in ((rb, "--", "s", "E7b TensorRT"),
+                                  (rc, "-", "o", "E7c DeepStream")):
+            if not rows:
+                continue
+            n = [r["cams"] for r in rows]
+            a1.plot(n, [100 * (r["fresh_fraction"] or 0) for r in rows], mk + ls, color=col, lw=1.8,
+                    ms=6, label=f"{lab} — {who}")
+            a2.plot(n, [1000 * (r["det_latency_p99_s"] or 0) for r in rows], mk + ls, color=col,
+                    lw=1.8, ms=6)
+    a1.axhline(95, color=ACCENT, lw=1, ls=":")
+    a1.set_ylim(-3, 104); a1.set_xlim(3.5, 14.5)
+    a1.legend(fontsize=6.5, frameon=False, loc="center left")
+    _style(a1, "Answers under 2 s old", "cameras", "fresh answers (%)")
+    a2.set_yscale("log")
+    a2.axhline(1000, color=ACCENT, lw=1, ls=":")
+    _style(a2, "Detection latency p99", "cameras", "capture to detections (ms, log)")
+
+    g = Path("results/e7c/gates.json")
+    e7 = Path("results/e7/gates.json")
+    if g.exists() and e7.exists():
+        tr = {(r["gate"], r["bin"]): r for r in json.loads(g.read_text())["rows"]}
+        bx = json.loads(e7.read_text())
+        pts = [("motion", "track-motion", SERIES[1]), ("person-motion", "person-track-motion", SERIES[0])]
+        for box_g, trk_g, col in pts:
+            x0 = 100 * bx["calls"][f"1280|{box_g}|all"]["rate"]
+            y0 = 100 * bx["recall"][f"1280|{box_g}|all"]["rate"]
+            x1 = 100 * tr[(trk_g, "all")]["call_rate"]
+            y1 = 100 * tr[(trk_g, "all")]["recall"]
+            a3.annotate("", (x1, y1), (x0, y0), arrowprops=dict(arrowstyle="->", color=col, lw=1.5))
+            a3.plot([x0], [y0], "s", color=col, ms=7, mfc="none", mew=1.5)
+            a3.plot([x1], [y1], "o", color=col, ms=7)
+            a3.annotate(trk_g, (x1, y1), textcoords="offset points", xytext=(8, 4),
+                        ha="left", fontsize=7.5, color=FG)
+        a3.plot([], [], "s", mfc="none", mec=FG, label="E7 box-matching gate")
+        a3.plot([], [], "o", color=FG, label="E7c tracker gate")
+        a3.legend(fontsize=7.5, frameon=False, loc="lower right")
+    _style(a3, "Offline: what the gate sends and keeps", "windows sent (%)",
+           "annotated activities covered (%)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+
 def comparisons(root="results/sweeps", out_dir="docs/img"):
     """Build the cross-sweep figures the comparison pages need."""
     root, out_dir = Path(root), Path(out_dir)
@@ -822,6 +874,10 @@ def comparisons(root="results/sweeps", out_dir="docs/img"):
                         "person-motion-roi-pytorch": rows[("person-motion", "roi")]["cameras_per_gpu"]}
         plot_e7b_model(out_dir / "e7b-model.png", modelled)
         print(f"  wrote {out_dir/'e7b-live.png'}, {out_dir/'e7b-model.png'}")
+
+    if Path("results/e7c").exists():
+        plot_e7c(out_dir / "e7c.png")
+        print(f"  wrote {out_dir/'e7c.png'}")
 
     tasks = [root / f"e3-{t}.json" for t in TASKS]
     tasks = [p for p in tasks if p.exists()]
