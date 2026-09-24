@@ -101,6 +101,9 @@ flat, nothing is dropped, and it handles ~26 cameras of CV on its own. But on on
 now have to come from the VLM side: fewer calls, fewer tokens per call, a faster
 engine, or the move NVIDIA's reference makes — a dedicated GPU for the VLM.
 
+**Next:** [E7d](e7d-models.md) swaps the VLM: a 3B model matches the 7B's recognition
+and carries 14 full-frame cameras; Qwen3-VL-8B recognises activities twice as well.
+
 ## Three engineering findings on the way
 
 - **`uridecodebin` hangs with 8 sources.** Isolated in bare `gst-launch`, it hung

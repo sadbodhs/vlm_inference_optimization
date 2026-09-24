@@ -68,6 +68,7 @@ nav:
       - E7 · The cascade: e7-cascade.md
       - E7b · The cascade, live: e7b-live.md
       - E7c · The cascade, DeepStream: e7c-deepstream.md
+      - E7d · Which VLM behind the gate: e7d-models.md
       - vLLM vs SGLang: stacks.md
       - Qwen2.5 vs Qwen3: models.md
   - Corrections: corrections.md

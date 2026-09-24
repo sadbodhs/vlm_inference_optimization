@@ -833,6 +833,115 @@ def plot_e7c(out):
     fig.tight_layout()
     fig.savefig(out, dpi=160)
 
+
+E7D_MODELS = [  # (arm id, label, generation index, size in B)
+    ("V_vllm_video", "Qwen2.5-VL-7B", 0, 7), ("E_q25_3b", "Qwen2.5-VL-3B", 0, 3),
+    ("E_q3vl_8b", "Qwen3-VL-8B", 1, 8), ("E_q3vl_4b", "Qwen3-VL-4B", 1, 4),
+    ("E_q3vl_2b", "Qwen3-VL-2B", 1, 2), ("E_q35_9b", "Qwen3.5-9B", 2, 9),
+    ("E_q35_4b", "Qwen3.5-4B", 2, 4), ("E_q35_2b", "Qwen3.5-2B", 2, 2)]
+E7D_SHORT = {"A": "in/out of vehicle", "B": "vehicle moves", "C": "doorway", "D": "object handling",
+             "E": "phone", "F": "conversation", "G": "sit / stand", "H": "bike, laptop, reading"}
+E7D_GEN = ["Qwen2.5-VL (Jan 2025)", "Qwen3-VL (Oct 2025)", "Qwen3.5 (Feb 2026)"]
+
+
+def e7d_cameras(arm_id, view):
+    """Highest supported camera count, or None if that model has no live run."""
+    tag = {"full": "track-motion-full-deepstream",
+           "roi": "person-track-motion-roi-deepstream"}[view]
+    d = Path("results/e7c") if arm_id == "V_vllm_video" else Path("results/e7d") / arm_id
+    f = d / f"{tag}.json"
+    if not f.exists():
+        return None, None
+    rows = json.loads(f.read_text())["rows"]
+    ok = [r for r in rows if r["supported"]]
+    if not ok:
+        return 0, None
+    best = max(ok, key=lambda r: r["cams"])
+    return best["cams"], best.get("gpu_mem_max_mib")
+
+
+def plot_e7d(out_frontier, out_groups, group_names):
+    comp = json.loads(Path("results/e7d/compare.json").read_text())["rows"]
+    lift = {(r["arm_id"], r["view"]): r for r in comp}
+
+    def skill_ci(arm_id, view):
+        f = (Path("results/e7/cascades.json") if arm_id == "V_vllm_video"
+             else Path("results/e7d") / arm_id / "cascades.json")
+        if not f.exists():
+            return None
+        for r in json.loads(f.read_text())["rows"]:
+            if (r["size"] == 1280 and r["gate"] == "dense" and r["arm"] == view
+                    and r["bin"] == "all" and r.get("lift_ci95")):
+                return r["lift_ci95"]
+        return None
+
+    fig, axes = plt.subplots(1, 2, figsize=(12.4, 4.6), sharey=True)
+    for ax, view, title, gate in ((axes[0], "full", "Full frame", "track-motion gate"),
+                                  (axes[1], "roi", "ROI crop", "person-track-motion gate")):
+        base_c, _ = e7d_cameras("V_vllm_video", view)
+        if base_c:
+            ax.axvline(base_c, color=WARN, lw=0.8, ls=":")
+        ax.axhline(0, color=WARN, lw=0.8)
+        for aid, lab, gen, size in E7D_MODELS:
+            r = lift.get((aid, view))
+            cams, _ = e7d_cameras(aid, view)
+            if r is None or cams is None:
+                continue
+            y = 100 * r["lift"]
+            col = SERIES[gen]
+            unusable = (r["compliance"] or 0) < 0.5 or r["false_alarms_per_hour"] > 5000
+            ci = skill_ci(aid, view)
+            if ci:
+                ax.plot([cams, cams], [100 * ci[0], 100 * ci[1]], color=col, lw=1.2, alpha=0.45)
+            ax.plot([cams], [y], "o", ms=5 + size, color=col,
+                    mfc="none" if unusable else col, mew=1.8, zorder=3)
+            note = " (format fails)" if (r["compliance"] or 0) < 0.5 else (
+                " (ticks every box)" if r["false_alarms_per_hour"] > 5000 else "")
+            ax.annotate(lab.split("-")[-1] + note, (cams, y), textcoords="offset points",
+                        xytext=(7 + size / 2, -3), fontsize=7.5, color=FG)
+        _style(ax, f"{title} — {gate}", "cameras per RTX 3090 (live, DeepStream + vLLM)",
+               "recognition above chance (points)" if view == "full" else "")
+    for g, name in enumerate(E7D_GEN):
+        axes[0].plot([], [], "o", color=SERIES[g], label=name)
+    axes[0].plot([], [], "o", mfc="none", mec=FG, label="unusable answers")
+    axes[0].legend(fontsize=7.5, frameon=False, loc="upper right")
+    fig.tight_layout()
+    fig.savefig(out_frontier, dpi=160)
+    plt.close(fig)
+
+    # which activities each model sees: lift per group, full frame
+    models = [(aid, lab) for aid, lab, *_ in E7D_MODELS if (aid, "full") in lift]
+    mute = {aid for aid, _ in models if (lift[(aid, "full")]["compliance"] or 0) < 0.5}
+    groups = sorted({g for aid, _ in models for g in lift[(aid, "full")]["per_group"]})
+    import numpy as np
+    from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
+    m = np.array([[100 * lift[(aid, "full")]["per_group"].get(g, {}).get("lift", np.nan)
+                   for g in groups] if aid not in mute else [np.nan] * len(groups)
+                  for aid, _ in models])
+    cmap = LinearSegmentedColormap.from_list("div", [SERIES[0], "#f2f2f2", SERIES[1]])
+    fig, ax = plt.subplots(figsize=(11.5, 0.42 * len(models) + 1.9))
+    ax.imshow(m, cmap=cmap, norm=TwoSlopeNorm(0, -60, 60), aspect="auto")
+    for i in range(len(models)):
+        for j in range(len(groups)):
+            if not np.isnan(m[i, j]):
+                ax.text(j, i, f"{m[i, j]:+.0f}", ha="center", va="center", fontsize=8,
+                        color="white" if abs(m[i, j]) > 40 else FG)
+            else:
+                ax.text(j, i, "—", ha="center", va="center", fontsize=8, color=WARN)
+    n = {g: lift[(models[0][0], "full")]["per_group"].get(g, {}).get("n", 0) for g in groups}
+    ax.set_xticks(range(len(groups)))
+    ax.set_xticklabels([f"{g}. {E7D_SHORT.get(g, g)}\n(n={n[g]})" for g in groups], fontsize=7.5)
+    ax.set_yticks(range(len(models)))
+    ax.set_yticklabels([lab + (" (no letters)" if aid in mute else "") for aid, lab in models],
+                       fontsize=8)
+    ax.set_title("Recognition above chance by activity group, full frame (points; blue = better "
+                 "than chance)", loc="left", fontsize=10, color=FG, pad=8)
+    for sp in ax.spines.values():
+        sp.set_visible(False)
+    fig.tight_layout()
+    fig.savefig(out_groups, dpi=160)
+    plt.close(fig)
+
 def comparisons(root="results/sweeps", out_dir="docs/img"):
     """Build the cross-sweep figures the comparison pages need."""
     root, out_dir = Path(root), Path(out_dir)
@@ -878,6 +987,13 @@ def comparisons(root="results/sweeps", out_dir="docs/img"):
     if Path("results/e7c").exists():
         plot_e7c(out_dir / "e7c.png")
         print(f"  wrote {out_dir/'e7c.png'}")
+
+    if Path("results/e7d/compare.json").exists():
+        sys.path.insert(0, str(Path(__file__).parent))
+        from e7_vlm import GROUPS
+        plot_e7d(out_dir / "e7d-frontier.png", out_dir / "e7d-groups.png",
+                 {g: d[0] for g, d in GROUPS.items()})
+        print(f"  wrote {out_dir/'e7d-frontier.png'}, {out_dir/'e7d-groups.png'}")
 
     tasks = [root / f"e3-{t}.json" for t in TASKS]
     tasks = [p for p in tasks if p.exists()]

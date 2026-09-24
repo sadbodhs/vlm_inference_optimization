@@ -1,0 +1,468 @@
+  cut 2018-03-05.13-15-00.13-20-00.bus.G340 from 60
+  cut 2018-03-05.13-15-00.13-20-00.bus.G340 from 660
+  cut 2018-03-05.13-15-00.13-20-00.bus.G340 from 720
+  cut 2018-03-05.13-15-00.13-20-00.bus.G340 from 1560
+  cut 2018-03-05.13-15-00.13-20-00.bus.G340 from 6060
+  cut 2018-03-05.13-15-00.13-20-00.bus.G340 from 7260
+  cut 2018-03-07.11-05-06.11-10-06.bus.G340 from 720
+  cut 2018-03-07.11-05-06.11-10-06.bus.G340 from 1560
+  cut 2018-03-07.11-05-06.11-10-06.bus.G340 from 4860
+  cut 2018-03-07.11-05-06.11-10-06.bus.G340 from 5220
+  cut 2018-03-07.11-05-06.11-10-06.bus.G340 from 5880
+  cut 2018-03-07.11-05-06.11-10-06.bus.G340 from 6240
+  cut 2018-03-07.11-05-06.11-10-06.bus.G340 from 6480
+  cut 2018-03-07.11-05-06.11-10-06.bus.G340 from 7620
+  cut 2018-03-07.11-05-06.11-10-06.bus.G340 from 8340
+  cut 2018-03-07.16-55-00.17-00-00.admin.G329 from 960
+  cut 2018-03-07.16-55-00.17-00-00.admin.G329 from 1560
+  cut 2018-03-07.16-55-00.17-00-00.admin.G329 from 2220
+  cut 2018-03-07.16-55-00.17-00-00.admin.G329 from 2580
+  cut 2018-03-07.16-55-00.17-00-00.admin.G329 from 2760
+  cut 2018-03-07.16-55-00.17-00-00.admin.G329 from 3960
+  cut 2018-03-07.16-55-00.17-00-00.admin.G329 from 5760
+  cut 2018-03-07.16-55-00.17-00-00.admin.G329 from 6240
+  cut 2018-03-07.16-55-00.17-00-00.admin.G329 from 7320
+  cut 2018-03-07.16-55-00.17-00-00.admin.G329 from 7680
+  cut 2018-03-07.16-55-00.17-00-00.school.G638 from 0
+  cut 2018-03-07.16-55-00.17-00-00.school.G638 from 1020
+  cut 2018-03-07.16-55-00.17-00-00.school.G638 from 1560
+  cut 2018-03-07.16-55-00.17-00-00.school.G638 from 2700
+  cut 2018-03-07.16-55-00.17-00-00.school.G638 from 2820
+  cut 2018-03-07.16-55-00.17-00-00.school.G638 from 5340
+  cut 2018-03-07.16-55-00.17-00-00.school.G638 from 6240
+  cut 2018-03-07.16-55-00.17-00-00.school.G638 from 6660
+  cut 2018-03-07.16-55-00.17-00-00.school.G638 from 6780
+  cut 2018-03-07.16-55-00.17-00-00.school.G638 from 8280
+  cut 2018-03-07.16-55-01.17-00-01.school.G420 from 480
+  cut 2018-03-07.16-55-01.17-00-01.school.G420 from 4140
+  cut 2018-03-07.16-55-01.17-00-01.school.G420 from 4500
+  cut 2018-03-07.16-55-01.17-00-01.school.G420 from 5280
+  cut 2018-03-07.16-55-01.17-00-01.school.G420 from 5580
+  cut 2018-03-07.16-55-01.17-00-01.school.G420 from 6240
+  cut 2018-03-07.16-55-01.17-00-01.school.G420 from 6300
+  cut 2018-03-07.16-55-01.17-00-01.school.G420 from 7320
+  cut 2018-03-07.17-20-07.17-25-07.hospital.G301 from 960
+  cut 2018-03-07.17-20-07.17-25-07.hospital.G301 from 1500
+  cut 2018-03-07.17-20-07.17-25-07.hospital.G301 from 3360
+  cut 2018-03-07.17-20-07.17-25-07.hospital.G301 from 4260
+  cut 2018-03-07.17-20-07.17-25-07.hospital.G301 from 4500
+  cut 2018-03-07.17-20-07.17-25-07.hospital.G301 from 4740
+  cut 2018-03-07.17-20-07.17-25-07.hospital.G301 from 6840
+  cut 2018-03-07.17-20-07.17-25-07.hospital.G301 from 8160
+  cut 2018-03-07.17-20-07.17-25-07.hospital.G301 from 8340
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 360
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 4620
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 5100
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 5520
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 5940
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 6060
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 6120
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 6300
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 6420
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 6540
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 6900
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 7380
+  cut 2018-03-07.17-35-01.17-40-01.school.G420 from 7800
+  cut 2018-03-09.10-15-01.10-20-01.admin.G326 from 2700
+  cut 2018-03-09.10-15-01.10-20-01.admin.G326 from 3420
+  cut 2018-03-09.10-15-01.10-20-01.admin.G326 from 3900
+  cut 2018-03-09.10-15-01.10-20-01.admin.G326 from 4200
+  cut 2018-03-09.10-15-01.10-20-01.admin.G326 from 4260
+  cut 2018-03-09.10-15-01.10-20-01.admin.G326 from 4680
+  cut 2018-03-09.10-15-01.10-20-01.admin.G326 from 5940
+  cut 2018-03-09.10-15-01.10-20-01.admin.G326 from 6060
+  cut 2018-03-09.10-15-01.10-20-01.admin.G326 from 6300
+  cut 2018-03-09.10-15-01.10-20-01.admin.G326 from 6600
+  cut 2018-03-09.10-20-00.10-25-00.school.G336 from 1920
+  cut 2018-03-09.10-20-00.10-25-00.school.G336 from 2280
+  cut 2018-03-09.10-20-00.10-25-00.school.G336 from 4920
+  cut 2018-03-09.10-20-00.10-25-00.school.G336 from 6240
+  cut 2018-03-09.10-20-00.10-25-00.school.G336 from 6540
+  cut 2018-03-09.10-20-00.10-25-00.school.G336 from 6660
+  cut 2018-03-09.10-20-00.10-25-00.school.G336 from 7080
+  cut 2018-03-11.11-20-00.11-25-00.school.G423 from 1320
+  cut 2018-03-11.11-20-00.11-25-00.school.G423 from 7680
+  cut 2018-03-11.16-10-00.16-15-00.bus.G509 from 120
+  cut 2018-03-11.16-10-00.16-15-00.bus.G509 from 3300
+  cut 2018-03-11.16-10-00.16-15-00.bus.G509 from 5100
+  cut 2018-03-11.16-10-00.16-15-00.bus.G509 from 5520
+  cut 2018-03-11.16-10-00.16-15-00.bus.G509 from 5640
+  cut 2018-03-11.16-10-00.16-15-00.bus.G509 from 5760
+  cut 2018-03-11.16-10-00.16-15-00.bus.G509 from 6360
+  cut 2018-03-11.16-10-00.16-15-00.bus.G509 from 6600
+  cut 2018-03-11.16-10-00.16-15-00.bus.G509 from 7140
+  cut 2018-03-11.16-20-08.16-25-08.hospital.G301 from 2100
+  cut 2018-03-11.16-20-08.16-25-08.hospital.G301 from 3960
+  cut 2018-03-11.16-20-08.16-25-08.hospital.G301 from 4200
+  cut 2018-03-11.16-20-08.16-25-08.hospital.G301 from 6960
+  cut 2018-03-11.16-20-08.16-25-08.hospital.G301 from 7380
+  cut 2018-03-11.16-20-08.16-25-08.hospital.G301 from 7560
+  cut 2018-03-11.16-20-08.16-25-08.hospital.G301 from 7800
+  cut 2018-03-11.16-20-08.16-25-08.hospital.G301 from 8040
+  cut 2018-03-11.16-20-08.16-25-08.hospital.G301 from 8220
+  cut 2018-03-11.16-25-01.16-30-01.admin.G326 from 2580
+  cut 2018-03-11.16-25-01.16-30-01.admin.G326 from 3660
+  cut 2018-03-11.16-25-01.16-30-01.admin.G326 from 3840
+  cut 2018-03-11.16-25-01.16-30-01.admin.G326 from 4560
+  cut 2018-03-11.16-25-01.16-30-01.admin.G326 from 4860
+  cut 2018-03-11.16-25-01.16-30-01.admin.G326 from 5400
+  cut 2018-03-11.16-25-01.16-30-01.admin.G326 from 6000
+  cut 2018-03-11.16-25-01.16-30-01.admin.G326 from 6120
+  cut 2018-03-11.16-25-01.16-30-01.admin.G326 from 6480
+  cut 2018-03-11.16-25-08.16-30-08.hospital.G436 from 2340
+  cut 2018-03-11.16-25-08.16-30-08.hospital.G436 from 2940
+  cut 2018-03-11.16-25-08.16-30-08.hospital.G436 from 5280
+  cut 2018-03-11.16-30-00.16-35-00.bus.G505 from 300
+  cut 2018-03-11.16-30-00.16-35-00.bus.G505 from 780
+  cut 2018-03-11.16-30-00.16-35-00.bus.G505 from 1860
+  cut 2018-03-11.16-30-00.16-35-00.bus.G505 from 2340
+  cut 2018-03-11.16-30-00.16-35-00.bus.G505 from 3960
+  cut 2018-03-11.16-30-00.16-35-00.bus.G505 from 4080
+  cut 2018-03-11.16-30-00.16-35-00.bus.G505 from 5340
+  cut 2018-03-11.16-30-00.16-35-00.bus.G505 from 6840
+  cut 2018-03-11.16-30-01.16-35-01.admin.G329 from 900
+  cut 2018-03-11.16-30-01.16-35-01.admin.G329 from 2580
+  cut 2018-03-11.16-30-01.16-35-01.admin.G329 from 7200
+  cut 2018-03-11.16-30-01.16-35-01.admin.G329 from 8040
+  cut 2018-03-11.16-40-00.16-45-00.bus.G509 from 240
+  cut 2018-03-11.16-40-00.16-45-00.bus.G509 from 1560
+  cut 2018-03-11.16-40-00.16-45-00.bus.G509 from 1680
+  cut 2018-03-11.16-40-00.16-45-00.bus.G509 from 1980
+  cut 2018-03-11.16-40-00.16-45-00.bus.G509 from 6000
+  cut 2018-03-11.16-40-00.16-45-00.bus.G509 from 7380
+  cut 2018-03-11.16-40-00.16-45-00.bus.G509 from 7620
+  cut 2018-03-11.16-40-00.16-45-00.bus.G509 from 8100
+  cut 2018-03-12.10-45-00.10-50-00.school.G421 from 3480
+  cut 2018-03-12.10-45-00.10-50-00.school.G421 from 4080
+  cut 2018-03-12.10-45-00.10-50-00.school.G421 from 4440
+  cut 2018-03-12.10-45-00.10-50-00.school.G421 from 4680
+  cut 2018-03-12.10-45-00.10-50-00.school.G421 from 5400
+  cut 2018-03-12.10-45-00.10-50-00.school.G421 from 6420
+  cut 2018-03-12.10-45-00.10-50-00.school.G421 from 6600
+  cut 2018-03-12.10-45-00.10-50-00.school.G421 from 7560
+  cut 2018-03-12.10-45-00.10-50-00.school.G421 from 7860
+  cut 2018-03-12.10-45-00.10-50-00.school.G421 from 8040
+  cut 2018-03-13.16-00-02.16-05-02.hospital.G436 from 1440
+  cut 2018-03-13.16-00-02.16-05-02.hospital.G436 from 1560
+  cut 2018-03-13.16-00-02.16-05-02.hospital.G436 from 4200
+  cut 2018-03-13.16-00-02.16-05-02.hospital.G436 from 4380
+  cut 2018-03-13.16-00-02.16-05-02.hospital.G436 from 5940
+  cut 2018-03-13.16-00-02.16-05-02.hospital.G436 from 6000
+  cut 2018-03-13.16-00-02.16-05-02.hospital.G436 from 6300
+  cut 2018-03-13.16-00-02.16-05-02.hospital.G436 from 7320
+  cut 2018-03-13.16-00-02.16-05-02.hospital.G436 from 8040
+  cut 2018-03-13.16-05-00.16-10-00.bus.G506 from 1320
+  cut 2018-03-13.16-05-00.16-10-00.bus.G506 from 1440
+  cut 2018-03-13.16-05-00.16-10-00.bus.G506 from 1500
+  cut 2018-03-13.16-05-00.16-10-00.bus.G506 from 1920
+  cut 2018-03-13.16-05-00.16-10-00.bus.G506 from 3360
+  cut 2018-03-13.16-05-00.16-10-00.bus.G506 from 3720
+  cut 2018-03-13.16-05-00.16-10-00.bus.G506 from 4920
+  cut 2018-03-13.16-05-00.16-10-00.bus.G506 from 5340
+  cut 2018-03-13.16-05-00.16-10-00.bus.G506 from 8040
+  cut 2018-03-13.17-15-03.17-20-03.school.G336 from 3480
+  cut 2018-03-13.17-15-03.17-20-03.school.G336 from 6840
+  cut 2018-03-13.17-15-03.17-20-03.school.G336 from 6960
+  cut 2018-03-13.17-15-03.17-20-03.school.G336 from 7560
+  cut 2018-03-13.17-15-03.17-20-03.school.G336 from 7800
+  cut 2018-03-15.15-00-06.15-05-06.hospital.G341 from 540
+  cut 2018-03-15.15-05-00.15-10-00.bus.G508 from 1500
+  cut 2018-03-15.15-05-00.15-10-00.bus.G508 from 2700
+  cut 2018-03-15.15-05-00.15-10-00.bus.G508 from 2880
+  cut 2018-03-15.15-05-00.15-10-00.bus.G508 from 3240
+  cut 2018-03-15.15-05-00.15-10-00.bus.G508 from 3360
+  cut 2018-03-15.15-05-00.15-10-00.bus.G508 from 5520
+  cut 2018-03-15.15-05-00.15-10-00.bus.G508 from 5940
+  cut 2018-03-15.15-05-00.15-10-00.bus.G508 from 7080
+  cut 2018-03-15.15-05-00.15-10-00.bus.G508 from 7320
+  cut 2018-03-15.15-05-00.15-10-00.bus.G508 from 8220
+  cut 2018-03-15.15-05-00.15-10-00.bus.G508 from 8340
+  cut 2018-03-15.15-50-06.15-55-06.hospital.G341 from 840
+  cut 2018-03-15.15-50-06.15-55-06.hospital.G341 from 1620
+  cut 2018-03-15.15-50-06.15-55-06.hospital.G341 from 1680
+  cut 2018-03-15.15-50-06.15-55-06.hospital.G341 from 4320
+  cut 2018-03-15.15-50-06.15-55-06.hospital.G341 from 5640
+  cut 2018-03-15.15-50-06.15-55-06.hospital.G341 from 5940
+  cut 2018-03-15.15-50-06.15-55-06.hospital.G341 from 7980
+  cut 2018-03-15.15-50-06.15-55-06.hospital.G341 from 8040
+--- alignment ---
+  2018-03-05.13-15-00.13-20-00.bus.G340_1560              best match at offset +0 (PSNR 42.677753 dB)
+  2018-03-05.13-15-00.13-20-00.bus.G340_6060              best match at offset +0 (PSNR 42.680303 dB)
+  2018-03-05.13-15-00.13-20-00.bus.G340_60                best match at offset +0 (PSNR 42.598991 dB)
+  2018-03-05.13-15-00.13-20-00.bus.G340_660               best match at offset +0 (PSNR 42.779581 dB)
+  2018-03-05.13-15-00.13-20-00.bus.G340_720               best match at offset +0 (PSNR 42.496486 dB)
+  2018-03-05.13-15-00.13-20-00.bus.G340_7260              best match at offset +0 (PSNR 42.650386 dB)
+  2018-03-07.11-05-06.11-10-06.bus.G340_1560              best match at offset +0 (PSNR 41.753268 dB)
+  2018-03-07.11-05-06.11-10-06.bus.G340_4860              best match at offset +0 (PSNR 41.537631 dB)
+  2018-03-07.11-05-06.11-10-06.bus.G340_5220              best match at offset +0 (PSNR 41.480305 dB)
+  2018-03-07.11-05-06.11-10-06.bus.G340_5880              best match at offset +0 (PSNR 41.448579 dB)
+  2018-03-07.11-05-06.11-10-06.bus.G340_6240              best match at offset +0 (PSNR 41.422379 dB)
+  2018-03-07.11-05-06.11-10-06.bus.G340_6480              best match at offset +0 (PSNR 41.428609 dB)
+  2018-03-07.11-05-06.11-10-06.bus.G340_720               best match at offset +0 (PSNR 41.464727 dB)
+  2018-03-07.11-05-06.11-10-06.bus.G340_7620              best match at offset +0 (PSNR 41.538009 dB)
+  2018-03-07.11-05-06.11-10-06.bus.G340_8340              best match at offset +0 (PSNR 41.310455 dB)
+  2018-03-07.16-55-00.17-00-00.admin.G329_1560            best match at offset +0 (PSNR 45.590300 dB)
+  2018-03-07.16-55-00.17-00-00.admin.G329_2220            best match at offset +0 (PSNR 46.191571 dB)
+  2018-03-07.16-55-00.17-00-00.admin.G329_2580            best match at offset +0 (PSNR 45.956104 dB)
+  2018-03-07.16-55-00.17-00-00.admin.G329_2760            best match at offset +0 (PSNR 45.980608 dB)
+  2018-03-07.16-55-00.17-00-00.admin.G329_3960            best match at offset +0 (PSNR 45.602509 dB)
+  2018-03-07.16-55-00.17-00-00.admin.G329_5760            best match at offset +0 (PSNR 45.639298 dB)
+  2018-03-07.16-55-00.17-00-00.admin.G329_6240            best match at offset +0 (PSNR 45.603508 dB)
+  2018-03-07.16-55-00.17-00-00.admin.G329_7320            best match at offset +0 (PSNR 45.540161 dB)
+  2018-03-07.16-55-00.17-00-00.admin.G329_7680            best match at offset +0 (PSNR 45.497285 dB)
+  2018-03-07.16-55-00.17-00-00.admin.G329_960             best match at offset +0 (PSNR 45.596024 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_0              best match at offset +0 (PSNR 43.934664 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_1020           best match at offset +0 (PSNR 43.876246 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_1560           best match at offset +0 (PSNR 43.907751 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_2160           best match at offset +0 (PSNR 43.926365 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_2520           best match at offset +0 (PSNR 44.182935 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_2700           best match at offset +0 (PSNR 43.998440 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_2820           best match at offset +0 (PSNR 44.018561 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_5280           best match at offset +0 (PSNR 43.986741 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_5340           best match at offset +0 (PSNR 43.948452 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_5880           best match at offset +0 (PSNR 44.003534 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_6120           best match at offset +0 (PSNR 43.921942 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_6240           best match at offset +0 (PSNR 43.952936 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_6540           best match at offset +0 (PSNR 43.959557 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_6660           best match at offset +0 (PSNR 43.980849 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_6780           best match at offset +0 (PSNR 43.890388 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_8280           best match at offset +0 (PSNR 43.879994 dB)
+  2018-03-07.16-55-00.17-00-00.school.G638_840            best match at offset +0 (PSNR 43.883473 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_3600           best match at offset +0 (PSNR 47.908963 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_3960           best match at offset +0 (PSNR 47.911419 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_4140           best match at offset +0 (PSNR 47.881259 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_4500           best match at offset +0 (PSNR 47.857230 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_480            best match at offset +0 (PSNR 47.993093 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_5280           best match at offset +0 (PSNR 47.841551 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_5580           best match at offset +0 (PSNR 47.737543 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_6240           best match at offset +0 (PSNR 47.686494 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_6300           best match at offset +0 (PSNR 47.694386 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_6600           best match at offset +0 (PSNR 47.710380 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_6660           best match at offset +0 (PSNR 47.822752 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_7140           best match at offset +0 (PSNR 47.703928 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_7320           best match at offset +0 (PSNR 47.705879 dB)
+  2018-03-07.16-55-01.17-00-01.school.G420_7740           best match at offset +0 (PSNR 47.820527 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_1500         best match at offset +0 (PSNR 44.874767 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_3120         best match at offset +0 (PSNR 44.079374 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_3360         best match at offset +0 (PSNR 44.273460 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_420          best match at offset +0 (PSNR 43.920307 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_4260         best match at offset +0 (PSNR 44.255019 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_4500         best match at offset +0 (PSNR 45.050386 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_4740         best match at offset +0 (PSNR 43.841639 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_6300         best match at offset +0 (PSNR 44.834612 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_6480         best match at offset +0 (PSNR 43.781463 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_6780         best match at offset +0 (PSNR 43.798941 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_6840         best match at offset +0 (PSNR 43.622332 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_720          best match at offset +0 (PSNR 43.874610 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_7320         best match at offset +0 (PSNR 44.375809 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_7980         best match at offset +0 (PSNR 43.773211 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_8160         best match at offset +0 (PSNR 43.975797 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_8340         best match at offset +0 (PSNR 43.441404 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_840          best match at offset +0 (PSNR 43.659222 dB)
+  2018-03-07.17-20-07.17-25-07.hospital.G301_960          best match at offset +0 (PSNR 44.152701 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_1620           best match at offset +0 (PSNR 47.996991 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_180            best match at offset +0 (PSNR 48.012048 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_2400           best match at offset +0 (PSNR 47.982673 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_2640           best match at offset +0 (PSNR 47.989343 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_360            best match at offset +0 (PSNR 47.930658 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_3840           best match at offset +0 (PSNR 48.370166 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_3900           best match at offset +0 (PSNR 48.346385 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_4620           best match at offset +0 (PSNR 48.360620 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_5100           best match at offset +0 (PSNR 48.385095 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_5520           best match at offset +0 (PSNR 48.379978 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_5940           best match at offset +0 (PSNR 48.385238 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_6060           best match at offset +0 (PSNR 48.333295 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_60             best match at offset +0 (PSNR 47.952868 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_6120           best match at offset +0 (PSNR 48.354766 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_6300           best match at offset +0 (PSNR 48.341967 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_6420           best match at offset +0 (PSNR 48.327348 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_6540           best match at offset +0 (PSNR 48.215897 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_6780           best match at offset +0 (PSNR 48.484089 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_6900           best match at offset +0 (PSNR 48.493245 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_7380           best match at offset +0 (PSNR 48.337998 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_7800           best match at offset +0 (PSNR 48.320637 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_8160           best match at offset +0 (PSNR 48.316166 dB)
+  2018-03-07.17-35-01.17-40-01.school.G420_840            best match at offset +0 (PSNR 47.996508 dB)
+  2018-03-09.10-15-01.10-20-01.admin.G326_2700            best match at offset +0 (PSNR 42.473899 dB)
+  2018-03-09.10-15-01.10-20-01.admin.G326_3420            best match at offset +0 (PSNR 42.913430 dB)
+  2018-03-09.10-15-01.10-20-01.admin.G326_3900            best match at offset +0 (PSNR 42.041501 dB)
+  2018-03-09.10-15-01.10-20-01.admin.G326_4200            best match at offset +0 (PSNR 42.038453 dB)
+  2018-03-09.10-15-01.10-20-01.admin.G326_4260            best match at offset +0 (PSNR 40.452636 dB)
+  2018-03-09.10-15-01.10-20-01.admin.G326_4680            best match at offset +0 (PSNR 41.403365 dB)
+  2018-03-09.10-15-01.10-20-01.admin.G326_5940            best match at offset +0 (PSNR 41.671679 dB)
+  2018-03-09.10-15-01.10-20-01.admin.G326_6060            best match at offset +0 (PSNR 42.411188 dB)
+  2018-03-09.10-15-01.10-20-01.admin.G326_6300            best match at offset +0 (PSNR 42.729570 dB)
+  2018-03-09.10-15-01.10-20-01.admin.G326_6600            best match at offset +0 (PSNR 42.193725 dB)
+  2018-03-09.10-15-01.10-20-01.admin.G326_7200            best match at offset +0 (PSNR 42.882784 dB)
+  2018-03-09.10-20-00.10-25-00.school.G336_1920           best match at offset +0 (PSNR 42.363091 dB)
+  2018-03-09.10-20-00.10-25-00.school.G336_2280           best match at offset +0 (PSNR 41.461039 dB)
+  2018-03-09.10-20-00.10-25-00.school.G336_4920           best match at offset +0 (PSNR 42.430506 dB)
+  2018-03-09.10-20-00.10-25-00.school.G336_6240           best match at offset +0 (PSNR 42.250483 dB)
+  2018-03-09.10-20-00.10-25-00.school.G336_6540           best match at offset +0 (PSNR 42.190373 dB)
+  2018-03-09.10-20-00.10-25-00.school.G336_6660           best match at offset +0 (PSNR 42.393631 dB)
+  2018-03-09.10-20-00.10-25-00.school.G336_7080           best match at offset +0 (PSNR 42.286711 dB)
+  2018-03-11.11-20-00.11-25-00.school.G423_1320           best match at offset +0 (PSNR 48.102287 dB)
+  2018-03-11.11-20-00.11-25-00.school.G423_7680           best match at offset +0 (PSNR 48.278153 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_0                 best match at offset +0 (PSNR 43.173154 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_120               best match at offset +0 (PSNR 43.410506 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_3120              best match at offset +0 (PSNR 43.187846 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_3300              best match at offset +0 (PSNR 43.226178 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_3960              best match at offset +0 (PSNR 43.278841 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_5100              best match at offset +0 (PSNR 43.768281 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_5520              best match at offset +0 (PSNR 43.373689 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_5640              best match at offset +0 (PSNR 43.137144 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_5760              best match at offset +0 (PSNR 43.190181 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_6360              best match at offset +0 (PSNR 43.119847 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_6600              best match at offset +0 (PSNR 43.132799 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_7140              best match at offset +0 (PSNR 43.537926 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_7860              best match at offset +0 (PSNR 43.259388 dB)
+  2018-03-11.16-10-00.16-15-00.bus.G509_8160              best match at offset +0 (PSNR 44.341180 dB)
+  2018-03-11.16-20-08.16-25-08.hospital.G301_2100         best match at offset +0 (PSNR 45.098476 dB)
+  2018-03-11.16-20-08.16-25-08.hospital.G301_3960         best match at offset +0 (PSNR 44.160117 dB)
+  2018-03-11.16-20-08.16-25-08.hospital.G301_4200         best match at offset +0 (PSNR 44.879682 dB)
+  2018-03-11.16-20-08.16-25-08.hospital.G301_6360         best match at offset +0 (PSNR 45.488167 dB)
+  2018-03-11.16-20-08.16-25-08.hospital.G301_6840         best match at offset +0 (PSNR 43.503762 dB)
+  2018-03-11.16-20-08.16-25-08.hospital.G301_6960         best match at offset +0 (PSNR 44.171408 dB)
+  2018-03-11.16-20-08.16-25-08.hospital.G301_7380         best match at offset +0 (PSNR 44.098646 dB)
+  2018-03-11.16-20-08.16-25-08.hospital.G301_7560         best match at offset +0 (PSNR 46.423369 dB)
+  2018-03-11.16-20-08.16-25-08.hospital.G301_7800         best match at offset +0 (PSNR 46.427824 dB)
+  2018-03-11.16-20-08.16-25-08.hospital.G301_8040         best match at offset +0 (PSNR 45.998895 dB)
+  2018-03-11.16-20-08.16-25-08.hospital.G301_8220         best match at offset +0 (PSNR 46.023834 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_1560            best match at offset +0 (PSNR 46.644195 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_180             best match at offset +0 (PSNR 46.659070 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_2580            best match at offset +0 (PSNR 46.672884 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_2700            best match at offset +0 (PSNR 46.682640 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_3180            best match at offset +0 (PSNR 46.687931 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_3420            best match at offset +0 (PSNR 46.685357 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_3660            best match at offset +0 (PSNR 46.695407 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_3840            best match at offset +0 (PSNR 46.685804 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_4560            best match at offset +0 (PSNR 46.699984 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_480             best match at offset +0 (PSNR 46.654059 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_4860            best match at offset +0 (PSNR 46.689675 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_5400            best match at offset +0 (PSNR 46.706552 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_5880            best match at offset +0 (PSNR 46.696351 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_6000            best match at offset +0 (PSNR 46.728735 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_6120            best match at offset +0 (PSNR 46.702585 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_6480            best match at offset +0 (PSNR 46.708209 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_6660            best match at offset +0 (PSNR 46.715853 dB)
+  2018-03-11.16-25-01.16-30-01.admin.G326_7980            best match at offset +0 (PSNR 46.767545 dB)
+  2018-03-11.16-25-08.16-30-08.hospital.G436_2340         best match at offset +0 (PSNR 42.203796 dB)
+  2018-03-11.16-25-08.16-30-08.hospital.G436_2940         best match at offset +0 (PSNR 42.231762 dB)
+  2018-03-11.16-25-08.16-30-08.hospital.G436_5280         best match at offset +0 (PSNR 42.364389 dB)
+  2018-03-11.16-30-00.16-35-00.bus.G505_1860              best match at offset +0 (PSNR 47.002802 dB)
+  2018-03-11.16-30-00.16-35-00.bus.G505_2340              best match at offset +0 (PSNR 47.065090 dB)
+  2018-03-11.16-30-00.16-35-00.bus.G505_300               best match at offset +0 (PSNR 46.988830 dB)
+  2018-03-11.16-30-00.16-35-00.bus.G505_3960              best match at offset +0 (PSNR 47.045306 dB)
+  2018-03-11.16-30-00.16-35-00.bus.G505_4080              best match at offset +0 (PSNR 47.062767 dB)
+  2018-03-11.16-30-00.16-35-00.bus.G505_5340              best match at offset +0 (PSNR 47.029852 dB)
+  2018-03-11.16-30-00.16-35-00.bus.G505_6840              best match at offset +0 (PSNR 47.104139 dB)
+  2018-03-11.16-30-00.16-35-00.bus.G505_780               best match at offset +0 (PSNR 46.977807 dB)
+  2018-03-11.16-30-01.16-35-01.admin.G329_2580            best match at offset +0 (PSNR 45.446094 dB)
+  2018-03-11.16-30-01.16-35-01.admin.G329_7200            best match at offset +0 (PSNR 45.467148 dB)
+  2018-03-11.16-30-01.16-35-01.admin.G329_8040            best match at offset +0 (PSNR 45.477577 dB)
+  2018-03-11.16-30-01.16-35-01.admin.G329_900             best match at offset +0 (PSNR 45.463120 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_1560              best match at offset +0 (PSNR 43.011323 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_1680              best match at offset +0 (PSNR 43.007201 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_1980              best match at offset +0 (PSNR 43.007288 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_240               best match at offset +0 (PSNR 43.005680 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_2760              best match at offset +0 (PSNR 43.012471 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_3780              best match at offset +0 (PSNR 43.019429 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_480               best match at offset +0 (PSNR 43.007955 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_5160              best match at offset +0 (PSNR 43.035079 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_5280              best match at offset +0 (PSNR 43.038973 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_5580              best match at offset +0 (PSNR 43.133377 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_6000              best match at offset +0 (PSNR 43.044383 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_6420              best match at offset +0 (PSNR 43.034995 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_7380              best match at offset +0 (PSNR 43.148159 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_7500              best match at offset +0 (PSNR 43.139853 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_7620              best match at offset +0 (PSNR 43.141871 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_7860              best match at offset +0 (PSNR 43.127108 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_7980              best match at offset +0 (PSNR 43.048835 dB)
+  2018-03-11.16-40-00.16-45-00.bus.G509_8100              best match at offset +0 (PSNR 43.129468 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_1680           best match at offset +0 (PSNR 45.881719 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_2160           best match at offset +0 (PSNR 45.940631 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_2640           best match at offset +0 (PSNR 46.393985 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_3480           best match at offset +0 (PSNR 45.883395 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_3720           best match at offset +0 (PSNR 45.966229 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_3900           best match at offset +0 (PSNR 46.667304 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_4080           best match at offset +0 (PSNR 46.716949 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_4440           best match at offset +0 (PSNR 46.313558 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_4680           best match at offset +0 (PSNR 46.365144 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_5400           best match at offset +0 (PSNR 46.613402 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_6420           best match at offset +0 (PSNR 46.200774 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_6600           best match at offset +0 (PSNR 46.235503 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_6780           best match at offset +0 (PSNR 46.756808 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_7560           best match at offset +0 (PSNR 46.677997 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_7680           best match at offset +0 (PSNR 46.750981 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_7860           best match at offset +0 (PSNR 47.014993 dB)
+  2018-03-12.10-45-00.10-50-00.school.G421_8040           best match at offset +0 (PSNR 45.887679 dB)
+  2018-03-13.16-00-02.16-05-02.hospital.G436_1140         best match at offset +0 (PSNR 45.411971 dB)
+  2018-03-13.16-00-02.16-05-02.hospital.G436_1440         best match at offset +0 (PSNR 45.709810 dB)
+  2018-03-13.16-00-02.16-05-02.hospital.G436_1560         best match at offset +0 (PSNR 44.646747 dB)
+  2018-03-13.16-00-02.16-05-02.hospital.G436_2340         best match at offset +0 (PSNR 43.453580 dB)
+  2018-03-13.16-00-02.16-05-02.hospital.G436_3840         best match at offset +0 (PSNR 43.798207 dB)
+  2018-03-13.16-00-02.16-05-02.hospital.G436_4200         best match at offset +0 (PSNR 45.122105 dB)
+  2018-03-13.16-00-02.16-05-02.hospital.G436_4380         best match at offset +0 (PSNR 43.711534 dB)
+  2018-03-13.16-00-02.16-05-02.hospital.G436_5940         best match at offset +0 (PSNR 46.317797 dB)
+  2018-03-13.16-00-02.16-05-02.hospital.G436_6000         best match at offset +0 (PSNR 45.502513 dB)
+  2018-03-13.16-00-02.16-05-02.hospital.G436_6300         best match at offset +0 (PSNR 45.827114 dB)
+  2018-03-13.16-00-02.16-05-02.hospital.G436_7320         best match at offset +0 (PSNR 46.305232 dB)
+  2018-03-13.16-00-02.16-05-02.hospital.G436_8040         best match at offset +0 (PSNR 46.001194 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_1140              best match at offset +0 (PSNR 44.948504 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_1200              best match at offset +0 (PSNR 45.113700 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_1320              best match at offset +0 (PSNR 45.010255 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_1440              best match at offset +0 (PSNR 45.013397 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_1500              best match at offset +0 (PSNR 45.205310 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_1920              best match at offset +0 (PSNR 45.316553 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_2700              best match at offset +0 (PSNR 45.295518 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_3360              best match at offset +0 (PSNR 45.341490 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_360               best match at offset +0 (PSNR 45.012407 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_3720              best match at offset +0 (PSNR 45.372578 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_3900              best match at offset +0 (PSNR 45.374532 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_4920              best match at offset +0 (PSNR 45.492506 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_5340              best match at offset +0 (PSNR 45.545285 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_6180              best match at offset +0 (PSNR 45.453069 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_6300              best match at offset +0 (PSNR 45.638446 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_6360              best match at offset +0 (PSNR 45.637472 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_6780              best match at offset +0 (PSNR 45.663711 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_7800              best match at offset +0 (PSNR 45.684219 dB)
+  2018-03-13.16-05-00.16-10-00.bus.G506_8040              best match at offset +0 (PSNR 45.508045 dB)
+  2018-03-13.17-15-03.17-20-03.school.G336_3480           best match at offset +0 (PSNR 42.047132 dB)
+  2018-03-13.17-15-03.17-20-03.school.G336_6840           best match at offset +0 (PSNR 41.721033 dB)
+  2018-03-13.17-15-03.17-20-03.school.G336_6960           best match at offset +0 (PSNR 42.236381 dB)
+  2018-03-13.17-15-03.17-20-03.school.G336_7560           best match at offset +0 (PSNR 41.864160 dB)
+  2018-03-13.17-15-03.17-20-03.school.G336_7800           best match at offset +0 (PSNR 41.773352 dB)
+  2018-03-15.15-00-06.15-05-06.hospital.G341_540          best match at offset +0 (PSNR 45.647885 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_1260              best match at offset +0 (PSNR 47.516901 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_1500              best match at offset +0 (PSNR 47.406684 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_2220              best match at offset +0 (PSNR 47.335245 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_2700              best match at offset +0 (PSNR 47.380076 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_2820              best match at offset +0 (PSNR 47.375829 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_2880              best match at offset +0 (PSNR 47.375086 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_3240              best match at offset +0 (PSNR 47.369956 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_3360              best match at offset +0 (PSNR 47.373559 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_3480              best match at offset +0 (PSNR 47.382067 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_3660              best match at offset +0 (PSNR 47.384601 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_420               best match at offset +0 (PSNR 47.581638 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_4740              best match at offset +0 (PSNR 47.437500 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_5220              best match at offset +0 (PSNR 47.349629 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_5520              best match at offset +0 (PSNR 47.412906 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_5940              best match at offset +0 (PSNR 47.412953 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_7080              best match at offset +0 (PSNR 47.399748 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_7320              best match at offset +0 (PSNR 47.386659 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_7440              best match at offset +0 (PSNR 47.418189 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_8220              best match at offset +0 (PSNR 47.442986 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_8280              best match at offset +0 (PSNR 47.386759 dB)
+  2018-03-15.15-05-00.15-10-00.bus.G508_8340              best match at offset +0 (PSNR 47.400145 dB)
+  2018-03-15.15-50-06.15-55-06.hospital.G341_1620         best match at offset +0 (PSNR 45.046094 dB)
+  2018-03-15.15-50-06.15-55-06.hospital.G341_1680         best match at offset +0 (PSNR 45.024411 dB)
+  2018-03-15.15-50-06.15-55-06.hospital.G341_2700         best match at offset +0 (PSNR 45.583287 dB)
+  2018-03-15.15-50-06.15-55-06.hospital.G341_3000         best match at offset +0 (PSNR 44.756436 dB)
+  2018-03-15.15-50-06.15-55-06.hospital.G341_4320         best match at offset +0 (PSNR 43.953557 dB)
+  2018-03-15.15-50-06.15-55-06.hospital.G341_5040         best match at offset +0 (PSNR 44.148580 dB)
+  2018-03-15.15-50-06.15-55-06.hospital.G341_5640         best match at offset +0 (PSNR 44.166793 dB)
+  2018-03-15.15-50-06.15-55-06.hospital.G341_5940         best match at offset +0 (PSNR 43.890522 dB)
+  2018-03-15.15-50-06.15-55-06.hospital.G341_7500         best match at offset +0 (PSNR 44.369343 dB)
+  2018-03-15.15-50-06.15-55-06.hospital.G341_7980         best match at offset +0 (PSNR 43.946408 dB)
+  2018-03-15.15-50-06.15-55-06.hospital.G341_8040         best match at offset +0 (PSNR 43.826261 dB)
+  2018-03-15.15-50-06.15-55-06.hospital.G341_840          best match at offset +0 (PSNR 45.307191 dB)

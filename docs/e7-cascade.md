@@ -101,6 +101,12 @@ chance) — it asserts more letters and wins by volume, at **2.4× the false ala
 - **The crop helps what it frames** (objects: +20 → +39) and **destroys what it
   excludes**: it crops to people, so vehicle motion falls to chance.
 
+!!! note "Revised by E7d (2026-09-24): conversations were a model limit"
+    With the same frames, prompt and pixels, **Qwen3-VL-8B** recognises
+    conversations at **+34 points** above chance and Qwen3.5-9B at +28. The −9 above
+    is Qwen2.5-VL-7B's limit, not the task's. Phones stay hard for every model
+    tested (≤ +12). See [E7d](e7d-models.md).
+
 !!! warning "The VLM's own skill is poorly pinned down"
     Resampling **clips** (activities within a clip share a scene and are not
     independent), the 95% interval on full-frame recognition above chance is

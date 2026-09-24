@@ -1,0 +1,48 @@
+
+=== YOLOv8s @ 640, all clips ===
+gate           arm     calls  gate rec   recog  chance    lift    FA/h  tok/call  cams/GPU
+dense          full   100.0%    100.0%   72.4%   32.7%   39.7%   803.5      1035    -
+dense          roi    100.0%    100.0%   69.9%   33.3%   36.6%   750.0       842    -
+presence       full    60.9%     99.8%   72.4%   32.6%   39.9%   800.5      1035    -  vs dense +0.0 pts [+0.0,+0.0]
+presence       roi     60.9%     99.8%   69.9%   33.1%   36.8%   743.5       842    -  vs dense +0.0 pts [+0.0,+0.0]
+person         full    40.2%     95.6%   69.4%   30.5%   38.8%   672.0      1035    -  vs dense -3.1 pts [-7.2,-0.2]
+person         roi     40.2%     95.6%   67.5%   31.8%   35.8%   626.5       842    -  vs dense -2.4 pts [-4.9,-0.4]
+motion         full    49.1%     99.3%   71.8%   32.0%   39.8%   681.0      1035    -  vs dense -0.7 pts [-1.9,+0.0]
+motion         roi     49.1%     99.3%   69.0%   32.5%   36.6%   631.5       842    -  vs dense -0.9 pts [-2.9,+0.0]
+person-motion  full    35.9%     94.7%   68.4%   29.8%   38.5%   601.0      1035    -  vs dense -4.1 pts [-8.6,-0.9]
+person-motion  roi     35.9%     94.7%   66.5%   31.0%   35.5%   565.5       842    -  vs dense -3.4 pts [-6.7,-1.0]
+
+=== YOLOv8s @ 1280, all clips ===
+gate           arm     calls  gate rec   recog  chance    lift    FA/h  tok/call  cams/GPU
+dense          full   100.0%    100.0%   72.4%   32.7%   39.7%   803.5      1035    -  skill CI [+26.2,+55.6]
+dense          roi    100.0%    100.0%   69.9%   33.3%   36.6%   750.0       842    -  skill CI [+19.9,+54.8]
+presence       full    61.4%     99.8%   72.4%   32.6%   39.8%   802.0      1035    -  vs dense +0.0 pts [+0.0,+0.0]
+presence       roi     61.4%     99.8%   69.9%   33.2%   36.7%   748.5       842    -  vs dense +0.0 pts [+0.0,+0.0]
+person         full    45.2%     98.6%   71.1%   31.8%   39.2%   693.0      1035    -  vs dense -1.4 pts [-4.2,+0.0]
+person         roi     45.2%     98.6%   67.9%   32.6%   35.2%   637.0       842    -  vs dense -2.0 pts [-5.4,-0.3]
+motion         full    45.4%     99.1%   71.6%   31.9%   39.7%   734.0      1035    -  vs dense -0.9 pts [-2.5,+0.0]
+motion         roi     45.4%     99.1%   69.2%   32.6%   36.6%   683.0       842    -  vs dense -0.7 pts [-2.2,+0.0]
+person-motion  full    37.8%     97.1%   70.2%   30.9%   39.3%   625.5      1035    -  vs dense -2.2 pts [-5.8,-0.6]
+person-motion  roi     37.8%     97.1%   67.7%   31.7%   36.0%   586.5       842    -  vs dense -2.2 pts [-5.6,-0.5]
+
+=== per activity group: dense, YOLO 1280 (recognised / chance / lift, n) ===
+  [full]
+    A a person gets into or out of a vehicle, opens or clo  54.3%   3.6%  +50.7  n=81
+    B a vehicle starts, stops, turns, or reverses           88.8%  54.6%  +34.2  n=80
+    C a person walks through a doorway or opens or closes   67.1%  16.9%  +50.2  n=149
+    D a person picks up, puts down, carries, or hands over  54.5%  18.5%  +36.1  n=33
+    E a person uses a phone                                 34.0%  21.8%  +12.2  n=50
+    F people talk to or touch each other                    91.1%  56.8%  +34.3  n=179
+    G a person sits down or stands up                       90.0%  13.0%  +77.0  n=10
+    H a person rides a bicycle, reads, uses a laptop, or b  66.7%  10.8%  +55.8  n=6
+  [roi]
+    A a person gets into or out of a vehicle, opens or clo  56.8%   5.1%  +51.7  n=81
+    B a vehicle starts, stops, turns, or reverses           67.5%  36.0%  +31.5  n=80
+    C a person walks through a doorway or opens or closes   63.1%  13.1%  +50.0  n=149
+    D a person picks up, puts down, carries, or hands over  63.6%  21.5%  +42.1  n=33
+    E a person uses a phone                                 40.0%  35.5%   +4.5  n=50
+    F people talk to or touch each other                    90.5%  65.2%  +25.3  n=179
+    G a person sits down or stands up                       90.0%  11.5%  +78.5  n=10
+    H a person rides a bicycle, reads, uses a laptop, or b  83.3%  14.2%  +69.2  n=6
+
+wrote results/e7d/E_q3vl_8b/cascades.json

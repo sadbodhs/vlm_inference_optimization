@@ -1,0 +1,5622 @@
+{
+ "meta": {
+  "arm_id": "E_q35_9b",
+  "capacity": {},
+  "sizes": [
+   640,
+   1280
+  ]
+ },
+ "rows": [
+  {
+   "size": 640,
+   "gate": "dense",
+   "arm": "full",
+   "bin": "empty",
+   "call_rate": 1.0,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1190.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 640,
+   "gate": "dense",
+   "arm": "full",
+   "bin": "sparse",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.9473684210526315,
+   "recognised_chance": 0.5578947368421052,
+   "lift": 0.3894736842105263,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1848.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1875,
+     "lift": 0.5625
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.7416666666666667,
+     "lift": 0.2583333333333333
+    },
+    "A": {
+     "n": 3,
+     "recognised": 1.0,
+     "chance": 0.5666666666666667,
+     "lift": 0.43333333333333335
+    },
+    "B": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6166666666666667,
+     "lift": 0.3833333333333333
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "dense",
+   "arm": "full",
+   "bin": "moderate",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.8939393939393939,
+   "recognised_chance": 0.5467171717171717,
+   "lift": 0.3472222222222222,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1526.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.941747572815534,
+     "chance": 0.7402912621359223,
+     "lift": 0.20145631067961167
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.6111111111111112,
+     "chance": 0.13333333333333333,
+     "lift": 0.47777777777777786
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1,
+     "lift": 0.65
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.014285714285714285,
+     "lift": 0.5571428571428572
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.19444444444444445,
+     "lift": 0.36111111111111116
+    },
+    "F": {
+     "n": 14,
+     "recognised": 1.0,
+     "chance": 0.5642857142857143,
+     "lift": 0.4357142857142857
+    },
+    "A": {
+     "n": 21,
+     "recognised": 1.0,
+     "chance": 0.46904761904761905,
+     "lift": 0.530952380952381
+    },
+    "B": {
+     "n": 22,
+     "recognised": 1.0,
+     "chance": 0.43636363636363634,
+     "lift": 0.5636363636363637
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "dense",
+   "arm": "full",
+   "bin": "busy",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.7520215633423181,
+   "recognised_chance": 0.6764150943396227,
+   "lift": 0.07560646900269541,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1484.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.9503105590062112,
+     "chance": 0.9419254658385092,
+     "lift": 0.008385093167701974
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.04666666666666667,
+     "lift": 0.2866666666666666
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.625,
+     "chance": 0.63375,
+     "lift": -0.008750000000000036
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.1951219512195122,
+     "chance": 0.34268292682926826,
+     "lift": -0.14756097560975606
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7894736842105263,
+     "chance": 0.5008771929824561,
+     "lift": 0.2885964912280702
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.1,
+     "lift": 0.5666666666666667
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.7692307692307693,
+     "chance": 0.5807692307692307,
+     "lift": 0.18846153846153857
+    },
+    "H": {
+     "n": 2,
+     "recognised": 0.5,
+     "chance": 0.075,
+     "lift": 0.425
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "dense",
+   "arm": "full",
+   "bin": "all",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.8061224489795918,
+   "recognised_chance": 0.5210034013605442,
+   "lift": 0.2851190476190476,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1512.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9497206703910615,
+     "chance": 0.6706703910614525,
+     "lift": 0.2790502793296089
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.8590604026845637,
+     "chance": 0.684228187919463,
+     "lift": 0.1748322147651007
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.8518518518518519,
+     "chance": 0.39259259259259255,
+     "lift": 0.4592592592592593
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.85,
+     "chance": 0.510625,
+     "lift": 0.339375
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.48484848484848486,
+     "chance": 0.0803030303030303,
+     "lift": 0.40454545454545454
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.09166666666666666,
+     "lift": 0.575
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.030000000000000006,
+     "lift": 0.57
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.26,
+     "chance": 0.164,
+     "lift": 0.096
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "dense",
+   "arm": "roi",
+   "bin": "empty",
+   "call_rate": 1.0,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 990.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 640,
+   "gate": "dense",
+   "arm": "roi",
+   "bin": "sparse",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.9473684210526315,
+   "recognised_chance": 0.5052631578947369,
+   "lift": 0.44210526315789467,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1494.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.2125,
+     "lift": 0.5375
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6083333333333333,
+     "lift": 0.3916666666666667
+    },
+    "A": {
+     "n": 3,
+     "recognised": 1.0,
+     "chance": 0.4666666666666666,
+     "lift": 0.5333333333333334
+    },
+    "B": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6166666666666667,
+     "lift": 0.3833333333333333
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "dense",
+   "arm": "roi",
+   "bin": "moderate",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.7171717171717171,
+   "recognised_chance": 0.45606060606060606,
+   "lift": 0.26111111111111107,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1316.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.6893203883495146,
+     "chance": 0.620873786407767,
+     "lift": 0.06844660194174756
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.8333333333333334,
+     "chance": 0.10833333333333332,
+     "lift": 0.7250000000000001
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1,
+     "lift": 0.65
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.02857142857142857,
+     "lift": 0.5428571428571428
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.26666666666666666,
+     "lift": 0.2888888888888889
+    },
+    "F": {
+     "n": 14,
+     "recognised": 0.7142857142857143,
+     "chance": 0.41785714285714287,
+     "lift": 0.29642857142857143
+    },
+    "A": {
+     "n": 21,
+     "recognised": 0.9523809523809523,
+     "chance": 0.40714285714285714,
+     "lift": 0.5452380952380952
+    },
+    "B": {
+     "n": 22,
+     "recognised": 0.6363636363636364,
+     "chance": 0.3181818181818182,
+     "lift": 0.3181818181818182
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "dense",
+   "arm": "roi",
+   "bin": "busy",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.738544474393531,
+   "recognised_chance": 0.6289757412398922,
+   "lift": 0.1095687331536388,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1272.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.968944099378882,
+     "chance": 0.9577639751552794,
+     "lift": 0.011180124223602594
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.11666666666666667,
+     "lift": 0.21666666666666665
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.725,
+     "chance": 0.39625,
+     "lift": 0.32875
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.12195121951219512,
+     "chance": 0.30609756097560975,
+     "lift": -0.18414634146341463
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7017543859649122,
+     "chance": 0.4587719298245614,
+     "lift": 0.24298245614035086
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.11666666666666665,
+     "lift": 0.5499999999999999
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.6730769230769231,
+     "chance": 0.4269230769230769,
+     "lift": 0.24615384615384622
+    },
+    "H": {
+     "n": 2,
+     "recognised": 1.0,
+     "chance": 0.15,
+     "lift": 0.85
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "dense",
+   "arm": "roi",
+   "bin": "all",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.7380952380952381,
+   "recognised_chance": 0.4797619047619047,
+   "lift": 0.2583333333333334,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1268.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9441340782122905,
+     "chance": 0.6963687150837988,
+     "lift": 0.24776536312849162
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.7114093959731543,
+     "chance": 0.5684563758389262,
+     "lift": 0.14295302013422817
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.7777777777777778,
+     "chance": 0.3012345679012346,
+     "lift": 0.4765432098765432
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.6875,
+     "chance": 0.42374999999999996,
+     "lift": 0.26375000000000004
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.6060606060606061,
+     "chance": 0.11363636363636365,
+     "lift": 0.49242424242424243
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.8333333333333334,
+     "chance": 0.125,
+     "lift": 0.7083333333333334
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.08,
+     "lift": 0.52
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.2,
+     "chance": 0.183,
+     "lift": 0.017000000000000015
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "presence",
+   "arm": "full",
+   "bin": "empty",
+   "call_rate": 0.34,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 304.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 640,
+   "gate": "presence",
+   "arm": "full",
+   "bin": "sparse",
+   "call_rate": 0.5488888888888889,
+   "gate_recall": 1.0,
+   "recognised": 0.9473684210526315,
+   "recognised_chance": 0.5578947368421052,
+   "lift": 0.3894736842105263,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1318.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1875,
+     "lift": 0.5625
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.7416666666666667,
+     "lift": 0.2583333333333333
+    },
+    "A": {
+     "n": 3,
+     "recognised": 1.0,
+     "chance": 0.5666666666666667,
+     "lift": 0.43333333333333335
+    },
+    "B": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6166666666666667,
+     "lift": 0.3833333333333333
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "presence",
+   "arm": "full",
+   "bin": "moderate",
+   "call_rate": 0.6144444444444445,
+   "gate_recall": 0.9949494949494949,
+   "recognised": 0.8888888888888888,
+   "recognised_chance": 0.5340909090909091,
+   "lift": 0.3547979797979798,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1110.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.9320388349514563,
+     "chance": 0.7184466019417476,
+     "lift": 0.21359223300970875
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.6111111111111112,
+     "chance": 0.13333333333333333,
+     "lift": 0.47777777777777786
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1,
+     "lift": 0.65
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.014285714285714285,
+     "lift": 0.5571428571428572
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.19444444444444445,
+     "lift": 0.36111111111111116
+    },
+    "F": {
+     "n": 14,
+     "recognised": 1.0,
+     "chance": 0.5464285714285715,
+     "lift": 0.4535714285714285
+    },
+    "A": {
+     "n": 21,
+     "recognised": 1.0,
+     "chance": 0.46904761904761905,
+     "lift": 0.530952380952381
+    },
+    "B": {
+     "n": 22,
+     "recognised": 1.0,
+     "chance": 0.43636363636363634,
+     "lift": 0.5636363636363637
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "presence",
+   "arm": "full",
+   "bin": "busy",
+   "call_rate": 0.9344444444444444,
+   "gate_recall": 1.0,
+   "recognised": 0.7520215633423181,
+   "recognised_chance": 0.6764150943396227,
+   "lift": 0.07560646900269541,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1366.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.9503105590062112,
+     "chance": 0.9419254658385092,
+     "lift": 0.008385093167701974
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.04666666666666667,
+     "lift": 0.2866666666666666
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.625,
+     "chance": 0.63375,
+     "lift": -0.008750000000000036
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.1951219512195122,
+     "chance": 0.34268292682926826,
+     "lift": -0.14756097560975606
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7894736842105263,
+     "chance": 0.5008771929824561,
+     "lift": 0.2885964912280702
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.1,
+     "lift": 0.5666666666666667
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.7692307692307693,
+     "chance": 0.5807692307692307,
+     "lift": 0.18846153846153857
+    },
+    "H": {
+     "n": 2,
+     "recognised": 0.5,
+     "chance": 0.075,
+     "lift": 0.425
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "presence",
+   "arm": "full",
+   "bin": "all",
+   "call_rate": 0.6094444444444445,
+   "gate_recall": 0.9982993197278912,
+   "recognised": 0.8044217687074829,
+   "recognised_chance": 0.5164115646258504,
+   "lift": 0.2880102040816326,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -0.17006802721088435,
+    -0.6557377049180327,
+    0.0
+   ],
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1024.5,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9497206703910615,
+     "chance": 0.6689944134078212,
+     "lift": 0.2807262569832403
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.8523489932885906,
+     "chance": 0.6681208053691275,
+     "lift": 0.18422818791946305
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.8518518518518519,
+     "chance": 0.39259259259259255,
+     "lift": 0.4592592592592593
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.85,
+     "chance": 0.510625,
+     "lift": 0.339375
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.48484848484848486,
+     "chance": 0.0803030303030303,
+     "lift": 0.40454545454545454
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.09166666666666666,
+     "lift": 0.575
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.030000000000000006,
+     "lift": 0.57
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.26,
+     "chance": 0.164,
+     "lift": 0.096
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "presence",
+   "arm": "roi",
+   "bin": "empty",
+   "call_rate": 0.34,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 104.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 640,
+   "gate": "presence",
+   "arm": "roi",
+   "bin": "sparse",
+   "call_rate": 0.5488888888888889,
+   "gate_recall": 1.0,
+   "recognised": 0.9473684210526315,
+   "recognised_chance": 0.5052631578947369,
+   "lift": 0.44210526315789467,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 964.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.2125,
+     "lift": 0.5375
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6083333333333333,
+     "lift": 0.3916666666666667
+    },
+    "A": {
+     "n": 3,
+     "recognised": 1.0,
+     "chance": 0.4666666666666666,
+     "lift": 0.5333333333333334
+    },
+    "B": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6166666666666667,
+     "lift": 0.3833333333333333
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "presence",
+   "arm": "roi",
+   "bin": "moderate",
+   "call_rate": 0.6144444444444445,
+   "gate_recall": 0.9949494949494949,
+   "recognised": 0.702020202020202,
+   "recognised_chance": 0.44267676767676767,
+   "lift": 0.2593434343434343,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 894.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.6601941747572816,
+     "chance": 0.5966019417475728,
+     "lift": 0.06359223300970884
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.8333333333333334,
+     "chance": 0.10833333333333332,
+     "lift": 0.7250000000000001
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1,
+     "lift": 0.65
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.02857142857142857,
+     "lift": 0.5428571428571428
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.26666666666666666,
+     "lift": 0.2888888888888889
+    },
+    "F": {
+     "n": 14,
+     "recognised": 0.7142857142857143,
+     "chance": 0.40714285714285714,
+     "lift": 0.30714285714285716
+    },
+    "A": {
+     "n": 21,
+     "recognised": 0.9523809523809523,
+     "chance": 0.40714285714285714,
+     "lift": 0.5452380952380952
+    },
+    "B": {
+     "n": 22,
+     "recognised": 0.6363636363636364,
+     "chance": 0.3181818181818182,
+     "lift": 0.3181818181818182
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "presence",
+   "arm": "roi",
+   "bin": "busy",
+   "call_rate": 0.9344444444444444,
+   "gate_recall": 1.0,
+   "recognised": 0.738544474393531,
+   "recognised_chance": 0.6289757412398922,
+   "lift": 0.1095687331536388,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1156.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.968944099378882,
+     "chance": 0.9577639751552794,
+     "lift": 0.011180124223602594
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.11666666666666667,
+     "lift": 0.21666666666666665
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.725,
+     "chance": 0.39625,
+     "lift": 0.32875
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.12195121951219512,
+     "chance": 0.30609756097560975,
+     "lift": -0.18414634146341463
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7017543859649122,
+     "chance": 0.4587719298245614,
+     "lift": 0.24298245614035086
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.11666666666666665,
+     "lift": 0.5499999999999999
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.6730769230769231,
+     "chance": 0.4269230769230769,
+     "lift": 0.24615384615384622
+    },
+    "H": {
+     "n": 2,
+     "recognised": 1.0,
+     "chance": 0.15,
+     "lift": 0.85
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "presence",
+   "arm": "roi",
+   "bin": "all",
+   "call_rate": 0.6094444444444445,
+   "gate_recall": 0.9982993197278912,
+   "recognised": 0.7329931972789115,
+   "recognised_chance": 0.47551020408163264,
+   "lift": 0.2574829931972789,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -0.5102040816326531,
+    -1.5486725663716814,
+    0.0
+   ],
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 779.5,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9441340782122905,
+     "chance": 0.6952513966480447,
+     "lift": 0.24888268156424576
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.6912751677852349,
+     "chance": 0.553020134228188,
+     "lift": 0.13825503355704694
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.7777777777777778,
+     "chance": 0.3012345679012346,
+     "lift": 0.4765432098765432
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.6875,
+     "chance": 0.42374999999999996,
+     "lift": 0.26375000000000004
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.6060606060606061,
+     "chance": 0.11363636363636365,
+     "lift": 0.49242424242424243
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.8333333333333334,
+     "chance": 0.125,
+     "lift": 0.7083333333333334
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.08,
+     "lift": 0.52
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.2,
+     "chance": 0.183,
+     "lift": 0.017000000000000015
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person",
+   "arm": "full",
+   "bin": "empty",
+   "call_rate": 0.0044444444444444444,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 12.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 640,
+   "gate": "person",
+   "arm": "full",
+   "bin": "sparse",
+   "call_rate": 0.14555555555555555,
+   "gate_recall": 0.8421052631578947,
+   "recognised": 0.7894736842105263,
+   "recognised_chance": 0.42105263157894735,
+   "lift": 0.368421052631579,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 398.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1625,
+     "lift": 0.5875
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.7416666666666667,
+     "lift": 0.2583333333333333
+    },
+    "A": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.2833333333333333,
+     "lift": 0.3833333333333333
+    },
+    "B": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.3416666666666667,
+     "lift": 0.32499999999999996
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person",
+   "arm": "full",
+   "bin": "moderate",
+   "call_rate": 0.5844444444444444,
+   "gate_recall": 0.9949494949494949,
+   "recognised": 0.8888888888888888,
+   "recognised_chance": 0.5234848484848484,
+   "lift": 0.3654040404040404,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1080.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.9320388349514563,
+     "chance": 0.7092233009708738,
+     "lift": 0.22281553398058251
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.6111111111111112,
+     "chance": 0.13333333333333333,
+     "lift": 0.47777777777777786
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1,
+     "lift": 0.65
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.014285714285714285,
+     "lift": 0.5571428571428572
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.19444444444444445,
+     "lift": 0.36111111111111116
+    },
+    "F": {
+     "n": 14,
+     "recognised": 1.0,
+     "chance": 0.5464285714285715,
+     "lift": 0.4535714285714285
+    },
+    "A": {
+     "n": 21,
+     "recognised": 1.0,
+     "chance": 0.46904761904761905,
+     "lift": 0.530952380952381
+    },
+    "B": {
+     "n": 22,
+     "recognised": 1.0,
+     "chance": 0.3840909090909091,
+     "lift": 0.615909090909091
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person",
+   "arm": "full",
+   "bin": "busy",
+   "call_rate": 0.8733333333333333,
+   "gate_recall": 0.9407008086253369,
+   "recognised": 0.7115902964959568,
+   "recognised_chance": 0.6429919137466308,
+   "lift": 0.06859838274932606,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1216.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.9503105590062112,
+     "chance": 0.9416149068322982,
+     "lift": 0.008695652173912993
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.04666666666666667,
+     "lift": 0.2866666666666666
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.625,
+     "chance": 0.55625,
+     "lift": 0.06874999999999998
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.1951219512195122,
+     "chance": 0.34268292682926826,
+     "lift": -0.14756097560975606
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7543859649122807,
+     "chance": 0.47105263157894733,
+     "lift": 0.2833333333333334
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.1,
+     "lift": 0.5666666666666667
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.5192307692307693,
+     "chance": 0.4355769230769231,
+     "lift": 0.08365384615384619
+    },
+    "H": {
+     "n": 2,
+     "recognised": 0.5,
+     "chance": 0.075,
+     "lift": 0.425
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person",
+   "arm": "full",
+   "bin": "all",
+   "call_rate": 0.40194444444444444,
+   "gate_recall": 0.95578231292517,
+   "recognised": 0.7738095238095238,
+   "recognised_chance": 0.48860544217687074,
+   "lift": 0.2852040816326531,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -3.2312925170068025,
+    -7.962529274004684,
+    -0.2936857562408223
+   ],
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 676.5,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9497206703910615,
+     "chance": 0.66536312849162,
+     "lift": 0.2843575418994414
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.8523489932885906,
+     "chance": 0.6345637583892618,
+     "lift": 0.21778523489932877
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.8148148148148148,
+     "chance": 0.3672839506172839,
+     "lift": 0.44753086419753085
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.6625,
+     "chance": 0.40437500000000004,
+     "lift": 0.25812499999999994
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.48484848484848486,
+     "chance": 0.0803030303030303,
+     "lift": 0.40454545454545454
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.09166666666666666,
+     "lift": 0.575
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.030000000000000006,
+     "lift": 0.57
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.26,
+     "chance": 0.161,
+     "lift": 0.099
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person",
+   "arm": "roi",
+   "bin": "empty",
+   "call_rate": 0.0044444444444444444,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 8.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 640,
+   "gate": "person",
+   "arm": "roi",
+   "bin": "sparse",
+   "call_rate": 0.14555555555555555,
+   "gate_recall": 0.8421052631578947,
+   "recognised": 0.7894736842105263,
+   "recognised_chance": 0.3684210526315789,
+   "lift": 0.4210526315789474,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 332.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1875,
+     "lift": 0.5625
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6083333333333333,
+     "lift": 0.3916666666666667
+    },
+    "A": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.21666666666666665,
+     "lift": 0.44999999999999996
+    },
+    "B": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.325,
+     "lift": 0.3416666666666666
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person",
+   "arm": "roi",
+   "bin": "moderate",
+   "call_rate": 0.5844444444444444,
+   "gate_recall": 0.9949494949494949,
+   "recognised": 0.696969696969697,
+   "recognised_chance": 0.4305555555555555,
+   "lift": 0.2664141414141415,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 880.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.6601941747572816,
+     "chance": 0.583495145631068,
+     "lift": 0.07669902912621362
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.8333333333333334,
+     "chance": 0.10833333333333332,
+     "lift": 0.7250000000000001
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1,
+     "lift": 0.65
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.02857142857142857,
+     "lift": 0.5428571428571428
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.25,
+     "lift": 0.3055555555555556
+    },
+    "F": {
+     "n": 14,
+     "recognised": 0.7142857142857143,
+     "chance": 0.40714285714285714,
+     "lift": 0.30714285714285716
+    },
+    "A": {
+     "n": 21,
+     "recognised": 0.9523809523809523,
+     "chance": 0.40714285714285714,
+     "lift": 0.5452380952380952
+    },
+    "B": {
+     "n": 22,
+     "recognised": 0.5909090909090909,
+     "chance": 0.2772727272727272,
+     "lift": 0.3136363636363637
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person",
+   "arm": "roi",
+   "bin": "busy",
+   "call_rate": 0.8733333333333333,
+   "gate_recall": 0.9407008086253369,
+   "recognised": 0.7035040431266847,
+   "recognised_chance": 0.6047169811320755,
+   "lift": 0.09878706199460918,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1058.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.968944099378882,
+     "chance": 0.9577639751552794,
+     "lift": 0.011180124223602594
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.11666666666666667,
+     "lift": 0.21666666666666665
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.725,
+     "chance": 0.355,
+     "lift": 0.37
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.12195121951219512,
+     "chance": 0.30609756097560975,
+     "lift": -0.18414634146341463
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.6666666666666666,
+     "chance": 0.42543859649122806,
+     "lift": 0.24122807017543857
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.11666666666666665,
+     "lift": 0.5499999999999999
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.4807692307692308,
+     "chance": 0.32211538461538464,
+     "lift": 0.15865384615384615
+    },
+    "H": {
+     "n": 2,
+     "recognised": 0.5,
+     "chance": 0.15,
+     "lift": 0.35
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person",
+   "arm": "roi",
+   "bin": "all",
+   "call_rate": 0.40194444444444444,
+   "gate_recall": 0.95578231292517,
+   "recognised": 0.7040816326530612,
+   "recognised_chance": 0.452891156462585,
+   "lift": 0.25119047619047624,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -3.401360544217687,
+    -6.6770186335403725,
+    -0.7736943907156673
+   ],
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 569.5,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9441340782122905,
+     "chance": 0.6918994413407822,
+     "lift": 0.25223463687150827
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.6912751677852349,
+     "chance": 0.5251677852348993,
+     "lift": 0.16610738255033564
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.7407407407407407,
+     "chance": 0.2802469135802469,
+     "lift": 0.4604938271604938
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.525,
+     "chance": 0.33999999999999997,
+     "lift": 0.18500000000000005
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.6060606060606061,
+     "chance": 0.11363636363636365,
+     "lift": 0.49242424242424243
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.125,
+     "lift": 0.5416666666666666
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.08,
+     "lift": 0.52
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.2,
+     "chance": 0.18,
+     "lift": 0.020000000000000018
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "motion",
+   "arm": "full",
+   "bin": "empty",
+   "call_rate": 0.1811111111111111,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 28.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 640,
+   "gate": "motion",
+   "arm": "full",
+   "bin": "sparse",
+   "call_rate": 0.3433333333333333,
+   "gate_recall": 1.0,
+   "recognised": 0.9473684210526315,
+   "recognised_chance": 0.4947368421052632,
+   "lift": 0.45263157894736833,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 878.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1625,
+     "lift": 0.5875
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.625,
+     "lift": 0.375
+    },
+    "A": {
+     "n": 3,
+     "recognised": 1.0,
+     "chance": 0.4333333333333333,
+     "lift": 0.5666666666666667
+    },
+    "B": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6166666666666667,
+     "lift": 0.3833333333333333
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "motion",
+   "arm": "full",
+   "bin": "moderate",
+   "call_rate": 0.5711111111111111,
+   "gate_recall": 1.0,
+   "recognised": 0.8838383838383839,
+   "recognised_chance": 0.5295454545454545,
+   "lift": 0.3542929292929293,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1014.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.941747572815534,
+     "chance": 0.7165048543689321,
+     "lift": 0.22524271844660193
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.5555555555555556,
+     "chance": 0.12777777777777777,
+     "lift": 0.4277777777777778
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.05,
+     "lift": 0.7
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.42857142857142855,
+     "chance": 0.014285714285714285,
+     "lift": 0.41428571428571426
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.17222222222222222,
+     "lift": 0.38333333333333336
+    },
+    "F": {
+     "n": 14,
+     "recognised": 1.0,
+     "chance": 0.5321428571428571,
+     "lift": 0.46785714285714286
+    },
+    "A": {
+     "n": 21,
+     "recognised": 1.0,
+     "chance": 0.46904761904761905,
+     "lift": 0.530952380952381
+    },
+    "B": {
+     "n": 22,
+     "recognised": 1.0,
+     "chance": 0.43636363636363634,
+     "lift": 0.5636363636363637
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "motion",
+   "arm": "full",
+   "bin": "busy",
+   "call_rate": 0.8666666666666667,
+   "gate_recall": 0.9892183288409704,
+   "recognised": 0.7439353099730458,
+   "recognised_chance": 0.6727762803234502,
+   "lift": 0.07115902964959564,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1228.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.9503105590062112,
+     "chance": 0.9419254658385092,
+     "lift": 0.008385093167701974
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.04666666666666667,
+     "lift": 0.2866666666666666
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.625,
+     "chance": 0.63375,
+     "lift": -0.008750000000000036
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.12195121951219512,
+     "chance": 0.31097560975609756,
+     "lift": -0.18902439024390244
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7894736842105263,
+     "chance": 0.5,
+     "lift": 0.2894736842105263
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.1,
+     "lift": 0.5666666666666667
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.7692307692307693,
+     "chance": 0.5807692307692307,
+     "lift": 0.18846153846153857
+    },
+    "H": {
+     "n": 2,
+     "recognised": 0.5,
+     "chance": 0.075,
+     "lift": 0.425
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "motion",
+   "arm": "full",
+   "bin": "all",
+   "call_rate": 0.4905555555555556,
+   "gate_recall": 0.9931972789115646,
+   "recognised": 0.7976190476190477,
+   "recognised_chance": 0.5092687074829932,
+   "lift": 0.28835034013605443,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -0.8503401360544217,
+    -2.770780856423174,
+    0.0
+   ],
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 787.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9497206703910615,
+     "chance": 0.6656424581005587,
+     "lift": 0.2840782122905028
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.8590604026845637,
+     "chance": 0.6557046979865773,
+     "lift": 0.20335570469798647
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.8518518518518519,
+     "chance": 0.3882716049382716,
+     "lift": 0.46358024691358024
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.85,
+     "chance": 0.510625,
+     "lift": 0.339375
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.45454545454545453,
+     "chance": 0.07575757575757576,
+     "lift": 0.3787878787878788
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.041666666666666664,
+     "lift": 0.625
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.5,
+     "chance": 0.030000000000000006,
+     "lift": 0.47
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.2,
+     "chance": 0.145,
+     "lift": 0.05500000000000002
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "motion",
+   "arm": "roi",
+   "bin": "empty",
+   "call_rate": 0.1811111111111111,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 18.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 640,
+   "gate": "motion",
+   "arm": "roi",
+   "bin": "sparse",
+   "call_rate": 0.3433333333333333,
+   "gate_recall": 1.0,
+   "recognised": 0.9473684210526315,
+   "recognised_chance": 0.43684210526315786,
+   "lift": 0.5105263157894737,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 614.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1875,
+     "lift": 0.5625
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.475,
+     "lift": 0.525
+    },
+    "A": {
+     "n": 3,
+     "recognised": 1.0,
+     "chance": 0.3333333333333333,
+     "lift": 0.6666666666666667
+    },
+    "B": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6166666666666667,
+     "lift": 0.3833333333333333
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "motion",
+   "arm": "roi",
+   "bin": "moderate",
+   "call_rate": 0.5711111111111111,
+   "gate_recall": 1.0,
+   "recognised": 0.702020202020202,
+   "recognised_chance": 0.43611111111111106,
+   "lift": 0.26590909090909093,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 826.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.6601941747572816,
+     "chance": 0.5907766990291262,
+     "lift": 0.06941747572815538
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.8333333333333334,
+     "chance": 0.1,
+     "lift": 0.7333333333333334
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.05,
+     "lift": 0.7
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.02857142857142857,
+     "lift": 0.5428571428571428
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.25,
+     "lift": 0.3055555555555556
+    },
+    "F": {
+     "n": 14,
+     "recognised": 0.7142857142857143,
+     "chance": 0.39285714285714285,
+     "lift": 0.32142857142857145
+    },
+    "A": {
+     "n": 21,
+     "recognised": 0.9523809523809523,
+     "chance": 0.40714285714285714,
+     "lift": 0.5452380952380952
+    },
+    "B": {
+     "n": 22,
+     "recognised": 0.6363636363636364,
+     "chance": 0.3181818181818182,
+     "lift": 0.3181818181818182
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "motion",
+   "arm": "roi",
+   "bin": "busy",
+   "call_rate": 0.8666666666666667,
+   "gate_recall": 0.9892183288409704,
+   "recognised": 0.738544474393531,
+   "recognised_chance": 0.626145552560647,
+   "lift": 0.11239892183288402,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 942.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.968944099378882,
+     "chance": 0.9577639751552794,
+     "lift": 0.011180124223602594
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.11666666666666667,
+     "lift": 0.21666666666666665
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.725,
+     "chance": 0.39625,
+     "lift": 0.32875
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.12195121951219512,
+     "chance": 0.2841463414634146,
+     "lift": -0.1621951219512195
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7017543859649122,
+     "chance": 0.45614035087719296,
+     "lift": 0.24561403508771928
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.11666666666666665,
+     "lift": 0.5499999999999999
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.6730769230769231,
+     "chance": 0.4269230769230769,
+     "lift": 0.24615384615384622
+    },
+    "H": {
+     "n": 2,
+     "recognised": 1.0,
+     "chance": 0.15,
+     "lift": 0.85
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "motion",
+   "arm": "roi",
+   "bin": "all",
+   "call_rate": 0.4905555555555556,
+   "gate_recall": 0.9931972789115646,
+   "recognised": 0.7329931972789115,
+   "recognised_chance": 0.4666666666666667,
+   "lift": 0.26632653061224487,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -0.5102040816326531,
+    -1.9169329073482428,
+    0.0
+   ],
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 600.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9441340782122905,
+     "chance": 0.6918994413407822,
+     "lift": 0.25223463687150827
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.6912751677852349,
+     "chance": 0.5389261744966443,
+     "lift": 0.15234899328859064
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.7777777777777778,
+     "chance": 0.29320987654320985,
+     "lift": 0.48456790123456794
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.6875,
+     "chance": 0.42374999999999996,
+     "lift": 0.26375000000000004
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.6060606060606061,
+     "chance": 0.10909090909090909,
+     "lift": 0.496969696969697
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.8333333333333334,
+     "chance": 0.09166666666666666,
+     "lift": 0.7416666666666667
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.06,
+     "lift": 0.54
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.2,
+     "chance": 0.157,
+     "lift": 0.04300000000000001
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person-motion",
+   "arm": "full",
+   "bin": "empty",
+   "call_rate": 0.0044444444444444444,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 12.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 640,
+   "gate": "person-motion",
+   "arm": "full",
+   "bin": "sparse",
+   "call_rate": 0.1322222222222222,
+   "gate_recall": 0.8421052631578947,
+   "recognised": 0.7894736842105263,
+   "recognised_chance": 0.38421052631578945,
+   "lift": 0.4052631578947369,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 354.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1625,
+     "lift": 0.5875
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.625,
+     "lift": 0.375
+    },
+    "A": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.2833333333333333,
+     "lift": 0.3833333333333333
+    },
+    "B": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.3416666666666667,
+     "lift": 0.32499999999999996
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person-motion",
+   "arm": "full",
+   "bin": "moderate",
+   "call_rate": 0.49444444444444446,
+   "gate_recall": 0.98989898989899,
+   "recognised": 0.8737373737373737,
+   "recognised_chance": 0.5128787878787879,
+   "lift": 0.36085858585858577,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 908.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.9223300970873787,
+     "chance": 0.6966019417475728,
+     "lift": 0.22572815533980584
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.5555555555555556,
+     "chance": 0.125,
+     "lift": 0.4305555555555556
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.05,
+     "lift": 0.7
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.42857142857142855,
+     "chance": 0.014285714285714285,
+     "lift": 0.41428571428571426
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.16666666666666666,
+     "lift": 0.38888888888888895
+    },
+    "F": {
+     "n": 14,
+     "recognised": 1.0,
+     "chance": 0.5321428571428571,
+     "lift": 0.46785714285714286
+    },
+    "A": {
+     "n": 21,
+     "recognised": 1.0,
+     "chance": 0.4595238095238095,
+     "lift": 0.5404761904761906
+    },
+    "B": {
+     "n": 22,
+     "recognised": 1.0,
+     "chance": 0.3931818181818182,
+     "lift": 0.6068181818181818
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person-motion",
+   "arm": "full",
+   "bin": "busy",
+   "call_rate": 0.8055555555555556,
+   "gate_recall": 0.9299191374663073,
+   "recognised": 0.7035040431266847,
+   "recognised_chance": 0.639487870619946,
+   "lift": 0.06401617250673863,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1090.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.9503105590062112,
+     "chance": 0.9416149068322982,
+     "lift": 0.008695652173912993
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.04666666666666667,
+     "lift": 0.2866666666666666
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.625,
+     "chance": 0.55625,
+     "lift": 0.06874999999999998
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.12195121951219512,
+     "chance": 0.3073170731707317,
+     "lift": -0.18536585365853658
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7543859649122807,
+     "chance": 0.47719298245614034,
+     "lift": 0.2771929824561404
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.1,
+     "lift": 0.5666666666666667
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.5192307692307693,
+     "chance": 0.43173076923076925,
+     "lift": 0.08750000000000002
+    },
+    "H": {
+     "n": 2,
+     "recognised": 0.5,
+     "chance": 0.075,
+     "lift": 0.425
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person-motion",
+   "arm": "full",
+   "bin": "all",
+   "call_rate": 0.3591666666666667,
+   "gate_recall": 0.9472789115646258,
+   "recognised": 0.7636054421768708,
+   "recognised_chance": 0.4800170068027211,
+   "lift": 0.2835884353741497,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -4.2517006802721085,
+    -9.190371991247265,
+    -0.9174311926605505
+   ],
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 591.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9497206703910615,
+     "chance": 0.6606145251396648,
+     "lift": 0.28910614525139666
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.8456375838926175,
+     "chance": 0.6174496644295302,
+     "lift": 0.22818791946308725
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.8148148148148148,
+     "chance": 0.3685185185185185,
+     "lift": 0.44629629629629625
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.6625,
+     "chance": 0.4,
+     "lift": 0.26249999999999996
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.45454545454545453,
+     "chance": 0.07424242424242425,
+     "lift": 0.38030303030303025
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.041666666666666664,
+     "lift": 0.625
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.5,
+     "chance": 0.030000000000000006,
+     "lift": 0.47
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.2,
+     "chance": 0.143,
+     "lift": 0.05700000000000002
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person-motion",
+   "arm": "roi",
+   "bin": "empty",
+   "call_rate": 0.0044444444444444444,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 8.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 640,
+   "gate": "person-motion",
+   "arm": "roi",
+   "bin": "sparse",
+   "call_rate": 0.1322222222222222,
+   "gate_recall": 0.8421052631578947,
+   "recognised": 0.7894736842105263,
+   "recognised_chance": 0.3263157894736842,
+   "lift": 0.4631578947368421,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 298.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1875,
+     "lift": 0.5625
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.475,
+     "lift": 0.525
+    },
+    "A": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.21666666666666665,
+     "lift": 0.44999999999999996
+    },
+    "B": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.325,
+     "lift": 0.3416666666666666
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person-motion",
+   "arm": "roi",
+   "bin": "moderate",
+   "call_rate": 0.49444444444444446,
+   "gate_recall": 0.98989898989899,
+   "recognised": 0.6818181818181818,
+   "recognised_chance": 0.41843434343434344,
+   "lift": 0.26338383838383833,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 744.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.6407766990291263,
+     "chance": 0.5684466019417476,
+     "lift": 0.0723300970873787
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.8333333333333334,
+     "chance": 0.1,
+     "lift": 0.7333333333333334
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.05,
+     "lift": 0.7
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.02857142857142857,
+     "lift": 0.5428571428571428
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.2333333333333333,
+     "lift": 0.3222222222222223
+    },
+    "F": {
+     "n": 14,
+     "recognised": 0.7142857142857143,
+     "chance": 0.38571428571428573,
+     "lift": 0.32857142857142857
+    },
+    "A": {
+     "n": 21,
+     "recognised": 0.9523809523809523,
+     "chance": 0.3976190476190476,
+     "lift": 0.5547619047619048
+    },
+    "B": {
+     "n": 22,
+     "recognised": 0.5454545454545454,
+     "chance": 0.28409090909090906,
+     "lift": 0.26136363636363635
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person-motion",
+   "arm": "roi",
+   "bin": "busy",
+   "call_rate": 0.8055555555555556,
+   "gate_recall": 0.9299191374663073,
+   "recognised": 0.706199460916442,
+   "recognised_chance": 0.602021563342318,
+   "lift": 0.10417789757412399,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 852.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.968944099378882,
+     "chance": 0.9577639751552794,
+     "lift": 0.011180124223602594
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.11666666666666667,
+     "lift": 0.21666666666666665
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.725,
+     "chance": 0.355,
+     "lift": 0.37
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.12195121951219512,
+     "chance": 0.28048780487804875,
+     "lift": -0.15853658536585363
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.6666666666666666,
+     "chance": 0.4298245614035087,
+     "lift": 0.2368421052631579
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.11666666666666665,
+     "lift": 0.5499999999999999
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.4807692307692308,
+     "chance": 0.31826923076923075,
+     "lift": 0.16250000000000003
+    },
+    "H": {
+     "n": 2,
+     "recognised": 1.0,
+     "chance": 0.15,
+     "lift": 0.85
+    }
+   }
+  },
+  {
+   "size": 640,
+   "gate": "person-motion",
+   "arm": "roi",
+   "bin": "all",
+   "call_rate": 0.3591666666666667,
+   "gate_recall": 0.9472789115646258,
+   "recognised": 0.7006802721088435,
+   "recognised_chance": 0.4448979591836735,
+   "lift": 0.25578231292517006,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -3.741496598639456,
+    -7.3409461663947795,
+    -1.0471204188481675
+   ],
+   "detector_share": 0.0172,
+   "vlm_share": null,
+   "false_alarms_per_hour": 475.5,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9441340782122905,
+     "chance": 0.6891061452513967,
+     "lift": 0.25502793296089377
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.6778523489932886,
+     "chance": 0.5104026845637584,
+     "lift": 0.16744966442953024
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.7407407407407407,
+     "chance": 0.2796296296296296,
+     "lift": 0.4611111111111111
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.5125,
+     "chance": 0.3375,
+     "lift": 0.17499999999999993
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.6060606060606061,
+     "chance": 0.10909090909090909,
+     "lift": 0.496969696969697
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.8333333333333334,
+     "chance": 0.09166666666666666,
+     "lift": 0.7416666666666667
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.06,
+     "lift": 0.54
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.2,
+     "chance": 0.156,
+     "lift": 0.04400000000000001
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "dense",
+   "arm": "full",
+   "bin": "empty",
+   "call_rate": 1.0,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1190.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 1280,
+   "gate": "dense",
+   "arm": "full",
+   "bin": "sparse",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.9473684210526315,
+   "recognised_chance": 0.5578947368421052,
+   "lift": 0.3894736842105263,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1848.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1875,
+     "lift": 0.5625
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.7416666666666667,
+     "lift": 0.2583333333333333
+    },
+    "A": {
+     "n": 3,
+     "recognised": 1.0,
+     "chance": 0.5666666666666667,
+     "lift": 0.43333333333333335
+    },
+    "B": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6166666666666667,
+     "lift": 0.3833333333333333
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "dense",
+   "arm": "full",
+   "bin": "moderate",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.8939393939393939,
+   "recognised_chance": 0.5467171717171717,
+   "lift": 0.3472222222222222,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1526.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.941747572815534,
+     "chance": 0.7402912621359223,
+     "lift": 0.20145631067961167
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.6111111111111112,
+     "chance": 0.13333333333333333,
+     "lift": 0.47777777777777786
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1,
+     "lift": 0.65
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.014285714285714285,
+     "lift": 0.5571428571428572
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.19444444444444445,
+     "lift": 0.36111111111111116
+    },
+    "F": {
+     "n": 14,
+     "recognised": 1.0,
+     "chance": 0.5642857142857143,
+     "lift": 0.4357142857142857
+    },
+    "A": {
+     "n": 21,
+     "recognised": 1.0,
+     "chance": 0.46904761904761905,
+     "lift": 0.530952380952381
+    },
+    "B": {
+     "n": 22,
+     "recognised": 1.0,
+     "chance": 0.43636363636363634,
+     "lift": 0.5636363636363637
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "dense",
+   "arm": "full",
+   "bin": "busy",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.7520215633423181,
+   "recognised_chance": 0.6764150943396227,
+   "lift": 0.07560646900269541,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1484.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.9503105590062112,
+     "chance": 0.9419254658385092,
+     "lift": 0.008385093167701974
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.04666666666666667,
+     "lift": 0.2866666666666666
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.625,
+     "chance": 0.63375,
+     "lift": -0.008750000000000036
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.1951219512195122,
+     "chance": 0.34268292682926826,
+     "lift": -0.14756097560975606
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7894736842105263,
+     "chance": 0.5008771929824561,
+     "lift": 0.2885964912280702
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.1,
+     "lift": 0.5666666666666667
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.7692307692307693,
+     "chance": 0.5807692307692307,
+     "lift": 0.18846153846153857
+    },
+    "H": {
+     "n": 2,
+     "recognised": 0.5,
+     "chance": 0.075,
+     "lift": 0.425
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "dense",
+   "arm": "full",
+   "bin": "all",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.8061224489795918,
+   "recognised_chance": 0.5210034013605442,
+   "lift": 0.2851190476190476,
+   "lift_ci95": [
+    0.17752100840336127,
+    0.4142628205128205
+   ],
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1512.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9497206703910615,
+     "chance": 0.6706703910614525,
+     "lift": 0.2790502793296089
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.8590604026845637,
+     "chance": 0.684228187919463,
+     "lift": 0.1748322147651007
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.8518518518518519,
+     "chance": 0.39259259259259255,
+     "lift": 0.4592592592592593
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.85,
+     "chance": 0.510625,
+     "lift": 0.339375
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.48484848484848486,
+     "chance": 0.0803030303030303,
+     "lift": 0.40454545454545454
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.09166666666666666,
+     "lift": 0.575
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.030000000000000006,
+     "lift": 0.57
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.26,
+     "chance": 0.164,
+     "lift": 0.096
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "dense",
+   "arm": "roi",
+   "bin": "empty",
+   "call_rate": 1.0,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 990.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 1280,
+   "gate": "dense",
+   "arm": "roi",
+   "bin": "sparse",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.9473684210526315,
+   "recognised_chance": 0.5052631578947369,
+   "lift": 0.44210526315789467,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1494.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.2125,
+     "lift": 0.5375
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6083333333333333,
+     "lift": 0.3916666666666667
+    },
+    "A": {
+     "n": 3,
+     "recognised": 1.0,
+     "chance": 0.4666666666666666,
+     "lift": 0.5333333333333334
+    },
+    "B": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6166666666666667,
+     "lift": 0.3833333333333333
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "dense",
+   "arm": "roi",
+   "bin": "moderate",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.7171717171717171,
+   "recognised_chance": 0.45606060606060606,
+   "lift": 0.26111111111111107,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1316.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.6893203883495146,
+     "chance": 0.620873786407767,
+     "lift": 0.06844660194174756
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.8333333333333334,
+     "chance": 0.10833333333333332,
+     "lift": 0.7250000000000001
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1,
+     "lift": 0.65
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.02857142857142857,
+     "lift": 0.5428571428571428
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.26666666666666666,
+     "lift": 0.2888888888888889
+    },
+    "F": {
+     "n": 14,
+     "recognised": 0.7142857142857143,
+     "chance": 0.41785714285714287,
+     "lift": 0.29642857142857143
+    },
+    "A": {
+     "n": 21,
+     "recognised": 0.9523809523809523,
+     "chance": 0.40714285714285714,
+     "lift": 0.5452380952380952
+    },
+    "B": {
+     "n": 22,
+     "recognised": 0.6363636363636364,
+     "chance": 0.3181818181818182,
+     "lift": 0.3181818181818182
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "dense",
+   "arm": "roi",
+   "bin": "busy",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.738544474393531,
+   "recognised_chance": 0.6289757412398922,
+   "lift": 0.1095687331536388,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1272.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.968944099378882,
+     "chance": 0.9577639751552794,
+     "lift": 0.011180124223602594
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.11666666666666667,
+     "lift": 0.21666666666666665
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.725,
+     "chance": 0.39625,
+     "lift": 0.32875
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.12195121951219512,
+     "chance": 0.30609756097560975,
+     "lift": -0.18414634146341463
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7017543859649122,
+     "chance": 0.4587719298245614,
+     "lift": 0.24298245614035086
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.11666666666666665,
+     "lift": 0.5499999999999999
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.6730769230769231,
+     "chance": 0.4269230769230769,
+     "lift": 0.24615384615384622
+    },
+    "H": {
+     "n": 2,
+     "recognised": 1.0,
+     "chance": 0.15,
+     "lift": 0.85
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "dense",
+   "arm": "roi",
+   "bin": "all",
+   "call_rate": 1.0,
+   "gate_recall": 1.0,
+   "recognised": 0.7380952380952381,
+   "recognised_chance": 0.4797619047619047,
+   "lift": 0.2583333333333334,
+   "lift_ci95": [
+    0.14770240700218817,
+    0.375
+   ],
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.0,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1268.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9441340782122905,
+     "chance": 0.6963687150837988,
+     "lift": 0.24776536312849162
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.7114093959731543,
+     "chance": 0.5684563758389262,
+     "lift": 0.14295302013422817
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.7777777777777778,
+     "chance": 0.3012345679012346,
+     "lift": 0.4765432098765432
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.6875,
+     "chance": 0.42374999999999996,
+     "lift": 0.26375000000000004
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.6060606060606061,
+     "chance": 0.11363636363636365,
+     "lift": 0.49242424242424243
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.8333333333333334,
+     "chance": 0.125,
+     "lift": 0.7083333333333334
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.08,
+     "lift": 0.52
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.2,
+     "chance": 0.183,
+     "lift": 0.017000000000000015
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "presence",
+   "arm": "full",
+   "bin": "empty",
+   "call_rate": 0.3422222222222222,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 306.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 1280,
+   "gate": "presence",
+   "arm": "full",
+   "bin": "sparse",
+   "call_rate": 0.5522222222222222,
+   "gate_recall": 1.0,
+   "recognised": 0.9473684210526315,
+   "recognised_chance": 0.5578947368421052,
+   "lift": 0.3894736842105263,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1316.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1875,
+     "lift": 0.5625
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.7416666666666667,
+     "lift": 0.2583333333333333
+    },
+    "A": {
+     "n": 3,
+     "recognised": 1.0,
+     "chance": 0.5666666666666667,
+     "lift": 0.43333333333333335
+    },
+    "B": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6166666666666667,
+     "lift": 0.3833333333333333
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "presence",
+   "arm": "full",
+   "bin": "moderate",
+   "call_rate": 0.6222222222222222,
+   "gate_recall": 0.9949494949494949,
+   "recognised": 0.8888888888888888,
+   "recognised_chance": 0.5373737373737374,
+   "lift": 0.35151515151515145,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1118.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.9320388349514563,
+     "chance": 0.7223300970873787,
+     "lift": 0.20970873786407762
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.6111111111111112,
+     "chance": 0.13333333333333333,
+     "lift": 0.47777777777777786
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1,
+     "lift": 0.65
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.014285714285714285,
+     "lift": 0.5571428571428572
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.19444444444444445,
+     "lift": 0.36111111111111116
+    },
+    "F": {
+     "n": 14,
+     "recognised": 1.0,
+     "chance": 0.5642857142857143,
+     "lift": 0.4357142857142857
+    },
+    "A": {
+     "n": 21,
+     "recognised": 1.0,
+     "chance": 0.46904761904761905,
+     "lift": 0.530952380952381
+    },
+    "B": {
+     "n": 22,
+     "recognised": 1.0,
+     "chance": 0.43636363636363634,
+     "lift": 0.5636363636363637
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "presence",
+   "arm": "full",
+   "bin": "busy",
+   "call_rate": 0.9377777777777778,
+   "gate_recall": 1.0,
+   "recognised": 0.7520215633423181,
+   "recognised_chance": 0.6764150943396227,
+   "lift": 0.07560646900269541,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1372.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.9503105590062112,
+     "chance": 0.9419254658385092,
+     "lift": 0.008385093167701974
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.04666666666666667,
+     "lift": 0.2866666666666666
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.625,
+     "chance": 0.63375,
+     "lift": -0.008750000000000036
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.1951219512195122,
+     "chance": 0.34268292682926826,
+     "lift": -0.14756097560975606
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7894736842105263,
+     "chance": 0.5008771929824561,
+     "lift": 0.2885964912280702
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.1,
+     "lift": 0.5666666666666667
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.7692307692307693,
+     "chance": 0.5807692307692307,
+     "lift": 0.18846153846153857
+    },
+    "H": {
+     "n": 2,
+     "recognised": 0.5,
+     "chance": 0.075,
+     "lift": 0.425
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "presence",
+   "arm": "full",
+   "bin": "all",
+   "call_rate": 0.6136111111111111,
+   "gate_recall": 0.9982993197278912,
+   "recognised": 0.8044217687074829,
+   "recognised_chance": 0.5177721088435374,
+   "lift": 0.2866496598639455,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -0.17006802721088435,
+    -0.6557377049180327,
+    0.0
+   ],
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1028.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9497206703910615,
+     "chance": 0.6706703910614525,
+     "lift": 0.2790502793296089
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.8523489932885906,
+     "chance": 0.6714765100671141,
+     "lift": 0.18087248322147653
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.8518518518518519,
+     "chance": 0.39259259259259255,
+     "lift": 0.4592592592592593
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.85,
+     "chance": 0.510625,
+     "lift": 0.339375
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.48484848484848486,
+     "chance": 0.0803030303030303,
+     "lift": 0.40454545454545454
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.09166666666666666,
+     "lift": 0.575
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.030000000000000006,
+     "lift": 0.57
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.26,
+     "chance": 0.164,
+     "lift": 0.096
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "presence",
+   "arm": "roi",
+   "bin": "empty",
+   "call_rate": 0.3422222222222222,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 106.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 1280,
+   "gate": "presence",
+   "arm": "roi",
+   "bin": "sparse",
+   "call_rate": 0.5522222222222222,
+   "gate_recall": 1.0,
+   "recognised": 0.9473684210526315,
+   "recognised_chance": 0.5052631578947369,
+   "lift": 0.44210526315789467,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 962.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.2125,
+     "lift": 0.5375
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6083333333333333,
+     "lift": 0.3916666666666667
+    },
+    "A": {
+     "n": 3,
+     "recognised": 1.0,
+     "chance": 0.4666666666666666,
+     "lift": 0.5333333333333334
+    },
+    "B": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6166666666666667,
+     "lift": 0.3833333333333333
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "presence",
+   "arm": "roi",
+   "bin": "moderate",
+   "call_rate": 0.6222222222222222,
+   "gate_recall": 0.9949494949494949,
+   "recognised": 0.7070707070707071,
+   "recognised_chance": 0.44595959595959594,
+   "lift": 0.2611111111111111,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 908.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.6699029126213593,
+     "chance": 0.6014563106796117,
+     "lift": 0.06844660194174756
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.8333333333333334,
+     "chance": 0.10833333333333332,
+     "lift": 0.7250000000000001
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1,
+     "lift": 0.65
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.02857142857142857,
+     "lift": 0.5428571428571428
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.26666666666666666,
+     "lift": 0.2888888888888889
+    },
+    "F": {
+     "n": 14,
+     "recognised": 0.7142857142857143,
+     "chance": 0.41785714285714287,
+     "lift": 0.29642857142857143
+    },
+    "A": {
+     "n": 21,
+     "recognised": 0.9523809523809523,
+     "chance": 0.40714285714285714,
+     "lift": 0.5452380952380952
+    },
+    "B": {
+     "n": 22,
+     "recognised": 0.6363636363636364,
+     "chance": 0.3181818181818182,
+     "lift": 0.3181818181818182
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "presence",
+   "arm": "roi",
+   "bin": "busy",
+   "call_rate": 0.9377777777777778,
+   "gate_recall": 1.0,
+   "recognised": 0.738544474393531,
+   "recognised_chance": 0.6289757412398922,
+   "lift": 0.1095687331536388,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1160.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.968944099378882,
+     "chance": 0.9577639751552794,
+     "lift": 0.011180124223602594
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.11666666666666667,
+     "lift": 0.21666666666666665
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.725,
+     "chance": 0.39625,
+     "lift": 0.32875
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.12195121951219512,
+     "chance": 0.30609756097560975,
+     "lift": -0.18414634146341463
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7017543859649122,
+     "chance": 0.4587719298245614,
+     "lift": 0.24298245614035086
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.11666666666666665,
+     "lift": 0.5499999999999999
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.6730769230769231,
+     "chance": 0.4269230769230769,
+     "lift": 0.24615384615384622
+    },
+    "H": {
+     "n": 2,
+     "recognised": 1.0,
+     "chance": 0.15,
+     "lift": 0.85
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "presence",
+   "arm": "roi",
+   "bin": "all",
+   "call_rate": 0.6136111111111111,
+   "gate_recall": 0.9982993197278912,
+   "recognised": 0.7346938775510204,
+   "recognised_chance": 0.4766156462585034,
+   "lift": 0.25807823129251706,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -0.3401360544217687,
+    -0.970873786407767,
+    0.0
+   ],
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 784.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9441340782122905,
+     "chance": 0.6963687150837988,
+     "lift": 0.24776536312849162
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.697986577181208,
+     "chance": 0.5560402684563759,
+     "lift": 0.14194630872483216
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.7777777777777778,
+     "chance": 0.3012345679012346,
+     "lift": 0.4765432098765432
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.6875,
+     "chance": 0.42374999999999996,
+     "lift": 0.26375000000000004
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.6060606060606061,
+     "chance": 0.11363636363636365,
+     "lift": 0.49242424242424243
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.8333333333333334,
+     "chance": 0.125,
+     "lift": 0.7083333333333334
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.08,
+     "lift": 0.52
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.2,
+     "chance": 0.183,
+     "lift": 0.017000000000000015
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person",
+   "arm": "full",
+   "bin": "empty",
+   "call_rate": 0.17222222222222222,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 14.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 1280,
+   "gate": "person",
+   "arm": "full",
+   "bin": "sparse",
+   "call_rate": 0.12666666666666668,
+   "gate_recall": 0.7368421052631579,
+   "recognised": 0.6842105263157895,
+   "recognised_chance": 0.36315789473684207,
+   "lift": 0.3210526315789474,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 266.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1875,
+     "lift": 0.5625
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.7416666666666667,
+     "lift": 0.2583333333333333
+    },
+    "A": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.2833333333333333,
+     "lift": 0.3833333333333333
+    },
+    "B": {
+     "n": 6,
+     "recognised": 0.3333333333333333,
+     "chance": 0.14166666666666666,
+     "lift": 0.19166666666666665
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person",
+   "arm": "full",
+   "bin": "moderate",
+   "call_rate": 0.5877777777777777,
+   "gate_recall": 0.9949494949494949,
+   "recognised": 0.8888888888888888,
+   "recognised_chance": 0.5247474747474747,
+   "lift": 0.3641414141414141,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1088.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.9320388349514563,
+     "chance": 0.7072815533980583,
+     "lift": 0.22475728155339803
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.6111111111111112,
+     "chance": 0.13333333333333333,
+     "lift": 0.47777777777777786
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1,
+     "lift": 0.65
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.014285714285714285,
+     "lift": 0.5571428571428572
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.18888888888888888,
+     "lift": 0.3666666666666667
+    },
+    "F": {
+     "n": 14,
+     "recognised": 1.0,
+     "chance": 0.5642857142857143,
+     "lift": 0.4357142857142857
+    },
+    "A": {
+     "n": 21,
+     "recognised": 1.0,
+     "chance": 0.46904761904761905,
+     "lift": 0.530952380952381
+    },
+    "B": {
+     "n": 22,
+     "recognised": 1.0,
+     "chance": 0.39545454545454545,
+     "lift": 0.6045454545454545
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person",
+   "arm": "full",
+   "bin": "busy",
+   "call_rate": 0.9222222222222223,
+   "gate_recall": 0.9946091644204852,
+   "recognised": 0.7466307277628033,
+   "recognised_chance": 0.6721024258760108,
+   "lift": 0.07452830188679249,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1332.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.9503105590062112,
+     "chance": 0.9419254658385092,
+     "lift": 0.008385093167701974
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.04666666666666667,
+     "lift": 0.2866666666666666
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.625,
+     "chance": 0.6287499999999999,
+     "lift": -0.00374999999999992
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.1951219512195122,
+     "chance": 0.34268292682926826,
+     "lift": -0.14756097560975606
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7719298245614035,
+     "chance": 0.49298245614035086,
+     "lift": 0.2789473684210526
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.1,
+     "lift": 0.5666666666666667
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.75,
+     "chance": 0.5625,
+     "lift": 0.1875
+    },
+    "H": {
+     "n": 2,
+     "recognised": 0.5,
+     "chance": 0.075,
+     "lift": 0.425
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person",
+   "arm": "full",
+   "bin": "all",
+   "call_rate": 0.45222222222222225,
+   "gate_recall": 0.9863945578231292,
+   "recognised": 0.7925170068027211,
+   "recognised_chance": 0.5084183673469388,
+   "lift": 0.2840986394557823,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -1.3605442176870748,
+    -4.12621359223301,
+    0.0
+   ],
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 675.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9497206703910615,
+     "chance": 0.6706703910614525,
+     "lift": 0.2790502793296089
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.8523489932885906,
+     "chance": 0.6614093959731544,
+     "lift": 0.1909395973154362
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.8271604938271605,
+     "chance": 0.38209876543209875,
+     "lift": 0.44506172839506175
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.7875,
+     "chance": 0.473125,
+     "lift": 0.31437499999999996
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.48484848484848486,
+     "chance": 0.0803030303030303,
+     "lift": 0.40454545454545454
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.09166666666666666,
+     "lift": 0.575
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.030000000000000006,
+     "lift": 0.57
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.26,
+     "chance": 0.161,
+     "lift": 0.099
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person",
+   "arm": "roi",
+   "bin": "empty",
+   "call_rate": 0.17222222222222222,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 12.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 1280,
+   "gate": "person",
+   "arm": "roi",
+   "bin": "sparse",
+   "call_rate": 0.12666666666666668,
+   "gate_recall": 0.7368421052631579,
+   "recognised": 0.631578947368421,
+   "recognised_chance": 0.3157894736842105,
+   "lift": 0.3157894736842105,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 150.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.2125,
+     "lift": 0.5375
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6083333333333333,
+     "lift": 0.3916666666666667
+    },
+    "A": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.21666666666666665,
+     "lift": 0.44999999999999996
+    },
+    "B": {
+     "n": 6,
+     "recognised": 0.16666666666666666,
+     "chance": 0.14166666666666666,
+     "lift": 0.024999999999999994
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person",
+   "arm": "roi",
+   "bin": "moderate",
+   "call_rate": 0.5877777777777777,
+   "gate_recall": 0.9949494949494949,
+   "recognised": 0.702020202020202,
+   "recognised_chance": 0.4313131313131313,
+   "lift": 0.2707070707070707,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 832.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.6699029126213593,
+     "chance": 0.5805825242718446,
+     "lift": 0.08932038834951461
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.8333333333333334,
+     "chance": 0.10833333333333332,
+     "lift": 0.7250000000000001
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1,
+     "lift": 0.65
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.5714285714285714,
+     "chance": 0.02857142857142857,
+     "lift": 0.5428571428571428
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.25,
+     "lift": 0.3055555555555556
+    },
+    "F": {
+     "n": 14,
+     "recognised": 0.7142857142857143,
+     "chance": 0.41785714285714287,
+     "lift": 0.29642857142857143
+    },
+    "A": {
+     "n": 21,
+     "recognised": 0.9523809523809523,
+     "chance": 0.40714285714285714,
+     "lift": 0.5452380952380952
+    },
+    "B": {
+     "n": 22,
+     "recognised": 0.5909090909090909,
+     "chance": 0.2909090909090909,
+     "lift": 0.30000000000000004
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person",
+   "arm": "roi",
+   "bin": "busy",
+   "call_rate": 0.9222222222222223,
+   "gate_recall": 0.9946091644204852,
+   "recognised": 0.7304582210242587,
+   "recognised_chance": 0.6253369272237197,
+   "lift": 0.10512129380053903,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1138.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.968944099378882,
+     "chance": 0.9577639751552794,
+     "lift": 0.011180124223602594
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.11666666666666667,
+     "lift": 0.21666666666666665
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.725,
+     "chance": 0.3925,
+     "lift": 0.33249999999999996
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.12195121951219512,
+     "chance": 0.30609756097560975,
+     "lift": -0.18414634146341463
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.6842105263157895,
+     "chance": 0.4491228070175438,
+     "lift": 0.23508771929824568
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.11666666666666665,
+     "lift": 0.5499999999999999
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.6346153846153846,
+     "chance": 0.4144230769230769,
+     "lift": 0.2201923076923077
+    },
+    "H": {
+     "n": 2,
+     "recognised": 1.0,
+     "chance": 0.15,
+     "lift": 0.85
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person",
+   "arm": "roi",
+   "bin": "all",
+   "call_rate": 0.45222222222222225,
+   "gate_recall": 0.9863945578231292,
+   "recognised": 0.717687074829932,
+   "recognised_chance": 0.46649659863945575,
+   "lift": 0.25119047619047624,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -2.0408163265306123,
+    -5.128205128205129,
+    -0.4750593824228028
+   ],
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 533.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9441340782122905,
+     "chance": 0.6963687150837988,
+     "lift": 0.24776536312849162
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.697986577181208,
+     "chance": 0.5442953020134229,
+     "lift": 0.15369127516778514
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.7530864197530864,
+     "chance": 0.28703703703703703,
+     "lift": 0.4660493827160494
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.5875,
+     "chance": 0.3875,
+     "lift": 0.2
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.6060606060606061,
+     "chance": 0.11363636363636365,
+     "lift": 0.49242424242424243
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.8333333333333334,
+     "chance": 0.125,
+     "lift": 0.7083333333333334
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.6,
+     "chance": 0.08,
+     "lift": 0.52
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.2,
+     "chance": 0.18,
+     "lift": 0.020000000000000018
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "motion",
+   "arm": "full",
+   "bin": "empty",
+   "call_rate": 0.025555555555555557,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 28.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 1280,
+   "gate": "motion",
+   "arm": "full",
+   "bin": "sparse",
+   "call_rate": 0.34,
+   "gate_recall": 1.0,
+   "recognised": 0.9473684210526315,
+   "recognised_chance": 0.5210526315789473,
+   "lift": 0.4263157894736842,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 818.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1875,
+     "lift": 0.5625
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.625,
+     "lift": 0.375
+    },
+    "A": {
+     "n": 3,
+     "recognised": 1.0,
+     "chance": 0.5666666666666667,
+     "lift": 0.43333333333333335
+    },
+    "B": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6166666666666667,
+     "lift": 0.3833333333333333
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "motion",
+   "arm": "full",
+   "bin": "moderate",
+   "call_rate": 0.5733333333333334,
+   "gate_recall": 0.9848484848484849,
+   "recognised": 0.8787878787878788,
+   "recognised_chance": 0.5303030303030303,
+   "lift": 0.3484848484848485,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1064.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.941747572815534,
+     "chance": 0.7184466019417476,
+     "lift": 0.22330097087378642
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.5555555555555556,
+     "chance": 0.11944444444444444,
+     "lift": 0.4361111111111111
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.075,
+     "lift": 0.675
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.2857142857142857,
+     "chance": 0.014285714285714285,
+     "lift": 0.2714285714285714
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.16666666666666666,
+     "lift": 0.38888888888888895
+    },
+    "F": {
+     "n": 14,
+     "recognised": 1.0,
+     "chance": 0.5392857142857144,
+     "lift": 0.46071428571428563
+    },
+    "A": {
+     "n": 21,
+     "recognised": 1.0,
+     "chance": 0.46904761904761905,
+     "lift": 0.530952380952381
+    },
+    "B": {
+     "n": 22,
+     "recognised": 1.0,
+     "chance": 0.4340909090909091,
+     "lift": 0.5659090909090909
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "motion",
+   "arm": "full",
+   "bin": "busy",
+   "call_rate": 0.8777777777777778,
+   "gate_recall": 0.9946091644204852,
+   "recognised": 0.7466307277628033,
+   "recognised_chance": 0.6735849056603773,
+   "lift": 0.07304582210242594,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1252.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.9503105590062112,
+     "chance": 0.9419254658385092,
+     "lift": 0.008385093167701974
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.04666666666666667,
+     "lift": 0.2866666666666666
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.625,
+     "chance": 0.63375,
+     "lift": -0.008750000000000036
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.14634146341463414,
+     "chance": 0.3170731707317073,
+     "lift": -0.17073170731707318
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7894736842105263,
+     "chance": 0.5008771929824561,
+     "lift": 0.2885964912280702
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.1,
+     "lift": 0.5666666666666667
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.7692307692307693,
+     "chance": 0.5807692307692307,
+     "lift": 0.18846153846153857
+    },
+    "H": {
+     "n": 2,
+     "recognised": 0.5,
+     "chance": 0.075,
+     "lift": 0.425
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "motion",
+   "arm": "full",
+   "bin": "all",
+   "call_rate": 0.45416666666666666,
+   "gate_recall": 0.9914965986394558,
+   "recognised": 0.7976190476190477,
+   "recognised_chance": 0.5113095238095238,
+   "lift": 0.2863095238095239,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -0.8503401360544217,
+    -2.819956616052061,
+    0.0
+   ],
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 790.5,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9497206703910615,
+     "chance": 0.6675977653631284,
+     "lift": 0.282122905027933
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.8590604026845637,
+     "chance": 0.6600671140939597,
+     "lift": 0.19899328859060406
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.8518518518518519,
+     "chance": 0.3919753086419753,
+     "lift": 0.4598765432098766
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.85,
+     "chance": 0.50875,
+     "lift": 0.34124999999999994
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.45454545454545453,
+     "chance": 0.07121212121212121,
+     "lift": 0.3833333333333333
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.041666666666666664,
+     "lift": 0.625
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.4,
+     "chance": 0.030000000000000006,
+     "lift": 0.37
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.22,
+     "chance": 0.149,
+     "lift": 0.07100000000000001
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "motion",
+   "arm": "roi",
+   "bin": "empty",
+   "call_rate": 0.025555555555555557,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 18.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 1280,
+   "gate": "motion",
+   "arm": "roi",
+   "bin": "sparse",
+   "call_rate": 0.34,
+   "gate_recall": 1.0,
+   "recognised": 0.9473684210526315,
+   "recognised_chance": 0.4631578947368421,
+   "lift": 0.4842105263157894,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 680.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.2125,
+     "lift": 0.5375
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.475,
+     "lift": 0.525
+    },
+    "A": {
+     "n": 3,
+     "recognised": 1.0,
+     "chance": 0.4666666666666666,
+     "lift": 0.5333333333333334
+    },
+    "B": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.6166666666666667,
+     "lift": 0.3833333333333333
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "motion",
+   "arm": "roi",
+   "bin": "moderate",
+   "call_rate": 0.5733333333333334,
+   "gate_recall": 0.9848484848484849,
+   "recognised": 0.702020202020202,
+   "recognised_chance": 0.43762626262626264,
+   "lift": 0.26439393939393935,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 846.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.6893203883495146,
+     "chance": 0.5941747572815534,
+     "lift": 0.09514563106796114
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.7222222222222222,
+     "chance": 0.09444444444444444,
+     "lift": 0.6277777777777778
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.0625,
+     "lift": 0.6875
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.42857142857142855,
+     "chance": 0.02857142857142857,
+     "lift": 0.39999999999999997
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.25,
+     "lift": 0.3055555555555556
+    },
+    "F": {
+     "n": 14,
+     "recognised": 0.7142857142857143,
+     "chance": 0.39642857142857146,
+     "lift": 0.31785714285714284
+    },
+    "A": {
+     "n": 21,
+     "recognised": 0.9523809523809523,
+     "chance": 0.40714285714285714,
+     "lift": 0.5452380952380952
+    },
+    "B": {
+     "n": 22,
+     "recognised": 0.6363636363636364,
+     "chance": 0.3159090909090909,
+     "lift": 0.32045454545454544
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "motion",
+   "arm": "roi",
+   "bin": "busy",
+   "call_rate": 0.8777777777777778,
+   "gate_recall": 0.9946091644204852,
+   "recognised": 0.738544474393531,
+   "recognised_chance": 0.6268194070080862,
+   "lift": 0.11172506738544474,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 968.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.968944099378882,
+     "chance": 0.9577639751552794,
+     "lift": 0.011180124223602594
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.11666666666666667,
+     "lift": 0.21666666666666665
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.725,
+     "chance": 0.39625,
+     "lift": 0.32875
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.12195121951219512,
+     "chance": 0.28780487804878047,
+     "lift": -0.16585365853658535
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7017543859649122,
+     "chance": 0.45789473684210524,
+     "lift": 0.243859649122807
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.11666666666666665,
+     "lift": 0.5499999999999999
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.6730769230769231,
+     "chance": 0.4269230769230769,
+     "lift": 0.24615384615384622
+    },
+    "H": {
+     "n": 2,
+     "recognised": 1.0,
+     "chance": 0.15,
+     "lift": 0.85
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "motion",
+   "arm": "roi",
+   "bin": "all",
+   "call_rate": 0.45416666666666666,
+   "gate_recall": 0.9914965986394558,
+   "recognised": 0.7329931972789115,
+   "recognised_chance": 0.4691326530612245,
+   "lift": 0.26386054421768707,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -0.5102040816326531,
+    -2.1238938053097347,
+    0.0
+   ],
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 628.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9441340782122905,
+     "chance": 0.694413407821229,
+     "lift": 0.2497206703910615
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.7114093959731543,
+     "chance": 0.5436241610738255,
+     "lift": 0.16778523489932884
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.7777777777777778,
+     "chance": 0.30061728395061726,
+     "lift": 0.4771604938271605
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.6875,
+     "chance": 0.421875,
+     "lift": 0.265625
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.5454545454545454,
+     "chance": 0.1,
+     "lift": 0.44545454545454544
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.8333333333333334,
+     "chance": 0.09166666666666666,
+     "lift": 0.7416666666666667
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.5,
+     "chance": 0.06,
+     "lift": 0.44
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.2,
+     "chance": 0.16,
+     "lift": 0.04000000000000001
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person-motion",
+   "arm": "full",
+   "bin": "empty",
+   "call_rate": 0.016666666666666666,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 14.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 1280,
+   "gate": "person-motion",
+   "arm": "full",
+   "bin": "sparse",
+   "call_rate": 0.13444444444444445,
+   "gate_recall": 0.7368421052631579,
+   "recognised": 0.6842105263157895,
+   "recognised_chance": 0.3526315789473684,
+   "lift": 0.3315789473684211,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 276.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.1875,
+     "lift": 0.5625
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.625,
+     "lift": 0.375
+    },
+    "A": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.2833333333333333,
+     "lift": 0.3833333333333333
+    },
+    "B": {
+     "n": 6,
+     "recognised": 0.3333333333333333,
+     "chance": 0.225,
+     "lift": 0.10833333333333331
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person-motion",
+   "arm": "full",
+   "bin": "moderate",
+   "call_rate": 0.5144444444444445,
+   "gate_recall": 0.9696969696969697,
+   "recognised": 0.8585858585858586,
+   "recognised_chance": 0.5093434343434343,
+   "lift": 0.34924242424242424,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 972.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.9223300970873787,
+     "chance": 0.6936893203883495,
+     "lift": 0.22864077669902916
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.5555555555555556,
+     "chance": 0.11944444444444444,
+     "lift": 0.4361111111111111
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.05,
+     "lift": 0.7
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.2857142857142857,
+     "chance": 0.014285714285714285,
+     "lift": 0.2714285714285714
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.1611111111111111,
+     "lift": 0.3944444444444445
+    },
+    "F": {
+     "n": 14,
+     "recognised": 1.0,
+     "chance": 0.5392857142857144,
+     "lift": 0.46071428571428563
+    },
+    "A": {
+     "n": 21,
+     "recognised": 1.0,
+     "chance": 0.46904761904761905,
+     "lift": 0.530952380952381
+    },
+    "B": {
+     "n": 22,
+     "recognised": 0.9090909090909091,
+     "chance": 0.36818181818181817,
+     "lift": 0.5409090909090909
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person-motion",
+   "arm": "full",
+   "bin": "busy",
+   "call_rate": 0.8455555555555555,
+   "gate_recall": 0.9838274932614556,
+   "recognised": 0.7412398921832885,
+   "recognised_chance": 0.6629380053908356,
+   "lift": 0.07830188679245287,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 1176.0,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.9503105590062112,
+     "chance": 0.9419254658385092,
+     "lift": 0.008385093167701974
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.043333333333333335,
+     "lift": 0.29
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.625,
+     "chance": 0.59875,
+     "lift": 0.026249999999999996
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.14634146341463414,
+     "chance": 0.31585365853658537,
+     "lift": -0.16951219512195123
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.7719298245614035,
+     "chance": 0.4807017543859649,
+     "lift": 0.29122807017543856
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.1,
+     "lift": 0.5666666666666667
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.75,
+     "chance": 0.5557692307692308,
+     "lift": 0.1942307692307692
+    },
+    "H": {
+     "n": 2,
+     "recognised": 0.5,
+     "chance": 0.075,
+     "lift": 0.425
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person-motion",
+   "arm": "full",
+   "bin": "all",
+   "call_rate": 0.37777777777777777,
+   "gate_recall": 0.9710884353741497,
+   "recognised": 0.7789115646258503,
+   "recognised_chance": 0.4949829931972789,
+   "lift": 0.2839285714285714,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -2.7210884353741496,
+    -6.685236768802229,
+    -0.8048289738430584
+   ],
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 609.5,
+   "tokens_per_call": 1041.3333333333333,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9497206703910615,
+     "chance": 0.6656424581005587,
+     "lift": 0.2840782122905028
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.8456375838926175,
+     "chance": 0.6342281879194631,
+     "lift": 0.21140939597315433
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.8271604938271605,
+     "chance": 0.37777777777777777,
+     "lift": 0.44938271604938274
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.7625,
+     "chance": 0.45625,
+     "lift": 0.30624999999999997
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.45454545454545453,
+     "chance": 0.07121212121212121,
+     "lift": 0.3833333333333333
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.6666666666666666,
+     "chance": 0.041666666666666664,
+     "lift": 0.625
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.4,
+     "chance": 0.030000000000000006,
+     "lift": 0.37
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.22,
+     "chance": 0.148,
+     "lift": 0.07200000000000001
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person-motion",
+   "arm": "roi",
+   "bin": "empty",
+   "call_rate": 0.016666666666666666,
+   "gate_recall": null,
+   "recognised": null,
+   "recognised_chance": 0.0,
+   "lift": null,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 12.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 0,
+   "per_group": {}
+  },
+  {
+   "size": 1280,
+   "gate": "person-motion",
+   "arm": "roi",
+   "bin": "sparse",
+   "call_rate": 0.13444444444444445,
+   "gate_recall": 0.7368421052631579,
+   "recognised": 0.6842105263157895,
+   "recognised_chance": 0.3,
+   "lift": 0.3842105263157895,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 162.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 19,
+   "per_group": {
+    "F": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.2125,
+     "lift": 0.5375
+    },
+    "C": {
+     "n": 6,
+     "recognised": 1.0,
+     "chance": 0.475,
+     "lift": 0.525
+    },
+    "A": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.21666666666666665,
+     "lift": 0.44999999999999996
+    },
+    "B": {
+     "n": 6,
+     "recognised": 0.3333333333333333,
+     "chance": 0.225,
+     "lift": 0.10833333333333331
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person-motion",
+   "arm": "roi",
+   "bin": "moderate",
+   "call_rate": 0.5144444444444445,
+   "gate_recall": 0.9696969696969697,
+   "recognised": 0.696969696969697,
+   "recognised_chance": 0.41439393939393937,
+   "lift": 0.28257575757575765,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 768.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 198,
+   "per_group": {
+    "C": {
+     "n": 103,
+     "recognised": 0.6893203883495146,
+     "chance": 0.566990291262136,
+     "lift": 0.12233009708737863
+    },
+    "D": {
+     "n": 18,
+     "recognised": 0.7222222222222222,
+     "chance": 0.09444444444444444,
+     "lift": 0.6277777777777778
+    },
+    "H": {
+     "n": 4,
+     "recognised": 0.75,
+     "chance": 0.0375,
+     "lift": 0.7125
+    },
+    "G": {
+     "n": 7,
+     "recognised": 0.42857142857142855,
+     "chance": 0.02857142857142857,
+     "lift": 0.39999999999999997
+    },
+    "E": {
+     "n": 9,
+     "recognised": 0.5555555555555556,
+     "chance": 0.2333333333333333,
+     "lift": 0.3222222222222223
+    },
+    "F": {
+     "n": 14,
+     "recognised": 0.7142857142857143,
+     "chance": 0.39642857142857146,
+     "lift": 0.31785714285714284
+    },
+    "A": {
+     "n": 21,
+     "recognised": 0.9523809523809523,
+     "chance": 0.40714285714285714,
+     "lift": 0.5452380952380952
+    },
+    "B": {
+     "n": 22,
+     "recognised": 0.5909090909090909,
+     "chance": 0.24545454545454545,
+     "lift": 0.34545454545454546
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person-motion",
+   "arm": "roi",
+   "bin": "busy",
+   "call_rate": 0.8455555555555555,
+   "gate_recall": 0.9838274932614556,
+   "recognised": 0.7277628032345014,
+   "recognised_chance": 0.6180592991913747,
+   "lift": 0.10970350404312668,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": null,
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 914.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 371,
+   "per_group": {
+    "F": {
+     "n": 161,
+     "recognised": 0.968944099378882,
+     "chance": 0.9577639751552794,
+     "lift": 0.011180124223602594
+    },
+    "D": {
+     "n": 15,
+     "recognised": 0.3333333333333333,
+     "chance": 0.11333333333333333,
+     "lift": 0.21999999999999997
+    },
+    "C": {
+     "n": 40,
+     "recognised": 0.725,
+     "chance": 0.37625000000000003,
+     "lift": 0.34874999999999995
+    },
+    "E": {
+     "n": 41,
+     "recognised": 0.12195121951219512,
+     "chance": 0.28536585365853656,
+     "lift": -0.16341463414634144
+    },
+    "A": {
+     "n": 57,
+     "recognised": 0.6842105263157895,
+     "chance": 0.43684210526315786,
+     "lift": 0.24736842105263163
+    },
+    "G": {
+     "n": 3,
+     "recognised": 0.6666666666666666,
+     "chance": 0.11666666666666665,
+     "lift": 0.5499999999999999
+    },
+    "B": {
+     "n": 52,
+     "recognised": 0.6153846153846154,
+     "chance": 0.40576923076923077,
+     "lift": 0.20961538461538465
+    },
+    "H": {
+     "n": 2,
+     "recognised": 1.0,
+     "chance": 0.15,
+     "lift": 0.85
+    }
+   }
+  },
+  {
+   "size": 1280,
+   "gate": "person-motion",
+   "arm": "roi",
+   "bin": "all",
+   "call_rate": 0.37777777777777777,
+   "gate_recall": 0.9710884353741497,
+   "recognised": 0.7159863945578231,
+   "recognised_chance": 0.4524659863945578,
+   "lift": 0.2635204081632653,
+   "lift_ci95": null,
+   "recog_change_vs_dense_pts": [
+    -2.2108843537414966,
+    -5.787037037037037,
+    -0.3597122302158273
+   ],
+   "detector_share": 0.03517,
+   "vlm_share": null,
+   "false_alarms_per_hour": 464.0,
+   "tokens_per_call": 847.7700729927008,
+   "cameras_per_gpu_vlm_only": null,
+   "cameras_per_gpu": null,
+   "instances": 588,
+   "per_group": {
+    "F": {
+     "n": 179,
+     "recognised": 0.9441340782122905,
+     "chance": 0.6924581005586592,
+     "lift": 0.25167597765363126
+    },
+    "C": {
+     "n": 149,
+     "recognised": 0.7114093959731543,
+     "chance": 0.5171140939597316,
+     "lift": 0.1942953020134227
+    },
+    "A": {
+     "n": 81,
+     "recognised": 0.7530864197530864,
+     "chance": 0.2814814814814815,
+     "lift": 0.47160493827160493
+    },
+    "B": {
+     "n": 80,
+     "recognised": 0.5875,
+     "chance": 0.37374999999999997,
+     "lift": 0.21375000000000005
+    },
+    "D": {
+     "n": 33,
+     "recognised": 0.5454545454545454,
+     "chance": 0.1,
+     "lift": 0.44545454545454544
+    },
+    "H": {
+     "n": 6,
+     "recognised": 0.8333333333333334,
+     "chance": 0.09166666666666666,
+     "lift": 0.7416666666666667
+    },
+    "G": {
+     "n": 10,
+     "recognised": 0.5,
+     "chance": 0.06,
+     "lift": 0.44
+    },
+    "E": {
+     "n": 50,
+     "recognised": 0.2,
+     "chance": 0.158,
+     "lift": 0.04200000000000001
+    }
+   }
+  }
+ ]
+}
