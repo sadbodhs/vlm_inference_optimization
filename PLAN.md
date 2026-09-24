@@ -597,3 +597,69 @@ way, what does the cascade gain?
 
 MPS; tracker tuning beyond NVIDIA's perf profile; rule-based events (tripwires,
 zones) — those need per-camera geometry this dataset does not give.
+
+## 13. E7d · Which VLM behind the gate: size and generation — pre-registered 2026-09-24, before any measurement
+
+**Question.** After E7c the VLM is the only limit on cameras per 3090. Is a smaller
+VLM the lever — and does a *newer* small model keep the recognition an older, larger
+one had? Conversely, is "cannot see phones or conversations" (E7) a property of
+Qwen2.5-VL-7B, or of the task at this resolution?
+
+### Models
+
+All 4-bit, all on the same vLLM v0.29.0 with V_vllm_video's settings (16 images,
+16,384 context, no prefix caching, no chunked prefill, no multimodal cache), util
+0.80, temperature 0, 16 output tokens, the same prompt and the same pixels
+(≤ 451,584 per frame, resized client-side). Checkpoints are pinned by revision.
+
+| generation | model | 4-bit checkpoint | on disk |
+|---|---|---|---|
+| Qwen2.5-VL (Jan 2025) | 7B — the E7/E7c baseline | Qwen/…-7B-Instruct-AWQ | 6.92 GB |
+| | **3B** | Qwen/…-3B-Instruct-AWQ | 3.40 GB |
+| Qwen3-VL (Oct 2025) | 8B | cyankiwi/…-8B-Instruct-AWQ-4bit | 7.55 GB |
+| | **4B** | cyankiwi/…-4B-Instruct-AWQ-4bit | 4.43 GB |
+| | **2B** | cyankiwi/…-2B-Instruct-AWQ-4bit | 2.23 GB |
+| Qwen3.5 (Feb 2026) | 9B | cyankiwi/Qwen3.5-9B-AWQ-4bit | 9.07 GB |
+| | **4B** | cyankiwi/Qwen3.5-4B-AWQ-4bit | 4.04 GB |
+| | **2B** | cyankiwi/Qwen3.5-2B-AWQ-4bit | 2.50 GB |
+
+Qwen3.5 is run with thinking **off** (`enable_thinking: false`); its 4B and 9B
+templates think by default, which a 16-token answer would truncate. Qwen3-VL and
+Qwen3.5 use 32 px per visual token against Qwen2.5-VL's 28, so the same pixels
+cost them ~25% fewer tokens. That is a property of the model and is kept: pixels
+are equalised, tokens are not, and tokens per call are reported.
+
+### Design
+
+1. **Recognition** — E7's VLM stage unchanged (`e7_vlm.py`, full frame and ROI, all
+   24 clips), scored by `e7_report.py` against the shuffled-answer chance baseline.
+   Model comparisons use a **paired bootstrap over clips** of the difference in lift
+   against Qwen2.5-VL-7B; a difference counts only if its 95% interval excludes 0.
+2. **Cameras** — E7c's live pipeline unchanged (DeepStream + NvDCF, the same
+   cameras and offsets), `track-motion` full frame and `person-track-motion` ROI,
+   camera counts stepped by 2 from 6 until two consecutive failures, then the gap
+   filled. Same bar: ≥ 95% of answers under 2 s old, detection-path p99 < 1 s.
+3. **Memory** — peak GPU memory at the supported limit for every model; then the
+   ≤ 4B model with the most full-frame cameras is rerun at util **0.40**.
+
+### Predictions
+
+12. **Size within a generation buys cameras, sub-linearly.** Qwen2.5-VL-3B carries
+    **1.4–2.0×** the 7B's cameras in both configurations — not the 2.3× the
+    parameter ratio suggests, because both share the same ~670M vision encoder.
+13. **…and costs recognition.** Qwen2.5-VL-3B's full-frame lift over chance is
+    lower than the 7B's (+16.9 points).
+14. **Newer and small matches older and big.** At least one ≤ 4B model from
+    Qwen3-VL or Qwen3.5 has a full-frame lift not significantly below the 7B's
+    **and** carries ≥ 1.4× its cameras.
+15. **The perception limit is not the model.** No model, including the 8B and 9B,
+    beats chance by more than 10 points on phones (group E) or conversations (F)
+    with full frames.
+16. **A small model frees the card.** At util 0.40 the chosen model loses at most
+    one camera against its 0.80 result.
+
+### Not measured
+
+Models outside the Qwen family (their prompt-following differs; a prompt change
+would confound the comparison); FP16/BF16 variants; thinking mode; Qwen3.5-0.8B;
+Qwen3.6 (27B and 35B only, too large to share this card with the CV service).

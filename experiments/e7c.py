@@ -51,7 +51,7 @@ TRACKER_LIB = "/opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracke
 TRACKER_CFG = ("/opt/nvidia/deepstream/deepstream/samples/configs/deepstream-app/"
                "config_tracker_NvDCF_perf.yml")
 FRESH_S, LATE_LIMIT_S = 2.0, 1.0
-MODEL_ID = "Qwen/Qwen2.5-VL-7B-Instruct-AWQ"
+MODEL_ID = "Qwen/Qwen2.5-VL-7B-Instruct-AWQ"      # E7c; E7d passes --arm-file
 TRACK_GATES = ("track-presence", "track-motion", "person-track-motion")
 
 
@@ -441,8 +441,8 @@ async def live_once(args, n: int) -> tuple[dict, list]:
         b64 = await loop.run_in_executor(pool, build)
         content = [{"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{x}"}}
                    for x in b64] + [{"type": "text", "text": QUESTION}]
-        body = {"model": MODEL_ID, "messages": [{"role": "user", "content": content}],
-                "max_tokens": 16, "temperature": 0, "stream": True}
+        body = {"model": args.model, "messages": [{"role": "user", "content": content}],
+                "max_tokens": 16, "temperature": 0, "stream": True, **args.extra_body}
         t_send, t_first, ok = time.time(), None, False
         try:
             async with http.stream("POST", f"{args.base_url}/v1/chat/completions", json=body) as r:
@@ -543,12 +543,46 @@ async def live_once(args, n: int) -> tuple[dict, list]:
     return row, results
 
 
+def next_count(rows: dict, plan: list[int]) -> int | None:
+    """E7d's search: walk the planned counts until two consecutive failures, then
+    fill the gap between the highest pass and the lowest failure above it; if even
+    the first count fails, step down until one passes."""
+    fails = 0
+    for n in plan:
+        if n not in rows:
+            return n
+        fails = 0 if rows[n]["supported"] else fails + 1
+        if fails >= 2:
+            break
+    ok = [n for n, r in rows.items() if r["supported"]]
+    if not ok:
+        lo = min(rows)
+        return lo - 1 if lo > 1 else None
+    best = max(ok)
+    above = [n for n, r in rows.items() if not r["supported"] and n > best]
+    if above and min(above) - best > 1:
+        return best + 1
+    return None
+
+
 async def cmd_live(args):
     tag = f"{args.gate}-{args.arm}-deepstream"
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     rows, fails = [], 0
-    for n in [int(x) for x in args.cams.split(",")]:
+    plan = [int(x) for x in args.cams.split(",")]
+    done_rows: dict[int, dict] = {}
+    while True:
+        if args.search:
+            n = next_count(done_rows, plan)
+            if n is None:
+                break
+        else:
+            if not plan:
+                break
+            n = plan.pop(0)
         row, detail = await live_once(args, n)
+        row["model"] = args.model
+        done_rows[n] = row
         rows.append(row)
         (out / f"{tag}-n{n}.jsonl").write_text("\n".join(json.dumps(r) for r in detail) + "\n")
         print(f"  N={n:<3} calls {100*(row['call_rate'] or 0):5.1f}%  sent {row['sent']:4d}  "
@@ -556,13 +590,14 @@ async def cmd_live(args):
               f"det-path p99 {row['det_latency_p99_s'] or 0:5.3f}s  gpu {row['gpu_util_mean'] or 0:4.0f}%  "
               f"mem {row['gpu_mem_max_mib'] or 0:6.0f}  {'OK' if row['supported'] else 'no'}", flush=True)
         fails = 0 if row["supported"] else fails + 1
-        if fails >= 2:
+        if fails >= 2 and not args.search:
             break
         await asyncio.sleep(5)
     prev = out / f"{tag}.json"
     old = json.loads(prev.read_text())["rows"] if prev.exists() else []
     merged = {r["cams"]: r for r in old + rows}
     json.dump({"meta": {"experiment": "e7c-live", "gate": args.gate, "arm": args.arm,
+                        "model": args.model, "vlm_arm": args.arm_id,
                         "duration_s": args.duration, "warmup_s": args.warmup, "fresh_s": FRESH_S,
                         "late_limit_s": LATE_LIMIT_S, "tracker": "NvDCF perf"},
                "rows": [merged[k] for k in sorted(merged)]}, open(prev, "w"), indent=1)
@@ -588,7 +623,16 @@ def main():
     ap.add_argument("--duration", type=float, default=120.0)
     ap.add_argument("--max-pixels", type=int, default=451584)
     ap.add_argument("--base-url", default="http://vlm-server:8000")
+    ap.add_argument("--arm-file", default=None,
+                    help="VLM arm YAML (E7d); default: E7c's Qwen2.5-VL-7B-AWQ")
+    ap.add_argument("--search", action="store_true",
+                    help="step through --cams until two failures, then fill the gap")
     args = ap.parse_args()
+    args.model, args.extra_body, args.arm_id = MODEL_ID, {}, "V_vllm_video"
+    if args.arm_file:
+        from bench.arms import Arm
+        a = Arm.load(args.arm_file)
+        args.model, args.extra_body, args.arm_id = a.model, dict(a.extra_body), a.id
     if args.mode == "offline":
         cmd_offline(args)
     elif args.mode == "gate":

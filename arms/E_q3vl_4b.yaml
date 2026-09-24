@@ -1,0 +1,23 @@
+# E7d (PLAN.md 13): Qwen3-VL 4B, 4-bit, in the cascade. Everything but the
+# model is V_vllm_video, so a difference against it is the model.
+id: E_q3vl_4b
+stack: vllm
+model: cyankiwi/Qwen3-VL-4B-Instruct-AWQ-4bit
+revision: b6a6f1cc360d21feee7465f8656b3855d61e767a
+base_url: http://vlm-server:8000
+quantization: compressed-tensors
+
+# safetensors on disk; the vision/LLM split is filled from the headers after download
+weight_bytes: 4.431e+9
+
+max_tokens: 16
+temperature: 0.0
+max_pixels: null          # per-frame cap applied client-side, as in E7
+
+max_images: 16
+max_model_len: 16384
+
+server_args: --no-enable-prefix-caching --no-enable-chunked-prefill --mm-processor-cache-gb 0
+
+notes: >
+  Qwen3-VL 4B. Compare against V_vllm_video (Qwen2.5-VL-7B-AWQ) in E7/E7c.
