@@ -553,3 +553,47 @@ frame. Both models fit; both run.
 Video decode; more than one detector worker; detector batching across cameras;
 MPS or any GPU partitioning — the two processes time-slice by default, which is
 what an untuned deployment does.
+
+## 12. E7c · The cascade, industry-shaped — pre-registered 2026-09-23, before any measurement
+
+**Question.** E7b's detector was a Python process running YOLO one frame at a time,
+gating on box motion. NVIDIA's own reference for CV + VLM (the VSS blueprint) is a
+DeepStream pipeline — hardware decode, a detector batched across cameras, a
+multi-object tracker — whose *events* trigger a separate VLM service. Built that
+way, what does the cascade gain?
+
+### Design
+
+- **CV service:** one DeepStream 7.1 pipeline for all N cameras: `nvv4l2decoder`
+  (NVDEC, from the MEVA H.264 files) → `nvstreammux` (batch N) → `nvinfer`
+  (YOLOv8s, same weights, 1280, FP16, conf 0.25, NMS IoU 0.7 to match ultralytics,
+  `interval=5`: detect every 6th frame) → `nvtracker` (NvDCF, the perf profile) on
+  every frame. Paced in real time by the pipeline clock.
+- **Gate on tracks, not boxes.** A window fires if a tracked person or vehicle is
+  born or lost in it, or moves > 0.1× its height across it (`track-motion`); the
+  same restricted to people (`person-track-motion`).
+- **VLM service:** unchanged — vLLM, V_vllm_video, util 0.80, same prompt, same two
+  frames per window (the same JPEG pixels as E7b), full frame or ROI from tracker
+  boxes.
+- **Cameras:** the same clips and the same per-camera start offsets as E7b
+  (offsets are keyframe-aligned: MEVA's GOP is 60 frames, one window).
+- **Offline replay:** the pipeline run flat out over all 24 clips, tracker output
+  logged, gates priced against MEVA's labels exactly as in E7.
+- **Supported:** ≥ 95% of answers under 2 s old, and detection-path lateness p99 < 1 s
+  (DeepStream does not drop late frames; it falls behind, which is the analogue of
+  E7b's drop rule).
+
+### Predictions
+
+9. The tracker gate fires on **fewer** windows than E7's `motion` gate at **≥ 98%**
+   activity coverage, and on **< 1%** of windows on verified-empty cameras — stable
+   IDs remove the flicker the box-motion gate paid for.
+10. With ROI crops, DeepStream carries **≥ 11** cameras (E7b: 10 with batch-1
+    TensorRT), because batching and `interval=5` cut the detector's GPU time.
+11. With full frames the VLM stays the limit: any gain over E7b's 8 cameras comes
+    from a lower call rate, not from detector cost.
+
+### Not measured
+
+MPS; tracker tuning beyond NVIDIA's perf profile; rule-based events (tripwires,
+zones) — those need per-camera geometry this dataset does not give.
