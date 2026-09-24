@@ -517,12 +517,23 @@ async def live_once(args, n: int) -> tuple[dict, list]:
     if t["wall0"] is not None:
         await asyncio.sleep(max(0.0, t["wall0"] + args.warmup + args.duration + 1 - time.time()))
     stop.set()
-    await done.wait()
+    # Teardown can hang: in E7d one source of eleven never delivered EOS and the run
+    # waited 75 min for the watchdog, losing a finished measurement. The window is
+    # over by now, so a stuck teardown cannot change the numbers -- stop waiting.
+    teardown_hung = False
+    try:
+        await asyncio.wait_for(done.wait(), timeout=60)
+    except asyncio.TimeoutError:
+        teardown_hung = True
+        print("  WARNING: pipeline teardown hung > 60 s; terminating it", flush=True)
+        proc.terminate()
     if pending:
         await asyncio.wait(pending, timeout=30)
     sampler.stop.set()
     await http.aclose()
     proc.join(timeout=30)
+    if proc.is_alive():
+        proc.kill()
 
     ok = [r for r in results if r["ok"]]
     stale = sorted(r["staleness_s"] for r in ok)
@@ -537,7 +548,8 @@ async def live_once(args, n: int) -> tuple[dict, list]:
            "det_latency_p50_s": q_(lat, 0.5), "det_latency_p99_s": q_(lat, 0.99),
            "det_drop_frac": 0.0,
            "gpu_util_mean": st.mean(sampler.util) if sampler.util else None,
-           "gpu_mem_max_mib": max(sampler.mem) if sampler.mem else None}
+           "gpu_mem_max_mib": max(sampler.mem) if sampler.mem else None,
+           "teardown_hung": teardown_hung}
     row["supported"] = bool(fresh is not None and fresh >= 0.95
                             and (row["det_latency_p99_s"] or 0) < LATE_LIMIT_S)
     return row, results
@@ -571,6 +583,13 @@ async def cmd_live(args):
     rows, fails = [], 0
     plan = [int(x) for x in args.cams.split(",")]
     done_rows: dict[int, dict] = {}
+    if args.discard_first:
+        # E7d: the first run after a server start failed on detection latency alone
+        # for two models (1.3 s, 1.8 s p99) and passed on rerun; warm the pair first.
+        row, _ = await live_once(args, plan[0])
+        print(f"  warm-up N={plan[0]} discarded (fresh {100*(row['fresh_fraction'] or 0):.1f}%, "
+              f"det-path p99 {row['det_latency_p99_s'] or 0:.3f}s)", flush=True)
+        await asyncio.sleep(5)
     while True:
         if args.search:
             n = next_count(done_rows, plan)
@@ -589,18 +608,24 @@ async def cmd_live(args):
               f"fresh {100*(row['fresh_fraction'] or 0):5.1f}%  stale p95 {row['staleness_p95_s'] or 0:5.2f}s  "
               f"det-path p99 {row['det_latency_p99_s'] or 0:5.3f}s  gpu {row['gpu_util_mean'] or 0:4.0f}%  "
               f"mem {row['gpu_mem_max_mib'] or 0:6.0f}  {'OK' if row['supported'] else 'no'}", flush=True)
+        # written after every count, not once at the end: a killed sweep keeps its rows
+        write_summary(out / f"{tag}.json", rows, args)
         fails = 0 if row["supported"] else fails + 1
         if fails >= 2 and not args.search:
             break
         await asyncio.sleep(5)
-    prev = out / f"{tag}.json"
-    old = json.loads(prev.read_text())["rows"] if prev.exists() else []
+
+
+def write_summary(path: Path, rows: list[dict], args) -> None:
+    old = json.loads(path.read_text())["rows"] if path.exists() else []
     merged = {r["cams"]: r for r in old + rows}
+    tmp = path.with_suffix(".json.tmp")
     json.dump({"meta": {"experiment": "e7c-live", "gate": args.gate, "arm": args.arm,
                         "model": args.model, "vlm_arm": args.arm_id,
                         "duration_s": args.duration, "warmup_s": args.warmup, "fresh_s": FRESH_S,
                         "late_limit_s": LATE_LIMIT_S, "tracker": "NvDCF perf"},
-               "rows": [merged[k] for k in sorted(merged)]}, open(prev, "w"), indent=1)
+               "rows": [merged[k] for k in sorted(merged)]}, open(tmp, "w"), indent=1)
+    tmp.replace(path)
 
 
 def main():
@@ -625,6 +650,8 @@ def main():
     ap.add_argument("--base-url", default="http://vlm-server:8000")
     ap.add_argument("--arm-file", default=None,
                     help="VLM arm YAML (E7d); default: E7c's Qwen2.5-VL-7B-AWQ")
+    ap.add_argument("--discard-first", action="store_true",
+                    help="run the first planned count once as an unrecorded warm-up")
     ap.add_argument("--search", action="store_true",
                     help="step through --cams until two failures, then fill the gap")
     args = ap.parse_args()
