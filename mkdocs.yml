@@ -74,6 +74,7 @@ nav:
   - Track B · VLMs in real-time CV:
       - Overview: recipe.md
       - R1 · The actor-crop reference level: r1-actor-crops.md
+      - R1b · Label-free crops: r1b-label-free.md
   - Corrections: corrections.md
   - Not measured: not-measured.md
   - Reproduce: reproduce.md

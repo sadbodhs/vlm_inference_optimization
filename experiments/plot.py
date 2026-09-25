@@ -1017,6 +1017,45 @@ def plot_r1(out):
     fig.savefig(out, dpi=160)
     plt.close(fig)
 
+
+def plot_r1b(out):
+    """R1b: the cascade's view -- lift vs the full frame, false alarms, tokens per window."""
+    rep = json.loads(Path("results/r1b/report.json").read_text())["models"]
+    rows = [(m, a) for m in ("E_q3vl_4b", "E_q3vl_8b") for a in ("F", "M", "GS", "GSC", "GO")
+            if a in rep.get(m, {})]
+    lab = {"F": "full frame", "M": "marked groups", "GS": "crop per group",
+           "GSC": "crop + context per group", "GO": "all groups, one request"}
+    col = {"F": SERIES[4], "M": SERIES[3], "GS": SERIES[1], "GSC": SERIES[0], "GO": SERIES[2]}
+    names = [f"{lab[a]} · {'4B' if m == 'E_q3vl_4b' else '8B'}" for m, a in rows]
+    y = list(range(len(rows)))[::-1]
+    fig, (a1, a2, a3) = plt.subplots(1, 3, figsize=(15.5, 4.3), sharey=True)
+    for yy, (m, a) in zip(y, rows):
+        r = rep[m][a]
+        mk = dict(color=col[a], ms=8, mew=1.8, mfc=col[a] if m == "E_q3vl_4b" else "none")
+        if r["vs_F"]:
+            pt, lo, hi = (100 * v for v in r["vs_F"])
+            a1.plot([lo, hi], [yy, yy], color=col[a], lw=2)
+            a1.plot([pt], [yy], "o" if m == "E_q3vl_4b" else "s", **mk)
+        else:
+            a1.plot([0], [yy], "o" if m == "E_q3vl_4b" else "s", **mk)
+        a2.barh(yy, r["fa_per_hour"], color=col[a], height=0.62, edgecolor="white", linewidth=2,
+                alpha=1.0 if m == "E_q3vl_4b" else 0.55)
+        a2.text(r["fa_per_hour"] + 15, yy, f"{r['fa_per_hour']:.0f}", va="center", fontsize=7.5, color=FG)
+        a3.barh(yy, r["tokens_per_window"], color=col[a], height=0.62, edgecolor="white", linewidth=2,
+                alpha=1.0 if m == "E_q3vl_4b" else 0.55)
+        a3.text(r["tokens_per_window"] + 15, yy, f"{r['tokens_per_window']:.0f}", va="center",
+                fontsize=7.5, color=FG)
+    a1.axvline(0, color=WARN, lw=1)
+    a1.set_yticks(y); a1.set_yticklabels(names, fontsize=8)
+    f4 = rep["E_q3vl_4b"]["F"]["tokens_per_window"]
+    a3.axvline(f4, color=WARN, lw=1, ls=":")
+    _style(a1, "Recognition vs the full frame, per model", "points above chance, 95% paired interval", "")
+    _style(a2, "False alarms", "labels not present, per hour of video", "")
+    _style(a3, "Cost", "prompt tokens per fired window", "")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+    plt.close(fig)
+
 def comparisons(root="results/sweeps", out_dir="docs/img"):
     """Build the cross-sweep figures the comparison pages need."""
     root, out_dir = Path(root), Path(out_dir)
@@ -1066,6 +1105,10 @@ def comparisons(root="results/sweeps", out_dir="docs/img"):
     if Path("results/r1/report.json").exists() and Path("results/r1/single_person.json").exists():
         plot_r1(out_dir / "r1.png")
         print(f"  wrote {out_dir/'r1.png'}")
+
+    if Path("results/r1b/report.json").exists():
+        plot_r1b(out_dir / "r1b.png")
+        print(f"  wrote {out_dir/'r1b.png'}")
 
     if Path("results/e7d/compare.json").exists():
         sys.path.insert(0, str(Path(__file__).parent))

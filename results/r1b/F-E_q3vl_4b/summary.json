@@ -1,0 +1,54 @@
+{
+  "n_requests": 1531,
+  "n_ok": 1531,
+  "n_failed": 0,
+  "wall_s": 271.794087577,
+  "ttft_ms": {
+    "p50": 1308.892206987366,
+    "p95": 1418.2449869986158,
+    "p99": 1471.9191007054178,
+    "mean": 1197.8161090515666
+  },
+  "tpot_ms": {
+    "p50": 183.92548649717355,
+    "p95": 428.7221799597319,
+    "mean": 184.38945720741012
+  },
+  "e2e_ms": {
+    "p50": 1335.7507420005277,
+    "p95": 1906.2963585020043
+  },
+  "throughput_req_s": 5.632940781194379,
+  "output_tok_s": 16.030517951446054,
+  "goodput_req_s": 0.014717023595543773,
+  "slo": {
+    "ttft_ms": 1000.0,
+    "tpot_ms": 50.0,
+    "fraction_met": 0.002612671456564337
+  },
+  "prompt_tokens": {
+    "mean": 1051.6133246244285
+  },
+  "harness": {
+    "verdict": "not-saturated",
+    "note": "Client kept up and the server absorbed everything without a growing queue. Latency numbers are valid; throughput is a floor, not a capacity.",
+    "loadgen_lag_ms": {
+      "p50": 0.08730500121600926,
+      "p99": 0.16020509938243782,
+      "drift": 0.005689691035374658
+    },
+    "ttft_drift_ms": 32.17262760703193,
+    "ttft_drift_frac": 0.027225270780212654,
+    "offered_qps": null,
+    "offered_qps_realized": 5.655018220527105,
+    "achieved_qps": 5.632940781194379,
+    "achieved_over_offered": 0.9960959561098164
+  },
+  "mode": "closed",
+  "wall_clock_s": 271.80010747601045,
+  "accuracy": {
+    "scorer": null,
+    "score": null,
+    "note": "not scored in this run"
+  }
+}

@@ -1,0 +1,133 @@
+{
+ "meta": {
+  "gate": "track-motion",
+  "windows_all": 3600,
+  "windows_fired": 1531,
+  "fired_frac": 0.42527777777777775,
+  "groups_per_fired_window_mean": 2.215545395166558,
+  "groups_per_fired_window_p90": 5,
+  "fired_windows_without_groups": 237,
+  "groups_dropped_over_cap": 44,
+  "activities": 588,
+  "activities_in_a_fired_window": 581,
+  "person_activities_in_a_fired_window": 492,
+  "person_activities_crop_covered": 424
+ },
+ "models": {
+  "E_q3vl_4b": {
+   "F": {
+    "lift": 0.11819727891156462,
+    "recognised": 0.4370748299319728,
+    "chance": 0.31887755102040816,
+    "fa_per_hour": 496.0,
+    "tokens_per_window": 1051.6133246244285,
+    "vs_F": null
+   },
+   "M": {
+    "lift": 0.20374149659863944,
+    "recognised": 0.6972789115646258,
+    "chance": 0.4935374149659864,
+    "fa_per_hour": 823.5,
+    "tokens_per_window": 1065.1365120836056,
+    "vs_F": [
+     0.08554421768707482,
+     -0.0692840646651271,
+     0.23327615780445965
+    ]
+   },
+   "GS": {
+    "lift": 0.1539965986394558,
+    "recognised": 0.7278911564625851,
+    "chance": 0.5738945578231293,
+    "fa_per_hour": 1225.0,
+    "tokens_per_window": 1109.3063357282822,
+    "vs_F": [
+     0.03579931972789119,
+     -0.12267904509283822,
+     0.19498502994011963
+    ],
+    "attributed_hit_rate": 0.6391446391446391
+   },
+   "GSC": {
+    "lift": 0.14591836734693875,
+    "recognised": 0.7636054421768708,
+    "chance": 0.617687074829932,
+    "fa_per_hour": 1430.0,
+    "tokens_per_window": 1391.1456564337034,
+    "vs_F": [
+     0.02772108843537413,
+     -0.1157817109144541,
+     0.1986301369863014
+    ],
+    "attributed_hit_rate": 0.6667656667656667
+   },
+   "GO": {
+    "lift": 0.21343537414965985,
+    "recognised": 0.7040816326530612,
+    "chance": 0.4906462585034014,
+    "fa_per_hour": 1065.5,
+    "tokens_per_window": 970.4402351404311,
+    "vs_F": [
+     0.09523809523809523,
+     -0.05624999999999997,
+     0.2312312312312313
+    ]
+   }
+  },
+  "E_q3vl_8b": {
+   "F": {
+    "lift": 0.22636054421768703,
+    "recognised": 0.7125850340136054,
+    "chance": 0.48622448979591837,
+    "fa_per_hour": 697.0,
+    "tokens_per_window": 1051.6133246244285,
+    "vs_F": null
+   },
+   "GO": {
+    "lift": 0.19260204081632648,
+    "recognised": 0.6139455782312925,
+    "chance": 0.421343537414966,
+    "fa_per_hour": 476.5,
+    "tokens_per_window": 970.4402351404311,
+    "vs_F": [
+     -0.03375850340136055,
+     -0.10460992907801425,
+     0.03840782122905034
+    ]
+   }
+  }
+ },
+ "predictions": {
+  "R1b.1": {
+   "holds": false,
+   "GSC_minus_F": 0.02772108843537413,
+   "ci": [
+    0.02772108843537413,
+    -0.1157817109144541,
+    0.1986301369863014
+   ]
+  },
+  "R1b.2": {
+   "holds": false,
+   "GS_over_F": 2.469758064516129,
+   "GSC_over_F": 2.8830645161290325
+  },
+  "R1b.3": {
+   "holds": false,
+   "GO_minus_GSC": 0.0675170068027211,
+   "GO_tokens_over_GSC": 0.697583484987633,
+   "GO_tokens_over_F": 0.9228108967590465
+  },
+  "R1b.4": {
+   "holds": false,
+   "M_minus_F": 0.08554421768707482,
+   "fa_ratio": 1.6602822580645162,
+   "token_increase": 0.012859467584253714
+  },
+  "R1b.5": {
+   "holds": true,
+   "gain_4b": 0.09523809523809523,
+   "gain_8b": -0.03375850340136055
+  }
+ }
+}

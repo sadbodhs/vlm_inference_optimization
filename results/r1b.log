@@ -1,0 +1,23 @@
+gpu_lock: acquired by 'r1b'
+  activities                               588
+  activities_in_a_fired_window             581
+  person_activities_in_a_fired_window      492
+  person_activities_crop_covered           424
+### R1b start 10:57  out=results/r1b
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+  F    requests  1531  prompt tokens mean 1052  ok 1531/1531
+  M    requests  1531  prompt tokens mean 1065  ok 1531/1531
+  GS   requests  3629  prompt tokens mean 468  ok 3629/3629
+  GSC  requests  3629  prompt tokens mean 587  ok 3629/3629
+  GO   requests  1531  prompt tokens mean 970  ok 1531/1531
+### E_q3vl_4b DONE 11:45
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+  F    requests  1531  prompt tokens mean 1052  ok 1531/1531
+  GO   requests  1531  prompt tokens mean 970  ok 1531/1531
+### E_q3vl_8b DONE 12:05
+stopped vlm-server
+### R1b COMPLETE 12:05

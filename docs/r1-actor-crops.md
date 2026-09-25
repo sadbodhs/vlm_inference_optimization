@@ -23,6 +23,13 @@ does that beat the full frame?
 - **Crop plus a small full frame keeps most of the gain with the fewest false
   alarms of any crop**: 64% for the 4B and 60% for the 8B, against 99%.
 
+!!! warning "Qualified by R1b"
+    R1's crops were drawn around each activity's annotated participants. With the
+    tracker choosing the crops and only gate-fired windows scored
+    ([R1b](r1b-label-free.md)), most of the gain disappears: +9 points at best for
+    the 4B, both intervals crossing zero, at about twice the false alarms, and −3 for
+    the 8B.
+
 Pre-registered in [RECIPE.md](https://github.com/sadbodhs/vlm_inference_optimization/blob/main/RECIPE.md)
 before any request. Part of [Track B](recipe.md).
 
@@ -148,9 +155,5 @@ crops; a zero-shot VLM, with its processor's 65,536 px floor, is not.
 
 ## Next: R1b
 
-A crop chosen **without labels**: proximity groups from the tracker, as in the
-exploratory analysis. Negatives drawn from windows **the gate actually fires on**,
-and crop + context as the lead arm. That tests whether the +12 to +16 points
-survive when the pipeline, not the annotation, decides who to look at. It enters
-the [backlog](https://github.com/sadbodhs/vlm_inference_optimization/blob/main/BACKLOG.md)
-first and is pre-registered before it runs.
+Done: [R1b](r1b-label-free.md) chose crops from the tracker alone and scored the
+gate's windows. Most of the gain did not survive.
