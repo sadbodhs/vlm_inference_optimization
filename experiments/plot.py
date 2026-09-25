@@ -844,20 +844,31 @@ E7D_SHORT = {"A": "in/out of vehicle", "B": "vehicle moves", "C": "doorway", "D"
 E7D_GEN = ["Qwen2.5-VL (Jan 2025)", "Qwen3-VL (Oct 2025)", "Qwen3.5 (Feb 2026)"]
 
 
-def e7d_cameras(arm_id, view):
-    """Highest supported camera count, or None if that model has no live run."""
+def e7d_cameras(arm_id, view, with_limiter=False):
+    """Highest supported camera count (None if no live run), its peak memory, and
+    what failed one step later: 'det' if only detection latency broke the bar.
+    Qwen3-VL-8B's warmed-up rerun is used where it exists (its first sweep failed
+    on start-up detection latency; both are on the E7d page)."""
     tag = {"full": "track-motion-full-deepstream",
            "roi": "person-track-motion-roi-deepstream"}[view]
     d = Path("results/e7c") if arm_id == "V_vllm_video" else Path("results/e7d") / arm_id
+    if (d / "rerun" / f"{tag}.json").exists():
+        d = d / "rerun"
     f = d / f"{tag}.json"
     if not f.exists():
-        return None, None
+        return (None, None, None) if with_limiter else (None, None)
     rows = json.loads(f.read_text())["rows"]
     ok = [r for r in rows if r["supported"]]
-    if not ok:
-        return 0, None
-    best = max(ok, key=lambda r: r["cams"])
-    return best["cams"], best.get("gpu_mem_max_mib")
+    best = max(ok, key=lambda r: r["cams"]) if ok else None
+    cams = best["cams"] if best else 0
+    nxt = min((r for r in rows if not r["supported"] and r["cams"] > cams),
+              key=lambda r: r["cams"], default=None)
+    lim = None
+    if nxt:
+        det_bad = (nxt["det_latency_p99_s"] or 0) >= 1.0
+        lim = "det" if det_bad and (nxt["fresh_fraction"] or 0) >= 0.9 else "vlm"
+    mem = best.get("gpu_mem_max_mib") if best else None
+    return (cams, mem, lim) if with_limiter else (cams, mem)
 
 
 def plot_e7d(out_frontier, out_groups, group_names):
@@ -879,32 +890,38 @@ def plot_e7d(out_frontier, out_groups, group_names):
     for ax, view, title, gate in ((axes[0], "full", "Full frame", "track-motion gate"),
                                   (axes[1], "roi", "ROI crop", "person-track-motion gate")):
         base_c, _ = e7d_cameras("V_vllm_video", view)
+        ax.axvspan(18.5, 20.5, color=WARN, alpha=0.08, lw=0)
+        ax.text(19.5, 0.97, "detector\nceiling", transform=ax.get_xaxis_transform(),
+                ha="center", va="top", fontsize=7, color=WARN)
         if base_c:
             ax.axvline(base_c, color=WARN, lw=0.8, ls=":")
         ax.axhline(0, color=WARN, lw=0.8)
         for aid, lab, gen, size in E7D_MODELS:
             r = lift.get((aid, view))
-            cams, _ = e7d_cameras(aid, view)
+            cams, _, lim = e7d_cameras(aid, view, with_limiter=True)
             if r is None or cams is None:
                 continue
             y = 100 * r["lift"]
             col = SERIES[gen]
             unusable = (r["compliance"] or 0) < 0.5 or r["false_alarms_per_hour"] > 5000
             ci = skill_ci(aid, view)
+            x = cams + (gen - 1) * 0.12          # models tied on cameras stay separable
             if ci:
-                ax.plot([cams, cams], [100 * ci[0], 100 * ci[1]], color=col, lw=1.2, alpha=0.45)
-            ax.plot([cams], [y], "o", ms=5 + size, color=col,
+                ax.plot([x, x], [100 * ci[0], 100 * ci[1]], color=col, lw=1.2, alpha=0.45)
+            ax.plot([x], [y], "o", ms=5 + size, color=col,
                     mfc="none" if unusable else col, mew=1.8, zorder=3)
             note = " (format fails)" if (r["compliance"] or 0) < 0.5 else (
                 " (ticks every box)" if r["false_alarms_per_hour"] > 5000 else "")
-            ax.annotate(lab.split("-")[-1] + note, (cams, y), textcoords="offset points",
+            if lim == "det":
+                note += " · detector-limited"
+            ax.annotate(lab.split("-")[-1] + note, (x, y), textcoords="offset points",
                         xytext=(7 + size / 2, -3), fontsize=7.5, color=FG)
         _style(ax, f"{title} — {gate}", "cameras per RTX 3090 (live, DeepStream + vLLM)",
                "recognition above chance (points)" if view == "full" else "")
     for g, name in enumerate(E7D_GEN):
         axes[0].plot([], [], "o", color=SERIES[g], label=name)
     axes[0].plot([], [], "o", mfc="none", mec=FG, label="unusable answers")
-    axes[0].legend(fontsize=7.5, frameon=False, loc="upper right")
+    axes[0].legend(fontsize=7.5, frameon=False, loc="upper center")
     fig.tight_layout()
     fig.savefig(out_frontier, dpi=160)
     plt.close(fig)

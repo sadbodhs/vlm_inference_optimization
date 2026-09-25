@@ -1,0 +1,770 @@
+gpu_lock: acquired by 'vlm-e7d-mem4b'
+### E_q3vl_4b_ctx4k  pass=mem  21:03
+  vram ok: want 9830 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+  smoke: 'N'  prompt tokens 883
+--- E_q3vl_4b_ctx4k  track-motion  full  (util 0.40)
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:04:35.661: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstchromaprint.so': libavcodec.so.58: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:04:35.673: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstlame.so': libmp3lame.so.0: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:04:35.681: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstmplex.so': libmjpegutils-2.1.so.0: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:04:35.686: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstpulseaudio.so': libFLAC.so.8: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:04:35.702: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstsndfile.so': libFLAC.so.8: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:04:35.730: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstopenmpt.so': libmpg123.so.0: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:04:35.736: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstfluidsynthmidi.so': libFLAC.so.8: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:04:35.820: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/deepstream/libnvdsgst_udp.so': librivermax.so.1: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:04:35.844: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstmpg123.so': libmpg123.so.0: cannot open shared object file: No such file or directory
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.425457452 [33m    8[00m 0x5e9ccd85d830 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.425486577 [33m    8[00m 0x5e9ccd85d830 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.433417180 [33m    8[00m 0x5e9ccd85d830 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=5
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=4
+  N=6   calls  20.3%  sent   73  fresh 100.0%  stale p95  0.66s  det-path p99 0.133s  gpu   30%  mem  11226  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.180710140 [33m  380[00m 0x628e28ae32b0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.180738353 [33m  380[00m 0x628e28ae32b0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.190214504 [33m  380[00m 0x628e28ae32b0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=5
+  N=8   calls  31.1%  sent  140  fresh 100.0%  stale p95  0.89s  det-path p99 0.100s  gpu   26%  mem  11395  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.188351507 [33m  746[00m 0x5f45896e3880 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.188376584 [33m  746[00m 0x5f45896e3880 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.197738690 [33m  746[00m 0x5f45896e3880 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=5
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=1
+  N=10  calls  26.6%  sent  146  fresh 100.0%  stale p95  1.00s  det-path p99 0.100s  gpu   40%  mem  11768  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.196155049 [34m 1119[00m 0x5ac9b8ca95b0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.196184906 [34m 1119[00m 0x5ac9b8ca95b0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.205291198 [34m 1119[00m 0x5ac9b8ca95b0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=5
+  N=12  calls  38.6%  sent  257  fresh 100.0%  stale p95  1.50s  det-path p99 0.267s  gpu   52%  mem  12104  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+0:00:00.203062381 [34m 1503[00m 0x5d460fdc6f30 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.203090824 [34m 1503[00m 0x5d460fdc6f30 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.212375143 [34m 1503[00m 0x5d460fdc6f30 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=12
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=5
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=13
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=4
+  N=14  calls  32.9%  sent  242  fresh 100.0%  stale p95  1.47s  det-path p99 0.122s  gpu   52%  mem  12247  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.208610085 [35m 1894[00m 0x631b2115d2c0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.208637838 [35m 1894[00m 0x631b2115d2c0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.218012737 [35m 1894[00m 0x631b2115d2c0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=15
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=14
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=12
+nvstreammux: Successfully handled EOS for source_id=13
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=5
+  N=16  calls  42.7%  sent  340  fresh  97.6%  stale p95  1.99s  det-path p99 0.199s  gpu   77%  mem  12393  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.215443346 [33m 2294[00m 0x5fe6abb31880 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.215471610 [33m 2294[00m 0x5fe6abb31880 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.228101034 [33m 2294[00m 0x5fe6abb31880 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=15
+nvstreammux: Successfully handled EOS for source_id=17
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=5
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=14
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=16
+nvstreammux: Successfully handled EOS for source_id=13
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=12
+  N=18  calls  38.4%  sent  389  fresh  53.5%  stale p95  3.47s  det-path p99 1.139s  gpu   72%  mem  12694  no
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.232166655 [34m 2703[00m 0x6366eedc6e90 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.232194348 [34m 2703[00m 0x6366eedc6e90 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.241284961 [34m 2703[00m 0x6366eedc6e90 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=19
+nvstreammux: Successfully handled EOS for source_id=15
+nvstreammux: Successfully handled EOS for source_id=12
+nvstreammux: Successfully handled EOS for source_id=18
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=14
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=17
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=13
+nvstreammux: Successfully handled EOS for source_id=16
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=5
+  N=20  calls  44.0%  sent  484  fresh   0.4%  stale p95 14.93s  det-path p99 4.267s  gpu   89%  mem  12825  no
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+0:00:00.225845280 [31m 3132[00m 0x5d43541f7db0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.225873554 [31m 3132[00m 0x5d43541f7db0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.234880759 [31m 3132[00m 0x5d43541f7db0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=16
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=13
+nvstreammux: Successfully handled EOS for source_id=15
+nvstreammux: Successfully handled EOS for source_id=14
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=5
+nvstreammux: Successfully handled EOS for source_id=12
+  N=17  calls  34.8%  sent  338  fresh  81.1%  stale p95  2.26s  det-path p99 0.300s  gpu   64%  mem  12630  no
+--- E_q3vl_4b_ctx4k  person-track-motion  roi  (util 0.40)
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:25:43.131: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstchromaprint.so': libavcodec.so.58: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:25:43.139: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstlame.so': libmp3lame.so.0: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:25:43.145: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstmplex.so': libmjpegutils-2.1.so.0: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:25:43.150: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstpulseaudio.so': libFLAC.so.8: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:25:43.161: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstsndfile.so': libFLAC.so.8: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:25:43.180: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstopenmpt.so': libmpg123.so.0: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:25:43.184: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstfluidsynthmidi.so': libFLAC.so.8: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:25:43.232: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/deepstream/libnvdsgst_udp.so': librivermax.so.1: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 02:25:43.252: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstmpg123.so': libmpg123.so.0: cannot open shared object file: No such file or directory
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+0:00:00.342671590 [33m    8[00m 0x5fbf345deab0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.342696377 [33m    8[00m 0x5fbf345deab0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.350977852 [33m    8[00m 0x5fbf345deab0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=5
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=4
+  N=6   calls  18.1%  sent   65  fresh 100.0%  stale p95  0.57s  det-path p99 0.201s  gpu   16%  mem  11790  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.190838226 [33m  380[00m 0x5a082c9b1ed0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.190866539 [33m  380[00m 0x5a082c9b1ed0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.200251408 [33m  380[00m 0x5a082c9b1ed0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=5
+  N=8   calls  28.0%  sent  126  fresh 100.0%  stale p95  0.80s  det-path p99 0.167s  gpu   34%  mem  11959  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+0:00:00.197725831 [33m  746[00m 0x5734d46009c0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.197754936 [33m  746[00m 0x5734d46009c0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.207347447 [33m  746[00m 0x5734d46009c0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=5
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=2
+  N=10  calls  24.0%  sent  132  fresh 100.0%  stale p95  0.93s  det-path p99 0.034s  gpu   34%  mem  12120  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+0:00:00.206444742 [34m 1119[00m 0x64d9e532dc80 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.206472464 [34m 1119[00m 0x64d9e532dc80 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.215736806 [34m 1119[00m 0x64d9e532dc80 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=5
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=8
+  N=12  calls  35.4%  sent  236  fresh 100.0%  stale p95  1.31s  det-path p99 0.267s  gpu   42%  mem  12258  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.214648400 [36m 1499[00m 0x61647605dd30 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.214675411 [36m 1499[00m 0x61647605dd30 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.223690371 [36m 1499[00m 0x61647605dd30 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=12
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=13
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=5
+  N=14  calls  30.7%  sent  226  fresh 100.0%  stale p95  1.29s  det-path p99 0.200s  gpu   49%  mem  12401  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.221191072 [31m 1890[00m 0x62412855f900 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.221217072 [31m 1890[00m 0x62412855f900 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.230748808 [31m 1890[00m 0x62412855f900 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=15
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=14
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=12
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=13
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=5
+  N=16  calls  40.3%  sent  321  fresh 100.0%  stale p95  1.83s  det-path p99 0.141s  gpu   65%  mem  12547  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.228862908 [31m 2292[00m 0x5a18f04390c0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.228891111 [31m 2292[00m 0x5a18f04390c0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.242228272 [31m 2292[00m 0x5a18f04390c0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=15
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=14
+nvstreammux: Successfully handled EOS for source_id=17
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=5
+nvstreammux: Successfully handled EOS for source_id=12
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=16
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=13
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=7
+  N=18  calls  33.4%  sent  339  fresh  95.3%  stale p95  1.99s  det-path p99 0.810s  gpu   71%  mem  12694  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+0:00:00.251141429 [31m 2700[00m 0x5956848c8db0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.251169011 [31m 2700[00m 0x5956848c8db0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.260505299 [31m 2700[00m 0x5956848c8db0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=12
+nvstreammux: Successfully handled EOS for source_id=19
+nvstreammux: Successfully handled EOS for source_id=18
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=15
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=14
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=13
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=17
+nvstreammux: Successfully handled EOS for source_id=16
+nvstreammux: Successfully handled EOS for source_id=5
+  N=20  calls  36.3%  sent  402  fresh  47.8%  stale p95  4.19s  det-path p99 3.398s  gpu   76%  mem  12825  no
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+0:00:00.249391004 [35m 3118[00m 0x5f7db5aa49c0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.249422123 [35m 3118[00m 0x5f7db5aa49c0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.258721360 [35m 3118[00m 0x5f7db5aa49c0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=17
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=19
+nvstreammux: Successfully handled EOS for source_id=12
+nvstreammux: Successfully handled EOS for source_id=13
+nvstreammux: Successfully handled EOS for source_id=14
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=18
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=20
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=5
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=16
+nvstreammux: Successfully handled EOS for source_id=15
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=21
+nvstreammux: Successfully handled EOS for source_id=8
+  N=22  calls  33.6%  sent  416  fresh  45.7%  stale p95  4.31s  det-path p99 3.421s  gpu   83%  mem  12981  no
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+0:00:00.248202289 [36m 3545[00m 0x5b461c879630 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.248231565 [36m 3545[00m 0x5b461c879630 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.257752631 [36m 3545[00m 0x5b461c879630 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=12
+nvstreammux: Successfully handled EOS for source_id=18
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=17
+nvstreammux: Successfully handled EOS for source_id=15
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=16
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=14
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=13
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=5
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=2
+  N=19  calls  30.5%  sent  325  fresh  64.9%  stale p95  3.38s  det-path p99 2.367s  gpu   68%  mem  12760  no
+### E_q3vl_4b_ctx4k DONE 21:49
+  allocator OOM retries: 0
+stopped vlm-server
+### E7D mem COMPLETE

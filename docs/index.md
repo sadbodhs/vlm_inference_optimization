@@ -40,7 +40,7 @@ trades accuracy, so the deliverable is a frontier, not a ranking.
 | Frames buy ordering | `order` **0.41 → 0.87**, chance to solved |
 | A detector gate beats the serving layer | YOLO → VLM cascade, both on one 3090, live: **5 → 8 cameras** (10 with ROI crops + TensorRT YOLO), 97–99% of activities kept |
 | The industry-shaped pipeline removes the detector bottleneck | DeepStream + NvDCF instead of a Python detector: **8 → 9 cameras** full-frame, 10 → 10 with ROI; the VLM becomes the only limit |
-| The VLM's generation beats its size | Qwen3-VL-8B recognises activities at **+40 points** above chance vs Qwen2.5-VL-7B's +17, and sees conversations the 7B missed; a **3B** matches the 7B and carries **14 cameras** vs 9 ([in progress](e7d-models.md)) |
+| The VLM's generation beats its size | Qwen3-VL-8B: **2.3× the 7B's recognition and one more camera**; newer 4B models keep the 7B's recognition at **16–18 cameras vs 9**, in half the GPU memory ([E7d](e7d-models.md)) |
 
 ![Accuracy retained against time to first token, per task](img/headline.png){ width="680" }
 

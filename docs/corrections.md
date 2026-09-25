@@ -1,6 +1,7 @@
 # Corrections
 
-Ten measurement bugs found while building this. Four produced
+Ten measurement bugs found while building this, and one conclusion that went
+further than its data. Four of the bugs produced
 **publishable-looking numbers that were wrong**. None were caught by inspection —
 every one was caught by a physical bound, a cross-experiment contradiction, or an
 internal inconsistency in the data.
@@ -153,6 +154,22 @@ every run in the study found failures in exactly three, all SGLang E0 rates. The
 corrected figure is 0.35 req/s, 22% *below* vLLM, and SGLang's saturated capacity
 is recorded as not measured. The harness now records the failed fraction of every
 run and disqualifies any rate over 1%.
+
+## The conclusion that generalised from one model
+
+E7 found Qwen2.5-VL-7B recognising conversations *below* chance, heard it say
+"no one is talking" about a crowd with sixteen annotated conversations, and wrote
+that hand-scale activities were **invisible** at surveillance distance: "the
+feature-size rule again". One model, read as a property of the task.
+
+[E7d](e7d-models.md) ran seven more models on the same frames, prompt and pixels.
+Qwen3-VL-8B recognises those conversations at **+34 points** above chance, and
+Qwen3.5-9B at +28. The limit was the 7B's. The E7 page now carries the revision;
+phones do stay hard for every model tested.
+
+The same experiment nearly published another single-run artefact: Qwen3-VL-8B's
+first live sweep read **5 cameras**, because the first runs after a server start
+failed on detection latency. A warmed-up rerun read 10. Both are on the page.
 
 ## The pattern
 

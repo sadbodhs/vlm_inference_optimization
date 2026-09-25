@@ -1,29 +1,29 @@
 # E7d · Which VLM behind the gate: size and generation
 
-!!! info "In progress — updated 2026-09-24"
-    **Recognition is final** for all eight models. **Cameras per 3090** are measured
-    for Qwen2.5-VL-7B (E7c) and Qwen2.5-VL-3B; the other six are running now, one
-    model at a time, and this page will be updated as they land.
-
 **Question:** after [E7c](e7c-deepstream.md) the VLM is the only limit on how many
 cameras one RTX 3090 carries. Is a smaller VLM the lever? Does a *newer* small model
 keep the recognition an older, larger one had? And is E7's finding that the VLM
 "cannot see phones or conversations" a property of the task, or of the model?
 
-**Answer so far:**
+**Answer:**
 
-- **Generation matters more than size.** **Qwen3-VL-8B** recognises activities at
-  **+39.7 points above chance** against Qwen2.5-VL-7B's +16.9, the only
-  difference in the set that is statistically clear.
+- **Generation beats size.** **Qwen3-VL-8B** recognises activities at **+39.7 points
+  above chance** against Qwen2.5-VL-7B's +16.9 (the only statistically clear
+  difference in the set) **and** carries one more camera (10 vs 9). It is better than
+  the 7B on both axes.
 - **E7's perception limit was the model.** Qwen3-VL-8B recognises conversations at
-  **+34 points** above chance, and Qwen3.5-9B at +28, where the 7B was *below*
-  chance. Phones stay hard for every model (≤ +12).
-- **Half the size, same recognition, 1.5× the cameras.** Qwen2.5-VL-3B matches the
-  7B's recognition exactly (+16.9) and carries **14 cameras full-frame (7B: 9)** and
-  **15 with ROI crops (7B: 10)**.
-- **The 2B models are unusable here.** Qwen3-VL-2B ticks nearly every box
-  (9,254 false alarms an hour); Qwen3.5-2B answers in prose and never gives a
-  letter.
+  **+34 points** above chance, Qwen3.5-9B at +28; the 7B was *below* chance. Phones
+  stay hard for every model (≤ +12).
+- **Newer 4B models keep the 7B's recognition at 1.7–1.8× the cameras:**
+  Qwen3-VL-4B **16** full-frame, Qwen3.5-4B **18** with ROI crops (7B: 9 and 10).
+  Qwen2.5-VL-3B matches the 7B at 14 and 15.
+- **At 2B the detector becomes the limit, at 18 cameras.** Both 2B models hit it
+  with VLM capacity to spare, but their answers are unusable: one ticks every box,
+  the other answers in prose.
+- **A small model frees memory only if you ask it to.** At the same util 0.80 every
+  model peaked at 21.6–23.5 GiB of 24. Given half the budget (0.40), Qwen3-VL-2B kept
+  its 18 cameras in **13 GiB**, and Qwen3-VL-4B its 16 in **12 GiB** once its context
+  length was sized to the ~1,100-token requests.
 
 Pre-registered in [PLAN.md §13](https://github.com/sadbodhs/vlm_inference_optimization/blob/main/PLAN.md)
 before any measurement.
@@ -103,41 +103,101 @@ are a lower bound.
 
 ![Recognition against cameras per 3090](img/e7d-frontier.png)
 
-| model | full frame, `track-motion` | ROI, `person-track-motion` | what gave way one camera later |
+| model | full frame, `track-motion` | ROI, `person-track-motion` | what failed one camera later |
 |---|---|---|---|
 | Qwen2.5-VL-7B ([E7c](e7c-deepstream.md)) | 9 | 10 | the VLM |
-| **Qwen2.5-VL-3B** | **14** (1.56×) | **15** (1.5×) | the VLM: 83% fresh at 15 full-frame; 63% at 16 ROI |
-| Qwen3.5-4B | running | running | |
-| Qwen3-VL-4B, Qwen3-VL-8B, Qwen3.5-9B, both 2Bs | queued | queued | |
+| Qwen2.5-VL-3B | 14 | 15 | the VLM |
+| **Qwen3-VL-8B** | **10** ¹ | **11** ¹ | the VLM |
+| **Qwen3-VL-4B** | **16** | 17 | the VLM (+ detector at ROI) |
+| Qwen3-VL-2B | 18 | 18 | **the detector** |
+| Qwen3.5-9B | 10 | 11 | the VLM |
+| **Qwen3.5-4B** | 15 | **18** | the VLM (+ detector at ROI) |
+| Qwen3.5-2B | 18 | 18 | **the detector** |
 
-The 3B gains 1.5×, not the 2.3× its parameter count suggests: it keeps the 7B's
-~670M-parameter vision encoder, which does the same work per image.
+¹ From a rerun with one discarded warm-up run. The first sweep read **5** full-frame
+and **10** ROI: right after the server started, 6 and 8 cameras failed on detection
+latency (1.8 s and 1.2 s p99) while the VLM's answers at 8 were 100% fresh, and the
+ROI sweep lost its summary to a teardown hang (below). Both sweeps are in
+`results/e7d/E_q3vl_8b/`.
 
-## Memory: a smaller model does not free the card by itself
+**Cameras follow the vision encoder and the token count, not the parameter count.**
+The 3B gains 1.5× on a 2.3× smaller language model because it keeps the 7B's
+~670M-parameter vision encoder. The newer generations spend ~20% fewer tokens on
+the same pixels (32 px per token against 28), part of why their 4B models carry
+more cameras than Qwen2.5's 3B.
 
-vLLM sizes its memory from `--gpu-memory-utilization`, not from the model. At 0.80
-the 3B reserved the same budget as the 7B and spent the difference on KV cache.
-Under load it then grew past the budget, as in [E7b](e7b-live.md):
+### The detector ceiling at 18 cameras
 
-| Qwen2.5-VL-3B | peak GPU memory |
-|---|---|
-| first run (6 cameras) | 20.8 GiB of 24.0 |
-| at its full-frame limit (14 cameras) | 21.2 GiB |
-| at its ROI limit (15 cameras) | 23.2 GiB |
-| highest seen (18 cameras, ROI, overloaded) | **23.4 GiB** — closer to the ceiling than the 7B ever came |
+Every sweep that reached 18–20 cameras (both 2B models, and both 4B models with
+ROI crops) failed there on **detection** latency: DeepStream's p99 passed 1 s
+(1.3–3.5 s) whether or not the VLM kept up. At 19 cameras the 2B models' answers
+were still 89–99.7% fresh. With a batch-16 engine detecting every 6th frame, the CV
+side runs out of time beside the VLM at about 18 cameras on this card. More cameras
+from here need lighter detection or a second GPU, not a smaller VLM.
 
-No allocation failed. The pre-registered test of whether a small model *can* free
-the card — the best ≤ 4B model rerun at util 0.40 — follows the camera sweep.
+## Memory: the budget, not the model, decides
 
-## Predictions so far
+vLLM sizes itself from `--gpu-memory-utilization`, not from the model: a smaller
+model spends what it saves on KV cache. Under load every model then grew past its
+0.80 budget (19.2 GiB), as in [E7b](e7b-live.md). No allocation failed.
+
+| at util 0.80 | GPU memory at the supported limit | highest seen in any run |
+|---|---|---|
+| Qwen2.5-VL-7B (E7c) | 20.6–22.5 GiB | 22.7 GiB |
+| Qwen2.5-VL-3B | 21.2–23.2 GiB | 23.4 GiB |
+| Qwen3-VL-8B | 21.0–22.0 GiB | 22.2 GiB |
+| Qwen3-VL-4B | 22.2–23.0 GiB | 23.4 GiB |
+| Qwen3-VL-2B | 22.3–22.5 GiB | **23.5 GiB** |
+| Qwen3.5-9B / 4B / 2B | 20.8–22.0 GiB | 22.3 GiB |
+
+The pre-registered test: the ≤ 4B model with the most full-frame cameras, rerun at
+**util 0.40**. The rule picked Qwen3-VL-2B (18 cameras):
+
+| Qwen3-VL-2B | util 0.80 | **util 0.40** |
+|---|---|---|
+| cameras, full frame / ROI | 18 / 18 | **18 / 18** |
+| GPU memory at the limit | 22.5 / 22.3 GiB | **12.4 / 13.1 GiB** |
+| highest seen | 23.5 GiB | **13.4 GiB** |
+
+**Ten gigabytes freed, no camera lost.** Because the rule's pick gives unusable
+answers, the best usable small model, Qwen3-VL-4B, was run too, and **it did not
+start at 0.40**. One request at the registered 16,384-token context needs 2.25 GiB
+of KV cache, and 2.01 GiB was left after weights and profiling. Qwen3-VL-4B stores
+144 KB of KV per token, 2.6× Qwen2.5's. E7d's requests use ~1,100 tokens, so it was
+rerun with a 4,096-token context, a deviation from the registration:
+
+| Qwen3-VL-4B | util 0.80, 16,384 context | **util 0.40, 4,096 context** |
+|---|---|---|
+| cameras, full frame / ROI | 16 / 17 | **16 / 18** |
+| GPU memory at the limit | 22.2 / 23.0 GiB | **12.1 / 12.4 GiB** |
+| highest seen | 23.4 GiB | **12.7 GiB** |
+
+**The usable 4B model keeps its cameras in about half the card.** The ROI result
+is one camera higher at 0.40, within the ±1 of a single run. So a small model does
+free the card, but only once both the memory budget and the context length are sized
+to the requests actually sent. Left at the defaults, vLLM claims the memory anyway.
+
+## Predictions: which held
 
 | # | prediction (pre-registered) | measured | verdict |
 |---|---|---|---|
 | 12 | Qwen2.5-VL-3B carries 1.4–2.0× the 7B's cameras | 1.56× full, 1.5× ROI | **held** |
 | 13 | …and its full-frame lift is lower than the 7B's | +0.0 points [−10.8, +8.4] | **failed** — no measurable loss |
-| 14 | a ≤ 4B Qwen3-VL/Qwen3.5 model is not significantly below the 7B **and** carries ≥ 1.4× its cameras | recognition: Qwen3-VL-4B and Qwen3.5-4B not below | pending cameras |
+| 14 | a ≤ 4B Qwen3-VL / Qwen3.5 model is not significantly below the 7B **and** carries ≥ 1.4× its cameras | Qwen3-VL-4B: +4.7 [−7.0, +13.9], 1.78×; Qwen3.5-4B: +2.6 [−15.7, +11.7], 1.67× | **held** |
 | 15 | no model beats chance by > 10 points on phones or conversations | Qwen3-VL-8B +34 on conversations, +12 on phones | **failed** |
-| 16 | at util 0.40 the chosen model loses ≤ 1 camera | — | pending |
+| 16 | at util 0.40 the chosen model loses ≤ 1 camera | Qwen3-VL-2B (the rule's pick): 18 → 18; Qwen3-VL-4B: 16 → 16, with a 4,096 context | **held** — the 4B only after the context deviation |
+
+## Deviations from the registration
+
+- **Qwen3-VL-8B's cameras come from a rerun** with one discarded warm-up run (both
+  sweeps reported above).
+- **The memory test ran a second model**, because the rule's pick gives unusable
+  answers, and that model needed a **4,096-token context** to start at 0.40.
+- **Teardown bounded mid-experiment.** At 11 cameras one of eleven sources never
+  delivered end-of-stream, and the run waited 75 minutes for the watchdog. From
+  Qwen3.5-9B's ROI sweep on, teardown gives up after 60 s. That is after the
+  measurement window, so it cannot change a number, and the summary is now saved
+  after every camera count. It fired three more times.
 
 ## Caveats
 
@@ -145,10 +205,15 @@ the card — the best ≤ 4B model rerun at util 0.40 — follows the camera swe
   not independent. Only the Qwen3-VL-8B difference clears it.
 - **One prompt, one answer format, 16 tokens.** A model that reasons first is
   penalised by design: a deployment parsing letters would get nothing either.
-- **One 120 s run per camera count;** limits are ±1 camera. The 3B's first
-  full-frame run (6 cameras) failed on detection latency alone (1.3 s p99, the
-  first run after start-up), while 8–14 all passed; the limit is unaffected.
+- **One 120 s run per camera count;** limits are ±1 camera. The first run after a
+  server start can fail on detection latency alone (the 3B at 6 cameras, 1.3 s p99;
+  the 8B above); the 3B's limit is unaffected because 8–14 all passed.
 - **Memory carries over between runs.** vLLM keeps what it grows, so later runs
   start higher. Peaks are per run, not per camera count in isolation.
+- **Live frames are pre-extracted JPEGs** read from disk, as in E7b and E7c; a
+  deployment would crop and encode from the decoder's GPU buffers (Track B backlog).
 - **Not measured:** models outside the Qwen family, FP16 variants, thinking mode,
-  Qwen3.5-0.8B, Qwen3.6 (27B and 35B only).
+  Qwen3.5-0.8B, Qwen3.6 (27B and 35B only), MPS.
+
+**Next:** [Track B](recipe.md) takes the crop question further: an actor-centred
+crop at a reference margin and size, rather than one box around everyone.
