@@ -1,0 +1,29 @@
+gpu_lock: acquired by 'r1'
+### R1 start 22:50  out=results/r1
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+positives 488  negatives 465  skipped {'no_box': 11}  tracker-matched positives 275
+  A0        n= 953  prompt tokens mean 1042  ok 953/953
+  A1        n= 953  prompt tokens mean 1063  ok 953/953
+  A2-m1.2   n= 953  prompt tokens mean 359  ok 953/953
+  A2-m1.5   n= 953  prompt tokens mean 378  ok 953/953
+  A2-m2     n= 953  prompt tokens mean 405  ok 953/953
+  A2-m3     n= 953  prompt tokens mean 466  ok 953/953
+  A3-h112   n= 953  prompt tokens mean 346  ok 953/953
+  A3-h224   n= 953  prompt tokens mean 486  ok 953/953
+  A3-h448   n= 953  prompt tokens mean 958  ok 953/953
+  A4        n= 953  prompt tokens mean 529  ok 953/953
+  A5        n= 740  prompt tokens mean 390  ok 740/740
+### E_q3vl_4b DONE 23:25
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+positives 488  negatives 465  skipped {'no_box': 11}  tracker-matched positives 275
+  A0        n= 953  prompt tokens mean 1042  ok 953/953
+  A1        n= 953  prompt tokens mean 1063  ok 953/953
+  A2-m2     n= 953  prompt tokens mean 405  ok 953/953
+  A4        n= 953  prompt tokens mean 529  ok 953/953
+### E_q3vl_8b DONE 23:52
+stopped vlm-server
+### R1 COMPLETE 23:52

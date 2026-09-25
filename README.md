@@ -28,6 +28,7 @@ Status: **first results measured.** One model, one arm, one dataset — see
 | A detector gate beats the serving layer | YOLO → VLM cascade, both on one 3090, live: **5 → 8 cameras** (10 with ROI crops + TensorRT YOLO), 97–99% of activities kept |
 | The industry-shaped pipeline removes the detector bottleneck | DeepStream + NvDCF instead of a Python detector: **8 → 9 cameras** full-frame, 10 → 10 with ROI; the VLM becomes the only limit |
 | The VLM's generation beats its size | Qwen3-VL-8B: **2.3× the 7B's recognition and one more camera**; newer 4B models keep the 7B's recognition at **16–18 cameras vs 9**, in half the GPU memory ([E7d](docs/e7d-models.md)) |
+| An actor-centred crop beats the full frame at a third of the cost | Qwen3-VL-4B: **+53 vs +26 points** above chance at 39% of the tokens; leak-free, single-person actions **+12 to +16**; crops also name an activity for 86–100% of uninvolved people ([R1](docs/r1-actor-crops.md)) |
 | The 3090 is power-limited | 349.2 W of 350 W at 66 °C — capped, not thermally throttled |
 
 ![Accuracy retained against time to first token, per task](docs/img/headline.png)

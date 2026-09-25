@@ -51,7 +51,8 @@ Rules:
 
 | id | question | domain | status |
 |---|---|---|---|
-| R1 | the actor-crop reference level: margin, size, marked frame, crop + full frame | surveillance (MEVA) | pre-registered 2026-09-25 |
+| R1 | the actor-crop reference level: margin, size, marked frame, crop + full frame | surveillance (MEVA) | published 2026-09-25: 6 of 7 held; see docs/r1-actor-crops.md |
+| R1b | R1 without labels: proximity-group crops, gate-fired negatives, crop + context | surveillance (MEVA) | backlog |
 | R2 | does R1's recipe transfer where people are large and stations fixed? | manufacturing (HA4M / InHARD) | backlog |
 | R3 | a whole-scene domain, where the recipe should say "don't crop" | traffic | backlog |
 | R4 | a trained action detector on the same clips: accuracy and cost | MEVA | backlog |

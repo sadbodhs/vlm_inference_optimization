@@ -19,7 +19,7 @@ is a cost model the cascade experiments measured piece by piece:
 **cameras per GPU ≈ VLM capacity ÷ (events per second × tokens per event)**
 
 - the **gate** sets events per second — [E7](e7-cascade.md), [E7c](e7c-deepstream.md)
-- the **crop** sets tokens per event — R1, next
+- the **crop** sets tokens per event — [R1](r1-actor-crops.md): an actor crop costs a third of the full frame
 - the **model** sets capacity and accuracy — [E7d](e7d-models.md)
 
 ## What Track B has to show
@@ -29,7 +29,7 @@ a VLM, in domains with different properties:
 
 | id | question | domain |
 |---|---|---|
-| R1 | the actor-crop reference level: margin, size, a marked frame, crop + full frame | surveillance (MEVA) |
+| [R1](r1-actor-crops.md) | the actor-crop reference level: margin, size, a marked frame, crop + full frame | surveillance (MEVA) — **done** |
 | R2 | does it transfer where people are large and stations fixed? | manufacturing |
 | R3 | a whole-scene domain, where the recipe should say "don't crop" | traffic |
 | R4 | a trained action detector on the same clips | MEVA |

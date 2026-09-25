@@ -73,6 +73,7 @@ nav:
       - Qwen2.5 vs Qwen3: models.md
   - Track B · VLMs in real-time CV:
       - Overview: recipe.md
+      - R1 · The actor-crop reference level: r1-actor-crops.md
   - Corrections: corrections.md
   - Not measured: not-measured.md
   - Reproduce: reproduce.md

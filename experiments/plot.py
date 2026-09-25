@@ -959,6 +959,64 @@ def plot_e7d(out_frontier, out_groups, group_names):
     fig.savefig(out_groups, dpi=160)
     plt.close(fig)
 
+
+def plot_r1(out):
+    """R1: recognition against prompt tokens per arm, false alarms, and the
+    leak-free single-person comparison against the full frame."""
+    rep = json.loads(Path("results/r1/report.json").read_text())["models"]
+    one = json.loads(Path("results/r1/single_person.json").read_text())
+    fig, (a1, a2, a3) = plt.subplots(1, 3, figsize=(15.5, 4.6))
+    fams = [("A0", "full frame", SERIES[4]), ("A1", "marked frame", SERIES[3]),
+            ("A2", "crop, margin", SERIES[1]), ("A3", "crop, actor height", SERIES[2]),
+            ("A4", "crop + context", SERIES[0]), ("A5", "tracker crop", WARN)]
+    col = lambda a: next(c for k, _, c in fams if a.startswith(k))
+    for model, mk in (("E_q3vl_4b", "o"), ("E_q3vl_8b", "s")):
+        m = rep.get(model, {})
+        for arm, r in m.items():
+            if not isinstance(r, dict) or "lift" not in r:
+                continue
+            a1.plot([r["prompt_tokens"]], [100 * r["lift"]], mk, color=col(arm), ms=8,
+                    mfc=col(arm) if model == "E_q3vl_4b" else "none", mew=1.8)
+            off = {"A0": (-8, 6), "A1": (6, 4), "A2-m2": (6, -12), "A3-h112": (4, 7),
+                   "A3-h448": (6, 4), "A4": (6, 4), "A5": (6, 4)}
+            if model == "E_q3vl_4b" and arm in off:
+                a1.annotate(arm + (" (tracked subset)" if arm == "A5" else ""),
+                            (r["prompt_tokens"], 100 * r["lift"]), textcoords="offset points",
+                            xytext=off[arm], ha="right" if arm == "A0" else "left",
+                            fontsize=7.5, color=FG)
+    for k, lab, c in fams:
+        a1.plot([], [], "o", color=c, label=lab)
+    a1.plot([], [], "o", color=FG, label="Qwen3-VL-4B"); a1.plot([], [], "s", mfc="none", mec=FG, label="Qwen3-VL-8B")
+    a1.legend(fontsize=7, frameon=False, loc="lower center", ncol=2, bbox_to_anchor=(0.52, 0.08))
+    _style(a1, "Recognition against cost, all actions", "prompt tokens per request",
+           "recognition above chance (points)")
+    m4 = rep["E_q3vl_4b"]
+    arms = [a for a in m4 if isinstance(m4[a], dict) and "false_alarm_rate" in m4[a]]
+    y = list(range(len(arms)))[::-1]
+    a2.barh(y, [100 * m4[a]["false_alarm_rate"] for a in arms], color=[col(a) for a in arms],
+            height=0.62, edgecolor="white", linewidth=2)
+    a2.set_yticks(y); a2.set_yticklabels(arms, fontsize=8)
+    a2.set_xlim(0, 105)
+    for yy, a in zip(y, arms):
+        a2.text(100 * m4[a]["false_alarm_rate"] + 1, yy, f"{100*m4[a]['false_alarm_rate']:.0f}%",
+                va="center", fontsize=7.5, color=FG)
+    _style(a2, "False alarms: uninvolved people given a letter", "share of negatives (%)", "")
+    rows = [(k.split("|")[1], k.split("|")[0], v) for k, v in one.items()]
+    y = list(range(len(rows)))[::-1]
+    for yy, (arm, model, v) in zip(y, rows):
+        pt, lo, hi = (100 * x for x in v["vs_A0"])
+        c = col(arm)
+        a3.plot([lo, hi], [yy, yy], color=c, lw=2)
+        a3.plot([pt], [yy], "o" if model == "E_q3vl_4b" else "s", color=c, ms=8,
+                mfc=c if model == "E_q3vl_4b" else "none", mew=1.8)
+    a3.axvline(0, color=WARN, lw=1)
+    a3.set_yticks(y)
+    a3.set_yticklabels([f"{a} · {'4B' if m == 'E_q3vl_4b' else '8B'}" for a, m, _ in rows], fontsize=8)
+    _style(a3, "Single-person actions: gain over the full frame", "points, 95% paired interval", "")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+    plt.close(fig)
+
 def comparisons(root="results/sweeps", out_dir="docs/img"):
     """Build the cross-sweep figures the comparison pages need."""
     root, out_dir = Path(root), Path(out_dir)
@@ -1004,6 +1062,10 @@ def comparisons(root="results/sweeps", out_dir="docs/img"):
     if Path("results/e7c").exists():
         plot_e7c(out_dir / "e7c.png")
         print(f"  wrote {out_dir/'e7c.png'}")
+
+    if Path("results/r1/report.json").exists() and Path("results/r1/single_person.json").exists():
+        plot_r1(out_dir / "r1.png")
+        print(f"  wrote {out_dir/'r1.png'}")
 
     if Path("results/e7d/compare.json").exists():
         sys.path.insert(0, str(Path(__file__).parent))
