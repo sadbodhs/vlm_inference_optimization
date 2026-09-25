@@ -52,7 +52,7 @@ Rules:
 | id | question | domain | status |
 |---|---|---|---|
 | R1 | the actor-crop reference level: margin, size, marked frame, crop + full frame | surveillance (MEVA) | published 2026-09-25: 6 of 7 held; see docs/r1-actor-crops.md |
-| R1b | R1 without labels: proximity-group crops, gate-fired negatives, crop + context | surveillance (MEVA) | backlog |
+| R1b | R1 without labels: proximity-group crops on gate-fired windows | surveillance (MEVA) | pre-registered 2026-09-25 |
 | R2 | does R1's recipe transfer where people are large and stations fixed? | manufacturing (HA4M / InHARD) | backlog |
 | R3 | a whole-scene domain, where the recipe should say "don't crop" | traffic | backlog |
 | R4 | a trained action detector on the same clips: accuracy and cost | MEVA | backlog |
@@ -125,3 +125,64 @@ A prediction holds on its point estimate; every comparison is also reported with
 Live cameras (R1 is offline; the live run follows only for arms that keep
 recognition); more than two frames (R6); other model families (R5); crops made
 inside DeepStream (backlog 7).
+
+## R1b · Label-free crops on gate-fired windows — pre-registered 2026-09-25, before any measurement
+
+**Question.** R1 chose each crop from the annotated participants, which leaked who
+was involved, and scored crops of people the gate might never send. With the crop
+chosen by the tracker alone and scored the way the cascade runs (on the windows
+E7c's gate fires), does centring on people still beat the full frame, and at what
+cost in false alarms and tokens?
+
+### Facts, measured before registering (`experiments/r1b_windows.py`, no VLM)
+
+- `track-motion` fires on **1,531 of 3,600 windows** (42.5%).
+- People tracked on the two VLM frames are grouped by proximity (gap ≤ one body
+  height; a vehicle joins the nearest person within one body height). Fired windows
+  hold **2.2 groups** on average (p90 5). 237 hold none (vehicle-only motion).
+  44 groups beyond a cap of 7 per window are dropped.
+- Label-free group crops (2× the group box) contain an actor of **424 of the 492
+  person activities** that fall in a fired window (86%).
+
+### Arms
+
+All arms: the same two frames per fired window (offsets 18 and 48), 16 answer
+tokens, frames capped at 451,584 px, context frames at 112,896 px. Windows with no
+group fall back to the full frame in every arm.
+
+| arm | per fired window |
+|---|---|
+| F | one request: the full frame, E7's prompt |
+| M | one request: the full frame with every group's crop drawn in red; prompt about the boxed people |
+| GS | one request **per group**: the group's 2× crop (R1's A2) |
+| GSC | one request **per group**: the 2× crop plus the full frame at low resolution (R1's A4) |
+| GO | **one** request: every group's crop (two frames each) plus one low-resolution full frame; prompt asks what happens in any close-up |
+
+**Models:** Qwen3-VL-4B on every arm; Qwen3-VL-8B on F and GO.
+
+### Scoring
+
+As E7, per activity instance: recognised if its group letter is in the answer for
+any fired window it overlaps (for GS and GSC, the union of that window's group
+answers). Chance from shuffling window answers across fired windows (20 shuffles).
+**False alarms per hour** = letters absent from the window's labels, over the 2 h of
+video. **Tokens per fired window** = the sum over that window's requests. Arms are
+compared to F by a paired bootstrap over clips.
+
+### Predictions (Qwen3-VL-4B unless stated)
+
+- **R1b.1** The gain survives without labels: GSC's lift exceeds F's by **≥ 5
+  points**.
+- **R1b.2** Context tames the false alarms: GS's false alarms per hour are **≥ 2×** F's;
+  GSC's are **≤ 1.5×** F's.
+- **R1b.3** One request per window is the deployable form: GO's lift is **within 5
+  points** of GSC's, at **≤ 60%** of GSC's tokens per window and **≤** F's.
+- **R1b.4** Marking without the leak: M's lift is **≥** F's, its false alarms per hour
+  within **±25%** of F's, at **< 5%** more tokens.
+- **R1b.5** Qwen3-VL-8B gains **less** from GO over F than the 4B does (it starts
+  higher: +40 vs +26 in R1).
+
+### Not measured
+
+Live cameras; other gates; group-size or grouping-distance sweeps; answers
+attributed to a specific group (reported, not predicted).
