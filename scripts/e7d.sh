@@ -25,6 +25,9 @@ body = {"model": arm["model"], "max_tokens": 16, "temperature": 0,
         "messages": [{"role": "user", "content": [img, img, {"type": "text", "text":
             "Which of these is happening? A. A person walks. B. A car turns. "
             "Answer with letters separated by commas, or N if none apply."}]}],
+        # the experiments cap each frame at 451,584 px client-side; so does the check,
+        # or two raw 1080p frames (~4,100 tokens) overflow a 4,096-token context
+        "mm_processor_kwargs": {"max_pixels": 451584},
         **(arm.get("extra_body") or {})}
 r = json.load(urllib.request.urlopen(urllib.request.Request(
     "http://127.0.0.1:8000/v1/chat/completions", json.dumps(body).encode(),
