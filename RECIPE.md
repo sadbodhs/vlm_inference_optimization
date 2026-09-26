@@ -53,7 +53,7 @@ Rules:
 |---|---|---|---|
 | R1 | the actor-crop reference level: margin, size, marked frame, crop + full frame | surveillance (MEVA) | published 2026-09-25: 6 of 7 held; see docs/r1-actor-crops.md |
 | R1b | R1 without labels: proximity-group crops on gate-fired windows | surveillance (MEVA) | published 2026-09-25: 1 of 5 held; see docs/r1b-label-free.md |
-| R2 | does R1's recipe transfer where people are large and stations fixed? | manufacturing (HA4M / InHARD) | backlog |
+| R2 | do hand crops beat the full frame where the answer is the part in the hand? | manufacturing (HA4M) | pre-registered 2026-09-25 |
 | R3 | a whole-scene domain, where the recipe should say "don't crop" | traffic | backlog |
 | R4 | a trained action detector on the same clips: accuracy and cost | MEVA | backlog |
 | R5 | AVA subset and a second model family | AVA | backlog |
@@ -186,3 +186,79 @@ compared to F by a paired bootstrap over clips.
 
 Live cameras; other gates; group-size or grouping-distance sweeps; answers
 attributed to a specific group (reported, not predicted).
+
+## R2 · Manufacturing: crops where people are large — pre-registered 2026-09-25, before any measurement
+
+**Question.** R1 and R1b tested crops on surveillance video, where people are small
+and most actions are body-scale. Theory (Context-Aware RCNN, ViCrop) says crops pay
+when the answer lies in **detail the full frame shrinks away**. HA4M is that case:
+a worker at a fixed station assembles a planetary gear set in 12 steps, and most
+steps differ only by **which small white part is in the hand**. Do label-free hand
+crops beat the full frame here?
+
+### Data: HA4M (CC BY 4.0; Cicirelli et al., Scientific Data 2022)
+
+- 217 recordings, 41 workers, one fixed Azure Kinect in front of the bench,
+  2048 × 1536 colour frames, every frame labelled with its step (0 = idle, 1–12).
+  Only the frames used were downloaded (15.6 GB of a 4.6 TB share,
+  `tools/fetch_ha4m.py`); **the data is deleted from the rig when R2 is done.**
+- **Two camera setups**, read from the image (nearest reference frame): a lab where
+  parts sit in clear boxes (22 workers) and a white room where they lie loose and
+  the worker stands further away (19 workers). One worker per setup is held out
+  (IDU001, IDU023): their first recording supplies the **reference sheet**, and none
+  of their samples are scored.
+- **Samples:** two frames 1 s apart around the midpoint of every step segment, and
+  of the final idle stretch where it is ≥ 31 frames. **2,570 scored** (1,133 lab,
+  1,437 white room).
+
+### Facts, measured before registering (`experiments/r2_prep.py`, no VLM)
+
+- YOLOv8s-pose finds the worker on all 5,844 sampled frames. A hand crop falls back
+  to the full frame for 31 samples (Kinect) and 22 (YOLO).
+- Hand crops cover **~2.8% of the frame** at native resolution, so parts appear
+  **2.6× larger** than in the full frame (which is shrunk to 38%). The Kinect and
+  YOLO crops agree at a median IoU of 0.78.
+
+### Arms
+
+Every request carries the setup's **reference sheet** first (12 numbered pictures,
+one per step, from the held-out worker), then two frames one second apart, unless
+marked "names only". Frames are capped at 451,584 px, context frames at 112,896 px.
+The model answers with a step number (1–12) or 0.
+
+| arm | what the VLM sees after the sheet |
+|---|---|
+| F | the full frame |
+| B | a fixed bench ROI per setup (5th–95th percentile box of all Kinect wrist positions, ×1.2), native |
+| HK | a hand crop from the **Kinect's body tracking**: one shoulder width square around each wrist, union over hands and frames, native |
+| HY | the same rule from **YOLOv8s-pose** (RGB only) |
+| HKC | HK plus the full frame at low resolution |
+| F-n, HK-n | F and HK with the step names only, no sheet |
+
+**Models:** Qwen3-VL-8B on every arm; Qwen3-VL-4B on F, HK and HKC.
+
+### Scoring
+
+Accuracy is predicting the step exactly. Chance comes from shuffling each arm's
+answers across its samples (20 shuffles), and lift is accuracy minus chance. Arms
+are compared by a **paired bootstrap over workers** (39 scored). Breakdowns: part
+steps (1–8, 10, 11) against the whole-assembly steps (9, 12); lab against white
+room.
+
+### Predictions (Qwen3-VL-8B unless stated)
+
+- **R2.1** Hand crops beat the full frame: HK's lift ≥ F's **+ 5 points**.
+- **R2.2** An RGB-only hand finder suffices: HY within **5 points** of HK.
+- **R2.3** HK's gain over F is **larger on part steps** (1–8, 10, 11) than on 9 and 12.
+- **R2.4** HK's gain over F is **larger in the white room** (smaller parts in frame)
+  than in the lab.
+- **R2.5** A fixed bench ROI gains **less** than hand crops: B − F < HK − F.
+- **R2.6** Context does not hurt: **HKC ≥ HK**.
+- **R2.7** The reference sheet matters: F ≥ F-n **+ 10** and HK ≥ HK-n **+ 10**.
+- **R2.8** HK costs **≤ 70%** of F's prompt tokens (the sheet's cost is shared).
+- **R2.9** The smaller model gains more: Qwen3-VL-4B's HK − F ≥ the 8B's.
+
+### Not measured
+
+Crops inside DeepStream; live cameras; frames beyond two; a trained action
+recogniser on HA4M (R4); depth.

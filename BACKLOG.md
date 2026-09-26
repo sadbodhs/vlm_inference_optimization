@@ -13,7 +13,7 @@ published / dropped**. Pre-registrations live in `PLAN.md` (Track A) or
 | 5 | per-actor scoring, prompt adapted to crops | E7 scoring was per window | fair test of person-level actions | code only | B · R1 | published (R1) |
 | 6 | group crops: several images in one request vs separate requests | user, 2026-09-24 | one request is cheaper per crop under load | small | B · R1 | idea |
 | 7 | crop + JPEG encode inside DeepStream (GPU) instead of disk JPEGs | live runs read pre-extracted JPEGs | realistic cost; cameras may drop slightly | ~1 day eng. | B | idea |
-| 8 | manufacturing domain (HA4M or InHARD) | user, 2026-09-24 | cropping helps more when people are large in frame | data + ~1 GPU day | B · R2 | idea — licences to check |
+| 8 | manufacturing domain (HA4M or InHARD) | user, 2026-09-24 | cropping helps more when people are large in frame | data + ~1 GPU day | B · R2 | pre-registered (HA4M; delete data after) |
 | 9 | whole-scene domain (traffic) | recipe must say when not to crop | full frame wins; the gate still pays | data + ~1 GPU day | B · R3 | idea |
 | 10 | trained action detector baseline | reviewers will ask | trained wins on closed classes, VLM on open ones | ~1 week | B · R4 | idea |
 | 11 | AVA subset + second model family (InternVL / Gemma) | generality | ordering of crop policies holds across families | ~1 week | B · R5 | idea |
