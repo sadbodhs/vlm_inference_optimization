@@ -71,20 +71,32 @@ def hand_box(parts):
     return [int(x1), int(y1), int(x2), int(y2)] if x2 - x1 > 32 and y2 - y1 > 32 else None
 
 
-def setup_of(rec, f):
+def thumb(rec, f):
     from PIL import Image
-    im = Image.open(ROOT / rec / "color" / f"{f:06d}.png").convert("L").crop((0, 0, 400, 300))
-    return 2 if st.mean(im.getdata()) > 170 else 1
+    return list(Image.open(ROOT / rec / "color" / f"{f:06d}.png").convert("L").resize((64, 48)).getdata())
+
+
+def setup_of(rec, f, refs):
+    """Nearest of two reference thumbnails (the lab, the white room) by mean absolute
+    difference over the whole frame. A brightness threshold on one corner put a lab
+    subject in the white room: the lab's curtains are bright too."""
+    t = thumb(rec, f)
+    d = {k: st.mean(abs(a - b) for a, b in zip(t, r)) for k, r in refs.items()}
+    return min(d, key=d.get)
 
 
 def main() -> None:
     from PIL import Image, ImageDraw, ImageFont
     man = [s for s in json.loads((ROOT / "manifest.json").read_text()) if s["complete"]]
     pose = json.loads((ROOT / "pose.json").read_text())
-    setup = {}
-    for s in man:
-        if s["subject"] not in setup:
-            setup[s["subject"]] = setup_of(s["rec"], s["frames"][0])
+    # anchors: the first subject is in the lab (setup 1), the last in the white room (2)
+    subs = sorted({s["subject"] for s in man})
+    first = {sub: next(s for s in man if s["subject"] == sub) for sub in subs}
+    refs = {1: thumb(first[subs[0]]["rec"], first[subs[0]]["frames"][0]),
+            2: thumb(first[subs[-1]]["rec"], first[subs[-1]]["frames"][0])}
+    setup = {sub: setup_of(first[sub]["rec"], first[sub]["frames"][0], refs) for sub in subs}
+    print("setup 1:", [x for x in subs if setup[x] == 1])
+    print("setup 2:", [x for x in subs if setup[x] == 2])
     by_setup = collections.defaultdict(list)
     for sub in sorted(setup):
         by_setup[setup[sub]].append(sub)
