@@ -42,6 +42,7 @@ trades accuracy, so the deliverable is a frontier, not a ranking.
 | The industry-shaped pipeline removes the detector bottleneck | DeepStream + NvDCF instead of a Python detector: **8 → 9 cameras** full-frame, 10 → 10 with ROI; the VLM becomes the only limit |
 | The VLM's generation beats its size | Qwen3-VL-8B: **2.3× the 7B's recognition and one more camera**; newer 4B models keep the 7B's recognition at **16–18 cameras vs 9**, in half the GPU memory ([E7d](e7d-models.md)) |
 | Crops help only when you already know whom to crop | ideal actor crops double Qwen3-VL-4B's recognition at a third of the tokens ([R1](r1-actor-crops.md)); chosen by the tracker, the gain shrinks to **+9 points (not significant) at ~2× the false alarms**, and the 8B gets worse ([R1b](r1b-label-free.md)) |
+| A zero-shot VLM cannot read fine assembly steps, cropped or not | on 12 gear-assembly steps, Qwen3-VL-8B is right 14.5% of the time (chance 5.8%); hand crops lower that by **7 points** ([R2](r2-manufacturing.md)) |
 
 ![Accuracy retained against time to first token, per task](img/headline.png){ width="680" }
 

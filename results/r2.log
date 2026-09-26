@@ -1,0 +1,22 @@
+gpu_lock: acquired by 'r2'
+### R2 start 21:07  out=results/r2
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+  F     n= 2570  prompt tokens mean 1543  ok 2570/2570
+  B     n= 2570  prompt tokens mean 997  ok 2570/2570
+  HK    n= 2570  prompt tokens mean 908  ok 2570/2570
+  HY    n= 2570  prompt tokens mean 950  ok 2570/2570
+  HKC   n= 2570  prompt tokens mean 1025  ok 2570/2570
+  F-n   n= 2570  prompt tokens mean 1080  ok 2570/2570
+  HK-n  n= 2570  prompt tokens mean 445  ok 2570/2570
+### E_q3vl_8b DONE 23:09
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+  F     n= 2570  prompt tokens mean 1543  ok 2570/2570
+  HK    n= 2570  prompt tokens mean 908  ok 2570/2570
+  HKC   n= 2570  prompt tokens mean 1025  ok 2570/2570
+### E_q3vl_4b DONE 00:01
+stopped vlm-server
+### R2 COMPLETE 00:01

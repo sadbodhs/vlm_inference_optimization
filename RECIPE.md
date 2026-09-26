@@ -53,7 +53,7 @@ Rules:
 |---|---|---|---|
 | R1 | the actor-crop reference level: margin, size, marked frame, crop + full frame | surveillance (MEVA) | published 2026-09-25: 6 of 7 held; see docs/r1-actor-crops.md |
 | R1b | R1 without labels: proximity-group crops on gate-fired windows | surveillance (MEVA) | published 2026-09-25: 1 of 5 held; see docs/r1b-label-free.md |
-| R2 | do hand crops beat the full frame where the answer is the part in the hand? | manufacturing (HA4M) | pre-registered 2026-09-25 |
+| R2 | do hand crops beat the full frame where the answer is the part in the hand? | manufacturing (HA4M) | published 2026-09-26: 3 of 9 held; zero-shot floor; see docs/r2-manufacturing.md |
 | R3 | a whole-scene domain, where the recipe should say "don't crop" | traffic | backlog |
 | R4 | a trained action detector on the same clips: accuracy and cost | MEVA | backlog |
 | R5 | AVA subset and a second model family | AVA | backlog |

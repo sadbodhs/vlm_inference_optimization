@@ -1056,6 +1056,59 @@ def plot_r1b(out):
     fig.savefig(out, dpi=160)
     plt.close(fig)
 
+
+def plot_r2(out):
+    """R2: lift vs the full frame per arm, per-step accuracy, and what the model answers."""
+    import collections, re
+    rep = json.loads(Path("results/r2/report.json").read_text())["models"]
+    fig, (a1, a2, a3) = plt.subplots(1, 3, figsize=(15.5, 4.4), gridspec_kw={"width_ratios": [1.1, 1.5, 1.1]})
+    lab = {"F": "full frame", "B": "bench area", "HK": "hands (Kinect)", "HY": "hands (YOLO)",
+           "HKC": "hands + context", "F-n": "full, names only", "HK-n": "hands, names only"}
+    col = {"F": SERIES[4], "B": SERIES[3], "HK": SERIES[1], "HY": SERIES[2], "HKC": SERIES[0],
+           "F-n": WARN, "HK-n": WARN}
+    rows = [(m, a) for m in ("E_q3vl_8b", "E_q3vl_4b") for a in lab if a in rep.get(m, {})]
+    y = list(range(len(rows)))[::-1]
+    for yy, (m, a) in zip(y, rows):
+        r = rep[m][a]
+        mk = "o" if m == "E_q3vl_8b" else "s"
+        c = col[a]
+        if r["vs_F"]:
+            pt, lo, hi = (100 * v for v in r["vs_F"])
+            a1.plot([lo, hi], [yy, yy], color=c, lw=2)
+            a1.plot([pt], [yy], mk, color=c, ms=8, mfc=c if m == "E_q3vl_8b" else "none", mew=1.8)
+        else:
+            a1.plot([0], [yy], mk, color=c, ms=8, mfc=c if m == "E_q3vl_8b" else "none", mew=1.8)
+    a1.axvline(0, color=WARN, lw=1)
+    a1.set_yticks(y)
+    a1.set_yticklabels([f"{lab[a]} · {'8B' if m == 'E_q3vl_8b' else '4B'}" for m, a in rows], fontsize=8)
+    _style(a1, "Step recognition vs the full frame", "points above chance, 95% paired interval", "")
+    m8 = rep["E_q3vl_8b"]
+    steps = list(range(13))
+    w = 0.38
+    for k, (a, c) in enumerate((("F", SERIES[4]), ("HK", SERIES[1]))):
+        vals = [100 * m8[a]["per_step"][str(st_)] for st_ in steps]
+        a2.bar([x + (k - 0.5) * w for x in steps], vals, width=w, color=c, label=lab[a],
+               edgecolor="white", linewidth=1.5)
+    a2.set_xticks(steps); a2.set_xticklabels([str(x) for x in steps], fontsize=8)
+    a2.legend(fontsize=7.5, frameon=False, loc="upper left")
+    _style(a2, "Accuracy per step, Qwen3-VL-8B", "step (0 = idle)", "correct (%)")
+    for k, a in enumerate(("F", "HK", "F-n")):
+        ans = []
+        for line in Path(f"results/r2/{a}-E_q3vl_8b/outputs.jsonl").read_text().splitlines():
+            r = json.loads(line)
+            mm = re.search(r"\b(1[0-2]|[0-9])\b", r["text"] or "")
+            ans.append(int(mm.group(1)) if mm else -1)
+        cnt = collections.Counter(ans)
+        vals = [100 * cnt.get(st_, 0) / len(ans) for st_ in steps]
+        a3.bar([x + (k - 1) * 0.28 for x in steps], vals, width=0.28, color=col[a],
+               label=lab[a], edgecolor="white", linewidth=1)
+    a3.set_xticks(steps); a3.set_xticklabels([str(x) for x in steps], fontsize=8)
+    a3.legend(fontsize=7.5, frameon=False, loc="upper center")
+    _style(a3, "What Qwen3-VL-8B answers", "answered step", "share of answers (%)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+    plt.close(fig)
+
 def comparisons(root="results/sweeps", out_dir="docs/img"):
     """Build the cross-sweep figures the comparison pages need."""
     root, out_dir = Path(root), Path(out_dir)
@@ -1109,6 +1162,10 @@ def comparisons(root="results/sweeps", out_dir="docs/img"):
     if Path("results/r1b/report.json").exists():
         plot_r1b(out_dir / "r1b.png")
         print(f"  wrote {out_dir/'r1b.png'}")
+
+    if Path("results/r2/report.json").exists():
+        plot_r2(out_dir / "r2.png")
+        print(f"  wrote {out_dir/'r2.png'}")
 
     if Path("results/e7d/compare.json").exists():
         sys.path.insert(0, str(Path(__file__).parent))

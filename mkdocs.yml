@@ -75,6 +75,7 @@ nav:
       - Overview: recipe.md
       - R1 · The actor-crop reference level: r1-actor-crops.md
       - R1b · Label-free crops: r1b-label-free.md
+      - R2 · Manufacturing (HA4M): r2-manufacturing.md
   - Corrections: corrections.md
   - Not measured: not-measured.md
   - Reproduce: reproduce.md
