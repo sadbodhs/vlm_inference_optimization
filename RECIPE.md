@@ -54,6 +54,7 @@ Rules:
 | R1 | the actor-crop reference level: margin, size, marked frame, crop + full frame | surveillance (MEVA) | published 2026-09-25: 6 of 7 held; see docs/r1-actor-crops.md |
 | R1b | R1 without labels: proximity-group crops on gate-fired windows | surveillance (MEVA) | published 2026-09-25: 1 of 5 held; see docs/r1b-label-free.md |
 | R2 | do hand crops beat the full frame where the answer is the part in the hand? | manufacturing (HA4M) | published 2026-09-26: 3 of 9 held; zero-shot floor; see docs/r2-manufacturing.md |
+| R2b | does the crop hold more information for a trained head? (frozen-encoder probe) | manufacturing (HA4M) | pre-registered 2026-09-27 |
 | R3 | a whole-scene domain, where the recipe should say "don't crop" | traffic | backlog |
 | R4 | a trained action detector on the same clips: accuracy and cost | MEVA | backlog |
 | R5 | AVA subset and a second model family | AVA | backlog |
@@ -262,3 +263,53 @@ room.
 
 Crops inside DeepStream; live cameras; frames beyond two; a trained action
 recogniser on HA4M (R4); depth.
+
+## R2b · Does the crop hold more information for a trained head? — pre-registered 2026-09-27, before any measurement
+
+**Question.** In R2, zero-shot Qwen3-VL-8B did worse with hand crops, but it was at
+the floor (14.5% on 12 steps) and could not name the parts at any resolution.
+That leaves two explanations. **(A)** The crop holds more usable detail that a model
+without knowledge of the parts cannot use; if so, training on the domain pays and
+crops help. **(B)** The crop loses what identifies the step (where the hand goes,
+how far the assembly has got); if so, crops are the wrong tool even for a trained
+model. A probe on the frozen encoder separates the two cheaply, before any
+fine-tuning is spent.
+
+### Design
+
+- **Data:** HA4M, a 20-worker subset re-downloaded for this probe (10 lab workers,
+  IDU001–010; 10 white-room workers, IDU023–032), with the same sampling as R2: two
+  frames 1 s apart around each step's midpoint. **Deleted again when R2b is done.**
+- **Encoder:** Qwen3-VL-8B's vision tower, frozen, loaded alone. Each image's final
+  merged tokens are mean-pooled into one vector, and the two frames are averaged.
+- **Views**, all from the Kinect's body tracking (label-free), images preprocessed as
+  the VLM would (frames capped at 451,584 px):
+  - **full**: the full frame
+  - **tight**: R2's hand crop, a square of one shoulder width around each wrist
+  - **wide**: the same at **three** shoulder widths (hands, upper body, workspace)
+  - **bench**: the per-setup station ROI, as in R2
+  - **full + wide**: the two vectors concatenated
+- **Head:** multinomial logistic regression on standardised features, with L2 strength
+  chosen by an inner split of the training workers. **5-fold cross-validation grouped
+  by worker**, so every prediction is for a worker the head never saw. Metrics:
+  accuracy and macro-F1 on steps 0–12. Views are compared by a paired bootstrap over
+  workers.
+
+### Predictions
+
+- **R2b.1** The encoder carries the step: the full-frame probe reaches **≥ 40%**
+  accuracy (zero-shot, R2: 14.5%).
+- **R2b.2** Crops help a trained head: **wide ≥ full + 3 points**.
+- **R2b.3** Context matters: **wide ≥ tight**.
+- **R2b.4** Detail and context are complementary: **full + wide ≥ the better single
+  view + 2 points**.
+- **R2b.5** Wide's gain over full is **larger on part steps** (1–8, 10, 11) than on
+  9 and 12.
+
+**Decision rule, stated in advance:** fine-tune a sub-1B VLM on crops only if R2b.2
+or R2b.4 holds with a 95% interval above zero. Otherwise the crop thread closes.
+
+### Not measured
+
+Fine-tuning; temporal models; the YOLO hand finder (R2: within 0.7 points of the
+Kinect's); other encoders.
