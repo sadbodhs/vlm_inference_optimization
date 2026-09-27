@@ -32,6 +32,7 @@ a VLM, in domains with different properties:
 | [R1](r1-actor-crops.md) | the actor-crop reference level: margin, size, a marked frame, crop + full frame | surveillance (MEVA) — **done** |
 | [R1b](r1b-label-free.md) | R1 with crops chosen by the tracker, scored on gate-fired windows | surveillance (MEVA) — **done** |
 | [R2](r2-manufacturing.md) | hand crops where the answer is the part in the hand | manufacturing (HA4M) — **done** |
+| [R2b](r2b-probe.md) | does the crop hold more information for a trained head? | manufacturing (HA4M) — **done** |
 | R3 | a whole-scene domain, where the recipe should say "don't crop" | traffic |
 | R4 | a trained action detector on the same clips | MEVA |
 | R5 | AVA and a second model family | AVA |

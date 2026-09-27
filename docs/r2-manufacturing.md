@@ -31,6 +31,12 @@ label-free hand crops beat the full frame there?
 never got off the floor. That calls for a model trained on the task. A trained
 action recogniser (R4) or a fine-tuned VLM is the next test, not a different crop.
 
+!!! note "Followed up by R2b"
+    A small classifier trained on the same model's frozen vision encoder names the
+    step for **76%** of held-out workers, and **81%** with the full frame and a wide
+    crop together ([R2b](r2b-probe.md)). The information was in the image; the
+    zero-shot model could not name it.
+
 Pre-registered in [RECIPE.md](https://github.com/sadbodhs/vlm_inference_optimization/blob/main/RECIPE.md)
 before any request. Part of [Track B](recipe.md).
 

@@ -1109,6 +1109,51 @@ def plot_r2(out):
     fig.savefig(out, dpi=160)
     plt.close(fig)
 
+
+def plot_r2b(out):
+    """R2b: a trained head on the frozen encoder -- accuracy per view, by setup, per step."""
+    r = json.loads(Path("results/r2b/report.json").read_text())
+    V = ["full", "tight", "wide", "bench", "full+wide"]
+    lab = {"full": "full frame", "tight": "tight hands", "wide": "wide hands",
+           "bench": "bench area", "full+wide": "full + wide"}
+    col = {"full": SERIES[4], "tight": SERIES[1], "wide": SERIES[2], "bench": SERIES[3], "full+wide": SERIES[0]}
+    fig, (a1, a2, a3) = plt.subplots(1, 3, figsize=(15.5, 4.4), gridspec_kw={"width_ratios": [1.1, 1.1, 1.6]})
+    x = list(range(len(V)))
+    acc = [100 * r["views"][v]["accuracy"] for v in V]
+    a1.bar(x, acc, color=[col[v] for v in V], width=0.62, edgecolor="white", linewidth=2)
+    for i, v in enumerate(V):
+        vs = r["views"][v]["vs_full"]
+        a1.text(i, acc[i] + 1.2, f"{acc[i]:.1f}" + ("" if not vs else f"\n{100*vs[0]:+.1f}"),
+                ha="center", fontsize=7.5, color=FG)
+    a1.axhline(14.5, color=WARN, lw=1, ls=":")
+    a1.text(-0.45, 17.5, "zero-shot VLM (R2): 14.5%", ha="left", fontsize=7, color=FG,
+            bbox=dict(facecolor="white", edgecolor="none", pad=1.5))
+    a1.axhline(100 * r["majority_class"], color=WARN, lw=1, ls="--")
+    a1.set_xticks(x); a1.set_xticklabels([lab[v] for v in V], fontsize=7.5, rotation=15)
+    a1.set_ylim(0, 100)
+    _style(a1, "Trained head on the frozen encoder", "", "accuracy on held-out workers (%)")
+    w = 0.38
+    for k, (setup, name) in enumerate((("1", "lab"), ("2", "white room"))):
+        vals = [100 * r["views"][v]["per_setup"][setup] for v in V]
+        a2.bar([i + (k - 0.5) * w for i in x], vals, width=w, color=[col[v] for v in V],
+               alpha=1.0 if k == 0 else 0.5, edgecolor="white", linewidth=1.5, label=name)
+    a2.set_xticks(x); a2.set_xticklabels([lab[v] for v in V], fontsize=7.5, rotation=15)
+    a2.set_ylim(0, 100)
+    a2.plot([], [], "s", color=FG, label="lab (solid)"); a2.plot([], [], "s", color=FG, alpha=0.4, label="white room (light)")
+    h, l = a2.get_legend_handles_labels()
+    a2.legend(h[-2:], l[-2:], fontsize=7.5, frameon=False, loc="upper center", ncol=2)
+    _style(a2, "By camera setup", "", "accuracy (%)")
+    steps = list(range(13))
+    for v, mk in (("full", "o"), ("wide", "^"), ("full+wide", "s")):
+        a3.plot(steps, [100 * r["per_step"][v][str(s_)] for s_ in steps], mk + "-", color=col[v], lw=1.8, ms=6,
+                label=lab[v])
+    a3.set_xticks(steps); a3.set_ylim(40, 100)
+    a3.legend(fontsize=7.5, frameon=False, loc="lower left")
+    _style(a3, "Per step", "step (0 = idle)", "accuracy (%)")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+    plt.close(fig)
+
 def comparisons(root="results/sweeps", out_dir="docs/img"):
     """Build the cross-sweep figures the comparison pages need."""
     root, out_dir = Path(root), Path(out_dir)
@@ -1166,6 +1211,10 @@ def comparisons(root="results/sweeps", out_dir="docs/img"):
     if Path("results/r2/report.json").exists():
         plot_r2(out_dir / "r2.png")
         print(f"  wrote {out_dir/'r2.png'}")
+
+    if Path("results/r2b/report.json").exists():
+        plot_r2b(out_dir / "r2b.png")
+        print(f"  wrote {out_dir/'r2b.png'}")
 
     if Path("results/e7d/compare.json").exists():
         sys.path.insert(0, str(Path(__file__).parent))

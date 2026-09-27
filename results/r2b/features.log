@@ -1,0 +1,47 @@
+gpu_lock: acquired by 'r2b'
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+vision tower loaded: 576M params, 0 unexpected keys
+  full: 0/1561
+  full: 160/1561
+  full: 320/1561
+  full: 480/1561
+  full: 640/1561
+  full: 800/1561
+  full: 960/1561
+  full: 1120/1561
+  full: 1280/1561
+  full: 1440/1561
+  full: 1561 x 4096
+  tight: 0/1561
+  tight: 160/1561
+  tight: 320/1561
+  tight: 480/1561
+  tight: 640/1561
+  tight: 800/1561
+  tight: 960/1561
+  tight: 1120/1561
+  tight: 1280/1561
+  tight: 1440/1561
+  tight: 1561 x 4096
+  wide: 0/1561
+  wide: 160/1561
+  wide: 320/1561
+  wide: 480/1561
+  wide: 640/1561
+  wide: 800/1561
+  wide: 960/1561
+  wide: 1120/1561
+  wide: 1280/1561
+  wide: 1440/1561
+  wide: 1561 x 4096
+  bench: 0/1561
+  bench: 160/1561
+  bench: 320/1561
+  bench: 480/1561
+  bench: 640/1561
+  bench: 800/1561
+  bench: 960/1561
+  bench: 1120/1561
+  bench: 1280/1561
+  bench: 1440/1561
+  bench: 1561 x 4096
