@@ -9,8 +9,13 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 MODE="${1:?prep|features|probe}"; shift || true
 case "$MODE" in
-  prep|probe)
+  prep)
     docker/run_harness.sh python3 experiments/r2b_probe.py "$MODE" "$@" ;;
+  probe)   # needs torch (the harness image has none); CPU is plenty for a linear head
+    docker run --rm --ipc=host -v "$PWD:/work" -w /work \
+      -e PYTHONPATH=/work/experiments:/work -e PYTHONUNBUFFERED=1 \
+      --entrypoint python3 "${VLLM_IMAGE:-vllm/vllm-openai:v0.29.0}" \
+      experiments/r2b_probe.py probe "$@" ;;
   features)
     docker run --rm --gpus all --ipc=host --name "r2b-$$" \
       -v "$PWD:/work" -w /work -v "$HOME/.cache/huggingface:/root/.cache/huggingface" \
