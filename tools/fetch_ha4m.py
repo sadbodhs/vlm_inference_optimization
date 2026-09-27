@@ -104,9 +104,14 @@ def main() -> None:
     ap.add_argument("--out", default="data/ha4m")
     ap.add_argument("--limit", type=int, default=0, help="recordings, for a trial")
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--subjects", default="",
+                    help="comma-separated subject ids (e.g. IDU001,IDU023), fetched in this order")
     args = ap.parse_args()
     out = Path(args.out)
     recs = sorted(n for n, _ in dav("/") if re.fullmatch(r"IDU\d+V\d+", n))
+    if args.subjects:
+        order = args.subjects.split(",")
+        recs = sorted((r for r in recs if r[:6] in order), key=lambda r: (order.index(r[:6]), r))
     if args.limit:
         recs = recs[:args.limit]
     print(f"{len(recs)} recordings", flush=True)
