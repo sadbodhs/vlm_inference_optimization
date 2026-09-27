@@ -62,6 +62,14 @@ before any request. Part of [Track B](recipe.md).
 A single mid-step frame often does not show the part (step 1 is mostly an arm).
 That is one limit of the test. HA4M frames © Cicirelli et al., CC BY 4.0.*
 
+![HA4M: full frame, wide and tight hand crops, both camera setups](img/r2-gallery.jpg)
+
+*What the model is shown, for steps 3, 6 and 10 in both rooms. Left to right: the
+full frame, a wide hand crop (three shoulder widths, not used in R2; R2b tests it)
+and R2's tight hand crop. In the full frame the parts are a few pixels wide. The
+tight crop is clear when the part is large (the cover) and shows only an arm when
+the part is inside the hand (step 3, lab). HA4M © Cicirelli et al., CC BY 4.0.*
+
 ## Results
 
 | Qwen3-VL-8B | accuracy | chance | lift | vs full frame [95%] | tokens |

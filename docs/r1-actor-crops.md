@@ -82,6 +82,15 @@ before any request. Part of [Track B](recipe.md).
 ¹ Scored on the 275 positives the tracker matched. On those samples it is within
 +0.2 points [−2.8, +3.5] of the annotated-box crop.
 
+![One MEVA moment, three ways of choosing the crop](img/crop-strategies.jpg)
+
+*One moment, a conversation between the two people in the blue box, and the three
+ways the experiments chose what to show the VLM. **Orange**, E7: one box around
+every detected person, here nearly the whole frame. **Blue**, R1: the activity's
+labelled participants at 2×, the ideal crop, which needs the answer key.
+**Green**, R1b: proximity groups from the tracker, with no labels (see
+[R1b](r1b-label-free.md)). MEVA © Kitware Inc. and IARPA, CC BY 4.0.*
+
 ## Two things the headline hides
 
 ### The box leaks who is involved

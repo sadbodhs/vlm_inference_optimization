@@ -54,6 +54,16 @@ before any request. Part of [Track B](recipe.md).
   comes from shuffling window answers across fired windows. A false alarm is any
   letter absent from the window's labels.
 
+![One MEVA moment, three ways of choosing the crop](img/crop-strategies.jpg)
+
+*The same moment under the three strategies. **Blue** is R1's labelled crop around
+the two people talking; **green** are this experiment's label-free groups. In this
+example, the grouping rule ("people within one body height join") fails under
+perspective. The man in the foreground is tall in the image, so one of his body
+heights reaches people far behind him, and his group covers most of the frame. One
+example, not a measurement, but it shows how label-free groups can bury the actors
+among bystanders. MEVA © Kitware Inc. and IARPA, CC BY 4.0.*
+
 ## Results
 
 | arm | 4B lift | vs full frame [95%] | recognised / chance | false alarms / h | tokens / window |
