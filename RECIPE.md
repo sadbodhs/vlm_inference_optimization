@@ -55,6 +55,7 @@ Rules:
 | R1b | R1 without labels: proximity-group crops on gate-fired windows | surveillance (MEVA) | published 2026-09-25: 1 of 5 held; see docs/r1b-label-free.md |
 | R2 | do hand crops beat the full frame where the answer is the part in the hand? | manufacturing (HA4M) | published 2026-09-26: 3 of 9 held; zero-shot floor; see docs/r2-manufacturing.md |
 | R2b | does the crop hold more information for a trained head? (frozen-encoder probe) | manufacturing (HA4M) | published 2026-09-27: 3 of 5 held; full+wide +4.5 [+1.5,+7.5]; fine-tuning rule met |
+| R1c | a precision pass: does a second look (or a stricter prompt) cut the false alarms crops bring? | surveillance (MEVA) | pre-registered 2026-10-02 |
 | R3 | a whole-scene domain, where the recipe should say "don't crop" | traffic | backlog |
 | R4 | a trained action detector on the same clips: accuracy and cost | MEVA | backlog |
 | R5 | AVA subset and a second model family | AVA | backlog |
@@ -187,6 +188,71 @@ compared to F by a paired bootstrap over clips.
 
 Live cameras; other gates; group-size or grouping-distance sweeps; answers
 attributed to a specific group (reported, not predicted).
+
+## R1c · A precision pass — pre-registered 2026-10-02, before any measurement
+
+**Question.** In R1b every crop arm raised false alarms 1.7–2.9×, and even the full
+frame names activities that aren't there. Can a second, cheap step remove the false
+ones without losing the real ones, and at what token cost? Backlog #17.
+
+### Facts, measured before registering (R1b's first-pass answers, no VLM)
+
+| first pass | fired windows naming ≥ 1 letter | letters named | correct | precision | top false letter |
+|---|---|---|---|---|---|
+| 4B F | 732 of 1,531 (48%) | 1,383 | 391 | 0.28 | G sits/stands: 640 of 992 |
+| 4B GO | 1,137 (74%) | 3,038 | 907 | 0.30 | G: 1,070 of 2,131 |
+| 8B F | 1,229 (80%) | 2,074 | 680 | 0.33 | B vehicle starts/stops: 638 of 1,394 |
+| 8B GO | 1,040 (68%) | 1,689 | 736 | 0.44 | D object: 338 of 953 |
+
+### Arms
+
+The first pass is R1b's, reused unchanged (same windows, frames, model and greedy
+decoding). Server settings as R1b (prefix caching off).
+
+| arm | what it adds |
+|---|---|
+| Fc, GOc | **stricter prompt**, one pass: F's or GO's request with one added line ("Most moments from this camera show none of these. Name a letter only if you can clearly see it happening; if unsure, leave it out."). Replaces the first pass. |
+| FV, GOV | **verification**: for each fired window whose first answer named letters, one more request with the **same images**, asking yes/no for each named letter only. A letter survives if the answer is yes. Unparsed letters are kept (and counted). |
+| F4V8 | **model cascade**: the 4B's F answers verified by the **8B**. The 8B runs only on windows the 4B flagged. |
+
+**Models:** 4B: Fc, GOc, FV, GOV. 8B: Fc, FV, F4V8.
+
+### Scoring
+
+As R1b: lift above chance per activity instance, false alarms per hour, paired
+bootstrap over clips. Added: **precision** (correct letters / letters named, over
+fired windows), **keep rates** for correct and false letters (V arms), and **tokens
+per fired window** summed over both passes (F4V8 reports 4B and 8B tokens
+separately).
+
+### Predictions
+
+- **R1c.1** Verification halves the 4B's false alarms: FV's false alarms per hour
+  **≤ 0.5×** F's, with lift **≥ F's − 2 points**.
+- **R1c.2** Verification makes crops affordable: GOV's false alarms per hour **≤ 4B
+  F's**, with lift **≥ 4B F's + 5 points**.
+- **R1c.3** A stricter prompt helps less: Fc cuts false alarms **≥ 25%** against F,
+  at **≤ 5%** more tokens, but **by less than** FV does.
+- **R1c.4** Self-checking is not blind agreement: in FV (4B), false letters survive
+  at **≤ half** the rate of correct letters, and **≥ 80%** of correct letters
+  survive.
+- **R1c.5** The 8B verifies itself too: 8B FV's false alarms per hour **≤ 0.5×** 8B
+  F's, lift within **2 points**.
+- **R1c.6** The cascade is the cheap route to the 8B: F4V8's lift is **within 5
+  points** of 8B F's, at **≤ 0.5×** its false alarms per hour, while running the 8B
+  on **≤ 50%** of fired windows.
+
+**Decision rule, stated in advance:** if R1c.1 or R1c.2 holds, the recipe adds
+"verify before alerting" as the default for alerting use; if R1c.6 holds, the
+4B-screens-8B-confirms cascade becomes the recommended configuration. If none
+holds, precision needs a trained head (R4).
+
+### Not measured
+
+Prefix caching (the verify request repeats the images, so with caching on most of
+its prefill would be a cache hit; R1c runs with caching off, as R1b did, and
+reports tokens); live cameras and cameras per GPU; verification of M, GS or GSC;
+per-letter thresholds.
 
 ## R2 · Manufacturing: crops where people are large — pre-registered 2026-09-25, before any measurement
 
