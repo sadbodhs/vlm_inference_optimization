@@ -55,7 +55,7 @@ Rules:
 | R1b | R1 without labels: proximity-group crops on gate-fired windows | surveillance (MEVA) | published 2026-09-25: 1 of 5 held; see docs/r1b-label-free.md |
 | R2 | do hand crops beat the full frame where the answer is the part in the hand? | manufacturing (HA4M) | published 2026-09-26: 3 of 9 held; zero-shot floor; see docs/r2-manufacturing.md |
 | R2b | does the crop hold more information for a trained head? (frozen-encoder probe) | manufacturing (HA4M) | published 2026-09-27: 3 of 5 held; full+wide +4.5 [+1.5,+7.5]; fine-tuning rule met |
-| R1c | a precision pass: does a second look (or a stricter prompt) cut the false alarms crops bring? | surveillance (MEVA) | pre-registered 2026-10-02 |
+| R1c | a precision pass: does a second look (or a stricter prompt) cut the false alarms crops bring? | surveillance (MEVA) | parked 2026-10-02, not run: off the optimization path (see the note in R1c) |
 | R3 | a whole-scene domain, where the recipe should say "don't crop" | traffic | backlog |
 | R4 | a trained action detector on the same clips: accuracy and cost | MEVA | backlog |
 | R5 | AVA subset and a second model family | AVA | backlog |
@@ -190,6 +190,12 @@ Live cameras; other gates; group-size or grouping-distance sweeps; answers
 attributed to a specific group (reported, not predicted).
 
 ## R1c · A precision pass — pre-registered 2026-10-02, before any measurement
+
+> **Parked 2026-10-02, not run** (only a 12-window smoke test of the code). R1c is about
+> recognition quality, not inference cost, and self-verification of VLM answers is
+> well studied. The study returns to capacity levers first. The registration and code
+> (`experiments/r1c_run.py`, `r1c_report.py`, `scripts/r1c.sh`) stay as they are, so the
+> experiment can run unchanged if precision becomes the priority.
 
 **Question.** In R1b every crop arm raised false alarms 1.7–2.9×, and even the full
 frame names activities that aren't there. Can a second, cheap step remove the false
