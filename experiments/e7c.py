@@ -407,6 +407,11 @@ async def live_once(args, n: int) -> tuple[dict, list]:
     import httpx
     from bench.imaging import resize_to_budget
     from e7_vlm import QUESTION, crop_jpeg, roi_box
+    from e8_vlm import INPUTS, VIDEO_QUESTION
+
+    # E8: which frames go to the VLM, and as images or one video. img2 is E7c/E7d.
+    offs, fps = INPUTS[args.input]
+    video = fps is not None
 
     cams = live_cameras(n, interleaved(args.selection))
     # real frame counts (ffprobe, written by scripts/e7c_prep.sh): clips run 9000-9018
@@ -429,7 +434,7 @@ async def live_once(args, n: int) -> tuple[dict, list]:
     async def send(ci, w_abs, t_newest, boxes_pair):
         clip = cams[ci][0]["clip"]
         raws = [(Path(args.frame_dir) / clip / f"{w_abs*WINDOW+o:05d}.jpg").read_bytes()
-                for o in VLM_OFFSETS]
+                for o in offs]
 
         def build():
             imgs = raws
@@ -439,10 +444,16 @@ async def live_once(args, n: int) -> tuple[dict, list]:
                     imgs = [crop_jpeg(r, box) for r in raws]
             return [base64.b64encode(resize_to_budget(r, args.max_pixels)[0]).decode() for r in imgs]
         b64 = await loop.run_in_executor(pool, build)
-        content = [{"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{x}"}}
-                   for x in b64] + [{"type": "text", "text": QUESTION}]
+        if video:
+            content = [{"type": "video_url", "video_url": {"url": "data:video/jpeg;base64," + ",".join(b64)}},
+                       {"type": "text", "text": VIDEO_QUESTION}]
+            extra = {**args.extra_body, "media_io_kwargs": {"video": {"fps": fps}}}
+        else:
+            content = [{"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{x}"}}
+                       for x in b64] + [{"type": "text", "text": QUESTION}]
+            extra = args.extra_body
         body = {"model": args.model, "messages": [{"role": "user", "content": content}],
-                "max_tokens": 16, "temperature": 0, "stream": True, **args.extra_body}
+                "max_tokens": 16, "temperature": 0, "stream": True, **extra}
         t_send, t_first, ok = time.time(), None, False
         try:
             async with http.stream("POST", f"{args.base_url}/v1/chat/completions", json=body) as r:
@@ -475,11 +486,12 @@ async def live_once(args, n: int) -> tuple[dict, list]:
             if in_window:
                 counters["windows"] += 1
             if gate_window(args.gate, win, prev):
-                fr = [base + o for o in VLM_OFFSETS]
+                fr = [base + o for o in offs]
                 if in_window and all(f in st_["tcap"] for f in fr):
                     counters["fired"] += 1
-                    pairs = [[[o[0], o[2], *o[3:7]] for o in st_["frames"].get(f, [])] for f in fr]
-                    tk = asyncio.ensure_future(send(src, w, st_["tcap"][fr[1]], pairs))
+                    pairs = [[[o[0], o[2], *o[3:7]] for o in st_["frames"].get(base + f, [])]
+                             for f in VLM_OFFSETS]
+                    tk = asyncio.ensure_future(send(src, w, st_["tcap"][fr[-1]], pairs))
                     pending.add(tk); tk.add_done_callback(pending.discard)
             for f in [f for f in st_["frames"] if f < a - 2 * WINDOW or f > a]:
                 st_["frames"].pop(f, None); st_["tcap"].pop(f, None)
@@ -620,7 +632,7 @@ def write_summary(path: Path, rows: list[dict], args) -> None:
     old = json.loads(path.read_text())["rows"] if path.exists() else []
     merged = {r["cams"]: r for r in old + rows}
     tmp = path.with_suffix(".json.tmp")
-    json.dump({"meta": {"experiment": "e7c-live", "gate": args.gate, "arm": args.arm,
+    json.dump({"meta": {"experiment": "e7c-live", "gate": args.gate, "arm": args.arm, "input": args.input,
                         "model": args.model, "vlm_arm": args.arm_id,
                         "duration_s": args.duration, "warmup_s": args.warmup, "fresh_s": FRESH_S,
                         "late_limit_s": LATE_LIMIT_S, "tracker": "NvDCF perf"},
@@ -643,6 +655,8 @@ def main():
     ap.add_argument("--gate", default="person-track-motion",
                     choices=["dense", "track-presence", "track-motion", "person-track-motion"])
     ap.add_argument("--arm", default="roi", choices=["full", "roi"])
+    ap.add_argument("--input", default="img2", choices=["img2", "vid2", "vid8"],
+                    help="E8: frames sent per window, as two images or one video")
     ap.add_argument("--cams", default="8,10,12")
     ap.add_argument("--warmup", type=float, default=10.0)
     ap.add_argument("--duration", type=float, default=120.0)
@@ -655,6 +669,8 @@ def main():
     ap.add_argument("--search", action="store_true",
                     help="step through --cams until two failures, then fill the gap")
     args = ap.parse_args()
+    if args.input != "img2" and args.arm != "full":
+        sys.exit("--input vid2/vid8 is full frame only (PLAN.md 14)")
     args.model, args.extra_body, args.arm_id = MODEL_ID, {}, "V_vllm_video"
     if args.arm_file:
         from bench.arms import Arm

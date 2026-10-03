@@ -663,3 +663,112 @@ are equalised, tokens are not, and tokens per call are reported.
 Models outside the Qwen family (their prompt-following differs; a prompt change
 would confound the comparison); FP16/BF16 variants; thinking mode; Qwen3.5-0.8B;
 Qwen3.6 (27B and 35B only, too large to share this card with the CV service).
+
+## 14. E8 · Send the window as a video: frame merging and EVS pruning — pre-registered 2026-10-03, before any measurement
+
+**Question.** Every run so far sent a window's two frames as **two images**. Qwen's
+vision encoder can also take them as **one video**, which merges each pair of frames
+into one set of tokens. vLLM can then prune video tokens that do not change between
+frames (EVS, `--video-pruning-rate`). Does either buy cameras per 3090 **without
+costing recognition**? And can EVS give the VLM 8 frames of the window for the token
+cost of 2, so that actions that only make sense in order become visible?
+
+A token saving that loses recognition is not a saving, so **recognition is the gate**:
+an arm counts as a win only if it holds recognition and adds cameras.
+
+### Feasibility (measured before registering, so stated as fact, not prediction)
+
+An exploratory check (`tools/evs_check.py`, 8 gate-fired MEVA windows, vLLM v0.29.0,
+same pixels) gave:
+
+| | 2 frames as 2 images | same 2 frames as 1 video | 8 frames as 1 video | 8 frames, EVS 0.75 |
+|---|---|---|---|---|
+| Qwen2.5-VL-7B prompt tokens | 1,271–1,335 | 722–754 | 2,354–2,482 | 722–754 |
+| Qwen3-VL-4B prompt tokens | 1,012–1,068 | 595–623 | 1,879–1,991 | server crash |
+
+- Video mode alone cuts prompt tokens by ~43%. EVS at 0.75 brings 8 frames down to
+  the token count of 2. EVS always keeps the first merged pair whole, so it has
+  nothing to prune in a 2-frame video.
+- **EVS crashes vLLM v0.29.0 on Qwen3-VL** on every video request, at 2 and at
+  8 frames: `evs.py:338 recompute_mrope_positions`, a tensor-size mismatch, and the
+  engine dies. The June 2026 Qwen3-VL EVS fix is already in this version, so this is
+  a separate bug. Video input **without** EVS works on Qwen3-VL. EVS is therefore
+  measured on Qwen2.5-VL-7B only.
+- EVS prunes after the vision encoder, so the encoder still pays for all 8 frames.
+  The saving is LLM prefill and KV cache.
+- Eight windows say nothing about recognition. That is what this experiment measures.
+
+### Design
+
+Everything not named here is E7d: vLLM v0.29.0, util 0.80, temperature 0,
+16 output tokens, ≤ 451,584 px per frame resized client-side, the same 24 clips
+(~3,600 windows), full frame. Frames come from `data/meva/frames5` (byte-identical
+to `frames/` at offsets 18 and 48).
+
+**Inputs per window** (offsets in frames at 30 fps; a window is frames 0–59):
+
+| arm | what is sent | prompt |
+|---|---|---|
+| `img2` | frames 18, 48 as two images (E7–E7d) | E7's question |
+| `vid2` | frames 18, 48 as one video, fps 1 | E7's question, "these two frames were taken one second apart" → "this short clip was taken" |
+| `vid8` | frames 6, 12, …, 48 as one video, fps 5 | as `vid2` |
+| `vid8-e50` | `vid8`, server at `--video-pruning-rate 0.5` | as `vid2` |
+| `vid8-e75` | `vid8`, server at `--video-pruning-rate 0.75` | as `vid2` |
+
+`vid8` ends on frame 48, like `img2`, so in the live run every arm sends at the same
+moment and freshness is comparable. The one-sentence prompt change is necessary
+(the image wording would be false for a clip) and is the same for all video arms.
+
+**Models:**
+- Qwen2.5-VL-7B-AWQ (V_vllm_video): all five arms.
+- Qwen3-VL-4B (E_q3vl_4b, E7d's best camera count among usable models) and
+  Qwen3-VL-8B (E_q3vl_8b, E7d's best recognition): `img2`, `vid2`, `vid8`.
+  No EVS arms: blocked by the crash above.
+
+**Measurements:**
+1. **Recognition.** Every arm on every window (dense), scored as in E7d
+   (`e7d_compare.py`): lift = recognised − shuffled-answer chance. Each arm is
+   compared with the **same model's** `img2` by a paired bootstrap over clips; a
+   difference counts only if its 95% interval excludes 0. Also reported: false
+   alarms per hour, per-group lift, prompt tokens per call. `img2` is rerun, not
+   reused from E7d, so every comparison is within one server session.
+2. **Cameras per 3090.** E7c/E7d's live pipeline unchanged (DeepStream + NvDCF,
+   the same cameras and offsets, `track-motion`, full frame), with only the request
+   changed. Cameras are stepped by 2 from 6 until two consecutive failures, then the
+   gap is filled. The bar is the same: ≥ 95% of answers under 2 s old, and
+   detection-path p99 < 1 s. Live runs: 7B `img2`, `vid2`, `vid8`, `vid8-e75`;
+   4B `img2`, `vid2`. The 8B is recognition only. Detection caps the card at
+   ~18 cameras (E7d), so an arm that reaches 18 is reported as detector-limited.
+
+### Predictions
+
+17. **Video mode is free.** For all three models, `vid2`'s lift is not
+    significantly below `img2`'s (the paired 95% CI of the difference includes 0
+    or is above it), at ≥ 40% fewer prompt tokens.
+18. **Eight frames help, where order matters.** For Qwen2.5-VL-7B and at least one
+    Qwen3-VL model, `vid8`'s lift is significantly above `img2`'s. The gain is
+    largest in the state-change groups: A (vehicle in/out, doors, trunk),
+    C (doorways) and G (sit down / stand up). It is not in E (phone) or
+    F (conversation).
+19. **EVS keeps most of the gain.** On Qwen2.5-VL-7B, `vid8-e75` keeps ≥ 75% of
+    `vid8`'s lift gain over `vid2`, at ≤ 1.1× `vid2`'s prompt tokens. `vid8-e50`
+    lands between them on both. If 18 fails for the 7B (no gain to keep), 19 is
+    reported as untestable, not as held.
+20. **Video mode buys cameras.** `vid2` carries ≥ 1.4× `img2`'s cameras on the 7B
+    (E7d: 9). On the 4B (E7d: 16) it reaches the ~18 detector ceiling.
+21. **EVS does not buy cameras over the baseline.** On the 7B, `vid8-e75` carries
+    within ±2 of `img2`'s cameras and fewer than `vid2`. The encoder processes
+    4 merged frame pairs, twice the work of `img2`'s 2 images (each image is
+    duplicated into a pair), which offsets the shorter prefill.
+    `vid8` without EVS carries fewer than `img2`.
+
+### Not measured
+
+- EVS on Qwen3-VL (vLLM bug above); a newer vLLM image.
+- ROI crops as video.
+- Frame counts other than 2 and 8, and pruning rates other than 0.5 and 0.75.
+- Other token-reduction methods (encoder-side pruning, token merging).
+- Moving cameras: MEVA cameras are fixed, which is the case EVS is built for. A
+  moving camera changes every token, so EVS would have nothing to prune.
+- Gates other than `track-motion`: the live gate is unchanged, and recognition is
+  scored dense.

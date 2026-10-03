@@ -26,6 +26,10 @@ class Sample:
     # Video: several frames in one prompt. A clip costs frames x tokens-per-frame,
     # so these two are in direct competition inside a fixed context budget.
     frames_b64: list[str] = field(default_factory=list)
+    # Send the frames as ONE video instead of one image each (E8). Qwen merges each
+    # pair of video frames into one set of tokens; images are not merged. The fps
+    # goes to the server per request (media_io_kwargs), not in the content.
+    as_video: bool = False
 
     def data_url(self) -> str:
         if self.image_b64:
@@ -36,7 +40,7 @@ class Sample:
         return f"data:image/{mime};base64,{base64.b64encode(raw).decode()}"
 
     def with_frames(self, frames: list[bytes], max_pixels: int | None,
-                    mime: str = "jpeg") -> "Sample":
+                    mime: str = "jpeg", as_video: bool = False) -> "Sample":
         """Copy carrying `frames`, each re-encoded within the per-frame budget.
 
         Done up front, outside the timed path: decoding and resizing N frames
@@ -52,7 +56,7 @@ class Sample:
             out.append(_b64.b64encode(data).decode())
             px += h * w
         return Sample(id=self.id, question=self.question, answers=list(self.answers),
-                      frames_b64=out, image_mime=mime, image_px=px)
+                      frames_b64=out, image_mime=mime, image_px=px, as_video=as_video)
 
     def resized(self, max_pixels: int | None) -> "Sample":
         """Copy of this sample with the image re-encoded within a pixel budget.
@@ -73,7 +77,10 @@ class Sample:
 
     def to_messages(self, prompt_suffix: str = "") -> list[dict]:
         content: list[dict] = []
-        if self.frames_b64:
+        if self.frames_b64 and self.as_video:
+            content.append({"type": "video_url", "video_url": {
+                "url": f"data:video/{self.image_mime};base64," + ",".join(self.frames_b64)}})
+        elif self.frames_b64:
             # Frames first, in temporal order. Anything asking about direction,
             # speed or ordering depends on that order being preserved.
             for f in self.frames_b64:
