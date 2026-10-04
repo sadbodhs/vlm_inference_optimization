@@ -1160,7 +1160,7 @@ def plot_e8(out):
     rows = json.loads(Path("results/e8/report.json").read_text())["rows"]
     models = [("Qwen2.5-VL-7B", SERIES[0]), ("Qwen3-VL-4B", SERIES[1]), ("Qwen3-VL-8B", SERIES[2])]
     lab = {"vid2": "2 frames as video", "vid8": "8 frames as video",
-           "vid8-e50": "8 frames, EVS 0.5", "vid8-e75": "8 frames, EVS 0.75"}
+           "vid8-e50": "8 frames, EVS 0.5", "vid8-e75": "EVS 0.75 (first 2 frames only)"}
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(13.5, 5.0), gridspec_kw={"width_ratios": [1.35, 1]})
 
     y, ticks, names = 0, [], []
@@ -1191,7 +1191,7 @@ def plot_e8(out):
            "change in recognition above chance (points, 95% paired interval)", "")
 
     arms = ["img2", "vid2", "vid8", "vid8-e75"]
-    alab = ["2 images", "2 frames\nas video", "8 frames\nas video", "8 frames\nEVS 0.75"]
+    alab = ["2 images", "2 frames\nas video", "8 frames\nas video", "8 frames\nEVS 0.75 ¹"]
     w = 0.38
     for k, (m, col) in enumerate(models[:2]):
         for i, a in enumerate(arms):

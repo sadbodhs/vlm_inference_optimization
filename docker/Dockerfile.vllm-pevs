@@ -1,0 +1,6 @@
+# vLLM v0.29.0 + the E9 pre-encoder pruning plugin (plugins/vlm_prune).
+# The base is the image every E-series run used; only the plugin is added.
+#   docker build -f docker/Dockerfile.vllm-pevs -t vlmbench-vllm-pevs:v0.29.0 .
+FROM vllm/vllm-openai:v0.29.0
+COPY plugins/vlm_prune /opt/vlm_prune
+RUN pip install --no-deps --no-build-isolation --no-index /opt/vlm_prune

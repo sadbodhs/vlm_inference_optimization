@@ -407,7 +407,7 @@ async def live_once(args, n: int) -> tuple[dict, list]:
     import httpx
     from bench.imaging import resize_to_budget
     from e7_vlm import QUESTION, crop_jpeg, roi_box
-    from e8_vlm import INPUTS, VIDEO_QUESTION
+    from e8_vlm import INPUTS, VIDEO_QUESTION, freeze_untracked
 
     # E8: which frames go to the VLM, and as images or one video. img2 is E7c/E7d.
     offs, fps = INPUTS[args.input]
@@ -431,7 +431,7 @@ async def live_once(args, n: int) -> tuple[dict, list]:
     counters = {"windows": 0, "fired": 0}
     t = {"wall0": None}
 
-    async def send(ci, w_abs, t_newest, boxes_pair):
+    async def send(ci, w_abs, t_newest, boxes_pair, boxes_all=None):
         clip = cams[ci][0]["clip"]
         raws = [(Path(args.frame_dir) / clip / f"{w_abs*WINDOW+o:05d}.jpg").read_bytes()
                 for o in offs]
@@ -442,6 +442,8 @@ async def live_once(args, n: int) -> tuple[dict, list]:
                 box = roi_box(boxes_pair[0], boxes_pair[1], 1920, 1080)
                 if box is not None:
                     imgs = [crop_jpeg(r, box) for r in raws]
+            if args.input == "vid8t":           # E9: freeze pixels outside the tracks
+                imgs = freeze_untracked(imgs, boxes_all)
             return [base64.b64encode(resize_to_budget(r, args.max_pixels)[0]).decode() for r in imgs]
         b64 = await loop.run_in_executor(pool, build)
         if video:
@@ -491,7 +493,8 @@ async def live_once(args, n: int) -> tuple[dict, list]:
                     counters["fired"] += 1
                     pairs = [[[o[0], o[2], *o[3:7]] for o in st_["frames"].get(base + f, [])]
                              for f in VLM_OFFSETS]
-                    tk = asyncio.ensure_future(send(src, w, st_["tcap"][fr[-1]], pairs))
+                    boxes_all = [[o[3:7] for o in st_["frames"].get(f, [])] for f in fr]
+                    tk = asyncio.ensure_future(send(src, w, st_["tcap"][fr[-1]], pairs, boxes_all))
                     pending.add(tk); tk.add_done_callback(pending.discard)
             for f in [f for f in st_["frames"] if f < a - 2 * WINDOW or f > a]:
                 st_["frames"].pop(f, None); st_["tcap"].pop(f, None)
@@ -655,7 +658,7 @@ def main():
     ap.add_argument("--gate", default="person-track-motion",
                     choices=["dense", "track-presence", "track-motion", "person-track-motion"])
     ap.add_argument("--arm", default="roi", choices=["full", "roi"])
-    ap.add_argument("--input", default="img2", choices=["img2", "vid2", "vid8"],
+    ap.add_argument("--input", default="img2", choices=["img2", "vid2", "vid8", "vid8t"],
                     help="E8: frames sent per window, as two images or one video")
     ap.add_argument("--cams", default="8,10,12")
     ap.add_argument("--warmup", type=float, default=10.0)

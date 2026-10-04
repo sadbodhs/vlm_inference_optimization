@@ -25,10 +25,11 @@ each input is paired against the same model sent two images.
 - **Eight frames are not a general gain.** Overall: no change on the 7B, +11.8 on the
   4B (not significant; it comes from conversations), −6.8 on the 8B. Unpruned, they
   cost cameras: the 7B drops from 9 to 4.
-- **EVS works as specified, but buys no cameras.** At rate 0.75, 8 frames cost exactly
-  the 2-frame video's 735 tokens, with recognition unchanged. The live result is
-  **9 cameras, the same as two images**: EVS prunes after the vision encoder, which
-  still processes all 8 frames.
+- **EVS buys no cameras.** At rate 0.5, 8 frames cost 1,293 tokens (as much as two
+  images) with recognition unchanged. At rate 0.75 the live result is **9 cameras,
+  the same as two images**: EVS prunes after the vision encoder, which still
+  processes all 8 frames. *Corrected 2026-10-04:* rate 0.75 keeps only the first
+  frame pair (see the note below), so it is not a pruned 8-frame input.
 - **EVS is not production-safe in vLLM v0.29.0.** On Qwen3-VL it crashes the server on
   every video request. On Qwen2.5-VL, under overload, it **runs the vision encoder
   out of memory and kills the server**, where every other input just answers late.
@@ -82,6 +83,19 @@ with the previous one and drops the tokens that changed least. The first pair is
 always kept whole, so a 2-frame video has nothing to prune. It saves LLM prefill and
 KV cache; the encoder has already done its full work.
 
+!!! warning "Corrected 2026-10-04: at rate 0.75, EVS keeps only the first two frames"
+    EVS keeps a fixed share of tokens, (1 − rate) × all tokens, and the always-kept
+    first pair counts toward it. Eight frames are 4 merged pairs of 576 tokens, so at
+    rate 0.75 the budget is 576 tokens: exactly the first pair (frames 6 and 12,
+    0.2 s apart), and nothing of the other six frames. This page first described it
+    as "8 frames at the 2-frame video's cost with recognition unchanged". That was
+    wrong. Its recognition (+17.9) is that of a 2-frame video of the window's first
+    0.2 s. Rate 0.5 (1,152 visual tokens: the first pair plus the 576 most-changed
+    tokens of the other three) is the only pruned 8-frame input measured here. The
+    camera count (9) and the out-of-memory crash stand: the encoder still processed
+    all 8 frames. Found while sizing E9 (`vllm/multimodal/video_prune/evs.py`,
+    `compute_retained_tokens_count`). See [Corrections](corrections.md).
+
 ## Recognition
 
 ![Recognition change against two images, and cameras per input](img/e8.png)
@@ -114,9 +128,9 @@ verdict changes.
   of the 8 letters: 27 windows with images, 98 as a 2-frame video). The Qwen3-VL
   models name *something* far more often: the 4B answers "nothing" on 68% of windows
   with images, 37% with a 2-frame video.
-- **EVS 0.75 is the 7B's best video input:** the 2-frame video's tokens, its highest
-  lift and its fewest false alarms of the video inputs. None of those differences is
-  significant.
+- **EVS 0.75 scored highest of the 7B's video inputs** (+17.9, fewest false alarms),
+  but it kept only frames 6 and 12 (corrected note above). None of these
+  differences is significant.
 
 ### By activity group
 
@@ -163,7 +177,8 @@ E 50, F 179, G 10, H 6. G and H are too small to read.
 - **EVS recovers the 8-frame input to exactly the baseline, 9, no further.** Its
   prompts are as short as the 2-frame video's, but its encoder work is twice the two
   images' (4 merged pairs against 2 duplicated images), and the encoder runs before
-  any pruning.
+  any pruning. (At this rate the prompt holds only the first frame pair; the
+  encoder still processes all four.)
 
 ### EVS fails by crashing
 
@@ -190,7 +205,7 @@ frames. The June 2026 Qwen3-VL EVS fix is in this version; this is a different b
 |---|---|---|---|
 | 17 | for all three models, a 2-frame video is not significantly below two images, at ≥ 40% fewer tokens | tokens −43 / −41 / −41%; 7B +0.6, 4B +3.5 (not significant); **8B −12.1 [−20.1, −2.7]** | **failed** (on the 8B) |
 | 18 | 8-frame video is significantly above two images on the 7B and one Qwen3-VL model, mostly in groups A, C, G | 7B −0.2, 4B +11.8 [−2.8, +22.4], 8B −6.8; the 4B's gain is in conversations (F) | **failed** |
-| 19 | EVS 0.75 keeps ≥ 75% of the 8-frame gain over the 2-frame video on the 7B, at ≤ 1.1× its tokens | no 8-frame gain on the 7B to keep; tokens 1.00× | **untestable**, as registered |
+| 19 | EVS 0.75 keeps ≥ 75% of the 8-frame gain over the 2-frame video on the 7B, at ≤ 1.1× its tokens | no 8-frame gain on the 7B to keep; tokens 1.00× | **untestable**, as registered. *Also ill-posed:* at 0.75 EVS keeps only the first pair by construction (corrected note above) |
 | 20 | a 2-frame video carries ≥ 1.4× the 7B's cameras; the 4B reaches the ~18 detector ceiling | 7B 9 → 15 (1.67×); 4B 15 → 18, detector-limited above | **held** |
 | 21 | EVS 0.75 carries within ±2 of two images' cameras and fewer than the 2-frame video; unpruned 8 frames fewer than two images | 9 vs 9 and 15; 4 vs 9 | **held** |
 

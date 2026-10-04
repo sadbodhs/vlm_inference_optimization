@@ -171,6 +171,21 @@ The same experiment nearly published another single-run artefact: Qwen3-VL-8B's
 first live sweep read **5 cameras**, because the first runs after a server start
 failed on detection latency. A warmed-up rerun read 10. Both are on the page.
 
+## "8 frames at the cost of 2" that was 2 frames
+
+[E8](e8-video-input.md) reported that vLLM's EVS at rate 0.75 sent 8 frames for
+the 2-frame video's 735 tokens "with recognition unchanged". It sent 2 frames.
+EVS keeps (1 − rate) of all tokens, and the first frame pair, always kept whole,
+counts toward that. Eight frames are 4 pairs, so a quarter of the tokens is
+exactly the first pair, and the other six frames were dropped every time.
+
+The token count matched the claim, which is why nobody looked further: 735 is what
+8 frames *pruned to a quarter* should cost, and also what 2 frames cost. It came
+out while sizing E9's pruning budget from E8's numbers: a quarter of the tokens
+left no room for anything after the first pair. The camera count and the server
+crash stand; only the reading of the recognition number changes. The E8 page
+carries the correction.
+
 ## The pattern
 
 Every one of these **reported plausible success while doing something other than

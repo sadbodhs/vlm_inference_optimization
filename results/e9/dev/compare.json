@@ -1,0 +1,70 @@
+{
+ "clips": [
+  "2018-03-07.17-35-01.17-40-01.school.G420",
+  "2018-03-11.16-40-00.16-45-00.bus.G509",
+  "2018-03-13.16-05-00.16-10-00.bus.G506",
+  "2018-03-15.15-05-00.15-10-00.bus.G508"
+ ],
+ "rows": [
+  {
+   "arm": "2 images",
+   "windows": 600,
+   "tokens": 1271.0,
+   "lift": 0.24259259259259258,
+   "instances": 27,
+   "false_alarms_per_hour": 225.0,
+   "same_answer_as_8_frames": 0.88,
+   "same_something_nothing": 0.91
+  },
+  {
+   "arm": "2 frames as video",
+   "windows": 600,
+   "tokens": 722.0,
+   "lift": 0.28148148148148144,
+   "instances": 27,
+   "false_alarms_per_hour": 222.0,
+   "same_answer_as_8_frames": 0.9283333333333333,
+   "same_something_nothing": 0.95
+  },
+  {
+   "arm": "8 frames",
+   "windows": 600,
+   "tokens": 2354.0,
+   "lift": 0.24444444444444444,
+   "instances": 27,
+   "false_alarms_per_hour": 270.0,
+   "same_answer_as_8_frames": 1.0,
+   "same_something_nothing": 1.0
+  },
+  {
+   "arm": "8 frames, vLLM EVS 0.5",
+   "windows": 600,
+   "tokens": 1266.0,
+   "lift": 0.2574074074074074,
+   "instances": 27,
+   "false_alarms_per_hour": 168.0,
+   "same_answer_as_8_frames": 0.955,
+   "same_something_nothing": 0.9683333333333334
+  },
+  {
+   "arm": "8 frames, pre-encoder unit 0.675",
+   "windows": 600,
+   "tokens": 885.0,
+   "lift": 0.23888888888888887,
+   "instances": 27,
+   "false_alarms_per_hour": 222.0,
+   "same_answer_as_8_frames": 0.9316666666666666,
+   "same_something_nothing": 0.955
+  },
+  {
+   "arm": "8 frames, pre-encoder window 0.675",
+   "windows": 600,
+   "tokens": 885.0,
+   "lift": 0.2518518518518519,
+   "instances": 27,
+   "false_alarms_per_hour": 357.0,
+   "same_answer_as_8_frames": 0.9133333333333333,
+   "same_something_nothing": 0.9333333333333333
+  }
+ ]
+}

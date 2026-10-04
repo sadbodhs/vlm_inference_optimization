@@ -122,6 +122,7 @@ case "${1:-start}" in
       -v "$HF_CACHE:/root/.cache/huggingface" \
       -p "127.0.0.1:$PORT:$PORT" \
       ${HF_TOKEN:+-e HUGGING_FACE_HUB_TOKEN="$HF_TOKEN"} \
+      ${PEVS_CHECK:+-e PEVS_CHECK="$PEVS_CHECK"} ${PEVS_MODE:+-e PEVS_MODE="$PEVS_MODE"} \
       "${ENTRY[@]}" "$IMAGE" "${ARGS[@]}" >/dev/null
 
     wait_ready "$PORT" "${WAIT_S:-1800}"

@@ -772,3 +772,78 @@ moment and freshness is comparable. The one-sentence prompt change is necessary
   moving camera changes every token, so EVS would have nothing to prune.
 - Gates other than `track-motion`: the live gate is unchanged, and recognition is
   scored dense.
+
+## 15. E9 · Prune before the encoder — pre-registered 2026-10-04, before any full measurement
+
+**Question.** E8 found that vLLM's EVS, which prunes video tokens *after* the vision
+encoder, buys no cameras: the encoder still processes every frame. If the tokens
+are chosen from the **pixels**, and the encoder runs **only on the kept patches**,
+do 8-frame windows become cheap enough to buy cameras, without costing recognition?
+And does the DeepStream tracker, which the pipeline already runs, choose them better
+than pixel change alone?
+
+### What is already measured (development, stated as fact)
+
+- **How much changes (step A, CPU only, all 3,600 windows).** After the first frame
+  pair, 2–10% of the 28 px blocks change (busy clips 16–20%). A tracker-box mask
+  keeps 8.8% of later-pair blocks and 94% of annotated actor area; pixel change
+  (> 2 grey levels, dilated) keeps 10.4% and 90%.
+- **The plugin** (`plugins/vlm_prune`, image `vlmbench-vllm-pevs:v0.29.0` = v0.29.0 +
+  the plugin) subclasses vLLM's Qwen2.5-VL. It keeps EVS's token count, so prompt
+  placeholders, positions and scheduling are untouched, and changes two things:
+  tokens are ranked by pixel change of each 28 px unit against the previous frame
+  pair (the first pair whole), and the encoder runs on the kept patches only.
+- **Verified:** with every unit kept, the subset path equals the full encoder
+  (minimum cosine 1.00000); the first pair, always kept, is unchanged (1.0000).
+- **Encoder time, 8 frames:** 240 ms in full, **86 ms** at rate 0.675 (707 of 2,176
+  units kept).
+- **Kept later-pair tokens drift** from their full-context values: mean cosine
+  **0.48**. Qwen2.5-VL's last encoder layer attends across the whole frame, which
+  pruning removes. Keeping whole 112 px windows instead does not help (0.49).
+- **Answers, 600 windows (one clip per bin):** at rate 0.675 (885 prompt tokens),
+  93.2% of answers are identical to unpruned 8 frames (2-frame video 92.8%, vLLM
+  EVS 0.5 95.5%, two images 88.0%). The window variant agrees less (91.3%) and adds
+  false alarms, so it is dropped. 27 activity instances: no recognition claim.
+
+### Design
+
+Everything not named is E8: Qwen2.5-VL-7B-AWQ, vLLM v0.29.0, util 0.80, the same
+24 clips, 8 frames (offsets 6, 12, …, 48) as one video at fps 5, full frame.
+
+| arm | server | client | prompt tokens |
+|---|---|---|---|
+| `pre-0.675` | plugin, `--video-pruning-rate 0.675` | 8 frames | ~885 |
+| `pre-0.5` | plugin, rate 0.5 | 8 frames | ~1,270 (= vLLM EVS 0.5's) |
+| `pre-trk-0.675` | plugin, rate 0.675 | 8 frames; after the first pair, pixels outside the tracker's boxes (+60 px) are copied from the first pair | ~885 |
+| `evs-0.5` (live only) | stock image, rate 0.5 | 8 frames | ~1,270 |
+
+**Reused from E8, not rerun** (a deviation from E8's own rule, to fit the 12-hour
+GPU budget; same base image and settings): two images, 2-frame video, unpruned
+8 frames, vLLM EVS 0.5 recognition; live counts 9, 15, 4 and 9 (EVS 0.75).
+
+1. **Recognition:** every window, scored as E8; each arm paired (bootstrap over
+   clips, 300 draws) against unpruned 8 frames, vLLM EVS 0.5 and two images. Also
+   reported: false alarms per hour, agreement with unpruned 8 frames, tokens.
+2. **Cameras:** E8's live pipeline unchanged (DeepStream + NvDCF, `track-motion`,
+   full frame, the same search and bar). The tracker arm freezes pixels from the
+   live tracker's boxes, as the client would in deployment.
+
+### Predictions
+
+22. **Pruning before the encoder buys cameras.** `pre-0.675` carries **≥ 12**
+    cameras (E8: vLLM EVS 9, unpruned 8 frames 4, 2-frame video 15).
+23. **Where you prune matters more than how many tokens you keep.** At the same
+    token count, `pre-0.5` carries **≥ 2 more** cameras than `evs-0.5`.
+24. **…without costing recognition.** Neither `pre-0.675` nor `pre-0.5` is
+    significantly below unpruned 8 frames or below vLLM EVS 0.5 (paired 95%).
+25. **The tracker chooses better than pixels alone.** `pre-trk-0.675` agrees with
+    unpruned 8 frames on at least as many windows as `pre-0.675`, with fewer
+    false alarms per hour.
+26. **No crash under overload.** No plugin arm kills the server in its live sweep
+    (vLLM EVS did, E8): the encoder now does the work it was admitted for.
+
+### Not measured
+
+Qwen3-VL (the plugin is Qwen2.5-VL-specific, and vLLM's EVS crashes on Qwen3-VL);
+codec motion vectors; reusing the first pair across windows; pruning rates other
+than 0.5 and 0.675; other frame counts.
