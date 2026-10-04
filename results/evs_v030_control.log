@@ -1,0 +1,11 @@
+gpu_lock: acquired by 'evs-v030-ctl'
+### 3. control: Qwen2.5-VL-7B, EVS off, 8 frames at concurrency 32 08:03
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.30.0  port=8000
+ready
+
+[vid8] 450 windows
+  prompt tokens mean 2354   ok 450/450
+  server alive: 1
+stopped vlm-server
+### control COMPLETE 08:10

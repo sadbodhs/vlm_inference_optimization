@@ -1,0 +1,57 @@
+gpu_lock: acquired by 'evs-v030'
+### 1. Qwen3-VL-4B, EVS 0.75, vllm/vllm-openai:v0.30.0 07:58
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.30.0  port=8000
+ready
+  img2  0.16-45-00.bus.G509|55 tok  1012   0.27s  'N'
+  vid2  0.16-45-00.bus.G509|55 FAILED {"error":{"message":"EngineCore encountered an issue. See stack trace (above) for the root cause.","type":"InternalServerError","param":null,"code":500}}
+  vid8  0.16-45-00.bus.G509|55 FAILED {"error":{"message":"EngineCore encountered an issue. See stack trace (above) for the root cause.","type":"InternalServerError","param":null,"code":500}}
+  img2  30-08.hospital.G436|14 FAILED URLError(ConnectionRefusedError(111, 'Connection refused'))
+  vid2  30-08.hospital.G436|14 FAILED URLError(ConnectionRefusedError(111, 'Connection refused'))
+  vid8  30-08.hospital.G436|14 FAILED URLError(ConnectionRefusedError(111, 'Connection refused'))
+  img2  7-00-00.school.G638|91 FAILED URLError(ConnectionRefusedError(111, 'Connection refused'))
+  vid2  7-00-00.school.G638|91 FAILED URLError(ConnectionRefusedError(111, 'Connection refused'))
+  vid8  7-00-00.school.G638|91 FAILED URLError(ConnectionRefusedError(111, 'Connection refused'))
+  img2  5-06.hospital.G341|142 FAILED URLError(ConnectionRefusedError(111, 'Connection refused'))
+  vid2  5-06.hospital.G341|142 FAILED URLError(ConnectionRefusedError(111, 'Connection refused'))
+  vid8  5-06.hospital.G341|142 FAILED URLError(ConnectionRefusedError(111, 'Connection refused'))
+  img2  0.16-10-00.bus.G506|12 FAILED URLError(gaierror(-3, 'Temporary failure in name resolution'))
+  vid2  0.16-10-00.bus.G506|12 FAILED URLError(gaierror(-3, 'Temporary failure in name resolution'))
+  vid8  0.16-10-00.bus.G506|12 FAILED URLError(gaierror(-3, 'Temporary failure in name resolution'))
+  img2  05-02.hospital.G436|21 FAILED URLError(gaierror(-3, 'Temporary failure in name resolution'))
+  vid2  05-02.hospital.G436|21 FAILED URLError(gaierror(-3, 'Temporary failure in name resolution'))
+  vid8  05-02.hospital.G436|21 FAILED URLError(gaierror(-3, 'Temporary failure in name resolution'))
+  img2  6.11-10-06.bus.G340|62 FAILED URLError(gaierror(-3, 'Temporary failure in name resolution'))
+  vid2  6.11-10-06.bus.G340|62 FAILED URLError(gaierror(-3, 'Temporary failure in name resolution'))
+  vid8  6.11-10-06.bus.G340|62 FAILED URLError(gaierror(-3, 'Temporary failure in name resolution'))
+  img2  -20-03.school.G336|103 FAILED URLError(gaierror(-3, 'Temporary failure in name resolution'))
+  vid2  -20-03.school.G336|103 FAILED URLError(gaierror(-3, 'Temporary failure in name resolution'))
+  vid8  -20-03.school.G336|103 FAILED URLError(gaierror(-3, 'Temporary failure in name resolution'))
+  server alive: 0
+### 2. Qwen2.5-VL-7B, EVS 0.75, 8 frames at concurrency 32 07:59
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.30.0  port=8000
+ready
+
+[vid8 evs 0.75] 450 windows
+Traceback (most recent call last):
+  File "/work/experiments/e8_vlm.py", line 101, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/work/experiments/e8_vlm.py", line 87, in main
+    summary = await run_arm(
+              ^^^^^^^^^^^^^^
+  File "/work/bench/harness.py", line 188, in run_arm
+    raise RuntimeError(
+RuntimeError: arm 'V_vllm_video': all 450 requests failed against http://vlm-server:8000 -- first error: no content tokens received
+  server alive: 0
+stopped vlm-server
+### v0.30.0 check COMPLETE 08:02
