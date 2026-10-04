@@ -1,0 +1,2 @@
+step	start	end	gpu_hours	note
+A	-	-	0.00	change measurement, CPU only (tools/change_ratio.py)
