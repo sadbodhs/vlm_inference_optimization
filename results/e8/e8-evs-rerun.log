@@ -1,0 +1,215 @@
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: held by 'e8-live', waiting 30s
+gpu_lock: acquired by 'e8-evs-rerun'
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 01:58:38.576: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstchromaprint.so': libavcodec.so.58: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 01:58:38.588: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstlame.so': libmp3lame.so.0: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 01:58:38.597: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstmplex.so': libmjpegutils-2.1.so.0: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 01:58:38.604: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstpulseaudio.so': libFLAC.so.8: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 01:58:38.622: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstsndfile.so': libFLAC.so.8: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 01:58:38.651: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstopenmpt.so': libmpg123.so.0: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 01:58:38.657: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstfluidsynthmidi.so': libFLAC.so.8: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 01:58:38.844: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/deepstream/libnvdsgst_udp.so': librivermax.so.1: cannot open shared object file: No such file or directory
+
+(gst-plugin-scanner:13): GStreamer-WARNING **: 01:58:38.874: Failed to load plugin '/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstmpg123.so': libmpg123.so.0: cannot open shared object file: No such file or directory
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+0:00:00.703836397 [33m    8[00m 0x5bb8134340a0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.703968828 [33m    8[00m 0x5bb8134340a0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.711983311 [33m    8[00m 0x5bb8134340a0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=5
+  warm-up N=9 discarded (fresh 97.1%, det-path p99 0.134s)
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.187835209 [31m  396[00m 0x5a304b15dfa0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.187863903 [31m  396[00m 0x5a304b15dfa0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.196568700 [31m  396[00m 0x5a304b15dfa0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=8
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=5
+  N=9   calls  30.1%  sent  138  fresh  97.1%  stale p95  1.82s  det-path p99 0.200s  gpu   55%  mem  21737  OK
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+Failed to query video capabilities: Invalid argument
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Initialized
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:327 [FullDims Engine Info]: layers num: 2
+0   INPUT  kFLOAT input           3x1280x1280     min: 1x3x1280x1280   opt: 16x3x1280x1280  Max: 16x3x1280x1280  
+1   OUTPUT kFLOAT output          33600x6         min: 0               opt: 0               Max: 0               
+
+0:00:00.202578908 [34m  765[00m 0x650c58e9cda0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2092> [UID = 1]: deserialized trt engine from :/work/model_b16_gpu0_fp16.engine
+0:00:00.202608244 [34m  765[00m 0x650c58e9cda0 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:684:gst_nvinfer_logger:<pgie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2195> [UID = 1]: Use deserialized engine model: /work/model_b16_gpu0_fp16.engine
+0:00:00.212042237 [34m  765[00m 0x650c58e9cda0 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<pgie>[00m [UID 1]: Load new model:/work/configs/e7c/config_infer_yolov8s_1280.txt sucessfully
+nvstreammux: Successfully handled EOS for source_id=11
+nvstreammux: Successfully handled EOS for source_id=6
+nvstreammux: Successfully handled EOS for source_id=3
+nvstreammux: Successfully handled EOS for source_id=7
+nvstreammux: Successfully handled EOS for source_id=9
+nvstreammux: Successfully handled EOS for source_id=0
+nvstreammux: Successfully handled EOS for source_id=10
+nvstreammux: Successfully handled EOS for source_id=4
+nvstreammux: Successfully handled EOS for source_id=2
+nvstreammux: Successfully handled EOS for source_id=1
+nvstreammux: Successfully handled EOS for source_id=5
+nvstreammux: Successfully handled EOS for source_id=8
+  N=12  calls  38.7%  sent  258  fresh   0.0%  stale p95 13.69s  det-path p99 0.234s  gpu   31%  mem  24122  no
+server alive after run: 0
+stopped vlm-server
+### EVS rerun COMPLETE 21:05

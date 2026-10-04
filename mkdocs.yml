@@ -69,6 +69,7 @@ nav:
       - E7b · The cascade, live: e7b-live.md
       - E7c · The cascade, DeepStream: e7c-deepstream.md
       - E7d · Which VLM behind the gate: e7d-models.md
+      - E8 · Send the window as a video: e8-video-input.md
       - vLLM vs SGLang: stacks.md
       - Qwen2.5 vs Qwen3: models.md
   - Track B · VLMs in real-time CV:

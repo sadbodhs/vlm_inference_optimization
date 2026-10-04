@@ -1154,6 +1154,67 @@ def plot_r2b(out):
     fig.savefig(out, dpi=160)
     plt.close(fig)
 
+
+def plot_e8(out):
+    """E8: recognition change vs the same model's two images, and cameras per arm."""
+    rows = json.loads(Path("results/e8/report.json").read_text())["rows"]
+    models = [("Qwen2.5-VL-7B", SERIES[0]), ("Qwen3-VL-4B", SERIES[1]), ("Qwen3-VL-8B", SERIES[2])]
+    lab = {"vid2": "2 frames as video", "vid8": "8 frames as video",
+           "vid8-e50": "8 frames, EVS 0.5", "vid8-e75": "8 frames, EVS 0.75"}
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(13.5, 5.0), gridspec_kw={"width_ratios": [1.35, 1]})
+
+    y, ticks, names = 0, [], []
+    for m, col in models:
+        base = next(r for r in rows if r["model"] == m and r["arm"] == "img2")
+        a1.text(-26.5, y + 0.62, f"{m} sent two images: {100 * base['lift']:+.1f} above chance, "
+                f"{base['tokens_per_call']:,.0f} tok", fontsize=7, color=WARN, va="center")
+        for r in [r for r in rows if r["model"] == m and r["arm"] != "img2"]:
+            lo, hi = (100 * v for v in r["lift_vs_img2_ci95"])
+            d = 100 * r["lift_vs_img2"]
+            sig = lo > 0 or hi < 0
+            a1.plot([lo, hi], [y, y], color=col, lw=2, alpha=0.5, solid_capstyle="round")
+            a1.plot([d], [y], "o", ms=8, color=col, mfc=col if sig else "white", mew=2, zorder=3)
+            tok = round(100 * r["tokens_vs_img2"])
+            a1.text(24, y, f"{r['tokens_per_call']:,.0f} tok ({'same' if tok == 0 else f'{tok:+d}%'})",
+                    va="center",
+                    fontsize=7.5, color=FG)
+            ticks.append(y); names.append(f"{m} · {lab[r['arm']]}")
+            y -= 1
+        y -= 0.6
+    a1.axvline(0, color=WARN, lw=1)
+    a1.set_yticks(ticks); a1.set_yticklabels(names, fontsize=7.5)
+    a1.set_xlim(-27, 34); a1.set_ylim(y + 0.2, 1.1)
+    a1.plot([], [], "o", mfc="white", mec=FG, mew=2, label="interval includes 0")
+    a1.plot([], [], "o", color=FG, label="significant (95%)")
+    a1.legend(fontsize=7.5, frameon=False, loc="lower left")
+    _style(a1, "Recognition vs the same model sent two images",
+           "change in recognition above chance (points, 95% paired interval)", "")
+
+    arms = ["img2", "vid2", "vid8", "vid8-e75"]
+    alab = ["2 images", "2 frames\nas video", "8 frames\nas video", "8 frames\nEVS 0.75"]
+    w = 0.38
+    for k, (m, col) in enumerate(models[:2]):
+        for i, a in enumerate(arms):
+            r = next((r for r in rows if r["model"] == m and r["arm"] == a), None)
+            if r is None or r["cameras"] is None:
+                continue
+            x = i + (k - 0.5) * w
+            a2.bar(x, r["cameras"], width=w, color=col, edgecolor="white", linewidth=2)
+            note = str(r["cameras"]) + ("\nserver died\nat 12" if r["server_died_at_cameras"] else "")
+            a2.text(x, r["cameras"] + 0.3, note, ha="center", va="bottom", fontsize=7.5, color=FG)
+        a2.plot([], [], "s", ms=9, color=col, label=m)
+    a2.axhline(18, color=WARN, lw=1, ls=":")
+    a2.text(3.6, 18.3, "detector ceiling", ha="right", fontsize=7, color=WARN)
+    a2.set_xticks(range(len(arms))); a2.set_xticklabels(alab, fontsize=8)
+    a2.set_ylim(0, 22)
+    a2.legend(fontsize=7.5, frameon=False, loc="upper left")
+    _style(a2, "Cameras per RTX 3090 (live, track-motion gate)", "",
+           "highest supported cameras")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+    plt.close(fig)
+
+
 def comparisons(root="results/sweeps", out_dir="docs/img"):
     """Build the cross-sweep figures the comparison pages need."""
     root, out_dir = Path(root), Path(out_dir)
@@ -1215,6 +1276,10 @@ def comparisons(root="results/sweeps", out_dir="docs/img"):
     if Path("results/r2b/report.json").exists():
         plot_r2b(out_dir / "r2b.png")
         print(f"  wrote {out_dir/'r2b.png'}")
+
+    if Path("results/e8/report.json").exists():
+        plot_e8(out_dir / "e8.png")
+        print(f"  wrote {out_dir/'e8.png'}")
 
     if Path("results/e7d/compare.json").exists():
         sys.path.insert(0, str(Path(__file__).parent))

@@ -1,0 +1,59 @@
+{
+ "meta": {
+  "experiment": "e7c-live",
+  "gate": "track-motion",
+  "arm": "full",
+  "input": "vid8",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct-AWQ",
+  "vlm_arm": "V_vllm_video",
+  "duration_s": 120.0,
+  "warmup_s": 10.0,
+  "fresh_s": 2.0,
+  "late_limit_s": 1.0,
+  "tracker": "NvDCF perf"
+ },
+ "rows": [
+  {
+   "cams": 9,
+   "gate": "track-motion",
+   "arm": "full",
+   "detector": "deepstream",
+   "windows": 458,
+   "sent": 138,
+   "ok": 138,
+   "call_rate": 0.30131004366812225,
+   "staleness_p50_s": 1.3505749702453613,
+   "staleness_p95_s": 1.8172614574432373,
+   "fresh_fraction": 0.9710144927536232,
+   "det_latency_p50_s": 0.00010657310485839844,
+   "det_latency_p99_s": 0.20026540756225586,
+   "det_drop_frac": 0.0,
+   "gpu_util_mean": 55.45454545454545,
+   "gpu_mem_max_mib": 21737.0,
+   "teardown_hung": false,
+   "supported": true,
+   "model": "Qwen/Qwen2.5-VL-7B-Instruct-AWQ"
+  },
+  {
+   "cams": 12,
+   "gate": "track-motion",
+   "arm": "full",
+   "detector": "deepstream",
+   "windows": 666,
+   "sent": 258,
+   "ok": 38,
+   "call_rate": 0.38738738738738737,
+   "staleness_p50_s": 7.6368889808654785,
+   "staleness_p95_s": 13.693393230438232,
+   "fresh_fraction": 0.0,
+   "det_latency_p50_s": 0.06692266464233398,
+   "det_latency_p99_s": 0.23391318321228027,
+   "det_drop_frac": 0.0,
+   "gpu_util_mean": 30.560606060606062,
+   "gpu_mem_max_mib": 24122.0,
+   "teardown_hung": false,
+   "supported": false,
+   "model": "Qwen/Qwen2.5-VL-7B-Instruct-AWQ"
+  }
+ ]
+}

@@ -1,0 +1,61 @@
+gpu_lock: acquired by 'e8-recog'
+### recog V_vllm_video evs 0 [img2,vid2,vid8] 14:09
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+
+[img2] 3600 windows
+  prompt tokens mean 1298   ok 3600/3600
+
+[vid2] 3600 windows
+  prompt tokens mean 735   ok 3600/3600
+
+[vid8] 3600 windows
+  prompt tokens mean 2407   ok 3600/3600
+### V_vllm_video evs 0 DONE 15:43
+### recog V_vllm_video evs 0.5 [vid8] 15:43
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+
+[vid8 evs 0.5] 3600 windows
+  prompt tokens mean 1293   ok 3600/3600
+### V_vllm_video evs 0.5 DONE 16:24
+### recog V_vllm_video evs 0.75 [vid8] 16:24
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+
+[vid8 evs 0.75] 3600 windows
+  prompt tokens mean 735   ok 3600/3600
+### V_vllm_video evs 0.75 DONE 16:58
+### recog E_q3vl_4b evs 0 [img2,vid2,vid8] 16:58
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+
+[img2] 3600 windows
+  prompt tokens mean 1035   ok 3600/3600
+
+[vid2] 3600 windows
+  prompt tokens mean 607   ok 3600/3600
+
+[vid8] 3600 windows
+  prompt tokens mean 1926   ok 3600/3600
+### E_q3vl_4b evs 0 DONE 17:48
+### recog E_q3vl_8b evs 0 [img2,vid2,vid8] 17:48
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vllm/vllm-openai:v0.29.0  port=8000
+ready
+
+[img2] 3600 windows
+  prompt tokens mean 1035   ok 3600/3600
+
+[vid2] 3600 windows
+  prompt tokens mean 607   ok 3600/3600
+
+[vid8] 3600 windows
+  prompt tokens mean 1926   ok 3600/3600
+### E_q3vl_8b evs 0 DONE 19:04
+stopped vlm-server
+### E8 recog COMPLETE 19:04

@@ -54,11 +54,22 @@ def main() -> None:
         return h / n - ch, per, ch_g
 
     def cameras(arm_id, label):
-        f = Path(args.results) / "e8" / arm_id / label / "track-motion-full-deepstream.json"
-        if not f.exists():
-            return None
-        ok = [r["cams"] for r in json.loads(f.read_text())["rows"] if r["supported"]]
-        return max(ok, default=0)
+        """(highest supported count, counts where the server died mid-run).
+
+        A `<label>-rerun` sweep, where present, replaces the original's rows at the
+        counts it ran (7B EVS 0.75: the server died at 12 cameras and the next count
+        ran against a dead server; scripts/e8_evs_rerun.sh). A count is a crash if
+        requests failed: an overloaded but live server answers late, it does not fail.
+        """
+        rows = {}
+        for sub in (label, f"{label}-rerun"):
+            f = Path(args.results) / "e8" / arm_id / sub / "track-motion-full-deepstream.json"
+            if f.exists():
+                rows.update({r["cams"]: r for r in json.loads(f.read_text())["rows"]})
+        if not rows:
+            return None, []
+        best = max((n for n, r in rows.items() if r["supported"]), default=0)
+        return best, sorted(n for n, r in rows.items() if r["ok"] < r["sent"])
 
     rows = []
     for arm_id, model in MODELS.items():
@@ -95,7 +106,8 @@ def main() -> None:
                 "lift_vs_img2_ci95": diff_ci,
                 "false_alarms_per_hour": fa / hours,
                 "compliance": compliance(run_dir),
-                "cameras": cameras(arm_id, label),
+                "cameras": cameras(arm_id, label)[0],
+                "server_died_at_cameras": cameras(arm_id, label)[1],
                 "per_group": {g: {"n": v[1], "recognised": v[0] / v[1],
                                   "chance": ch_g.get(g, 0.0), "lift": v[0] / v[1] - ch_g.get(g, 0.0)}
                               for g, v in sorted(per.items()) if v[1]},
@@ -138,7 +150,9 @@ def main() -> None:
               f"{'' if ci is None else f'[{100*ci[0]:+.1f},{100*ci[1]:+.1f}]':>15s} "
               f"{r['false_alarms_per_hour']:6.0f} {100 * (r['compliance'] or 0):6.1f}% "
               f"{pct(sum(sc) / len(sc) if sc else None):>6s} {pct(sum(st) / len(st) if st else None):>6s} "
-              f"{'-' if r['cameras'] is None else r['cameras']:>5}")
+              f"{'-' if r['cameras'] is None else r['cameras']:>5}"
+              + (f"  (server died at {r['server_died_at_cameras']} cameras)"
+                 if r["server_died_at_cameras"] else ""))
         if "kept_of_vid8_gain" in r:
             k = r["kept_of_vid8_gain"]
             print(f"{'':24s} keeps {'-' if k is None else f'{100*k:.0f}%'} of vid8's gain over vid2, "

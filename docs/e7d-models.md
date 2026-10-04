@@ -215,5 +215,6 @@ to the requests actually sent. Left at the defaults, vLLM claims the memory anyw
 - **Not measured:** models outside the Qwen family, FP16 variants, thinking mode,
   Qwen3.5-0.8B, Qwen3.6 (27B and 35B only), MPS.
 
-**Next:** [Track B](recipe.md) takes the crop question further: an actor-centred
+**Next:** [E8](e8-video-input.md) changes how the window is sent: two frames as one
+video, and EVS token pruning for eight. [Track B](recipe.md) takes the crop question further: an actor-centred
 crop at a reference margin and size, rather than one box around everyone.
