@@ -33,6 +33,91 @@ Pre-registered in [PLAN.md §15](https://github.com/sadbodhs/vlm_inference_optim
 before any full measurement. GPU time: **3.4 hours** of a 12-hour budget
 (`results/e9/gpu_ledger.tsv`).
 
+## Concepts
+
+![What the vision encoder processes, and what reaches the language model, for three ways of sending one window](img/e9-concept.png)
+
+*The same 2-second window, three ways. Top: vLLM's EVS encodes all 8 frames, then
+drops tokens. Middle: E9 drops unchanged blocks from the pixels, so they are never
+encoded. Bottom: 2 frames as one video, nothing to prune. Box widths are schematic;
+the numbers are measured.*
+
+### A vision token is a 28 px block
+
+Qwen's vision encoder cuts a frame into 14 × 14 px patches and merges each 2 × 2
+group into one **token**, so one token describes a 28 × 28 px block. At the size this
+study sends (≤ 451,584 px per frame), a frame pair becomes about 550 tokens. Every
+experiment here is about how many of those blocks the model is made to look at.
+
+### Every request pays twice: the encoder, then the language model
+
+1. **The vision encoder** (a ~670M-parameter transformer) turns the blocks into
+   tokens. Its work grows with the number of patches it is given: 240 ms for 8 frames.
+2. **The language model** then reads every token before it can answer (*prefill*),
+   about 0.2–0.3 ms per token on this card ([E2](e2-vision-tokens.md)), and keeps
+   them in its KV cache while answering.
+
+Cutting tokens *after* the encoder only saves step 2. Cutting them *before* saves both.
+
+### Video frames come in pairs
+
+Qwen's encoder reads video two frames at a time: each patch is 2 frames deep. A
+still image is copied into both slots, which is why two images cost twice what the
+same two frames cost as one video ([E8](e8-video-input.md)). Eight frames are
+therefore 4 frame pairs, and each pair is one grid of tokens.
+
+### Fixed cameras repeat themselves
+
+A surveillance camera does not move, and most of its picture does not change from
+one moment to the next. On these 24 MEVA cameras, after the first frame pair of a
+window **only 2–10% of the 28 px blocks change** (16–20% in busy scenes). This is
+*temporal redundancy*, the same property video codecs use to store only what
+changes. Everything after the first pair is mostly repeated information.
+
+### Pruning after the encoder vs before it
+
+- **vLLM's EVS** (Efficient Video Sampling) runs the encoder on every pair, compares
+  each output token with the same position in the previous pair, and drops the
+  least-changed ones before the language model. The model still paid for encoding
+  everything. EVS keeps a fixed share of tokens, and the always-kept first pair
+  counts toward it.
+- **Pruning before the encoder** decides from the raw pixels instead: how much did
+  this block change since the previous pair? Only the changed blocks, plus the whole
+  first pair, are given to the encoder. It is the idea behind
+  [Run-Length Tokenization](https://arxiv.org/abs/2411.05222) and
+  [CodecSight](https://arxiv.org/abs/2604.06036). What E9 adds is measuring it in a
+  live multi-camera pipeline on one consumer GPU.
+
+### Why the kept tokens drift
+
+A token's meaning comes from its block **and its surroundings**: the encoder's
+attention layers let every block look at others. Qwen2.5-VL mostly looks within
+112 px windows, but 4 of its 32 layers look across the whole frame pair, including
+the last one. Remove 90% of a frame and a moving person's blocks lose the scene
+around them. Their tokens come out different from what the full frame would give:
+mean cosine 0.48 here. The first pair is unaffected, because the encoder never
+looks across pairs. Whether the drift matters is an empirical question. Here, the
+language model's answers barely changed (84–89% identical), but nothing in this
+experiment explains why.
+
+### Telling the model where and when a token is
+
+Each token carries a position: which frame pair, which row, which column (Qwen
+calls this M-RoPE). After pruning, the remaining tokens must keep their **original**
+positions, or the model would read a block from the corner as if it were in the
+middle. vLLM recomputes these positions for pruned video, and that recomputation is
+what crashes: on Qwen3-VL for every request ([E8](e8-video-input.md)), and on
+Qwen2.5-VL here, under deep overload.
+
+### Tokens are not capacity
+
+How many cameras a GPU carries depends on the **total** GPU time per request, not on
+prompt length alone. That total includes encoder work, prefill, preprocessing and
+scheduling, set against the freshness bar (95% of answers under 2 s). E8 showed
+tokens cut with no cameras gained, because the encoder still ran. E9 shows the
+opposite case: at the same token count, skipping encoder work gains cameras. And at
+902 tokens, something other than tokens still holds it at 10 cameras.
+
 ## How it works
 
 Qwen merges each pair of video frames into one grid of 28 px units, one token per

@@ -71,6 +71,9 @@ before any measurement.
 
 ## Why video mode is cheaper
 
+*A longer, illustrated explanation of tokens, frame pairs and pruning is in
+[E9 · Concepts](e9-pre-encoder.md#concepts).*
+
 Qwen's vision encoder cuts its input into patches 2 frames deep. An **image** is
 copied into both slots of each patch, so two images cost two full sets of tokens.
 A **video** of the same two frames fills the two slots with two different frames:
