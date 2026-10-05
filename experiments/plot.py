@@ -1215,6 +1215,56 @@ def plot_e8(out):
     plt.close(fig)
 
 
+
+def plot_e9(out):
+    """E9: cameras per 3090 and recognition change, pruning before vs after the encoder."""
+    rows = {r["arm"]: r for r in json.loads(Path("results/e9/report.json").read_text())["rows"]}
+    order = [("2 images", "2 images", WARN), ("2 frames as video", "2 frames\nas video", WARN),
+             ("8 frames", "8 frames", WARN),
+             ("8 frames, vLLM EVS 0.5", "8 frames\nvLLM EVS 0.5", SERIES[0]),
+             ("pre-encoder 0.5", "8 frames\nours 0.5", SERIES[1]),
+             ("pre-encoder 0.675", "8 frames\nours 0.675", SERIES[1]),
+             ("pre-encoder 0.675, tracker", "8 frames\nours 0.675\n+ tracker", SERIES[2])]
+    order = [o for o in order if o[0] in rows]
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(14, 4.8), gridspec_kw={"width_ratios": [1.25, 1]})
+    for i, (k, lab, col) in enumerate(order):
+        r = rows[k]
+        a1.bar(i, r["cameras"], width=0.62, color=col, edgecolor="white", linewidth=2)
+        note = f"{r['cameras']}\n{r['tokens_per_call']:,.0f} tok"
+        if r["server_died_at_cameras"]:
+            note += "\nserver died\nat 12"
+        a1.text(i, r["cameras"] + 0.3, note, ha="center", va="bottom", fontsize=7.5, color=FG)
+    a1.set_xticks(range(len(order))); a1.set_xticklabels([o[1] for o in order], fontsize=7.5)
+    a1.set_ylim(0, 20)
+    a1.annotate("", xy=(4, 14.6), xytext=(3, 14.6),
+                arrowprops=dict(arrowstyle="->", color=SERIES[1], lw=1.2))
+    a1.text(3.5, 15.1, "same tokens: 6 -> 9 cameras", ha="center", fontsize=7.5, color=SERIES[1])
+    _style(a1, "Cameras per RTX 3090 (Qwen2.5-VL-7B, live, track-motion gate)", "",
+           "highest supported cameras")
+
+    y, ticks, names = 0, [], []
+    for k, lab, col in order:
+        r = rows[k]
+        x = r["vs"].get("8 frames")
+        if x is None:
+            continue
+        lo, hi = 100 * x["ci95"][0], 100 * x["ci95"][1]
+        d = 100 * x["diff"]
+        a2.plot([lo, hi], [y, y], color=col, lw=2, alpha=0.5, solid_capstyle="round")
+        a2.plot([d], [y], "o", ms=8, color=col, mfc=col if (lo > 0 or hi < 0) else "white", mew=2)
+        a2.text(18, y, f"{100*r['same_answer_as_8_frames']:.0f}% same\n{r['false_alarms_per_hour']:,.0f} FA/h",
+                va="center", fontsize=7, color=FG)
+        ticks.append(y); names.append(lab.replace("\n", " "))
+        y -= 1
+    a2.axvline(0, color=WARN, lw=1)
+    a2.set_yticks(ticks); a2.set_yticklabels(names, fontsize=7.5)
+    a2.set_xlim(-18, 26)
+    _style(a2, "Recognition vs unpruned 8 frames", "change above chance (points, 95% paired interval)", "")
+    fig.tight_layout()
+    fig.savefig(out, dpi=160)
+    plt.close(fig)
+
+
 def comparisons(root="results/sweeps", out_dir="docs/img"):
     """Build the cross-sweep figures the comparison pages need."""
     root, out_dir = Path(root), Path(out_dir)
@@ -1276,6 +1326,10 @@ def comparisons(root="results/sweeps", out_dir="docs/img"):
     if Path("results/r2b/report.json").exists():
         plot_r2b(out_dir / "r2b.png")
         print(f"  wrote {out_dir/'r2b.png'}")
+
+    if Path("results/e9/report.json").exists():
+        plot_e9(out_dir / "e9.png")
+        print(f"  wrote {out_dir/'e9.png'}")
 
     if Path("results/e8/report.json").exists():
         plot_e8(out_dir / "e8.png")

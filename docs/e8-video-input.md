@@ -233,3 +233,6 @@ frames. The June 2026 Qwen3-VL EVS fix is in this version; this is a different b
 - **Not measured:** EVS on Qwen3-VL, ROI crops as video, frame counts other than 2
   and 8, pruning rates other than 0.5 and 0.75, encoder-side token pruning, and live
   cameras for the 8B and for the 4B's 8-frame input.
+
+**Next:** [E9](e9-pre-encoder.md) prunes before the encoder instead: at the same token
+count, 6 → 9 cameras.

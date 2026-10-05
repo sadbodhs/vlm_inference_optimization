@@ -1,2 +1,13 @@
 step	start	end	gpu_hours	note
 A	-	-	0.00	change measurement, CPU only (tools/change_ratio.py)
+B+C-dev	2026-10-04T17:55:27	2026-10-04T17:56:33	0.02	plugin exactness + encoder check (scripts/e9_dev.sh)
+B+C-dev	2026-10-04T17:59:43	2026-10-04T18:08:31	0.15	plugin exactness + encoder check (scripts/e9_dev.sh)
+B+C-dev	2026-10-04T18:10:29	2026-10-04T18:19:18	0.15	plugin exactness + encoder check (scripts/e9_dev.sh)
+B+C-dev	2026-10-04T18:21:30	2026-10-04T18:25:12	0.06	plugin exactness + encoder check (scripts/e9_dev.sh)
+C-dev	2026-10-04T18:27:33	2026-10-04T18:31:18	0.06	diag-window,acc-unit,acc-window
+C-dev	2026-10-04T18:36:35	2026-10-04T18:47:05	0.17	acc-unit,acc-window
+D-collision	2026-10-04T18:49:05	2026-10-04T18:51:00	0.03	recog+live started together; both aborted
+D-recog	2026-10-04T18:50:03	2026-10-04T20:21:46	1.53	scripts/e9.sh
+D-live	2026-10-04T20:22:03	2026-10-04T21:25:23	1.06	scripts/e9.sh
+D-rerun	2026-10-04T21:25:31	2026-10-04T21:31:23	0.10	pre-0.5@9
+B-debug	2026-10-04T17:57:00	2026-10-04T17:59:30	0.05	foreground server start to read the plugin constructor error (not logged at the time)

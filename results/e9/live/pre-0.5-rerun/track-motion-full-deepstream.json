@@ -1,0 +1,38 @@
+{
+ "meta": {
+  "experiment": "e7c-live",
+  "gate": "track-motion",
+  "arm": "full",
+  "input": "vid8",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct-AWQ",
+  "vlm_arm": "V_vllm_video",
+  "duration_s": 120.0,
+  "warmup_s": 10.0,
+  "fresh_s": 2.0,
+  "late_limit_s": 1.0,
+  "tracker": "NvDCF perf"
+ },
+ "rows": [
+  {
+   "cams": 9,
+   "gate": "track-motion",
+   "arm": "full",
+   "detector": "deepstream",
+   "windows": 458,
+   "sent": 137,
+   "ok": 137,
+   "call_rate": 0.29912663755458513,
+   "staleness_p50_s": 1.3794169425964355,
+   "staleness_p95_s": 1.849916696548462,
+   "fresh_fraction": 0.9708029197080292,
+   "det_latency_p50_s": 0.0001430511474609375,
+   "det_latency_p99_s": 0.10026383399963379,
+   "det_drop_frac": 0.0,
+   "gpu_util_mean": 54.40909090909091,
+   "gpu_mem_max_mib": 21231.0,
+   "teardown_hung": false,
+   "supported": true,
+   "model": "Qwen/Qwen2.5-VL-7B-Instruct-AWQ"
+  }
+ ]
+}

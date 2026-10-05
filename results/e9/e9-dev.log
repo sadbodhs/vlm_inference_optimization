@@ -1,0 +1,19 @@
+gpu_lock: acquired by 'e9-dev'
+### acc-unit rate 0.675 mode unit 18:36
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vlmbench-vllm-pevs:v0.29.0  port=8000
+ready
+
+[vid8 evs 0.675] 600 windows
+  prompt tokens mean 885   ok 600/600
+vlm_prune: pre-encoder video pruning active (rate 0.675, mode unit, check False)
+### acc-window rate 0.675 mode window 18:41
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vlmbench-vllm-pevs:v0.29.0  port=8000
+ready
+
+[vid8 evs 0.675] 600 windows
+  prompt tokens mean 885   ok 600/600
+vlm_prune: pre-encoder video pruning active (rate 0.675, mode window, check False)
+stopped vlm-server
+### E9 dev COMPLETE 18:47

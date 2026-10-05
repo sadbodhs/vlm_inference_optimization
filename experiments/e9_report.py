@@ -34,7 +34,8 @@ ARMS = [
     ("8 frames, vLLM EVS 0.75 (first pair only)", "results/e8-vid8-e75-V_vllm_video",
      ["results/e8/V_vllm_video/vid8-e75", "results/e8/V_vllm_video/vid8-e75-rerun"], "E8"),
     ("pre-encoder 0.675", "results/e9/e8-vid8-e68-V_vllm_video", ["results/e9/live/pre-0.675"], "E9"),
-    ("pre-encoder 0.5", "results/e9/e8-vid8-e50-V_vllm_video", ["results/e9/live/pre-0.5"], "E9"),
+    ("pre-encoder 0.5", "results/e9/e8-vid8-e50-V_vllm_video",
+     ["results/e9/live/pre-0.5", "results/e9/live/pre-0.5-rerun"], "E9"),
     ("pre-encoder 0.675, tracker", "results/e9/e8-vid8t-e68-V_vllm_video", ["results/e9/live/pre-trk-0.675"], "E9"),
 ]
 REFS = ("8 frames", "8 frames, vLLM EVS 0.5", "2 images")

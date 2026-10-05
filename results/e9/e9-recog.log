@@ -1,0 +1,27 @@
+gpu_lock: acquired by 'e9-recog'
+### recog pre-0.675 18:50
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vlmbench-vllm-pevs:v0.29.0  port=8000
+ready
+
+[vid8 evs 0.675] 3600 windows
+  prompt tokens mean 902   ok 3600/3600
+### pre-0.675 DONE 19:16
+### recog pre-0.5 19:16
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vlmbench-vllm-pevs:v0.29.0  port=8000
+ready
+
+[vid8 evs 0.5] 3600 windows
+  prompt tokens mean 1293   ok 3600/3600
+### pre-0.5 DONE 19:49
+### recog pre-trk-0.675 19:49
+  vram ok: want 19660 MiB, free 23989 MiB of 24576 MiB
+starting vlm-server  stack=vllm  image=vlmbench-vllm-pevs:v0.29.0  port=8000
+ready
+
+[vid8t evs 0.675] 3600 windows
+  prompt tokens mean 902   ok 3600/3600
+### pre-trk-0.675 DONE 20:21
+stopped vlm-server
+### E9 recog COMPLETE 20:21
